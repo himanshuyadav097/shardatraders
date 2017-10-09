@@ -1,0 +1,1085 @@
+<?php
+ini_set('memory_limit', '-1');
+/**
+ * Implements hook_ctools_plugin_api().
+*/
+function ws_account_ctools_plugin_api($owner, $api) {
+	if ($owner == 'services' && $api == 'services') {
+		return array(
+				'version' => 3,
+				'file' => 'ws_account.services.inc'
+		);
+	}
+}
+
+/**
+ * Function to prepare mobile list
+ * @param unknown $data
+ */
+function prepare_mobile_list($data){
+
+	/** getting list from mongo **/
+
+	/** CACHING :: ProductList **/
+	$get_key = CACHE_KEY_PRODUCT_LIST;
+	$group = CACHE_GROUP_PRODUCT_LIST;
+	$key_array = array();
+
+	 if(!empty($data)){
+		foreach($data as $key=>$value){
+			if($key!= SERVICE_KEY_SEARCH_ARRAY){
+				$other_keys .= "$key=".$value;
+			}
+			else{
+				$search_array_decoded = json_decode( $data[SERVICE_KEY_SEARCH_ARRAY], true);
+				foreach($search_array_decoded as $decode_key=>$decode_val){
+					$key_array[]= "$decode_key=".$decode_val;
+				}				
+			}
+			$key_array = implode('_', $key_array);
+		}
+		$subgroup = isset($other_keys)? $other_keys:'category';
+		$cache_key = bestby_get_cache_key($get_key, $group, $subgroup, $key_array);
+	}
+	if(!empty($cache_key)){
+		$cache_array = bestby_get_cache_data($cache_key,BESTBY_CACHE_BIN);
+		$cache_data = $cache_array['data'];
+	}
+	if(empty($cache_data)){ 
+		$connection=mongo_connect();
+		$searchArray = array();
+		$page  = !empty($data[SERVICE_KEY_PAGER]) ? (int) $data[SERVICE_KEY_PAGER] : 1;
+		if(!empty($data[SERVICE_KEY_LIMIT]))
+			$limit = $data[SERVICE_KEY_LIMIT];
+		$skip  = ($page - 1) * $limit;
+		$next  = ($page + 1);
+		$prev  = ($page - 1);
+		if($data[SERVICE_KEY_SORT]=='ASC')
+		{
+			$sort=1;
+		}
+		else
+		{
+			$sort= -1;
+		}
+		/** Type **/
+		if(empty($data[SERVICE_KEY_TYPE]))
+			$sort  = array('scores.overall'=> -1);
+		else
+			$sort  = array( $data[SERVICE_KEY_TYPE] => $sort);
+		/** Category **/
+		if(!empty($data[SERVICE_KEY_CATEGORY]) && empty($data[SERVICE_KEY_SEARCH_ARRAY])){
+			/* without Dirver */
+			/* $searchArray['$and'][] = array('categoryId'=>$data[SERVICE_KEY_CATEGORY]);
+			 $searchArray['$and'][] = array('brand'=>array('$exists'=> true,'$ne'=> null));
+			$searchArray['$and'][] = array('status'=>1); */
+			/* with Dirver */
+			$filter['$and'][] = ["categoryId"=> $data[SERVICE_KEY_CATEGORY]];
+			$filter['$and'][] = ['brand'=>['$exists'=> true,'$ne'=> null]];
+			$filter['$and'][] = ['status'=>1];
+		}elseif(!empty($data[SERVICE_KEY_SEARCH_ARRAY])){
+			$filter['$and'][] = ["categoryId"=> $data[SERVICE_KEY_CATEGORY]];
+			$filter['$and'][] = ['brand'=>['$exists'=> true,'$ne'=> null]];
+			$filter['$and'][] = ['status'=>1];
+		}
+		/** Search_Array **/
+		if(!empty($data[SERVICE_KEY_SEARCH_ARRAY])){
+			$var = json_decode( $data[SERVICE_KEY_SEARCH_ARRAY], true);
+			$query = get_mongo_query($var);
+			$filter = prepare_search_array_filter($query);
+		}
+		$options = ['limit' =>$limit,'sort'=>$sort,'skip'=>$skip];
+
+		$query_mongo = new MongoDB\Driver\Query($filter,$options);
+		$mongoResult = $connection->executeQuery(MONGO_DB_NAME.'.products', $query_mongo);
+		$array_1 = $mongoResult->toArray();
+		$array_1 = replace_image_urls_products($array_1);
+
+		foreach ($array_1 as $arr){
+			$mongo_oid = new MongoDB\BSON\ObjectId($arr->_id);
+			/** Caching for Brand **/
+			 $brandImage_subgroup = strtolower($arr->brand);
+			$brandImage_cache_key = bestby_get_cache_key(CACHE_KEY_BRAND_IMAGE, CACHE_GROUP_BRAND_IMAGE, $brandImage_subgroup, NULL);
+			if($brandImage_cache_key != NULL){
+				$brandImage_cache_array = bestby_get_cache_data($brandImage_cache_key, BESTBY_CACHE_BIN);
+				$brandImage_cache_data = $brandImage_cache_array['data'];
+			}
+
+			if(!empty($brandImage_cache_data)){
+				error_log("From Cache Brand Image obtained for $brandImage_cache_key");
+				$arr->brand_image = $brandImage_cache_data;
+			}
+			else{ 
+				$brandName = $arr->brand;
+				$result = fetch_brand_image($brandName);
+				$arr->brand_image = file_create_url($result->brand_image);
+				/** CACHING :: Brand Image **/
+				 if(!empty($arr->brand_image) && ($brandImage_cache_key != NULL)){
+					$values = $arr->brand_image;
+					$expire = CACHE_EXPIRE_TIME;
+					$brandImage_cache_array = bestby_cache_set_wrapper($brandImage_cache_key, $values, BESTBY_CACHE_BIN, $expire);
+					error_log("Caching Brand Image for $brandImage_cache_key");
+				} 
+			}
+
+			/** Caching for Merchant Url **/
+			 $merchantUrl_subgroup = $arr->sku;
+			$merchantUrl_cache_key = bestby_get_cache_key(CACHE_KEY_MERCHANT_URL, CACHE_GROUP_MERCHANT_URL, $merchantUrl_subgroup, NULL);
+			if($merchantUrl_cache_key != NULL){
+				$merchantUrl_cache_array = bestby_get_cache_data($merchantUrl_cache_key, BESTBY_CACHE_BIN);
+				$merchantUrl_cache_data = $merchantUrl_cache_array['data'];
+			}
+
+			if(!empty($merchantUrl_cache_data)){
+				error_log("From Cache Merchant Url obtained for $merchantUrl_cache_key");
+				$arr->merchant_url = $merchantUrl_cache_data;
+			}
+			else{
+				$mongo_pid = $arr->sku;
+				$result1 = fetch_merchant_url($mongo_pid);
+				$arr->merchant_url = $result1->url;
+
+				/** CACHING :: Merchant Url **/
+				 if(!empty($arr->merchant_url) && ($merchantUrl_cache_key != NULL)){
+					$values = $arr->merchant_url;
+					$expire = CACHE_EXPIRE_TIME;
+					$merchantUrl_cache_array = bestby_cache_set_wrapper($merchantUrl_cache_key, $values, BESTBY_CACHE_BIN, $expire);
+					error_log("Caching Merchant Url for $merchantUrl_cache_key");
+				} 
+ 
+			}
+		} 
+		$query_mongo_count = new MongoDB\Driver\Query($filter);
+		$mongoResult_count = $connection->executeQuery(MONGO_DB_NAME.'.products', $query_mongo_count);
+		$total = count($mongoResult_count->toArray());
+		$array_1[SERVICE_KEY_PRODUCT_LIST_TOTAL] = $total;
+
+		/** CACHING :: ProductList **/
+		 if(!empty($array_1) && ($cache_key != NULL)){
+			$values = $array_1;
+			$expire = CACHE_EXPIRE_TIME;
+			$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+			error_log("Caching ProductList done for $cache_key");
+		}
+		
+
+	}
+	else{
+		error_log("From Cache ProductList obtained for $cache_key");
+		$array_1 = $cache_data;
+	} 
+
+	return $array_1;
+}
+
+/**
+ * Function to prepare search_array filter for product_list api
+ * @param unknown $query
+ */
+function prepare_search_array_filter($query){
+	if(!empty($query['allAttributes'])){
+		if(count($query['allAttributes']) >1){
+			$attibute_array=['$or'=>$query['allAttributes']];
+		}else{
+			$attibute_array=['$and'=>$query['allAttributes']];
+		}
+		$filter['$and'][]=$attibute_array;
+	}
+
+	if(!empty($query['mrp'])){
+		if(count($query['mrp']) >1){
+			$mrp=['$or'=>$query['mrp']];
+		}else{
+			$mrp=['$and'=>$query['mrp']];
+		}
+		$filter['$and'][]=$mrp;
+	}
+	if(!empty($query['recording'])){
+		if(count($query['recording']) >1){
+			$record=['$or'=>$query['recording']];
+		}else{
+			$record=['$and'=>$query['recording']];
+		}
+		$filter['$and'][]=$record;
+	}
+	if(!empty($query['sim_size'])){
+		if(count($query['sim_size']) >1){
+			$sim_size=['$or'=>$query['sim_size']];
+		}else{
+			$sim_size=['$and'=>$query['sim_size']];
+		}
+		$filter['$and'][]=$sim_size;
+	}
+	if(!empty($query['sim_type'])){
+		if(count($query['sim_type']) >1){
+			$sim_type=['$or'=>$query['sim_type']];
+		}else{
+			$sim_type=['$and'=>$query['sim_type']];
+		}
+		$filter['$and'][]= $sim_type;
+	}
+	if(!empty($query['ram'])){
+		if(count($query['ram']) >1){
+			$ram=['$or'=>$query['ram']];
+		}else{
+			$ram=['$and'=>$query['ram']];
+		}
+		$filter['$and'][]=$ram;
+	}
+	if(!empty($query['os'])){
+		if(count($query['os']) >1){
+			$os=['$or'=>$query['os']];
+		}else{
+			$os=['$and'=>$query['os']];
+		}
+		$filter['$and'][]=$os;
+	}
+	if(!empty($query['prim_cam'])){
+		if(count($query['prim_cam']) >1){
+			$prim_cam=['$or'=>$query['prim_cam']];
+		}else{
+			$prim_cam=['$and'=>$query['prim_cam']];
+		}
+		$filter['$and'][]=$prim_cam;
+	}
+	if(!empty($query['net_type'])){
+		if(count($query['net_type']) >1){
+			$net_type=['$or'=>$query['net_type']];
+		}else{
+			$net_type=['$and'=>$query['net_type']];
+		}
+		$filter['$and'][]=$net_type;
+	}
+	if(!empty($query['connection'])){
+		if(count($query['connection']) >1){
+			$connectionss=['$or'=>$query['connection']];
+		}else{
+			$connectionss=['$and'=>$query['connection']];
+		}
+		$filter['$and'][]=$connectionss;
+	}
+	if(!empty($query['internal_store'])){
+		if(count($query['internal_store']) >1){
+			$internal_store=['$or'=>$query['internal_store']];
+		}else{
+			$internal_store=['$and'=>$query['internal_store']];
+		}
+		$filter['$and'][]=$internal_store;
+	}
+	if(!empty($query['clock_speed'])){
+		if(count($query['clock_speed']) >1){
+			$clock_speed=['$or'=>$query['clock_speed']];
+		}else{
+			$clock_speed=['$and'=>$query['clock_speed']];
+		}
+		$filter['$and'][]=$clock_speed;
+	}
+	if(!empty($query['core'])){
+		if(count($query['core']) >1){
+			$core=['$or'=>$query['core']];
+		}else{
+			$core=['$and'=>$query['core']];
+		}
+		$filter['$and'][]=$core;
+	}
+	if(!empty($query['processor_type'])){
+
+		if(count($query['processor_type']) >1){
+			$processor_type=['$or'=>$query['processor_type']];
+		}else{
+			$processor_type=['$and'=>$query['processor_type']];
+		}
+		$filter['$and'][]=$processor_type;
+	}
+	if(!empty($query['resolution_type'])){
+		if(count($query['resolution_type']) >1){
+			$resolution_type=['$or'=>$query['resolution_type']];
+		}else{
+			$resolution_type=['$and'=>$query['resolution_type']];
+		}
+	}
+	if(!empty($query['front_camera'])){
+		if(count($query['front_camera']) >1){
+			$front_camera=['$or'=>$query['front_camera']];
+		}else{
+			$front_camera=['$and'=>$query['front_camera']];
+		}
+		$filter['$and'][]=$front_camera;
+	}
+
+	if(!empty($query['sim_type'])){
+		if(count($query['sim_type']) >1){
+			$sim_type=['$or'=>$query['sim_type']];
+		}else{
+			$sim_type=['$and'=>$query['sim_type']];
+		}
+		$filter['$and'][]=$sim_type;
+	}
+	if(!empty($query['brand'])){
+		if(count($query['brand'])>1){
+			$brand=['$or'=>$query['brand']];
+		}else{
+			$brand=['$and'=>$query['brand']];
+		}
+		$filter['$and'][]=$brand;
+	}
+	return $filter;
+}
+function replace_image_urls_products($array_1){
+	global $base_url;
+	foreach($array_1 as $mongoIdkey=>$mongodata){
+		$images = $mongodata->images;
+		$sku = $mongodata->sku;
+		//echo'<pre>';print_r($mongodata);exit;
+		$imagesArray =array();
+		foreach ($images as $imagekey=>$imageValue){
+			$imageValue_temp = explode('/',$imageValue);
+			$temp_count =count($imageValue_temp);
+			$imagesArray [$imagekey]= $base_url.'/sites/default/files/product_images/'.$imageValue_temp[$temp_count-1];
+			//$mongodata['images'] = $imagesArray;
+			//$imagesArray[$imagekey]=str_replace('http://img', 'https://img', $imageValue);
+		}
+		$mongodata->images = $imagesArray;
+		$array_1->$mongoIdkey = $mongodata;
+	}
+	return $array_1;
+}
+
+
+function replace_image_urls_pdetail($array_1){
+	global $base_url;
+	foreach($array_1 as $mongoIdkey=>$mongodata){
+		$images = $mongodata['images'];
+		$sku = $mongodata['sku'];
+		//echo'<pre>';print_r($mongodata);exit;
+		$imagesArray =array();
+		foreach ($images as $imagekey=>$imageValue){
+			$imageValue_temp = explode('/',$imageValue);
+			$temp_count =count($imageValue_temp);
+			$imagesArray [$imagekey]= $base_url.'/sites/default/files/product_images/'.$imageValue_temp[$temp_count-1];
+			//$mongodata['images'] = $imagesArray;
+			//$imagesArray[$imagekey]=str_replace('http://img', 'https://img', $imageValue);
+		}
+		$mongodata['images'] = $imagesArray;
+		$array_1[$mongoIdkey] = $mongodata;
+	}
+
+	return $array_1;
+}
+
+function prepare_mobile_detail($data){
+	
+	/** getting mobile details from mongo **/
+	$connection=mongo_connect();
+	if(!empty($data[SERVICE_KEY_SKU_ID])){
+	
+		/** CACHING :: mobileDetail **/
+		$key = CACHE_KEY_PRODUCT_DETAIL;
+		$group = CACHE_GROUP_PRODUCT_DETAIL;
+		$subgroup = $data[SERVICE_KEY_SKU_ID];
+		$cache_key = bestby_get_cache_key($key, $group, $subgroup, NULL);
+		if(!empty($cache_key)){
+			$cache_array = bestby_get_cache_data($cache_key, BESTBY_CACHE_BIN);
+			$cache_data = $cache_array['data'];
+		}
+		
+		if(empty($cache_data)){
+		
+			$filter = [SERVICE_KEY_SKU_ID=> $data[SERVICE_KEY_SKU_ID]];
+			$query_mongo = new MongoDB\Driver\Query($filter);
+			$mongoResult = $connection->executeQuery(MONGO_DB_NAME.'.products', $query_mongo);
+			$array_temp = json_decode(json_encode($mongoResult->toArray()), true);
+
+			$array_1 =array();
+			$mongo_pid = $data[SERVICE_KEY_SKU_ID];
+		
+			/** CACHING :: Merchant Url **/
+			$merchantUrl_subgroup = $mongo_pid;
+			$merchantUrl_cache_key = bestby_get_cache_key(CACHE_KEY_MERCHANT_URL, CACHE_GROUP_MERCHANT_URL, $merchantUrl_subgroup, NULL);
+			if($merchantUrl_cache_key != NULL){
+				$merchantUrl_cache_array = bestby_get_cache_data($merchantUrl_cache_key, BESTBY_CACHE_BIN);
+				$merchantUrl_cache_data = $merchantUrl_cache_array['data'];
+			}
+			if(!empty($merchantUrl_cache_data)){
+				$array_temp[0]['merchant_path'] = $merchantUrl_cache_data;
+				error_log("From Cache Merchant Url obtained for $merchantUrl_cache_key");
+			}
+			else{
+
+				$result = fetch_merchant_url($mongo_pid);              //function to fetch merchant
+				$array_temp[0]['merchant_path'] = $result->url;
+				//$array_temp[0]['merchant_path'] = "www.techletsolutions.com";
+
+				/** Caching **/
+				if(!empty($array_temp[0]['merchant_path']) && ($merchantUrl_cache_key != NULL)){
+					$values = $array_temp[0]['merchant_path'];
+					$expire = CACHE_EXPIRE_TIME;
+					$merchantUrl_cache_array = bestby_cache_set_wrapper($merchantUrl_cache_key, $values, BESTBY_CACHE_BIN, $expire);
+					error_log("Caching Merchant Url for $merchantUrl_cache_key");
+				}
+			}
+
+	 		$count = 0;
+			foreach ($array_temp as $ke){
+				$brandName = $ke['brand'];
+				$result = fetch_brand_image($brandName);
+				$array_temp[$count]['brand_image'] = file_create_url($result->brand_image);
+				$count++;						
+			}
+			$array_temp[0]['total_expert_reviews'] = count($array_temp[0]['reviews']['expert'])-1;
+			$rating_arry = array ();
+			$i = 1;
+			foreach ($array_temp[0]['reviews']['expert'] as $reviews){
+				$rating_arry ['raing_' . $i] = $reviews ['rating'];
+				$i++;
+			}
+			array_pop($rating_arry);
+			$array_temp[0]['ratings'] = $rating_arry;
+			
+			$count_9to10 = count ( array_filter ( $rating_arry, function ($e) {
+				return ($e > 9 && $e <= 10);
+			} ) );
+			$count_8to9 = count ( array_filter ( $rating_arry, function ($e) {
+				return ($e > 8 && $e <= 9);
+			} ) );
+			$count_6to8 = count ( array_filter ( $rating_arry, function ($e) {
+				return ($e > 6 && $e <= 8);
+			} ) );
+			$count_4to6 = count ( array_filter ( $rating_arry, function ($e) {
+				return ($e > 4 && $e <= 6);
+			} ) );
+			$count_0to4 = count ( array_filter ( $rating_arry, function ($e) {
+				return ($e > 0 && $e <= 4);
+			} ) );
+			
+			$per_9tp10 = ($count_9to10 / $array_temp[0]['total_expert_reviews']) * 100;
+			$per_8to9 = ($count_8to9 / $array_temp[0]['total_expert_reviews']) * 100;
+			$per_6to8 = ($count_6to8 / $array_temp[0]['total_expert_reviews']) * 100;
+			$per_4to6 = ($count_4to6 / $array_temp[0]['total_expert_reviews']) * 100;
+			$per_0to4 = ($count_0to4 / $array_temp[0]['total_expert_reviews']) * 100;
+			
+		  $array_temp[0]['ratings']['9to10'] = $count_9to10;
+		  $array_temp[0]['ratings']['8to9'] = $count_8to9;
+		  $array_temp[0]['ratings']['6to8'] = $count_6to8;
+		  $array_temp[0]['ratings']['4to6'] = $count_4to6;
+		  $array_temp[0]['ratings']['0to4'] = $count_0to4;
+		  
+		  $array_temp[0]['ratings']['perc9to10'] = $per_9tp10;
+		  $array_temp[0]['ratings']['perc8to9'] = $per_8to9;
+		  $array_temp[0]['ratings']['perc6to8'] = $per_6to8;
+		  $array_temp[0]['ratings']['perc4to6'] = $per_4to6;
+		  $array_temp[0]['ratings']['perc0to4'] = $per_0to4;
+		
+			// Creating an array of attributes based on mongo_id
+			$array_1[$array_temp[0]['_id']['$oid']]=$array_temp[0];
+			
+			/** Caching ProductDetail **/
+			if(!empty($array_1) && ($cache_key != NULL)){
+				$values = $array_1;
+				$expire = CACHE_EXPIRE_TIME;
+				$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+				error_log("Caching ProductDetail for $cache_key");
+			}
+		}
+		else{
+			error_log("From Caching ProductDetail for $cache_key");
+			$array_1 = $cache_data;
+		}
+	}
+	if(!empty($data[SERVICE_KEY_MONGO_ID])){
+		/** CACHING :: ProductDetail based on Mongo Id **/
+		$key = CACHE_KEY_PRODUCT_DETAIL;
+		$group = CACHE_GROUP_PRODUCT_DETAIL;
+		$subgroup = $data[SERVICE_KEY_MONGO_ID];
+		$cache_key = bestby_get_cache_key($key, $group, $subgroup, array());
+		if(!empty($cache_key)){
+			$cache_array = bestby_get_cache_data($cache_key, BESTBY_CACHE_BIN);
+			$cache_data = $cache_array['data'];
+		}
+		if(empty($cache_data)){
+			$id = new \MongoDB\BSON\ObjectId($data[SERVICE_KEY_MONGO_ID]);
+			$filter = [SERVICE_KEY_MONGO_ID => $id];
+			$query_mongo = new MongoDB\Driver\Query($filter);
+			$mongoResult = $connection->executeQuery(MONGO_DB_NAME.'.products', $query_mongo);
+			$array_temp = json_decode(json_encode($mongoResult->toArray()), true);
+			$array_1 =array();
+			$array_1[$array_temp[0]['_id']['$oid']]=$array_temp[0];
+			/** CACHING :: Save In Cache **/
+			if(!empty($array_1)){
+				if(!empty($cache_key)){
+					$values = $array_1;
+					$expire = CACHE_EXPIRE_TIME;
+					$bin = BESTBY_CACHE_BIN;
+					$cache_array = bestby_cache_set_wrapper($cache_key, $values, $bin, $expire);
+					$cache_data = $cache_array['data'];
+					error_log("Caching ProductDetail for $cache_key");
+				}
+			}
+		}
+		else{
+			error_log("From Cache ProductDetail for $cache_key");
+			$array_1 = $cache_data;
+		}
+	}
+	$array_1 = replace_image_urls_pdetail($array_1);
+
+	return $array_1;
+}
+
+function get_mongo_query($var){
+	$searchArray = array();
+	$attribute = array();
+	$mrp = array();
+	$match_brand = array();
+	$recording = array();
+	$sim_size = array();
+	$ram = array();
+	$os = array();
+	$prim_cam = array();
+	$net_type = array();
+	$connectionss = array();
+	$internal_store = array();
+	$clock_speed = array();
+	$core = array();
+	$processor_type = array();
+	$resolution_type = array();
+	$front_camera = array();
+	$sim_type = array();
+	foreach ($var as $key=>$value){
+		if(strpos($key, 'brand_') !== false){
+			$match = str_replace('-', ' ', $value);
+			$match = str_replace('@', '&', $value);
+			$match = trim($match);
+			$match_brand[]= array('brand'=>$match);
+		}
+		if(strpos($value, 'price_') !== false && strpos($key, '-') == false && strpos($key, 'Above') == false){
+			$match_price =  (int)$key;
+			$mrp[] =  array('mrp'=>array('$lte' => $match_price));
+		}elseif(strpos($value, 'price_') !== false && strpos($key, '-') !== false && strpos($key, 'Above') == false){
+			list ( $a, $b ) = explode ( '-', $key );
+			$a = (int)$a;
+			$b = (int)$b;
+			$mrp[] = array('mrp'=>['$gte' => $a, '$lte' => $b]);
+		}elseif(strpos($value, 'price_') !== false && strpos($key, 'Above') !== false){
+			$amount = explode ('-',$key );
+			$a = (int)$amount[0];
+			$mrp[] = array('mrp'=>['$gte' => $a]);
+		}
+		/*
+		 * size query
+		*/
+		if(strpos($key, 'size_') !== false){
+			if(strpos($value, 'Less') !== false){
+				$sim_size[] = array('allAttributes'=>['$elemMatch'=>['key'=>'Display Size','value'=>['$lte'=>'2 inch']]]);
+			}elseif(strpos($value, '-') !== false){
+				list ( $a, $b ) = explode ( '@inch', $value );
+				list ( $c, $d ) = explode ( '@-@', $b );
+				$sim_size[] = array('allAttributes'=>['$elemMatch'=>['key'=>'Display Size','value'=>['$gte' => "$a inch", '$lte' =>"$d inch"]]]);
+			}else{
+				list ( $a, $b ) = explode ( '@inch', $value );
+				$sim_size[] = array('allAttributes'=>['$elemMatch'=>['key'=>'Display Size','value'=>['$gte'=>"$a inch"]]]);
+			}
+		}
+		/*
+		 * ram query
+		*/
+		if(strpos($key, 'ram_') !== false){
+			if(strpos($value, '-') !== false && strpos($value, 'and') == false){
+				list ( $a, $b ) = explode ( '-', $value );
+				$ram[] = array('allAttributes'=>['$elemMatch'=>['key'=>'RAM','value'=>"$a GB"]]);
+			}
+		}
+		/*
+		 * os query
+		*/
+		if(strpos($key, 'os_') !== false){
+			//$regex_1 = new MongoRegex("/".$value."/");
+			$regex_1 = new MongoDB\BSON\Regex($value);
+			$os[] = array('allAttributes'=>['$elemMatch'=>['key'=>'Operating System','value'=>$regex_1]]);
+			//print_r($os);exit;
+		}
+		/*
+		 * primary camera query
+		*/
+		if(strpos($key, 'pc_') !== false){
+			list ( $a, $b ) = explode ( 'MP-', $value );
+			$val = str_replace('-','MP', $a);
+			$val =  (int)$val;
+
+			$prim_cam[] = array('allAttributes'=>['$elemMatch'=>['key'=>'Primary Camera','value'=>['$gte'=>"$val"]]]);
+		}
+		/*
+		 * os query
+		*/
+		if(strpos($key, 'netT_') !== false){
+			//$regex_1 = new MongoRegex("/".$value."/");
+			$regex_1 = new MongoDB\BSON\Regex($value);
+			$net_type[] = array('allAttributes'=>['$elemMatch'=>['value'=>$regex_1,'key'=>'Network Type']]);
+		}
+		/*
+		 * connectivity query
+		*/
+		if(strpos($key, 'connect_') !== false){
+			if (strpos($value, '-') !== false)
+				$key_use = str_replace('@', ' ', $value);
+			else
+				$key_use = $value;
+			$connectionss[] = array('allAttributes'=>['$elemMatch'=>['key'=>"$key_use",'value'=>"Yes"]]);
+		}
+		/*
+		 * internal storage query
+		*/
+		if(strpos($key, 'interS_') !== false){
+			if(strpos($value, 'below') !== false){
+				list ( $a, $b ) = explode ( '-GB-', $value );
+				$pass_val = (int)$a;
+				$pass_val = $pass_val * 1000000;
+				$internal_store[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_INTERNAL_STORAGE,'converted_val'=>['$lte'=>$pass_val]]]);
+			}elseif(strpos($value, '-') !== false && strpos($value, 'below') == false && strpos($value, 'above') == false){
+				list ( $a, $b ) = explode ( '-GB', $value );
+				$c = str_replace('-', '', $b);
+				$pass_val_1 = (int)$a;
+				$pass_val_1 = $pass_val_1 * 1000000;
+				$pass_val_2 = (int)$c;
+				$pass_val_2 = $pass_val_2 * 1000000;
+				$internal_store[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_INTERNAL_STORAGE,'converted_val'=>['$gte' => $pass_val_1, '$lte' =>$pass_val_2]]]);
+			}else{
+				list ( $a, $b ) = explode ( '-GB', $value );
+				$pass_val = (int)$a;
+				$pass_val = $pass_val * 1000000;
+				$internal_store[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_INTERNAL_STORAGE,'converted_val'=>['$gte'=>$pass_val]]]);
+			}
+		}
+		/*
+		 * processor speed query
+		*/
+		if(strpos($key, 'pcs_') !== false){
+			list ( $a, $b ) = explode ( '-GHZ-', $value );
+			$clock_speed[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_PROCESSOR_CLOCK_SPEED,'value'=>['$gte'=>"$a GHz"]]]);
+		}
+		/*
+		 * processor core query
+		*/
+		if(strpos($key, 'core_') !== false){
+			$correct_word = str_replace('-', ' ', $value);
+			//$regex_1 = new MongoRegex("/".$correct_word."/");
+			$regex_1 = new MongoDB\BSON\Regex($correct_word);
+			$core[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_PROCESSOR_CORE,'value'=>$regex_1]]);
+		}
+		/*
+		 * processor type query
+		*/
+		if(strpos($key, 'processT_') !== false){
+			//$regex_1 = new MongoRegex("/".$value."/");
+			$regex_1 = new MongoDB\BSON\Regex($value);
+			$processor_type[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_PROCESSOR_TYPE,'value'=>$regex_1]]);
+		}
+		/*
+		 * screen resolution query
+		*/
+		if(strpos($key, 'resolT_') !== false){
+			$correct_word = str_replace('-', ' ', $value);
+			//$regex_1 = new MongoRegex("/".$correct_word."/");
+			$regex_1 = new MongoDB\BSON\Regex($correct_word);
+			$resolution_type[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_RESOLUTION_TYPE,'value'=>$regex_1]]);
+		}
+		/*
+		 * secondary camera query
+		*/
+		if(strpos($key, 'frontcam_') !== false){
+			$front_camera[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_SECONDARY_CAMERA,'value'=>['$gte'=>$value]]]);
+		}
+		/*
+		 * sim type query
+		*/
+		if(strpos($key, 'simT_') !== false){
+			$correct_word = str_replace('-', ' ', $value);
+			$regex_1 = new MongoDB\BSON\Regex($correct_word);
+			$sim_type[] = array('allAttributes'=>['$elemMatch'=>['key'=>API_SIM_TYPE,'value'=>$regex_1]]);
+			//$sim_type[]= array('allAttributes'=>array('$elemMatch'=>array('key'=>API_SIM_TYPE,'value'=>$regex_1)));
+			//$searchArray['allAttributes'] = array('$elemMatch'=>array('key'=>API_SIM_TYPE,'value'=>$regex_1));
+		}
+		/*
+		 * recording type query
+		*/
+		if(strpos($key, 'recording_') !== false){
+			$key_use = str_replace('-', ' ', $value);
+			$attribute[] = array('allAttributes'=>['$elemMatch'=>['key'=>"$key_use",'value'=>"Yes"]]);
+		}
+	}
+
+	/* $attribute = array();
+
+	$recording = array();
+	$sim_size = array();
+	$ram = array();
+	$os = array();
+	$prim_cam = array();
+	$net_type = array();
+	$connection = array();
+	$internal_store = array();
+	$clock_speed = array();
+	$core = array();
+	$processor_type = array();
+	$resolution_type = array();
+	$front_camera = array();
+	$sim_type = array(); */
+	$searchArray['allAttributes'] = $attribute;
+	$searchArray['mrp'] = $mrp;
+	$searchArray['brand'] = $match_brand;
+	$searchArray['recording'] = $recording;
+	$searchArray['sim_size'] = $sim_size;
+	$searchArray['ram'] = $ram;
+	$searchArray['os'] = $os;
+	$searchArray['prim_cam'] = $prim_cam;
+	$searchArray['net_type'] = $net_type;
+	$searchArray['connection'] = $connectionss;
+	$searchArray['internal_store'] = $internal_store;
+	$searchArray['clock_speed'] = $clock_speed;
+	$searchArray['core'] = $core;
+	$searchArray['processor_type'] = $processor_type;
+	$searchArray['resolution_type'] = $resolution_type;
+	$searchArray['front_camera'] = $front_camera;
+	$searchArray['sim_type'] = $sim_type;
+	//print_r($searchArray);exit;
+	return $searchArray;
+}
+
+/**
+ * Function to get Top Product List
+ * @param unknown $arg1
+ */
+function top_product_list($arg1){
+	global $base_url;
+
+	$url_params = $arg1[SERVICE_KEY_URL_PARAM];
+	$image_path = $base_url.'/sites/all/themes/bootstrap/images/top10.jpg';
+
+	$url_array = fetch_url_based_page_and_image($url_params);
+	$condition = $url_array['condition'];
+	$page_title = $url_array['page_title'];
+	$image_path = $url_array['image_path'];
+	 
+
+	$url_check = $base_url.'/';
+	if ($image_path == $url_check){
+		$image_path = $base_url.'/sites/all/themes/bootstrap/images/top10.jpg';
+	}
+
+	$response = array();
+	/** CACHING :: top Product listical **/
+	$get_key = CACHE_KEY_PRODUCT_DETAIL;
+	$group = CACHE_GROUP_TOP_PRODUCT_LIST;
+	$subgroup = $url_params;
+	$key_array = NULL;
+	$cache_key = bestby_get_cache_key($get_key, $group, $subgroup, $key_array);
+	if(!empty($cache_key)){
+		$cache_array = bestby_get_cache_data($cache_key,BESTBY_CACHE_BIN);
+		$cache_data = $cache_array['data'];
+	}
+	
+	if(empty($cache_data)){ 
+		$query = db_select('bb_listical_product', 'bp');
+		$query->Join ( 'bb_feed', 'bbp', 'bbp.mongo_pid = bp.product_sku' );
+		$query->fields('bp',array('product_mongo_id','score','product_sku'));
+		$query->fields('bbp',array('url','sku','seller_id','img_url','name','price'));
+		$query->condition('listical_id',$condition, '=');
+		$result = $query->execute ()->fetchAll();
+		
+		foreach($result as $tempkey=>$temres){
+			$imageValue_temp = explode('/',$temres->img_url);
+			$temp_count =count($imageValue_temp);
+			$img_url = $base_url.'/sites/default/files/feed_images/'.$imageValue_temp[$temp_count-1];
+			 
+			$data =array(SERVICE_KEY_SKU_ID=>$temres->product_sku);
+			$result_mongo = prepare_mobile_detail($data);
+			 
+			$result_all_attributes = $result_mongo;
+			$result_exp_rating = $result_mongo[$temres->product_mongo_id]['reviews']['expert']['avg_expert_rating'];
+			$result_user_rating = $result_mongo[$temres->product_mongo_id]['reviews']['user']['avg_user_rating'];
+			$result[$tempkey]->exp_rating = $result_exp_rating;
+			$result[$tempkey]->user_rating = $result_user_rating;
+			//$result[$tempkey]->url = $result_user_rating;
+			$result[$tempkey]->img_url = $img_url;
+			$result[$tempkey]->attributes = $result_all_attributes;
+		}
+		 
+		 if(!empty($result) && ($cache_key != NULL)){			
+			$values = $result;
+			$expire = CACHE_EXPIRE_TIME;
+			$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+			error_log("Caching Top Listical for $cache_key");
+		} 
+	 }
+	else{
+		$result = $cache_data;
+		error_log("From Cache Top Listical for $cache_key");
+	} 
+	$response[SERVICE_KEY_LISTICAL_PRODUCTS] = $result;
+	$response[SERVICE_KEY_LISTICAL_PAGE_TITLE] = $page_title;
+	$response[SERVICE_KEY_LISTICAL_PAGE_IMAGE] = $image_path;
+	return $response;
+}
+
+/**
+ * Function to get Deals of the Day
+ * @param unknown $arg1
+ */
+function deals_product_list($arg1){
+	global $base_url;
+	$deal_name = $arg1[SERVICE_KEY_DEALS_OF_DAY];
+	$response = array();
+
+	/** CACHING :: Deals of the Day **/
+	$get_key = CACHE_KEY_TOP_DEALS_OF_THE_DAY;
+	$group = CACHE_GROUP_DEALS_OF_THE_DAY;
+	$subgroup = $deal_name;
+	$key_array = NULL;
+	$cache_key = bestby_get_cache_key($get_key, $group, $subgroup, $key_array);
+	if(!empty($cache_key)){
+		$cache_array = bestby_get_cache_data($cache_key,BESTBY_CACHE_BIN);
+		$cache_data = $cache_array['data'];
+	}
+	if(empty($cache_data)){
+		if($deal_name == 'deals_of_day'){
+			$query = db_select('bb_deals_product','dp');
+			$query->fields('dp');
+			$result = $query->execute()->fetchAll();
+			$result_array =array();
+			$i=1;
+			foreach($result as $res){
+				$img = json_decode($res->resolutionImage);
+				$imageValue_temp = explode('/',$img->default);
+				$temp_count =count($imageValue_temp);
+				$imagesNew = $base_url.'/sites/default/files/deals_images/'.$imageValue_temp[$temp_count-1];
+
+				$result_array['num']=$i;
+				$result_array['title']=$res->title;
+				$result_array['url']=$res->url;
+				$result_array['img']=$imagesNew;
+				$i++;
+				$response[SERVICE_KEY_DEALS_PRODUCTS_.$res->id]=$result_array;
+			}
+		}
+
+		if(!empty($response) && ($cache_key != NULL)){
+			$values = $response;
+			$expire = CACHE_EXPIRE_TIME;
+			$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+			error_log("Caching Deals of the Day for $cache_key");
+		}
+	}
+	else{
+		$response = $cache_data;
+		error_log("From Cache Deals of the Day $cache_key");
+	}
+	return $response;
+}
+
+/**
+ * Function to get listical list
+ * @param unknown $arg1
+ * @return unknown
+ */
+function listical_list($arg1){
+	$attribute_array =array();
+	$attributesTemp = explode(",",$arg1[SERVICE_KEY_ATTRIBUTES_LISTICALS]);
+	foreach($attributesTemp as $ragListkey => $ragListValue){
+		$attribute_array[]= get_cnd_id_by_name($ragListValue);
+	}
+	$attributesId = implode(",",$attribute_array);
+
+	if(!empty($arg1[SERVICE_KEY_FILTER_LISTICALS])){
+		$res = db_query("SELECT * from bb_listical WHERE attribute =:attributes AND flag=:flag",array(':attributes'=>$attributesId,':flag'=>$arg1[SERVICE_KEY_FILTER_LISTICALS]))->fetchAll();
+	}else{
+		$res = db_query("SELECT * from bb_listical WHERE attribute =:attributes ",array(':attributes'=>$attributesId))->fetchAll();
+	}
+
+	$response[SERVICE_KEY_LISTICALS_LIST]=$res;
+	 
+	return $response;
+}
+
+/**
+ * Function to get filter mongo list
+ * @param unknown $data
+ * @return unknown|NULL
+ */
+function filter_mongo_list($data){
+
+	/** getting mobile filter from mongo **/
+	$connection=mongo_connect();
+	$searchArray=array();
+	
+	if(!empty($data[SERVICE_KEY_FILTER_PARAM])){
+		
+		/** CACHING :: filter mongo list **/
+		$get_key = CACHE_KEY_FILTER_PARAM;
+		$group = CACHE_GROUP_FILTER_PARAM;
+		$subgroup = $string;
+		$key_array = NULL;
+		$cache_key = bestby_get_cache_key($get_key, $group, $subgroup, $key_array);
+		
+		if(!empty($cache_key)){
+			$cache_array = bestby_get_cache_data($cache_key,BESTBY_CACHE_BIN);
+			$cache_data = $cache_array['data'];
+		}
+		
+		if(empty($cache_data)){
+			$filter = [];
+			$query_mongo = new MongoDB\Driver\Query($filter);
+			$mongoResult = $connection->executeQuery(MONGO_DB_NAME.'.mobilefilter', $query_mongo);
+			$array_1 = json_decode(json_encode($mongoResult->toArray()),true);
+			$sel = array();
+			foreach($array_1 as $key=>$x){
+				foreach ($x as $keytemp => $xvalue){
+					if($keytemp == $data[SERVICE_KEY_FILTER_PARAM]){
+						$sel[$data[SERVICE_KEY_FILTER_PARAM]] = $xvalue;
+					}
+				}
+			}
+			$res = $sel[$data[SERVICE_KEY_FILTER_PARAM]];
+			/** Caching filter param **/
+			if(!empty($res) && ($cache_key != NULL)){
+				$values = $s;
+				$expire = CACHE_EXPIRE_TIME;
+				$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+				error_log("Caching Filter Param for $cache_array");
+			}
+	   }
+	   else{
+	   	 $res = $cache_data;
+	   	 error_log(" From Cache Filter Param for $cache_key");	   	 
+	   }
+	}
+	$response[SERVICE_KEY_MOBILE_FILTER] = $res;
+	
+	return $response;
+}
+
+/**
+ * Functiont to get search mongo list
+ * @param unknown $data
+ */
+function search_mongo_list($data){
+	$string = '';
+	$matches = array();
+	$brands = array();
+	$string = $data[SERVICE_KEY_SEARCH_PARAM];
+
+	/** CACHING :: search param **/
+	$get_key = CACHE_KEY_SEARCH_PARAM;
+	$group = CACHE_GROUP_KEY_SEARCH;
+	$subgroup = $string;
+	$key_array = NULL;
+	$cache_key = bestby_get_cache_key($get_key, $group, $subgroup, $key_array);
+	if(!empty($cache_key)){
+		$cache_array = bestby_get_cache_data($cache_key,BESTBY_CACHE_BIN);
+		$cache_data = $cache_array['data'];
+	}
+	if(empty($cache_data)){
+		$connection_search = new MongoClient( MONGODB_CLIENT );
+		$collection_search = $connection_search->{MONGO_DB_NAME}->products;
+		$regex = new MongoRegex("/^".$string.".*/");
+		$f_key =array();
+		$field_array=array('brand'=>true,'name'=>true,'sku'=>true,'_id'=>false,'status'=>1);
+		$cursor_search = $collection_search->find($f_key,$field_array);
+		$sel = iterator_to_array($cursor_search);
+		$i = 1;
+		if(count($sel)>0)
+		foreach ($sel as $key => $val){
+			if(!empty($val['brand'])){
+				$matches[$i] = ucwords($val['brand'].' phones');
+				$i++;
+			}
+			if(!empty($val['name'])){
+				$matches[$val['sku']] = ucfirst(check_plain($val['name']));
+			}
+		}
+		$matches = array_unique($matches);
+		$s=array();
+		if(count($matches)>0){
+			foreach ($matches as $matched_key => $matched_value){
+				$s[$matched_key] = $matched_value;
+			}
+		}
+		/** Caching search params **/
+		if(!empty($s) && ($cache_key != NULL)){
+			$values = $s;
+			$expire = CACHE_EXPIRE_TIME;
+			$cache_array = bestby_cache_set_wrapper($cache_key, $values, BESTBY_CACHE_BIN, $expire);
+			error_log("Caching Search Param for $cache_array");
+		}
+	}
+	else{
+		$s = $cache_data;
+		error_log("From Cache Search Param for $cache_key");
+	}
+	
+	$response[SERVICE_KEY_SEARCH_LIST] = $s;
+	return $response;
+}
+
+/**
+ * Function to get latest reviews
+ * @param unknown $data
+ * @return mixed[]
+ */
+function get_latest_reviews($data){
+	
+	$page  = !empty($data[SERVICE_KEY_PAGER]) ? (int) $data[SERVICE_KEY_PAGER] : 1;
+	$limit = $data[SERVICE_KEY_LIMIT];
+	$skip  = ($page - 1) * $limit;
+	$next  = ($page + 1);
+	$prev  = ($page - 1);
+	
+	
+	$result2 = array();
+	$query = db_select('bb_feed_review','tn')
+	    ->extend('PagerDefault')
+		->fields('tn')
+		->groupBy('tn.mongo_pid')
+		->limit($limit,$skip)
+		->orderBy('tn.created','desc');
+	$result = $query->execute()->fetchAll();
+	$total = count($result);
+	$i=0;
+	
+	/* $page  = !empty($data[SERVICE_KEY_PAGER]) ? (int) $data[SERVICE_KEY_PAGER] : 1;
+	if(!empty($data[SERVICE_KEY_LIMIT]))
+	$limit = $data[SERVICE_KEY_LIMIT];
+	$skip  = ($page - 1) * $limit;
+	$next  = ($page + 1);
+	$prev  = ($page - 1); */
+	
+	foreach ($result as $row){
+		
+		$brand_image = '';
+		$mongo_id = '';
+		$mongo_id = $row->mongo_pid;
+		$pass_apiarray = array();
+		$pass_apiarray = array(SERVICE_KEY_FEED_MONGO=>$mongo_id);
+		$result1 = api_call($pass_apiarray);
+		$var = json_decode($result1, true);
+		$array_1 = $var[SERVICE_KEY_PRODUCT_DETAIL];
+
+		
+		$brandName = $array_1[$mongo_id]['brand'];
+		$result = fetch_brand_image($brandName);
+		$array_1[$mongo_id]['brand_image'] = file_create_url($result->brand_image);
+
+		$sku = $array_1[$mongo_id]['sku'];
+		$result1 = fetch_merchant_url($sku);
+		$array_1[$mongo_id]['merchant_url'] = $result1->url;
+		
+		
+		if(array_key_exists($mongo_id,$array_1)){
+			$result2[] = $array_1[$mongo_id];
+			
+		}
+		
+	}
+	$result2['total_product_reviews'] = $total;
+	
+	return $result2;
+}

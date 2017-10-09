@@ -1,0 +1,6 @@
+name = Web Services Account module
+description = Provides API for Hotels related services
+package = Hotels Web Services
+core = 7.x
+dependencies[] = services
+dependencies[] = rest_server

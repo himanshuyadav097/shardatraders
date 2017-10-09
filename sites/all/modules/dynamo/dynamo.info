@@ -1,0 +1,4 @@
+name= Dynamo
+description=Techlet backend form generator. Idea behind this is in 70% cases we generate same type of form, so why not automate that. In case user want to cutsomize it then they can use anytag of drupal here and further supported tags in this module
+core=7.x
+package= "Techlet Dynamo"

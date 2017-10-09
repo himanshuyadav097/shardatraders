@@ -1,0 +1,186 @@
+<?php 
+function st_material_permission(){
+return array (
+  'st_material_per_add' => 
+  array (
+    'title' => 'Create form st_material According To choice',
+    'description' => 'Form st_material Creation',
+  ),
+  'st_material_per_view' => 
+  array (
+    'title' => 'View The List Of st_material',
+    'description' => 'View st_material according to his powers',
+  ),
+);
+}
+function st_material_menu() {
+$items['admins/st_material/add']=array (
+  'title' => 'Add New St Material Form',
+  'page callback' => 'drupal_get_form',
+  'page arguments' => 
+  array (
+    0 => 'st_material_add',
+  ),
+  'access arguments' => 
+  array (
+    0 => 'st_material_per_add',
+  ),
+  'description' => 'General',
+  'type' => 0,
+  'weight' => 1,
+);
+$items['admins/st_material/view']=array (
+  'title' => 'St Material List',
+  'page callback' => 'drupal_get_form',
+  'page arguments' => 
+  array (
+    0 => 'st_material_view',
+  ),
+  'access arguments' => 
+  array (
+    0 => 'st_material_per_view',
+  ),
+  'description' => 'General',
+  'type' => 0,
+  'weight' => 1,
+);
+$items['admins/st_material/edit/%']=array (
+  'title' => 'St Material Edit',
+  'page callback' => 'drupal_get_form',
+  'page arguments' => 
+  array (
+    0 => 'st_material_add',
+    1 => 3,
+  ),
+  'access arguments' => 
+  array (
+    0 => 'st_material_per_add',
+  ),
+  'description' => 'General',
+  'type' => 0,
+  'weight' => 1,
+);
+$items['admins/st_material/detail/%']=array (
+  'title' => 'St Material detail',
+  'page callback' => 'drupal_get_form',
+  'page arguments' => 
+  array (
+    0 => 'st_material_detail',
+    1 => 3,
+  ),
+  'access arguments' => 
+  array (
+    0 => 'st_material_per_view',
+  ),
+  'description' => 'General',
+  'type' => 0,
+  'weight' => 1,
+);
+return $items;
+}
+function st_material_add($form,&$form_state,$id=NULL){
+if(!empty($id)){
+		$data = get_data_by_pks('st_material', $id);
+		
+		$form['#submit'][] = "st_material_edit_submit";
+		$form['id']=array(
+				'#type'=>'value',
+				'#value'=>$id,
+		);
+	}	
+$form['material_name']=array (
+  '#type' => 'textfield',
+  '#title' => 'Material name',
+  '#size' => '255',
+  '#attributes' => 
+  array (
+    'placeholder' => '',
+    'maxlength' => '255',
+  ),
+  '#default_value' => isset($data->material_name)?$data->material_name:"",
+);
+
+$form['submit']=array('#type'=>'submit','#value'=>'Save');
+return $form;
+}
+function st_material_validate($form,&$form_state){
+
+}
+function st_material_add_submit($form,&$form_state){
+
+global $user;
+$query = db_insert('st_material')
+	 ->fields(array('material_name'=>$form_state['values']['material_name'],
+	 		'created'=>time(),
+		
+	 )
+	 		)->execute();
+if($query>0){
+    	drupal_set_message('st_material added successfully');
+		drupal_goto('admins/st_material/add');	
+    }
+}
+function st_material_edit_submit($form,&$form_state){
+global $user;
+$query = db_update('st_material')
+	 ->fields(array('material_name'=>$form_state['values']['material_name'],'created'=>strtotime($form_state['values']['created']),'updated'=>strtotime($form_state['values']['updated']),'updatedby'=>$form_state['values']['updatedby'],'createdby'=>$form_state['values']['createdby'],))
+	 ->condition('id', $form_state['values']['id'], '=')
+	 ->execute();
+if($form_state['values']['id']>0){
+    	drupal_set_message('st_material update successfully');
+		drupal_goto('admins/st_material/view');
+    }
+}
+function st_material_view($form,&$form_state){
+global $user;
+	$query = db_select('st_material','tn')
+	->extend('PagerDefault')
+	->fields('tn')
+	->orderBy('tn.id','desc')
+	->limit(20);
+	$result = $query->execute();
+$rows_articles=array();
+foreach ($result as $records){
+//$created=util_date_format_short($records->created);
+//$updated=util_date_format_short($records->updated);
+/*if($records->deleted){
+			 $deleted="Deleted";
+            }*/
+		/* else
+		{
+			//$deleted=l("<i class='icon-fixed-width icon-trash'></i>Delete",'admins/st_material/edit/'.$records->id,array('html'=>TRUE));
+		} */
+$rows_articles[] = array(l($records->id,'st_material/edit/'.$records->id),$records->material_name,$records->created,$records->updated,$records->updatedby,$records->createdby,);
+}
+$headers=array('Id','Material Name','Created','Updated','Updatedby','Createdby',);
+$all_articles=theme('table', array('header' => $headers, 'rows' => $rows_articles,'empty'=>'No Record Found','attributes'=>array('class'=>array('list-table'),'style'=>'width:100%;')));
+$all_articles .=theme('pager');
+$form['all_articles']=array(
+			'#markup'=>$all_articles,
+	);
+return $form;
+}
+function st_material_detail($form,&$form_state,$id=NULL){
+global $user;
+	$query = db_select('st_material','tn')
+	->extend('PagerDefault')
+	->fields('tn')
+	->condition('tn.id',$id,'=')
+	->orderBy('tn.id','desc');
+	$result = $query->execute()->fetchObject();
+$rows_articles=array();
+if(!empty($result))
+foreach ($result as $key => $value){
+
+
+
+$rows_articles[] = array($key.' :: '.$value);
+}
+
+$all_articles=theme('table', array('header' => array(), 'rows' => $rows_articles,'empty'=>'No Record Found','attributes'=>array('class'=>array('list-table'),'style'=>'width:100%;')));
+$all_articles .=theme('pager');
+$form['all_articles']=array(
+			'#markup'=>$all_articles,
+	);
+return $form;
+}

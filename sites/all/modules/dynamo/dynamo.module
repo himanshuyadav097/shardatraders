@@ -1,0 +1,628 @@
+<?php 
+define("NEXT_LINE","\n");
+define("SEMICOLON",";");
+define("TABLEPREFIX","gb_");
+/**
+ * function to create permission hook
+ */
+function dynamo_permission(){
+	return array(
+			'dynamo_permission' => array(
+					'title' => t('Dynamo Admin'),
+					'description' => t('Permission for dynamo generation'),
+			),
+	);
+}
+/**
+ * function to create the hook_menu for the add-society form
+ *
+ */
+function dynamo_menu() {
+	$items = array();
+	
+	$items['admins/dynamo/generator'] = array(
+   		'title' => t('Generate backend for form'),
+   		'description' => 'Dynamo generator',
+   		'page callback' => 'dynamo',
+		'access callback' => TRUE,
+   		'access arguments' => array('dynamo_permission'),
+   		'type' => MENU_NORMAL_ITEM,
+   );
+	return $items;
+}
+
+/**
+ * Core logic of dynamo
+ */
+function dynamo(){
+	
+	$table_name = 'st_material_type'; //TODO later on make this dynamic
+	
+	//Call dynamo core for a table
+	dynamo_core_table($table_name);
+}
+
+/**
+ * Dynamo core for a table
+ * @param unknown $table_name
+ */
+function dynamo_core_table($table_name){
+	/**
+	 * 1. Fetch the metadata for table
+	 * 2. Define its propertry array 
+	 * 3. Create module file structure
+	 * 4. Create a. info file, b. Schema (later on), c. module file
+	 * 5. In module file generation sequence should be 
+	 * a. Permission 
+	 * b. Menu
+	 * c. insert/update form
+	 * d. List form 
+	 * 
+	 */
+	
+	
+	$table_def=db_query("SHOW create table $table_name")->fetchAll() ;
+	echo "<pre>";
+	#print_r($table_def['0']);
+	
+	foreach($table_def['0'] as $key =>$value){
+		if($key=="Create Table"){
+			$core_table_schema= $value;
+		}
+	}
+	
+	//echo $core_table_schema;
+	
+	$table_constraint_arr=array();
+	$count=strpos($core_table_schema,'FOREIGN');
+	if($count >0){
+		//TODO:explode  FOREIGN KEY
+		$table_constraint_arr=explode_data_frm_word($core_table_schema,"CONSTRAINT");
+		unset($table_constraint_arr[0]);
+		$ref_arr=array();
+		foreach($table_constraint_arr as $key => $value){
+			$arr=explode_data_frm_word($value,'FOREIGN KEY ("');
+			$arr2=explode_data_frm_word($arr[1],'REFERENCES');
+	
+			$main_col_name= trim(str_replace('")','',$arr2[0])); // main table name
+			$arr3=explode_data_frm_word($arr2[1],'")');
+	
+			$arr4=explode_data_frm_word($arr3[0],'("');
+			$ref_table_name=str_replace('"','',$arr4[0]); //ref table name
+	
+			$ref_col_name=$arr4[1];//ref col name
+	
+			$ref_arr[$main_col_name]['ref_table_name']=$ref_table_name;
+			$ref_arr[$main_col_name]['ref_col_name']=$ref_col_name;
+			 
+		}
+	
+	}
+	
+ 
+	
+	
+	//1. Fetch the metadata for table and 2. define its propery
+	$table_meta_info = dynamo_fetch_table_meta($table_name,$ref_arr);
+	
+
+	
+	$permission=var_export(get_permission_array($table_name),true);
+	$menu_arr=get_dynomo_menu($table_name);
+	$menu='';
+	$str='';
+	$str='<?php '.NEXT_LINE;
+	$str .='function '.$table_name.'_permission(){'.NEXT_LINE;
+	$str .=$permission.SEMICOLON;
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	$str .='function '.$table_name.'_menu() {'.NEXT_LINE;
+	foreach($menu_arr as $mkey=>$mvalue){
+		$menu=var_export($mvalue,true);
+		$str .='$items[\''.$mkey.'\']='.$menu.';';
+		$str .=NEXT_LINE;
+		#$str .=$menu;
+	}
+	$str .='return $items;';
+	//$str .=';';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	$arr='array(';
+	$table_field_array=array();
+	foreach($table_meta_info as $key=>$value){
+		if($key=="created" || $key=="updated"){
+			$arr.='\''.$key.'\'=>strtotime($form_state[\'values\'][\''.$key.'\']),';
+			$table_field_array[] ='strtotime($form_state[\'values\'][\''.$key.'\'])';
+		}
+		else{
+			$arr.='\''.$key.'\'=>$form_state[\'values\'][\''.$key.'\'],';
+			$table_field_array[] ='$form_state[\'values\'][\''.$key.'\']';
+		}
+	
+	}
+	
+	
+	
+	//$fieldarr .=')';
+	$arr .=')';
+	
+	$headerArr='';
+	$fieldarr='';
+	                 
+	// fetch column info
+	
+	
+	
+	$table_info = db_query("desc $table_name")->fetchAll();
+	$id='';
+	foreach ($table_info as $table_field_info){
+		$head=ucfirst($table_field_info->Field);
+		$headerArr .='\''.$head.'\',';
+		if($table_field_info->Field=="id"){
+			$fieldarr .='l($records->'.$table_field_info->Field.',\''.$table_name.'/edit/\'.$records->'.$table_field_info->Field.'),';
+			$id=$table_field_info->Field;
+		}else{
+			$fieldarr .='$records->'.$table_field_info->Field.',';
+		}
+	}
+	
+	
+	$str .='function '.$table_name.'_add($form,&$form_state,$id=NULL){'.NEXT_LINE;
+	$str .='if(!empty($id)){
+		$data = get_data_by_pks(\''.$table_name.'\', $id);
+		
+		$form[\'#submit\'][] = "'.$table_name.'_edit_submit";
+		$form[\'id\']=array(
+				\'#type\'=>\'value\',
+				\'#value\'=>$id,
+		);
+	}	';
+	$str .=NEXT_LINE;
+	foreach($table_meta_info as $key=>$value){
+		#$arr_val="$value";
+		#$contents = var_dump($arr_val);
+
+		$sty= var_export($value, true);
+		#$sty['#default_value'] ='$data->'.$key;
+		$str .='$form[\''.$key.'\']='.$sty.';';
+		$str .=NEXT_LINE;
+	}
+		/*$str .='if(!empty($id)){';
+	$str .=NEXT_LINE;
+	$str .='$options=array(0=>\'No\',1=>\'Yes\');';
+	$str .=NEXT_LINE;
+ $str .='$form[\'deleted\']= array(
+				\'#type\' => \'select\',
+				\'#title\' => t(\'Deleted\'),
+				\'#default_value\' =>$data->deleted,
+				\'#options\'=>$options,
+		);';
+	$str .='}'; */
+	$str .=NEXT_LINE;
+	$str .='$form[\'submit\']=array(\'#type\'=>\'submit\',\'#value\'=>\'Save\');';
+	$str .=NEXT_LINE;
+	$str .='return $form;';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	$str .='function '.$table_name.'_validate($form,&$form_state){'.NEXT_LINE;
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	$str .='function '.$table_name.'_add_submit($form,&$form_state){'.NEXT_LINE;
+	$str .='global $user;'.NEXT_LINE;
+
+	//$str .=$arr;
+	$str .='$query = db_insert(\''.$table_name.'\')
+	 ->fields('.$arr.')->execute();';
+	$str .=NEXT_LINE;
+	$str .='if($query>0){
+    	drupal_set_message(\''.$table_name.' added successfully\');
+		drupal_goto(\'admins/'.$table_name.'/view'.'\');	
+    }';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	//Edit submit Start
+	$str .='function '.$table_name.'_edit_submit($form,&$form_state){'.NEXT_LINE;
+	$str .='global $user;'.NEXT_LINE;
+	#$arr=array();
+
+	//$str .=$arr;
+	$str .='$query = db_update(\''.$table_name.'\')
+	 ->fields('.$arr.')
+	 ->condition(\'id\', $form_state[\'values\'][\'id\'], \'=\')
+	 ->execute();';
+	$str .=NEXT_LINE;
+	$str .='if($form_state[\'values\'][\'id\']>0){
+    	drupal_set_message(\''.$table_name.' update successfully\');
+		drupal_goto(\'admins/'.$table_name.'/view'.'\');
+    }';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	//Edit submit end
+	
+	
+	
+	
+	$str .='function '.$table_name.'_view($form,&$form_state){'.NEXT_LINE;
+	$str .='global $user;'.NEXT_LINE;
+	
+	$str .='	$query = db_select(\''.$table_name.'\',\'tn\')
+	->extend(\'PagerDefault\')
+	->fields(\'tn\')
+	->orderBy(\'tn.id\',\'desc\')
+	->limit(20);
+	$result = $query->execute();';
+	$str .=NEXT_LINE;
+	$str .='$rows_articles=array();';
+	$str .=NEXT_LINE;
+	$str .='foreach ($result as $records){';
+	$str .=NEXT_LINE;
+	$str .='$created=util_date_format_short($records->created);';
+	$str .=NEXT_LINE;
+	$str .='$updated=util_date_format_short($records->updated);';
+	$str .=NEXT_LINE;
+	$str .='if($records->deleted){
+			 $deleted="Deleted";
+            }
+		else
+		{
+			$deleted=l("<i class=\'icon-fixed-width icon-trash\'></i>Delete",\'admins/'.$table_name.'/edit/\'.$records->'.$id.',array(\'html\'=>TRUE));
+		}';
+	$str .=NEXT_LINE;
+	$str .='$rows_articles[] = array('.$fieldarr.');';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	$str .='$headers=array('.$headerArr.');';
+	$str .=NEXT_LINE;
+	$str .='$all_articles=theme(\'table\', array(\'header\' => $headers, \'rows\' => $rows_articles,\'empty\'=>\'No Record Found\',\'attributes\'=>array(\'class\'=>array(\'list-table\'),\'style\'=>\'width:100%;\')));';
+	$str .=NEXT_LINE;
+	$str .='$all_articles .=theme(\'pager\');';
+	$str .=NEXT_LINE;
+	$str .='$form[\'all_articles\']=array(
+			\'#markup\'=>$all_articles,
+	);';
+	$str .=NEXT_LINE;
+	$str .='return $form;';
+	
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	/********************detail function **************/
+	
+
+
+	$str .='function '.$table_name.'_detail($form,&$form_state,$id=NULL){'.NEXT_LINE;
+	$str .='global $user;'.NEXT_LINE;
+
+	$str .='	$query = db_select(\''.$table_name.'\',\'tn\')
+	->extend(\'PagerDefault\')
+	->fields(\'tn\')
+	->condition(\'tn.id\',$id,\'=\')
+	->orderBy(\'tn.id\',\'desc\');
+	$result = $query->execute()->fetchObject();';
+	$str .=NEXT_LINE;
+	$str .='$rows_articles=array();';
+	$str .=NEXT_LINE;
+	$str .= 'if(!empty($result))';
+	$str .=NEXT_LINE;
+	$str .='foreach ($result as $key => $value){';
+	$str .=NEXT_LINE;
+	#$str .='$created=util_date_format_short($records->created);';
+	$str .=NEXT_LINE;
+	#$str .='$updated=util_date_format_short($records->updated);';
+	$str .=NEXT_LINE;
+	/*$str .='if($records->deleted){
+			 $deleted="Deleted";
+            }
+		else
+		{
+			$deleted=l("<i class=\'icon-fixed-width icon-trash\'></i>Delete",\'admins/'.$table_name.'/edit/\'.$records->'.$id.',array(\'html\'=>TRUE));
+		}';*/
+	$str .=NEXT_LINE;
+	$str .='$rows_articles[] = array($key.\' :: \'.$value);';
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	#$str .='$headers=array('.$headerArr.');';
+	$str .=NEXT_LINE;
+	$str .='$all_articles=theme(\'table\', array(\'header\' => array(), \'rows\' => $rows_articles,\'empty\'=>\'No Record Found\',\'attributes\'=>array(\'class\'=>array(\'list-table\'),\'style\'=>\'width:100%;\')));';
+	$str .=NEXT_LINE;
+	$str .='$all_articles .=theme(\'pager\');';
+	$str .=NEXT_LINE;
+	$str .='$form[\'all_articles\']=array(
+			\'#markup\'=>$all_articles,
+	);';
+	$str .=NEXT_LINE;
+	$str .='return $form;';
+	
+	$str .=NEXT_LINE;
+	$str .='}';
+	$str .=NEXT_LINE;
+	
+	
+	
+	/*******************detail function end **********/
+	
+	
+	
+	$directory = "sites/all/modules/custom/".$table_name;
+	$folder_gen_status = drupal_mkdir($directory); 
+	echo "\n Pranav2 [".$folder_gen_status."]";
+	$module_file_path=$directory.'/'.$table_name.".module";
+	$info_file_path=$directory.'/'.$table_name.".info";
+	if(!file_exists($module_file_path)){
+	$module_file=@drupal_tempnam($module_file_path);
+
+	$temp_module_file=file_unmanaged_copy($module_file,$directory);
+	
+	file_unmanaged_move($temp_module_file,$module_file_path);
+
+	$info_file=@drupal_tempnam($info_file_path);
+	$temp_info_file=file_unmanaged_copy($info_file,$directory);
+	file_unmanaged_move($temp_info_file,$info_file_path);
+	drupal_chmod($directory,0777);
+	drupal_chmod($module_file_path,0777);
+	drupal_chmod($info_file_path,0777);
+	$info_content='name='.$table_name.NEXT_LINE;
+	$info_content .='description=Techlet '.$table_name.' tags in this module'.NEXT_LINE;
+	$info_content .='core=7.x'.NEXT_LINE;
+	$info_content .='package="Techlet"';
+	file_put_contents($info_file_path,$info_content);
+	$str=str_replace("'###",'',$str);
+	$str=str_replace("###'",'',$str);
+	
+	file_put_contents($module_file_path,$str);
+	
+	}
+	
+	
+	#file_create_filename($table_name.".info", $directory);
+	
+	
+	
+}
+
+/**
+ * fetch the meta info of table
+ * @param unknown $table_name talbe for which meta information need to be fetched
+ */
+function dynamo_fetch_table_meta($table_name,$ref_arr=array()){
+	echo "This is check";
+	echo $table_name;
+	$table_info = db_query("desc $table_name")->fetchAll();
+	
+	//var_dump($table_info);
+	/* echo "<pre>";
+	print_r($table_info);
+	exit;
+	 */
+	$table = '<table>';
+	$table .= "<tr><td>Field</td><td>Type</td><td>Null</td><td>Key</td><td>Default</td><td>Extra</td></tr>";
+	$htmlArray=array();
+	
+	
+	
+	foreach ($table_info as $table_field_info){
+		#echo $table_field_info->Type;
+		@list($first,$second)=explode(" ",$table_field_info->Type);
+		#echo "\n Amit1 [".$first."]";
+		@list($dtype,$third)=explode("(",$first);
+	    $lenght=substr($third,0,-1);
+	    if($table_field_info->Key!="PRI"){
+			$htmlArray[$table_field_info->Field]=dynamo_get_html($dtype,$lenght,($table_field_info->Field),$ref_arr);
+	    }
+		$field_name = $table_field_info->Field;
+		$field_type = $table_field_info->Type;
+		$field_is_nullable = $table_field_info->Null;
+		$field_key_type = $table_field_info->Key;
+		$field_default = $table_field_info->Default;
+		$field_extra = $table_field_info->Extra;
+		$table .= "<tr><td>$field_name</td><td>$field_type</td><td>$field_is_nullable</td><td>$field_key_type</td><td>$field_default</td><td>$field_extra</td></tr>";
+	}
+	$table .= "</table>";
+	
+	//echo $table;
+	/* echo "<pre>";
+	print_r($htmlArray);
+	exit;  */
+	return $htmlArray;
+}
+
+/**
+ * get html from data type
+ */
+
+function dynamo_get_html($dataType,$length,$name,$ref_arr){
+	$table_field_name=$name;
+	$name=ucfirst($name);
+	$options=array(0=>'No',1=>'Yes');
+	$type=strtolower($dataType);
+	$hint='';
+	if($length==1 &&($type=="bigint" || $type=="int") ){
+		$type="select";
+	}
+	if($length==11 &&($type=="bigint" || $type=="int") ){
+		$type="date";
+	}else{
+		if($type=="bigint" || $type=="int"){
+			$type="integer";
+		}
+		if($type=="varchar" || $type=="char"){
+			$type="varchar";
+		}
+		if($type==strtolower("DECIMAL")){
+			$type="decimal";
+		}
+		
+	}	
+	if(strtolower($name)=="created" || strtolower($name)=="updated" ){
+		$val='###isset($data->'.strtolower($name).')?date("Y-m-d",$data->'.strtolower($name).'):""###';
+	}else{
+	$val='###isset($data->'.strtolower($name).')?$data->'.strtolower($name).':""###';
+	}
+	
+   if(array_key_exists($table_field_name,$ref_arr)){
+	if(!empty($ref_arr[$table_field_name])){
+		$type="select";
+		$table=$ref_arr[$table_field_name]['ref_table_name'];
+		if(!empty($table))
+		$col_name=$ref_arr[$table_field_name]['ref_col_name'];
+		$query=db_query("select $col_name from $table")->fetchAll();
+	
+		$options=array();
+		foreach($query as $value){
+			$options[$value->id]=$value->id;
+		}
+		
+	}
+   }	
+	//exit;
+	
+
+	
+
+
+	switch($type) {
+		case "integer":
+			$type='textfield';
+			return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+			break;
+		case "varchar":
+			$type='textfield';
+			return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+			break;
+	   case "text":
+	   	$type="textarea";
+	   	return array('#type' =>$type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+	   	break;
+	   	case "date":
+	   		$type='date_popup';
+	   		$date_format='d/m/Y';
+	   		$date_year_range='-1:+1';
+	   		return array('#type' =>$type,'#date_format'=>$date_format,'#date_year_range'=>$date_year_range,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+	   		break;
+	   	case "decimal":
+	   		$type='textfield';
+	   		return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+	   		break;
+	   	case "select":
+	   		$type='select';
+	   		return array('#type' =>$type,'#title' => t($name),'#options'=>$options,'#attributes'=>array('placeholder' =>$hint),'#default_value'=>$val);
+	   	default:
+	   		$type='textfield';
+	}	
+	
+}
+
+function get_permission_array($table_name){
+	return array (
+			$table_name.'_per_add' => array(
+					'title' => t('Create form '.$table_name.' According To choice'),
+					'description' => t('Form '.$table_name.' Creation'),
+			),
+
+			$table_name.'_per_view' => array(
+					'title' => t ( 'View The List Of '.$table_name ),
+					'description' => t ( 'View '.$table_name.' according to his powers' ) 
+			),
+	);
+	
+}
+
+function get_dynomo_menu($table_name){
+
+	$menu_arry = array();
+	$tableNameTitle=ucwords(str_replace('_', " ", $table_name));
+	$menu_arry['admins/'.$table_name.'/add'] = array(
+			'title' => t('Add New '.$tableNameTitle. ' Form'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' =>array($table_name.'_add'),
+			'access arguments' => array($table_name.'_per_add'),
+			'description' => 'General',
+			'type' => MENU_CALLBACK,
+			'weight' => 1,
+	);
+	
+	$menu_arry['admins/'.$table_name.'/view'] = array(
+			'title' => t($tableNameTitle. ' List'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' =>array($table_name.'_view'),
+			'access arguments' => array($table_name.'_per_view'),
+			'description' => 'General',
+			'type' => MENU_CALLBACK,
+			'weight' => 1,
+	);
+	
+	$menu_arry['admins/'.$table_name.'/edit/%'] = array(
+			'title' => t($tableNameTitle. ' Edit'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' =>array($table_name.'_add',3),
+			'access arguments' => array($table_name.'_per_add'),
+			'description' => 'General',
+			'type' => MENU_CALLBACK,
+			'weight' => 1,
+	);
+	
+	$menu_arry['admins/'.$table_name.'/detail/%'] = array(
+			'title' => t($tableNameTitle. ' detail'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' =>array($table_name.'_detail',3),
+			'access arguments' => array($table_name.'_per_view'),
+			'description' => 'General',
+			'type' => MENU_CALLBACK,
+			'weight' => 1,
+	);
+	
+
+	return $menu_arry;
+	
+
+} 
+
+/* function util_date_format_short($date){
+	if($date==0 || $date==NULL){
+		return 0;
+	}
+	else
+	{
+		return format_date($date,'custom', ' j M Y');
+	}
+} */
+
+/**
+ * get table Object data by its id
+ */
+/* function get_data_by_pks($table,$id){
+	$Object = db_query("select * from $table where id = :id",array(':id'=>$id))->fetchObject();
+	return $Object;
+}
+ */
+
+function explode_data_frm_word($main_string,$string){
+	$table_constraint_arr=explode($string,$main_string);
+	return $table_constraint_arr;
+}
+
+//get_all_data_by_condition($tableName, $fields);
+function get_dropdown_array($table_name, $id, $value){
+	$dropdown_result = db_query("select $id, $value from $table_name")->fetchAll();
+	$options_array = array();
+	$options_array[NULL] =  'Select';
+	foreach ($dropdown_result as $option){
+		$options_array[$option->$id] = $option->$value;
+	}
+	
+	return $options_array;
+}
