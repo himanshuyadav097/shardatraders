@@ -222,7 +222,7 @@ function st_inventery_view($form, &$form_state) {
 	->fields ( 'b' )
 	
 	//->orderBy ( 'tn.int_id', 'desc' )
-	->limit ( 20 );
+	->limit ( 10 );
 	
 	if (! empty ( $default_mid )) {
 		$query->condition ( 'tn.mid', $default_mid, '=' );
@@ -230,12 +230,19 @@ function st_inventery_view($form, &$form_state) {
 	$result = $query->execute ();
 	
 	$rows_articles = array ();
+//	$rem_qty = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'] ,'mid');
 	foreach ( $result as $records ) {
 		 $created=util_date_format_short($records->created);
 		
 		$unit = get_ut_material_qty ( $records->unit );
-		$mat = get_ut_material_mat ( $records->mid );
+		//$rem_qty = get_data_by_pks ( 'st_order', $records->mid ,'mid');
 		
+		//$remaing_qty = db_query ( "select SUM(qty) from st_order  WHERE  $records->mid ;" )->fetchAll ();
+		
+	
+				$mat = get_ut_material_mat ( $records->mid );
+		
+				$rem_qty=get_rem_qty($records->mid);
 		$rows_articles [] = array (
 				$records->int_id,
 				$mat,
@@ -246,6 +253,7 @@ function st_inventery_view($form, &$form_state) {
 				$records->base_price,
 				$records->sale_price,
 				$created
+				//$rem_qty->qty
 		);
 	}
 	
@@ -258,7 +266,8 @@ function st_inventery_view($form, &$form_state) {
 			'Total Price INR',
 			'Base Price INR',
 			'Sale price INR',
-			'Created'
+			'Created',
+			'Selling qty'
 	);
 	$all_articles = theme ( 'table', array (
 			'header' => $headers,
@@ -340,4 +349,15 @@ function get_ut_material_qty($unit) {
 function get_ut_material_mat($mat) {
 	$mat_name = db_query ( "SELECT name from st_material where mid=$mat" )->fetchAll ();
 	return $mat_name [0]->name;
+}
+function get_rem_qty($mat) {
+	$rem_qty=array();
+	$mat_name = db_query ( "select qty from st_order where mid=$mat" )->fetchAll ();
+	foreach ($mat_name as $res){
+		echo "<pre>";
+		$rem_qty=$res->qty;
+		
+	}
+	print_r($rem_qty);
+	exit;
 }
