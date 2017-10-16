@@ -1,0 +1,4 @@
+name=Utility
+description=Utility Module (Here you can put common function for perticular application)
+core=7.x
+package= "Custom"

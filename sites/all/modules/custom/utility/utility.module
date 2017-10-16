@@ -1,0 +1,4926 @@
+<?php
+
+define('SUPPILER', 'Suppiler');
+define('SUPPILER_REF_NO_DORAK', '01');
+define('BDM', 'BDM');
+define('AGENT', 'Agent');
+define('AGENT_CHILD', 'AgentChild');
+define('ACCOUNT', 'Account');
+define('GSA', 'GSA');
+define('API_SUPPILER', 'ApiSuppiler');
+define('NONE', 'None');
+define('FINANCE', 'Finance');
+define('SUPERADMIN', 'Super Admin');
+
+define('SUPPILER_KEY', 'S');
+define('BDM_KEY', 'B');
+define('AGENT_KEY', 'A');
+define('AGENTCHILD_KEY', 'AC');
+define('ACCOUNT_KEY', 'ACC');
+define('GSA_KEY', 'G');
+define('API_SUPPILER_KEY', 'AS');
+define('NONE_KEY', 'X');
+define('FINANCE_KEY', 'F');
+define('SUPERADMIN_KEY', 'SA');
+
+
+define('ROLE_SUPPILER','5');
+define('ROLE_AGENT','4'); // 
+define('ROLE_AGENT_CHILD','7');  // 
+define('ROLE_ACCOUNT','6');  // 
+define('ROLE_GSA','10');  // 
+define('ROLE_BDM','11');
+define('ROLE_FINANCE','12');
+define('ROLE_API_SUPPILER','9'); // 
+define('ROLE_SUPPORT_AGENT','13'); //
+define('RESTAURANT_IMAGE_CODE','RES'); //
+define('IMAGE_BASE_URL_HD','http://photos.hotelbeds.com/giata/bigger/');
+
+define('IMAGE_BASE_URL_SMALL','http://photos.hotelbeds.com/giata/small/');
+
+define('IMAGE_BASE_URL_MEDIUM','http://photos.hotelbeds.com/giata/medium/');
+
+define('IMAGE_BASE_URL','http://photos.hotelbeds.com/giata/');
+
+define('ACTIVITY_API_URL','https://api.test.hotelbeds.com/activity-api/3.0/activities');
+define('ACTIVITY_API_KEY','ptq9qgten8u3c8kn5ebj6s97');
+define('ACTIVITY_API_SECRET','PhRZ34k34f');
+define('ACTIVITY_ITEM_PER_PAGE',5);
+define('ACTIVITY_PAGE',1);
+define('ACTIVITY_ITEM_ORDER','PRICE');
+
+define('PAX_TYPE_ADULT','ADULT');
+define('PAX_TYPE_CHILD','CHILD');
+
+define('ACTIVITY_DETAIL_API_URL','https://api.test.hotelbeds.com/activity-api/3.0/activities/details/full');
+
+define('ORDER_TYPE',1); // for online
+
+#define('MONGODB_CLIENT',"mongodb://192.168.1.60");
+
+define('PAGE_LIMIT',10);
+
+//define('DORAK_BASE_PRICE','base_price');
+define('USER_COMMISSION_CURRENCY','user_currency');
+define('USER_COMMISSION_CURRENCY_NAME','user_currency_name');
+define('USER_DEFAULT_CURRENCY','USD');
+define('USER_DEFAULT_CURRENCY_ID',75011);
+define('PRICE_ENGINE_STATUS','status');
+define('PRICE_ENGINE_MESSAGE','message');
+define('RATE_AGAINST_USD','rate');
+define('API_TRUE',1);
+define('API_FALSE',0);
+define('UPPER_COMMISSION_THRESHOLD',400);
+define('LOWER_COMMISSION_THRESHOLD',800);
+define('SYSTEM_LOW','SYSTEM_LOW');
+define('SYSTEM_MID','SYSTEM_MID');
+define('SYSTEM_HIGH','SYSTEM_HIGH');
+define('GSA_LOW','GSA_LOW');
+define('GSA_MID','GSA_MID');
+define('GSA_HIGH','GSA_HIGH');
+define('CUSTOMER_LOW','CUSTOMER_LOW');
+define('CUSTOMER_MID','CUSTOMER_MID');
+define('CUSTOMER_HIGH','CUSTOMER_HIGH');
+define('DEFAULT_COMMISSION',2);
+define('USERID','uid');
+define('COMMISSION','COMMISSION');
+define('GLOBAL_BED_ID','gb_id');
+define('GSA_PRICE','GSA_PRICE');
+define('AGENT_PRICE','AGENT_PRICE');
+define('CUSTOMER_PRICE','CUSTOMER_PRICE');
+define('GSA_COMMISSION','GSA_COMMISSION');
+define('AGENT_COMMISSION','AGENT_COMMISSION');
+define('CUSTOMER_COMMISSION','CUSTOMER_COMMISSION');
+define('CURRENT_PRICE','CURRENT_PRICE');
+define('SEARCH_KEY','am_');
+
+/*Order States*/
+define('ORDER_STATUS_PENDING',100);
+define('ORDER_STATUS_CANCELLED',-200);
+define('ORDER_STATUS_BOOKED',500);
+define('ORDER_STATUS_CANCEL_REQUESTED',-100);
+define('ORDER_STATUS_MODIFIED',1000);
+define('ORDER_STATUS_COMPLETED',1500);
+define('ORDER_STATUS_MISSED',1200);
+define('ORDER_STATUS_MODIFIED_REQUESTED',2000);
+
+/*Order States Text*/
+define('ORDER_STATUS_PENDING_TEXT','In Process');
+define('ORDER_STATUS_CANCELLED_TEXT','Cancelled');
+define('ORDER_STATUS_REJECTED_TEXT','Rejected');
+define('ORDER_STATUS_BOOKED_TEXT','Confirmed');
+define('ORDER_STATUS_CANCEL_REQUESTED_TEXT','Cancel Requested');
+define('ORDER_STATUS_MODIFIED_TEXT','Modified');
+define('ORDER_STATUS_COMPLETED_TEXT','Completed');
+define('ORDER_STATUS_MISSED_TEXT','Missed');
+define('ORDER_STATUS_MODIFIED_REQUESTED_TEXT','Modification Requested');
+
+
+/*Payments States*/
+define('PAYMENTS_STATUS_PENDING',100);
+define('PAYMENTS_STATUS_REFUND',-200);
+define('PAYMENTS_STATUS_PARTIAL_PAYMENT',500);
+define('PAYMENTS_STATUS_SUCCESS',1000);
+
+
+define('PAYMENTS_STATUS_PENDING_TXT','Pending');
+define('PAYMENTS_STATUS_REFUND_TXT','Refund');
+define('PAYMENTS_STATUS_PARTIAL_PAYMENT_TXT','Partial Payment');
+define('PAYMENTS_STATUS_SUCCESS_TXT','Payment Success');
+
+define('PAYMENT_TYPE_ONLINE',1);
+define('PAYMENT_TYPE_POINT',2);
+define('PAYMENT_TYPE_NA',0);
+define('PAYMENT_TYPE_OTHERCARD',3);
+
+define('PAYMENT_TYPE_ONLINE_TEXT','Credit or Debit Card Payment');
+define('PAYMENT_TYPE_POINT_TEXT','Bank credit Payment');
+define('PAYMENT_TYPE_NA_TEXT','Payment Pending');
+define('PAYMENT_TYPE_OTHERCARD_TXT','Client Credit Card');
+
+
+
+define('BOOKING_TYPE_HOTEL', 'H');
+define('BOOKING_TYPE_ACTIVITY', 'A');
+define('BOOKING_TYPE_PACKAGE', 'P');
+define('BOOKING_TYPE_TRANSFER', 'T');
+define('BOOKING_TYPE_MIXED', 'M');
+define('BOOKING_TYPE_VISA', 'V');
+
+define('THIRTY_DAYS', 30*86400);
+define('SEVEN_DAYS', 7*86400);
+
+define('IMAGE_TYPE_RESTAURANT','RES');
+define('IMAGE_TYPE_ROOM','HAB');
+define('IMAGE_TYPE_GENERAL','GEN');
+define('IMAGE_TYPE_SPORTS','DEP'); //Sports and entertainment
+define('IMAGE_TYPE_LOBBY','COM'); //Lobby
+define('IMAGE_TYPE_CONFERENCE','CON');
+define('IMAGE_TYPE_BAR','BAR');
+define('IMAGE_TYPE_POOL','PIS');
+define('IMAGE_TYPE_BEACH','PLA');
+define('IMAGE_TYPE_TERRACE','TER');
+
+define('BOOKING_TYPE_HOTEL_NAME', 'Hotel');
+define('BOOKING_TYPE_ACTIVITY_NAME', 'Activity');
+define('BOOKING_TYPE_PACKAGE_NAME', 'Package');
+define('BOOKING_TYPE_TRANSFER_NAME', 'Transfer');
+define('BOOKING_TYPE_MIXED_NAME', 'Mixed');
+define('BOOKING_TYPE_VISA_NAME', 'Visa');
+
+define('TRANSACTION_MODE_PG_ID',1);
+define('TRANSACTION_MODE_PG_VALUE','Payment Gateway');
+define('TRANSACTION_MODE_CREDIT_ID',2);
+define('TRANSACTION_MODE_CREDIT_VALUE','Credit Line');
+
+define('TXN_STATUS_SUCCESS',1); 
+define('HOURS_BUFFER_CANCELDATE',12);
+define('HB_BASE_PRICE','Hotal bed base price');
+define('HB_TO_GB_MARKUP',4);
+define('AUTO_COMPLETE_SHOW_LIMIT',10);
+define('KILOMETER',' km');
+define('METER',' m');
+define('MEDIUM_INTERNET_SPEED',64);
+define('HOTEL_TYPE','HOSTEL');
+define('SUPPLIER_NAME','http//www.global-beds.com');
+define('VAT_NO','816 003 7959');
+define('REFERENCE','XXXX');
+define('MONGO_SERVER_ERROR','Server not connected. Please try again!');
+define('VERIFICATION_REQUEST_SENT','V');
+define('VERIFICATION_REQUEST_REJECTED','B');
+define('VERIFICATION_REQUEST_RESENT','R');
+define('INVERVAL1',604800);
+define('INVERVAL2',2592000);
+
+
+
+define('SUPERADMIN_ROLE_VALUE','8');    
+define('PAID_FACILITIES','$');  
+define('PAID_FACILITIES_DESCRIPTION','* $ = Paid Facilities are paid at hotel.');        
+define('PERCENTAGE_KEY', 'P');
+define('AMOUNT_KEY', 'A');
+define('PERCENTAGE', 'Perecentage');
+define('AMOUNT', 'Amount');
+define('GB_CANCEL_MARKUP', 'GB_CANCEL_MARKUP');
+define('GB_MARKUP', 'GB_MARKUP');
+define('MARKUP_KEY', 'M');
+define('DISCOUNT_KEY', 'D');
+define('MARKUP', 'Markup');
+define('DISCOUNT', 'Discount');
+define('DEFAULT_CANCELLATION_MARKUP',5);
+
+define('CANCELLATION_CHARGES','CANCELLATION_CHARGES');
+define('CANCEL_BASE_CHARGES','CANCELLATION_BASE_CHARGES');
+define('CUSTOMER_CANCEL_PRICE','CUSTOMER_CANCEL_PRICE');
+define('CANCEL_BFR_BUFFER_DATE','CANCEL_BFR_BUFFER_DATE');
+define('CANCEL_AFTR_BUFFER_DATE','CANCEL_AFTR_BUFFER_DATE');
+define('DEFAULT_BUFFER_TIME', 24*60*60 );
+define('ONE_DAY_BUFFER_TIME', 24*60*60 );
+define('GB_CANCEL_DATE_MARKUP','GB_CANCEL_DATE_MARKUP');
+define('STATUS_KEY', 'status');
+define('ONLY_ONE_BDM_FOUND', 1);
+define('MORE_THAN_ONE_BDM_FOUND', 2);
+define('NO_BDM_FOUND', 3);
+//define('BDM_ID', bdm_id);
+
+ // superadmin role id.
+/**
+ * user role is mygate Super Admin
+*/
+function is_superadmin() {
+	global $user;
+	if (in_array ( 'superadmin', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+/**
+ * 
+ * @return boolean
+ */
+function is_administrator() {
+	global $user;
+	if (in_array ( 'administrator', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+/**
+ *
+ * @return boolean
+ */
+function is_supplier() {
+	global $user;
+	if (in_array ( 'supplier', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+/**
+ *
+ * @return boolean
+ */
+function is_agent() {
+	global $user;
+	if (in_array ( 'agent', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+/**
+ *
+ * @return boolean
+ */
+function is_agentChild() {
+	global $user;
+	if (in_array ( 'agentChild', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+/**
+ *
+ * @return boolean
+ */
+function is_apiSupplier() {
+	global $user;
+	if (in_array ( 'apiSupplier', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+/**
+ *
+ * @return boolean
+ */
+function is_gsa() {
+	global $user;
+	if (in_array ( 'gsa', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+/**
+ *
+ * @return boolean
+ */
+function is_account() {
+	global $user;
+	if (in_array ( 'account', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+function is_bdm() {
+	global $user;
+	if (in_array ( 'bdm', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+function is_finance() {
+	global $user;
+	if (in_array ( 'finance', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+function is_supportAgent() {
+	global $user;
+	if (in_array ( 'support agent', array_values ( $user->roles ) ))
+		return true;
+	else
+		return false;
+}
+
+
+/**
+ * Fetch Depedded Dropdown
+ *
+ * @param string $include_0
+ * @param unknown $CND_GROUP
+ * @param string $selecttype
+ * @return multitype:string NULL
+ */
+function get_cnd_child_group_array($include_0 = FALSE, $CND_GROUP, $selecttype = '') {
+	$loan_purpose_array = array ();
+	
+//	$options [0]='Select';
+	if (! empty ( $CND_GROUP )) {
+		$query = db_select ( 'gb_cnd', 'c' );
+		$query->fields ( 'c' );
+		$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_parent_id', $CND_GROUP, '=' )->orderBy ( 'cnd_name', "ASC" );
+		$results_db = $query->execute ();
+		 if ($include_0) {
+			$loan_purpose_array [0] = 'Select ' . $selecttype;
+		}
+		foreach ( $results_db as $res ) {
+				
+			$loan_purpose_array [$res->id] = $res->cnd_name;
+		}
+		return $loan_purpose_array;
+	} else {
+		return $loan_purpose_array;
+	}
+}
+
+
+
+/**
+ * Get Nationality Dropdown For Visa
+ * 
+ */
+function get_visa_nationality_array() {
+	$loan_purpose_array = array ();
+
+	 $query = db_select('gb_visa_fee','gbv');
+	 $query->LeftJoin ('gb_cnd', 'gc', 'gc.id = gbv.aNationality' );
+	$query->fields('gbv',array('aNationality'))
+	->fields('gc',array('id','cnd_name'));
+	$query->condition('gc.cnd_group','COUNTRY','=')->condition('gbv.deleted','0','=')->orderBy ( 'gc.cnd_name', "ASC" );
+		$results_db = $query->execute ();
+		foreach ( $results_db as $res ) {
+
+			$loan_purpose_array [$res->id] = $res->cnd_name;
+		}     
+		return $loan_purpose_array;
+	
+}
+
+
+
+/**
+ * Get Visa For Country Dropdown
+ *
+ */
+function get_visa_forCountry_array() {
+	$loan_purpose_array = array ();
+
+	$query = db_select('gb_visa_fee','gbv');
+	$query->LeftJoin ('gb_cnd', 'gc', 'gc.id = gbv.aDestination' );
+	$query->fields('gbv',array('aDestination'))
+	->fields('gc',array('id','cnd_name'));
+	$query->condition('gc.cnd_group','COUNTRY','=')->condition('gbv.deleted','0','=')->orderBy ( 'gc.cnd_name', "ASC" );
+	$results_db = $query->execute ();
+	foreach ( $results_db as $res ) {
+
+		$loan_purpose_array [$res->id] = $res->cnd_name;
+	}
+	return $loan_purpose_array;
+
+}
+/**
+ * Cnd Data By Function
+ *
+ * @param
+ *        	string
+ * @param
+ *        	unknown
+ * @param
+ *        	unknown
+ * @param
+ *        	unknown
+ * @param
+ *        	string
+ * @return multitype:string NULL
+ *         returning cnd_names based on the matching of parent id
+ */
+function get_cnd_name_group_array_by_parent_id($is_parent_id, $parent_id, $order) {
+	$cnd_name_array = array ();
+	$query = db_select ( 'gb_cnd', 'c' );
+	$query->fields ( 'c' );
+	if ($is_parent_id) {
+		if ($order)
+			$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_parent_id', $parent_id, '=' )->orderBy ( 'priority', "ASC" );
+
+		else
+			$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_group', $CND_GROUP, '=' )->orderBy ( 'cnd_name', "ASC" );
+	}
+
+	$results_db = $query->execute ();
+	/*
+	 * if($include_0){
+	* $cnd_name_array[0] = 'Select '.$select_statement;
+	* }
+	*/
+	foreach ( $results_db as $res ) {
+		$cnd_name_array [$res->id] = $res->cnd_name;
+	}
+	return $cnd_name_array;
+}
+/**
+ * Create New User Uid
+ *
+ * @param unknown $name
+ * @param unknown $mail
+ * @param unknown $mobileno
+ * @return string
+ */
+function createNewUser($name, $mail, $pass,$status) {
+	global $user;
+	$account = user_load_by_mail ( $mail );
+	if (! $account) {
+
+		$userinfo = array (
+				'name' => $mail,
+				'mail' => $mail,
+				'pass' => $pass,
+				'init' => $name,
+				// 'data' => $name,
+				'created' => time (),
+				'status' => $status,
+				'access' => REQUEST_TIME
+		);
+		$account = user_save ( drupal_anonymous_user (), $userinfo );
+		if (! empty ( $account->uid ))
+			return $account->uid;
+		else {
+			if(!empty($user->uid))
+			{
+				drupal_set_message ( t ( MSG_CREATENEWUSER_NOT_EMPTY_UID_ERROR ), 'error' );
+				return '';
+			}
+			else
+			{
+				$_SESSION['message_home'] = MSG_CREATENEWUSER_SESSION;
+				drupal_goto();
+			}
+		}
+	} else
+		return '';
+}
+
+/**
+ * Create New User Uid
+ *
+ * @param unknown $name
+ * @param unknown $mail
+ * @param unknown $mobileno
+ * @return string
+ */
+function createNewUser_app($name, $mail, $mobileno) {
+	$userinfo = array (
+			'name' => $mail,
+			'mail' => $mail,
+			'pass' => $mobileno,
+			'init' => $name,
+			// 'data' => $name,
+			'created' => time (),
+			'status' => 1,
+			'access' => REQUEST_TIME
+	);
+	$account = user_save ( drupal_anonymous_user (), $userinfo );
+	if (! empty ( $account->uid ))
+		return $account->uid;
+	else {
+		drupal_set_message ( t ( MSG_CREATENEWUSER_APP_ERROR ), 'error' );
+		return '';
+	}
+
+}
+/**
+ * function to return active/inactive status
+ *
+ * @param unknown $type
+ * @return string
+ */
+function get_status_type($request = NULL) {
+	$option = array (
+			'1' => 'Inactive',
+			'0' => 'Active'
+	);
+	if ($request == '0')
+		return $option [$request];
+	else
+		return $option [$request];
+}
+/**
+ *
+ * @param unknown $file
+ * @param unknown $fName=file
+ *        	control name
+ * @param unknown $uid
+ * @param string $folderName=folder
+ *        	name where to upload images
+ * @return Ambigous <File, boolean, The, stdClass>|number
+ */
+function saveprofileImage($file, $fName, $uid, $folderName = null) {
+	if (! empty ( $fName )) {
+
+		$file = saveUploadedData ( $file [$fName] );
+		if ($file != FALSE) {
+			if (empty ( $folderName )) {
+				$folderName = "profile_image";
+			}
+			$uploadeded_image = util_upload_images ( $file, 'public://' . $folderName . '/' . $uid );
+			return $uploadeded_image;
+		}
+	}
+	return 0;
+}
+
+/**
+ * upload file
+ *
+ * @param unknown $fil
+ * @param unknown $id
+ * @return boolean|number
+ */
+function saveUploadedData($fil, $replace = FILE_EXISTS_RENAME) {
+	global $user;
+	// Custom code to upload image file in drupal
+	if (is_uploaded_file ( $fil ['tmp_name'] ) && $fil ['error'] == UPLOAD_ERR_OK) {
+		$file = new stdClass ();
+		$file->uid = $user->uid;
+		$file->status = 0;
+		$file->filename = trim ( drupal_basename ( $fil ['name'] ), '.' );
+		$file->uri = $fil ['tmp_name'];
+		$file->filemime = file_get_mimetype ( $file->filename );
+		$file->filesize = $fil ['size'];
+		$destination = 'temporary://';
+		$destination_scheme = file_uri_scheme ( $destination );
+		if (! $destination_scheme || ! file_stream_wrapper_valid_scheme ( $destination_scheme )) {
+			return FALSE;
+		}
+		$file->destination = file_destination ( $destination . $file->filename, $replace );
+		if (substr ( $destination, - 1 ) != '/') {
+			$destination .= '/';
+		}
+		$file->uri = $file->destination;
+		if (! drupal_move_uploaded_file ( $fil ['tmp_name'], $file->uri )) {
+			watchdog ( 'file', 'Upload error. Could not move uploaded file %file to destination %destination.', array (
+			'%file' => $file->filename,
+			'%destination' => $file->uri
+			) );
+			return FALSE;
+		}
+		drupal_chmod ( $file->uri );
+		if ($file = file_save ( $file )) {
+			return $file;
+		}
+	}
+	return FALSE;
+}
+
+/**
+ * @param string $request
+ * @return multitype:string
+ */
+function delete_record($request = NULL) {
+
+	return array (
+			'0' => 'No',
+			'1' => 'Yes'
+	);
+}
+
+function util_date_format_short($date) {
+	if ($date == 0 || $date == NULL) {
+		return 0;
+	} else {
+		return format_date ( $date, 'custom', ' j M Y' );
+	}
+}
+
+/** 
+ * @param unknown $time_ago
+ * @return string
+ */
+
+function timeAgo($time_ago)
+{
+	$time_ago = $time_ago;
+	$cur_time   = time();
+	$time_elapsed   = $cur_time - $time_ago;
+	$seconds    = $time_elapsed ;
+	$minutes    = round($time_elapsed / 60 );
+	$hours      = round($time_elapsed / 3600);
+	$days       = round($time_elapsed / 86400 );
+	$weeks      = round($time_elapsed / 604800);
+	$months     = round($time_elapsed / 2600640 );
+	$years      = round($time_elapsed / 31207680 );
+	// Seconds
+	if($seconds <= 60){
+		return "just now";
+	}
+	//Minutes
+	else if($minutes <=60){
+		if($minutes==1){
+			return "one minute";
+		}
+		else{
+			return "$minutes minutes";
+		}
+	}
+	//Hours
+	else if($hours <=24){
+		if($hours==1){
+			return "an hour";
+		}else{
+			return "$hours hrs";
+		}
+	}
+	//Days
+	else if($days <= 7){
+		if($days==1){
+			return "yesterday";
+		}else{
+			return "$days days";
+		}
+	}
+	//Weeks
+	else if($weeks <= 4.3){
+		if($weeks==1){
+			return "a week";
+		}else{
+			return "$weeks weeks";
+		}
+	}
+	//Months
+	else if($months <=12){
+		if($months==1){
+			return "a month";
+		}else{
+			return "$months months";
+		}
+	}
+	//Years
+	else{
+		if($years==1){
+			return "one year";
+		}else{
+			return "$years years";
+		}
+	}
+}
+
+/**
+ * otp code generate
+ * @param number $len
+ * @return string
+ */
+
+function util_random_code_generator($len = 7,$pass=NULL){
+	if(empty($pass))
+		$chars = "123456789";
+	else
+		$chars="123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop";
+	$str="";
+
+	$size = strlen( $chars );
+	for( $i = 0; $i < $len; $i++ ) {
+		$str .= $chars[ rand( 0, $size - 1 ) ];
+	}
+	$str =$str;
+	return $str;
+}
+/**
+ * Cnd Data By Function
+ * @param string $include_0
+ * @param unknown $CND_GROUP
+ * @param unknown $is_parent
+ * @param unknown $order
+ * @param string $select_statement
+ * @return multitype:string NULL
+ */
+function get_cnd_name_group_array($include_0 =FALSE,$CND_GROUP,$is_parent,$order,$select_statement=''){
+	$loan_purpose_array = array();
+	$query = db_select('gb_cnd','c');
+	$query->fields('c');
+	if($is_parent)
+	{
+		if($order)
+			$query->condition('deleted','N','=')->condition('cnd_group',$CND_GROUP,'=')->orderBy('priority',"ASC");
+		else
+			$query->condition('deleted','N','=')->condition('cnd_group',$CND_GROUP,'=')->condition('cnd_parent_id ',0,'!=')->orderBy('cnd_name',"ASC");
+	}
+	else
+	{
+		if($order)
+			$query->condition('deleted','N','=')->condition('cnd_group',$CND_GROUP,'=')->orderBy('priority',"ASC");
+		else
+			$query->condition('deleted','N','=')->condition('cnd_group',$CND_GROUP,'=')->orderBy('cnd_name',"ASC");
+	}
+	$results_db= $query->execute();
+
+	if ($include_0 && !in_array($CND_GROUP, array('COUNTRY','CURRENCY_TYPE','COMPANY_TYPE','REGION','PASSPORT_TYPE','PROMOTION_TYPE'))) {
+		$loan_purpose_array [0] = 'Select ' . $select_statement;
+	}
+	foreach($results_db as $res)
+	{
+		if($CND_GROUP=='STATE_INDIA' || $CND_GROUP=='COUNTRY' || $CND_GROUP=='CURRENCY_TYPE' || $CND_GROUP=='COMPANY_TYPE' || $CND_GROUP=='REGION' || $CND_GROUP=='NATIONALITY'|| $CND_GROUP=='PASSPORT_TYPE' || $CND_GROUP=='PROMOTION_TYPE' || $CND_GROUP=='LANGUAGES' || $CND_GROUP=='RELIGION' || $CND_GROUP=='HIGHEST_QUALIFICATION' || $CND_GROUP=='TICKET_ISSUE_TYPE' || $CND_GROUP=='TICKET_SUBISSUE_TYPE' || $CND_GROUP=='TICKET_STATUS' || $CND_GROUP=='TICKET_PRIORITY' ){
+			$loan_purpose_array[$res->id]=$res->cnd_name;
+		}else{
+			$loan_purpose_array[$res->cnd_code]=$res->cnd_name;
+		}
+	}
+	return $loan_purpose_array;
+}
+
+/**
+ * register alter hook
+ * @param unknown $form
+ * @param unknown $form_state
+ * @param unknown $form_id
+ * @return multitype:
+ */
+
+
+/*function utility_form_alter(&$form, &$form_state, $form_id) {
+	$option=array(1,2,3,4);
+	if ($form_id == 'user_register_form') {
+		unset($form['account']['mail'] );
+		unset($form['account']['name'] );
+		unset($form['#validate']);
+		#echo "<pre>";
+	
+		$form['type_company'] = array(
+				'#type'=>'select',
+				'#title' => t('Type of Company'),
+				'#options' => $option,
+				'#multiple' => false,
+				'#attributes'=>array('size'=>0),
+				'#required' => TRUE,
+		);
+		$iscountry = isset ( $form_state ['values'] ['country'] ) ? $form_state ['values'] ['country'] : 0;
+		$form['country'] = array(
+				'#type'=>'select',
+				'#title' => t('Country'),
+				'#options' => get_cnd_name_group_array ( TRUE, 'COUNTRY_INDIA', False, FALSE, 'Country' ),
+				 '#ajax' => array (
+					'callback' => 'reg_child_state_callback',
+					'wrapper' => 'reg_child_state',
+					'event' => 'change' 
+			     ) ,
+				'#required' => TRUE,
+		);
+		$isstate = isset ( $form_state ['values'] ['state'] ) ? $form_state ['values'] ['state'] : 0;
+		$form['state'] = array(
+				'#type'=>'select',
+				'#title' => t('State'),
+				'#options' => get_cnd_child_group_array ( FALSE, 27, 'State' ),
+				'#prefix' => '<div id="reg_child_state">',
+				'#suffix' => '</div>',
+			    '#ajax' => array (
+					'callback' => 'reg_child_callback',
+					'wrapper' => 'reg_child',
+					'event' => 'change' 
+			) ,
+				'#required' => TRUE,
+		);
+		
+		$form['city'] = array(
+				'#type'=>'select',
+				'#title' => t('City'),
+				'#options' => get_cnd_child_group_array ( FALSE, $isstate, 'City' ),
+			    '#prefix' => '<div id="reg_child">',
+			    '#suffix' => '</div>',
+				'#required' => TRUE,
+		);
+		$form['company_name']= array(
+				'#type' => 'textfield',
+				'#title' => t('Company Name'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		$form['fname']= array(
+				'#type' => 'textfield',
+				'#title' => t('Contact Person First Name'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		$form['lname']= array(
+				'#type' => 'textfield',
+				'#title' => t('Contact Person Last Name'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		$form['email']= array(
+				'#type' => 'textfield',
+				'#title' => t('Email'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		$form['phone']= array(
+				'#type' => 'textfield',
+				'#title' => t('Phone'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		$form['password']= array(
+				'#type' => 'password',
+				'#title' => t('Password'),
+				'#required' => TRUE,
+				'#size' => 30,
+		);
+		
+		$form['#submit'][0] = 'utility_user_register_form_submit';
+		$form['#validate'][] = 'utility_form_alter_validate';
+		return $form;
+	
+	}
+	
+}*/
+
+
+function reg_child_callback($form, $form_state)
+{
+	$form['city']['#validated'] = TRUE;
+	return  $form['city'];
+}
+function reg_child_state_callback($form, $form_state)
+{
+	$commands = array();
+	$commands[] = ajax_command_replace("#reg_child_state", render($form['state']));
+	$commands[] = ajax_command_replace("#reg_child", render($form['city']));
+	return array('#type' => 'ajax', '#commands' => $commands);
+	/* $form['state']['#validated'] = TRUE;
+	return  $form['state']; */
+}
+
+/**
+ * Insert function use to user insert in gb_user table
+ * @param unknown $userId
+ * @param unknown $fname
+ * @param unknown $lname
+ * @param unknown $type_company
+ * @param unknown $country
+ * @param unknown $state
+ * @param unknown $city
+ * @param unknown $company_name
+ * @param unknown $email
+ * @param unknown $phone
+ */
+function gb_user_insert($userId,$fname,$lname,$type_company,$region,$country,$state,$city,$company_name,$email,$phone,$currency,$mastergid=API_FALSE,$gbType=NONE_KEY,$bdm_id=NULL){
+	try{
+		$ac=db_insert('gb_user')
+		->fields(array(
+				'uid'=>$userId,
+				'masterGid'=>$mastergid,
+				'currency'=>$currency,
+				'fContactFName'=>$fname,
+				'fContactLName'=>$lname,
+				'fContatmail'=>$email,
+				'fContactMobile'=>$phone,
+				'fContactCountry'=>$country,
+				'fContactState'=>$state,
+				'fContactCity'=>$city,
+				'gbType'=>$gbType,
+				'company_type'=>$type_company,
+				'company_name'=>$company_name,
+				'bdm_attach_id'=>$bdm_id,
+				'Region'=>$region,
+				'updated'=>time(),
+				'created'=>time(),
+				'updatedBy'=>1,
+		))->execute();
+	}
+	catch(Exception $e){
+		$ac=0;
+		drupal_set_message($e);
+	}
+	return $ac;
+	
+}
+
+
+
+function get_gb_type_array($key=null){
+		/* $type =array(SUPPILER_KEY=>SUPPILER,AGENT_KEY=>AGENT,
+				ACCOUNT_KEY=>ACCOUNT,GSA_KEY=>GSA,API_SUPPILER_KEY=>API_SUPPILER,NONE_KEY=>NONE); */
+	$type =array(AGENT_KEY=>AGENT,
+			GSA_KEY=>GSA);
+		if(is_agent())
+			$type =array(AGENTCHILD_KEY=>AGENT_CHILD);
+		if(is_gsa())
+			$type =array(AGENT_KEY=>AGENT);
+	if(!empty($key)){
+		$type=$type[$key];
+	}
+	return $type;
+}
+
+function get_fn_acc_type_array($key=null){
+	$type =array(FINANCE_KEY=>FINANCE,
+			ACCOUNT_KEY=>ACCOUNT);
+	if(!empty($key)){
+		$type=$type[$key];
+	}
+	return $type;
+}
+
+function get_gb_type_all_array($key=null){
+	$type =array(SUPPILER_KEY=>SUPPILER,AGENT_KEY=>AGENT,
+			ACCOUNT_KEY=>ACCOUNT,GSA_KEY=>GSA,API_SUPPILER_KEY=>API_SUPPILER,NONE_KEY=>NONE,AGENTCHILD_KEY=>AGENT_CHILD,SUPERADMIN_KEY=>SUPERADMIN);
+	if(!empty($key)){
+		$type=$type[$key];
+	}
+	return $type;
+}
+
+
+function get_role_frm_type_array($key=null){
+	$type =array(SUPPILER_KEY=>ROLE_SUPPILER,AGENT_KEY=>ROLE_AGENT,
+			AGENTCHILD_KEY=>ROLE_AGENT_CHILD,ACCOUNT_KEY=>ROLE_ACCOUNT,GSA_KEY=>ROLE_GSA,API_SUPPILER_KEY=>ROLE_API_SUPPILER);
+	if(!empty($key)){
+		$type=$type[$key];
+	}
+	return $type;
+}
+
+
+
+function get_menu_item(){
+
+global $user;
+global $base_url;
+if(strtolower($_GET['q'] == 'hotelsearch'))
+	$dashboard_active = 'active';
+else 
+	$dashboard_active = '';
+	$html = is_administrator() || is_superadmin() ?'<li class="'.$dashboard_active.' dropdown_menu_list dashboard_left"><a href="'.$base_url.'/hotelsearch">Dashboard</a>
+									</li>':'<li class="'.$dashboard_active.' dropdown_menu_list dashboard_left"><a href="'.$base_url.'/hotelsearch">Dashboard</a>
+									</li>';
+		
+	/// GSA/Agent
+	if(is_superadmin() || is_administrator() || is_bdm()){
+		if(strtolower($_GET['q'] == 'ocean/agent_gsa/view') && !empty($_GET['status']))
+			$pend_regs_active = 'active';
+		elseif(strtolower($_GET['q'] == 'ocean/agent_gsa/view'))
+			$GSA_Agent_active = 'active';
+		else
+		{
+			$pend_regs_active = '';
+			$GSA_Agent_active = '';
+		}
+	$html .='<li class="dropdown_menu_list dropdown-submenu manage_user">
+        <a class="test"  href="#">Manage Users<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item"style="display:block;"><li class="'.$GSA_Agent_active.'"><a href="'.$base_url.'/ocean/agent_gsa/view">Manage Agents/Gsa</a></li>'; 
+	$html .= '<li class="'.$pend_regs_active.'"><a href="'.$base_url.'/ocean/agent_gsa/view?status=P">Pending Registrations</a></li></ul></li>';
+	
+	} 
+	
+	if(is_agent()){
+		$user_detail = get_data_object_by_condition_value1('gb_user', 'uid', $user->uid, 'deleted', API_FALSE);
+		$commssion_info = get_data_object_by_condition_value1('gb_commission','gb_id', $user_detail->id, 'deleted', API_FALSE);
+		if(strtolower($_GET['q'] == 'admins/gb_user/view'))
+			$Child_active = 'active';
+		else
+			$Child_active = '';
+		if(strpos(strtolower($_GET['q']), 'admins/gb_commission/edit/') !== false)
+		{
+			$com_id = explode('/', $_GET['q']);
+			if($com_id[3] == $commssion_info->id)
+				$comm_active = 'active';
+		}
+		elseif(strpos(strtolower($_GET['q']), 'admins/gb_commission/add/') !== false)
+		{
+			$com_id = explode('/', $_GET['q']);
+			if($com_id[3] == $user_detail->id)
+				$comm_active = 'active';
+		}
+		else
+		{
+			$comm_active = '';
+		}
+		if($_GET['q'] == 'admins/gb_user/booking/history/')
+			$account_summary = 'active';
+		else
+			$account_summary = '';
+		$html .='<li class="dropdown_menu_list dropdown-submenu manage_user">
+        <a class="test"  href="#">Manage Users<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item"style="display:block;"><li class="'.$Child_active.'"><a href="'.$base_url.'/admins/gb_user/view">Manage Child Agent</a></li>';
+		$html .='<li class="'.$account_summary.'"><a href="'.$base_url.'/admins/gb_user/booking/history/'.$user_detail->id.'">My Account Summary</a></li>';
+		if(!empty($commssion_info))
+			$html .='<li class="'.$comm_active.'"><a href="'.$base_url.'/admins/gb_commission/edit/'.$commssion_info->id.'">My Markup</a></li></ul></li>';
+		else
+			$html .='<li class="'.$comm_active.'"><a href="'.$base_url.'/admins/gb_commission/add/'.$user_detail->id.'">My Markup</a></li></ul></li>';
+		/* $html .='<li class="dropdown_menu_list"><a href="/admins/gb_user/details/'.$user_detail->id.'"><!-- <img class="mrR2"
+								src="/sites/all/themes/bootstrap/images/refund.png"> -->My Details</a></li>'; */
+	}
+	if(is_gsa()){
+		$user_detail = get_data_object_by_condition_value1('gb_user', 'uid', $user->uid, 'deleted', API_FALSE);
+		$commssion_info = get_data_object_by_condition_value1('gb_commission', 'gb_id', $user_detail->id, 'deleted', API_FALSE);
+		if(strtolower($_GET['q'] == 'admins/gb_user/view'))
+			$Child_active = 'active';
+		else
+			$Child_active = '';
+		if(strpos(strtolower($_GET['q']), 'admins/gb_commission/edit/') !== false)
+		{
+			$com_id = explode('/', $_GET['q']);
+			if($com_id[3] == $commssion_info->id)
+				$comm_active = 'active';
+		}
+		elseif(strpos(strtolower($_GET['q']), 'admins/gb_commission/add/') !== false)
+		{
+			$com_id = explode('/', $_GET['q']);
+			if($com_id[3] == $user_detail->id)
+				$comm_active = 'active';
+		}
+		else
+		{
+			$comm_active = '';
+		}
+		if($_GET['q'] == 'admins/gb_user/booking/history/')
+			$account_summary = 'active';
+		else
+			$account_summary = '';
+		$html .='<li class="dropdown_menu_list dropdown-submenu manage_user">
+        <a class="test"  href="#">Manage Users<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item"style="display:block;"><li class="'.$Child_active.'"><a href="'.$base_url.'/admins/gb_user/view">Manage Agents</a></li>';
+		$html .='<li class="'.$account_summary.'"><a href="'.$base_url.'/admins/gb_user/booking/history/'.$user_detail->id.'">My Account Summary</a></li>';
+		if(!empty($commssion_info))
+			$html .='<li class="'.$comm_active.'"><a href="'.$base_url.'/admins/gb_commission/edit/'.$commssion_info->id.'">My Markup</a></li></ul></li>';
+		else
+			$html .='<li class="'.$comm_active.'"><a href="'.$base_url.'/admins/gb_commission/add/'.$user_detail->id.'">My Markup</a></li></ul></li>';
+		/* $html .='<li class="dropdown_menu_list"><a href="/admins/gb_user/details/'.$user_detail->id.'"><!-- <img class="mrR2"
+								src="/sites/all/themes/bootstrap/images/refund.png"> -->My Details</a></li>'; */
+	}
+	//bookings
+	if(strtolower($_GET['q'] == 'bookinglist') && $_GET['col1'] == 'orader_status' && $_GET['col1_val'] == ORDER_STATUS_BOOKED)
+		$active_booking = 'active';
+	elseif(strtolower($_GET['q'] == 'bookinglist') && $_GET['booking_status'] == ORDER_STATUS_MODIFIED)
+		$modified_booking = 'active';
+	elseif(strtolower($_GET['q'] == 'bookinglist') && $_GET['booking_status'] == ORDER_STATUS_CANCELLED)
+		$cancelled_booking = 'active';
+	elseif(strtolower($_GET['q'] == 'bookinglist'))
+		$latest_booking = 'active';
+	else
+	{
+		$active_booking = '';
+		$modified_booking = '';
+		$cancelled_booking = '';
+		$latest_booking = '';
+	}
+	$html .= '<li class="dropdown_menu_list dropdown-submenu bookings_item">
+        <a class="test"  href="#">Bookings<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$latest_booking.'"><a href="'.$base_url.'/bookinglist">Latest Bookings</a></li>';
+	$html .= '<li class="'.$active_booking.'"><a href="'.$base_url.'/bookinglist?col1=orader_status&col1_val='.ORDER_STATUS_BOOKED.'">Active Bookings</a></li>';
+	$html .= '<li class="'.$modified_booking.'"><a href="'.$base_url.'/bookinglist?booking_status='.ORDER_STATUS_MODIFIED.'">Modified Bookings</a></li>';
+	$html .= '<li class="'.$cancelled_booking.'"><a href="'.$base_url.'/bookinglist?booking_status='.ORDER_STATUS_CANCELLED.'">Cancelled Bookings</a></li>';
+	if(is_administrator() || is_superadmin() || is_bdm() ){
+	//$html .= '<li><a href="/ocean/most_booked_destinations">Most booked Destinations</a></li>';
+		
+	//$html .= '<li><a href="/ocean/most_activice_agents">Most Activice Agents</a></li>';
+		
+	//$html .= '<li><a href="/ocean/most_booked_hotels">Most booked hotels</a></li>';
+	}
+	
+
+		$html .= '</ul></li>';
+		
+		// Visa
+		
+		if(strtolower($_GET['q'] == 'admins/gb_visa/view'))
+			$visa_manage = 'active';
+		
+		$html .= '<li class="dropdown_menu_list dropdown-submenu manage_visa">
+        <a class="test"  href="#"> Manage Visa<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$visa_manage.'"><a href="'.$base_url.'/admins/gb_visa/view">E-Visa Application</a></li>';
+		$html .= '</ul></li>';
+		
+		
+		
+		
+		
+		
+	//operations
+	if(is_administrator() || is_superadmin() ){
+		if(strtolower($_GET['q'] == 'ocean/bdm/view'))
+			$manage_bdm = 'active';
+		elseif(strtolower($_GET['q'] == 'support/view'))
+			$manage_ticket = 'active';
+		elseif(strtolower($_GET['q'] == 'ocean/add_edit_region'))
+			$manage_region = 'active';
+		elseif(strtolower($_GET['q'] == 'admins/gb_visa/view'))
+			$manage_visa = 'active';
+		elseif(strtolower($_GET['q'] == 'ocean/fin_acc/view'))
+			$manage_visa = 'active';
+		else
+		{
+			$manage_fin_acc = '';
+			$manage_bdm = '';
+			$manage_ticket = '';
+			$manage_region = '';
+			$manage_visa = '';
+		}
+	$html .= '<li class="dropdown_menu_list dropdown-submenu operations">
+        <a class="test"  href="#">Operations<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$manage_bdm.'"><a href="'.$base_url.'/ocean/bdm/view">Manage BDM</a></li>';
+	$html .= '<li class="'.$manage_fin_acc.'"><a href="'.$base_url.'/ocean/fin_acc/view">Manage Finance/Accounts</a></li>';
+	$html .= '<li class="'.$manage_ticket.'"><a href="'.$base_url.'/support/view">Manage Tickets</a></li>';
+	$html .= '<li class="'.$manage_region.'"><a href="'.$base_url.'/ocean/add_edit_region">Manage Country Mapping</a></li>';
+	//$html .= '<li class="'.$manage_visa.'"><a href="/admins/gb_visa/view">Manage Visa</a></li>';
+			$html .='</ul></li>';
+	}
+	// manage ticket is enabled for bdm
+	if(is_gsa() || is_agent() || is_bdm()){
+		if(strtolower($_GET['q'] == 'support/view'))
+			$manage_ticket = 'active';
+		else
+			$manage_ticket = '';
+		$html .= '<li class="dropdown_menu_list dropdown-submenu operations">
+        <a class="test"  href="#">Operations<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;">';
+		//$html .= '<li><a href="/ocean/bdm/view">View BDM</a></li>';
+		$html .= '<li class="'.$manage_ticket.'"><a href="'.$base_url.'/support/view">Manage Tickets</a></li></ul></li>';
+		
+	
+	
+/* 		$html .= '<li class="dropdown_menu_list dropdown-submenu">
+        <a class="test"  href="#">Finance<span class="caret"></span></a>
+        <ul class="dropdown-menu" style="display:block;"><li><a href="/ocean/booking_markups">Booking Markups</a></li></ul></li>'; */
+	}
+	
+	if(is_administrator() || is_superadmin() || is_bdm() || is_gsa() || is_agent()){
+		//finance
+		/* $html .= '<li class="dropdown_menu_list dropdown-submenu">
+		<a class="test"  href="#">Finance<span class="caret"></span></a>
+		<ul class="dropdown-menu" style="display:block;"><li><a href="/ocean/finance_dashboard">Finance Dashboard</a></li>'; */
+	
+		//$html .= '<li><a href="/ocean/booking_markups">Booking Markups</a></li></ul></li>';
+		//Misc
+		if(strtolower($_GET['q'] == 'fn_reports/bookedhotellist'))
+			$booked_hotel_report = 'active';
+		elseif(strtolower($_GET['q'] == 'fn_reports/gsa-reports'))
+			$gsa_report = 'active';
+		elseif(strtolower($_GET['q'] == 'fn_reports/mybookings/view'))
+			$agent_report = 'active';
+		else
+		{
+			$booked_hotel_report = '';
+			$gsa_report = '';
+			$agent_report = '';
+		}
+		$html .= '<li class="dropdown_menu_list dropdown-submenu reports_item">
+        <a class="test"  href="#">Reports <span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$booked_hotel_report.'"><a href="'.$base_url.'/fn_reports/bookedhotellist/">Booked Hotels Report</a></li>';
+		if(!is_agent() && !is_gsa())
+		{
+		$html .= '<li class="'.$gsa_report.'"><a href="'.$base_url.'/fn_reports/gsa-reports">Supplier Reconciliation</a></li>';
+		}
+
+			$html .= '<li class="'.$agent_report.'"><a href="'.$base_url.'/fn_reports/mybookings/view">Agent Reconciliation</a></li></ul></li>';}
+
+	
+			
+			if(is_administrator() || is_superadmin()){
+				//finance
+				/* $html .= '<li class="dropdown_menu_list dropdown-submenu">
+				<a class="test"  href="#">Finance<span class="caret"></span></a>
+				<ul class="dropdown-menu" style="display:block;"><li><a href="/ocean/finance_dashboard">Finance Dashboard</a></li>'; */
+			
+				//$html .= '<li><a href="/ocean/booking_markups">Booking Markups</a></li></ul></li>';
+				//Misc
+				if(strtolower($_GET['q'] == 'accounts/gb-comleted-earnings'))
+						$gb_completed_report = 'active';
+		elseif(strtolower($_GET['q'] == 'accounts/gb-expected-earnings'))
+							$gb_expected_report = 'active';
+		elseif(strtolower($_GET['q'] == 'accounts/gb-gross-earnings'))
+							$gb_gross_report = 'active';
+		elseif(strtolower($_GET['q'] == 'accounts/mostactiveagentslist'))
+		$gb_mostactive_report = 'active';
+		elseif(strtolower($_GET['q'] == 'accounts/paymentlist'))
+		$gb_paylist_report = 'active';
+		elseif(strtolower($_GET['q'] == 'fn_reports/sold_dates/view'))
+		$hightst_selling_day = 'active';
+		elseif(strtolower($_GET['q'] == 'fn_reports/duration_of_stay/count'))
+		$duration_of_stay_count = 'active';
+									else
+									{
+										$gb_completed_report = '';
+										$gb_expected_report = '';
+										$gb_gross_report = '';
+										$gb_mostactive_report ='';
+										$gb_paylist_report ='';
+										$hightst_selling_day = '';
+										$duration_of_stay_count = '';
+									}
+									$html .= '<li class="dropdown_menu_list dropdown-submenu acc_reports_item">
+        <a class="test"  href="#">Account Reports<span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$gb_completed_report.'"><a href="'.$base_url.'/accounts/gb-comleted-earnings">GB Completed Earnings</a></li>';
+										$html .= '<li class="'.$gb_expected_report.'"><a href="'.$base_url.'/accounts/gb-expected-earnings">GB Expected Earnings</a></li>';
+										$html .= '<li class="'.$gb_gross_report.'"><a href="'.$base_url.'/accounts/gb-gross-earnings">GB Gross Earnings</a></li>';
+									$html .= '<li class="'.$gb_mostactive_report.'"><a href="'.$base_url.'/accounts/mostactiveagentslist">GB Most Active Agents</a></li>';
+									$html .= '<li class="'.$gb_paylist_report.'"><a href="'.$base_url.'/accounts/paymentlist">GB Agents Credit Report</a></li>';
+									$html .= '<li class="'.$hightst_selling_day.'"><a href="'.$base_url.'/fn_reports/sold_dates/view">Highly Sold Dates Report</a></li>';
+									$html .= '<li class="'.$duration_of_stay_count.'"><a href="'.$base_url.'/fn_reports/duration_of_stay/count">Duration of Booking Report</a></li></ul></li>';
+			}
+			
+			
+		if(is_administrator() || is_superadmin()){
+	//finance
+	/* $html .= '<li class="dropdown_menu_list dropdown-submenu">
+        <a class="test"  href="#">Finance<span class="caret"></span></a>
+        <ul class="dropdown-menu" style="display:block;"><li><a href="/ocean/finance_dashboard">Finance Dashboard</a></li>'; */
+
+	//$html .= '<li><a href="/ocean/booking_markups">Booking Markups</a></li></ul></li>';
+	//Misc
+			if(strtolower($_GET['q'] == 'oceans/cnds'))
+				$manage_cnd = 'active';
+			elseif(strtolower($_GET['q'] == 'ocean/currency/rates'))
+				$currency_rate = 'active';
+			/* elseif(strtolower($_GET['q'] == 'admins/gb_visa_fee/add'))
+			$visa_add = 'active'; */
+			elseif(strtolower($_GET['q'] == 'admins/gb_visa_fee/view'))
+			$visa_view = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_region/view'))
+			$gb_region = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_country/view'))
+			$gb_country= 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_state/view'))
+			$gb_state = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_city/view'))
+			$gb_city = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_promotion_banner/view'))
+			$promotions_view = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_markup/modify') && strtoupper($_GET['markup'] == GB_MARKUP))
+			$gb_markup = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_markup/modify') && strtoupper($_GET['markup'] == GB_CANCEL_MARKUP))
+			$gb_cancel_markup = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_discount_markup/view'))
+			$manage_markup = 'active';
+			elseif(strtolower($_GET['q'] == 'admins/gb_cancel_date/modify'))
+			$gb_can_date_markup = 'active';
+			else
+			{
+				$manage_cnd = '';
+				$currency_rate = '';
+				/* $visa_add =''; */
+				$visa_view ='';
+				$promotions_view = '';
+				$gb_markup = '';
+				$gb_cancel_markup = '';
+				$gb_region = '';
+				$gb_country = '';
+				$gb_state = '';
+				$gb_city = '';
+				$manage_markup = '';
+				$gb_can_date_markup = '';
+				
+			}
+	$html .= '<li class="dropdown_menu_list dropdown-submenu misc">
+        <a class="test"  href="#">Misc <span class="caret"></span></a>
+        <ul class="dropdown-menu nav_sub_item" style="display:block;"><li class="'.$manage_cnd.'"><a href="'.$base_url.'/oceans/cnds">Manage Masters</a></li>';
+/* 	$html .= '<li class="'.$visa_add.'"><a href="/admins/gb_visa_fee/add">Add Visa Fees</a></li>'; */
+	$html .= '<li class="'.$visa_view.'"><a href="'.$base_url.'/admins/gb_visa_fee/view">View Visa Fees</a></li>';
+	$html .= '<li class="'.$promotions_view.'"><a href="'.$base_url.'/admins/gb_promotion_banner/view">View Promotions</a></li>';
+	$html .= '<li class="'.$gb_markup.'"><a href="'.$base_url.'/admins/gb_markup/modify/?markup='.GB_MARKUP.'">Manage GB Markup </a></li>';
+	$html .= '<li class="'.$gb_cancel_markup.'"><a href="'.$base_url.'/admins/gb_markup/modify/?markup='.GB_CANCEL_MARKUP.'">Manage GB Cancellation Markup </a></li>';
+	$html .= '<li class="'.$gb_can_date_markup.'"><a href="'.$base_url.'/admins/gb_cancel_date/modify">Manage GB Cancellation Date Markup </a></li>';
+	$html .= '<li class="'.$manage_markup.'"><a href="'.$base_url.'/admins/gb_discount_markup/view">Manage Discounts/Markups </a></li>';
+	$html .= '<li class="'.$gb_region.'"><a href="'.$base_url.'/admins/gb_region/view">Manage Region/Sub Region</a></li>';
+	$html .= '<li class="'.$gb_country.'"><a href="'.$base_url.'/admins/gb_country/view">Manage Country </a></li>';
+	$html .= '<li class="'.$gb_state.'"><a href="'.$base_url.'/admins/gb_state/view">Manage State </a></li>';
+	$html .= '<li class="'.$gb_city.'"><a href="'.$base_url.'/admins/gb_city/view">Manage City </a></li>';
+	$html .= '<li class="'.$currency_rate.'"><a href="'.$base_url.'/ocean/currency/rates">Set Currency Rates </a></li></ul></li>';}
+		
+	return $html;
+
+}
+
+/*get Name Of all Bdm Users */
+function getAllbdmNameList($include_0 =FALSE){
+
+	$bdm_list_array = array ();
+$query =db_select ('gb_user', 'n');
+$query->join('users_roles', 'u', 'n.uid = u.uid');
+ 
+$query->condition('rid',ROLE_BDM)
+->fields('n',array('id','fContactFName','fContactLName'));
+$query->orderBy('n.fContactFName','ASC');
+
+$result = $query->execute()->fetchAll();
+if ($include_0) {
+	$bdm_list_array [0] = '--Select BDM -- ';
+}
+
+foreach ( $result as $res ) {
+
+	$bdm_list_array [$res->id] = $res->fContactFName.' '.$res->fContactLName;
+}
+return $bdm_list_array;
+}
+
+
+
+/*get Agency Name /GSA / BDM by AgentId*/
+function getAgent_Bdm_GsabyAgentId($id,$Role){
+	$query =db_select ('gb_user', 'n');
+	$query->join('users_roles', 'u', 'n.uid = u.uid');
+	$query->fields('n',array('company_name','fContactFName','fContactLName'));
+	$query->condition('n.uid',$id,'=');
+	if($Role == 'AGENT')
+	{
+	$query->condition('u.rid',ROLE_AGENT);
+	}else if($Role == 'BDM')
+	{
+	$query->condition('u.rid',ROLE_BDM);
+	}else if($Role == 'GSA'){
+    $query->condition('u.rid',ROLE_GSA);
+	}
+	//echo $query;
+	$result = $query->execute()->fetchAll();
+	return $result;
+	
+
+}
+/**
+ * Function to sent mail whenever a visa form gets submitted.
+ **/
+function send_mail_visa_request($addAddress, $addCC=NULL,$addBCC=NULL,$name,$passport_no,$id)
+{
+	
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{	
+		$mail = new PHPMailer;	                       
+	
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		// Changed Username4 to Username3
+		$mail->Username = Username4;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+	
+		$mail->setFrom(Username4);
+		
+		foreach($addAddress as $key => $value)
+		{	
+			$mail->addAddress($value);
+		}
+		
+		if(!empty($addCC))
+		{
+			 foreach($addCC as $x => $y)
+			 { 
+				$mail->addCC($y);
+			 } 
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		
+		$visa_mail_time = get_time_long(time());
+		$body = visa_request_mail_body($name,$passport_no,$visa_mail_time,$id);
+		//$body = visa_request_mail_body($name,$passport_no,$visa_mail_time);
+		
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');*/    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+	
+		$mail->Subject = MSG_SEND_MAIL_VISA_ACCOUNT_REQUEST_SUBJECT_MSG;
+		$mail->MsgHTML($body);
+		//$mail->Body    = MSG_SEND_MAIL_VISA_ACCOUNT_REQUEST_BODY_MSG;
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	    }else{ echo 'Message could not be sent please add receipt ';
+	    }
+        return $mail;
+	
+}
+
+/**
+ * Agent Approved Mail Function.
+ */
+function send_mail_Agent_approve($addAddress, $addCC=NULL,$addBCC=NULL,$user_name,$subject)
+{
+		require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+		require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+		//require 'PHPMailerAutoload.php';
+		if(!empty($addAddress))
+		{
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+	
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                             // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		//Changed Username2 to Username3
+		$mail->Username = Username2;                          // SMTP username
+		$mail->Password = password;                           // SMTP password
+		$mail->SMTPSecure = Encryption_method1;               // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                  // TCP port to connect to
+	
+		$mail->setFrom(Username2);
+	foreach($addAddress as $key => $value)
+		{	
+		$mail->addAddress($value);
+		}
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+		if(!empty($addCC))
+		{
+			 foreach($addCC as $x => $y)
+			 { 			
+				$mail->addCC($y);
+			 } 
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$name = $user_name;
+		$body = Agent_approve_msgbody($name);
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+	
+		//$mail->Subject = MSG_SEND_MAIL_AGENT_APPROVE_SUBJECT_MSG;
+		$mail->Subject = $subject;
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+		}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+	
+/***
+ * Agent Deactivated mail function.
+ */	
+function send_mail_Agent_deactivated($addAddress, $addCC=NULL,$addBCC=NULL,$user_name)
+{
+		require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+		require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+		//require 'PHPMailerAutoload.php';
+		if(!empty($addAddress))
+		{
+			$mail = new PHPMailer;
+			//$mail->SMTPDebug = 2;                                // Enable verbose debug output
+	
+			$mail->isSMTP();                                       // Set mailer to use SMTP
+			$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                                // Enable SMTP authentication
+			//Changed Username2 to Username3
+			$mail->Username = Username2;                           // SMTP username
+			$mail->Password = password;                            // SMTP password
+			$mail->SMTPSecure = Encryption_method1;                // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = port1;                                   // TCP port to connect to
+	
+			$mail->setFrom(Username2);
+			foreach($addAddress as $key => $value)
+			{
+				$mail->addAddress($value);
+			}
+			// Add a recipient
+			//$mail->addAddress('ellen@example.com');               // Name is optional
+			//$mail->addReplyTo('test@global-beds.com');
+			if(!empty($addCC))
+			{
+				foreach($addCC as $x => $y)
+				{			
+					$mail->addCC($y);
+				}
+			}
+			if(!empty($addBCC))
+			{
+				foreach($addBCC as $a => $b)
+				{
+					$mail->addBCC($b);
+				}
+			}
+			$name = $user_name;
+			$body = Agent_deactivate_msgbody($name);
+	
+			//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+			$mail->isHTML(true);                                  // Set email format to HTML
+	
+			$mail->Subject = MSG_SEND_MAIL_AGENT_DEACTIVATED_SUBJECT_MSG;
+			$mail->MsgHTML($body);
+			//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	
+			if(!$mail->send()) {
+				echo 'Message could not be sent.';
+				echo 'Mailer Error: ' . $mail->ErrorInfo;
+			} else {
+				echo 'Message has been sent';
+			}
+		}else{ echo 'Message could not be sent please add receipt ';
+		}
+		return $mail;
+	}
+
+
+/**
+ * Agent Registeration mail function.
+ */
+function send_mail_Agent_register($addAddress, $addCC=NULL,$addBCC=NULL,$name)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+	//require 'PHPMailerAutoload.php';
+	$mail = new PHPMailer;
+	//$mail->SMTPDebug = 2;                                   // Enable verbose debug output
+
+$mail->isSMTP();                                              // Set mailer to use SMTP
+	$mail->Host = SMTP_HOST1;                                 // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                                   // Enable SMTP authentication
+    // Changed Username1 to Username3
+	$mail->Username = Username2;                              // SMTP username
+	$mail->Password = password;                               // SMTP password
+	$mail->SMTPSecure = Encryption_method1;                   // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = port1;                                      // TCP port to connect to
+
+	$mail->setFrom(Username2);
+foreach($addAddress as $key => $value)
+	{	
+	$mail->addAddress($value);
+	}
+	// Add a recipient
+	//$mail->addAddress('ellen@example.com');                  // Name is optional
+	//$mail->addReplyTo('test@global-beds.com');
+		if(!empty($addCC))
+		{
+			 foreach($addCC as $x => $y)
+			 { 		
+				$mail->addCC($y);
+			 } 
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$l_name = $name;
+		$body = registration_msgbody($l_name);
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+	
+		$mail->Subject = MSG_SEND_MAIL_AGENT_REGISTER_SUBJECT_MSG;
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+		}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;	
+}
+
+/***
+ * User Verification Mail Function
+ */
+function send_mail_user_verification($addAddress, $username,$subject,$addCC=NULL,$addBCC=NULL)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		//require 'PHPMailerAutoload.php';
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		//changed Username1 to Username3
+		$mail->Username = Username2;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username2);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{				
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$body = verification_msgbody($username);
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		//$mail->Subject = MSG_SEND_MAIL_VERIFICATION_SUBJECT_MSG;
+		$mail->Subject = $subject;
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/***
+ * Function to sent mail after booking gets confirmed
+ */
+function send_mail_booking_confirmed($addAddress, $addCC=NULL,$addBCC=NULL,$orderId)
+{ 
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+	//require 'PHPMailerAutoload.php';
+	$mail = new PHPMailer;
+	//$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+
+	$mail->isSMTP();                                        // Set mailer to use SMTP
+	$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+	//changed Username1 to Username3
+	$mail->Username = Username1;                            // SMTP username
+	$mail->Password = password;                             // SMTP password
+	$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = port1;                                    // TCP port to connect to
+
+	$mail->setFrom(Username1);
+    foreach($addAddress as $key => $value)
+	{	
+	    $mail->addAddress($value);
+	}
+	// Add a recipient
+	//$mail->addAddress('ellen@example.com');               // Name is optional
+	//$mail->addReplyTo('test@global-beds.com');
+	
+	if(!empty($addCC))
+		{
+			 foreach($addCC as $x => $y)
+			 { 		
+				$mail->addCC($y);
+			 } 
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		
+		$subject = booking_confirmed_msgsubject($orderId);
+		$body = booking_confirmed_msgbody($orderId);
+	    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+	    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                   // Set email format to HTML
+
+		$mail->Subject = "$subject";
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+		}else{ echo 'Message could not be sent please add receipt ';
+	}
+  return $mail;
+}
+	
+/***
+ * Booking Cancellation mail.
+ */	
+function send_mail_booking_status($addAddress, $addCC=NULL,$addBCC=NULL,$orderId,$booking_status)
+{		
+		require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+		require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+		if(!empty($addAddress))
+		{
+			//require 'PHPMailerAutoload.php';
+			$mail = new PHPMailer;
+			//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+	
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = SMTP_HOST1;                             // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			// changed Username1 to Username3
+			$mail->Username = Username1;                          // SMTP username
+			$mail->Password = password;                           // SMTP password
+			$mail->SMTPSecure = Encryption_method1;               // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = port1;                                  // TCP port to connect to
+	
+			$mail->setFrom(Username1);
+			foreach($addAddress as $key => $value)
+			{
+				$mail->addAddress($value);
+			}
+			// Add a recipient
+			//$mail->addAddress('ellen@example.com');               // Name is optional
+			//$mail->addReplyTo('test@global-beds.com');
+	
+			if(!empty($addCC))
+			{
+				foreach($addCC as $x => $y)
+				{				
+					$mail->addCC($y);
+				}
+			}
+			if(!empty($addBCC))
+			{
+				foreach($addBCC as $a => $b)
+				{
+					$mail->addBCC($b);
+				}
+			}
+			
+			$mail_contents = get_booking_status_based_mail_subject_body($booking_status);
+			$subject = $mail_contents['subject'];		
+			$body = booking_cancellation_msgbody($orderId,$booking_status);
+			//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+			$mail->isHTML(true);                                  // Set email format to HTML
+	
+			$mail->Subject = $subject;
+			$mail->MsgHTML($body);
+			//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		
+			if(!$mail->send()) {
+				echo 'Message could not be sent.';
+				echo 'Mailer Error: ' . $mail->ErrorInfo;
+			} else {
+				echo 'Message has been sent';
+			}
+		}else{ echo 'Message could not be sent please add receipt ';
+		}
+		return $mail;
+	}
+
+/****
+ * 
+ */
+function send_mail_booking_vouchers($addAddress,$path, $addCC=NULL,$addBCC=NULL)
+{
+	require_once(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require_once(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		//require 'PHPMailerAutoload.php';
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                // Enable verbose debug output
+		$mail->isSMTP();                                       // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                // Enable SMTP authentication
+		// changed Username1 to Username3
+		$mail->Username = Username1;                           // SMTP username
+		$mail->Password = password;                            // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username1);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		if(!empty($path)){
+			$mail->addAttachment($path);
+		}
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+		
+		$key_array = get_all_key_array();
+		$gb_booking_no = get_data_by_pks('gb_orders',$id)->gb_booking_no;
+		$key_array[BKEY_BOOKING_NUMBER] = $gb_booking_no;
+		$mail->Subject = get_message(MSG_ORDER_VOUCHER_MAIL_SUBJECT_MSG,$key_array);
+		$mail->Body = MSG_ORDER_VOUCHER_MAIL_BODY_MSG;
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		$msg='';
+		if(!$mail->send()) {
+			$msg .='Message could not be sent.';
+			$msg .='Mailer Error: ' . $mail->ErrorInfo;
+			drupal_set_message($msg,'error');
+		} else {
+			$msg ='Message has been sent';
+			drupal_set_message($msg);
+		}
+	}else{
+		$msg ='Message could not be sent please add receipt ';
+		drupal_set_message($msg);
+	}
+	if(!empty($path)){
+		unlink($path);
+	}
+	return $msg;
+}
+ 
+/**
+ * Function for send_mail_booking_invoice
+ */	
+function send_mail_booking_invoice($addAddress,$path,$invoice_no, $addCC=NULL,$addBCC=NULL)
+{
+	    global $user;
+		require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+		require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+		if(!empty($addAddress))
+		{
+					
+			$mail = new PHPMailer;
+			//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+	
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = SMTP_HOST1;                             // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			// changed Username1 to Username3
+			$mail->Username = Username6;                          // SMTP username
+			$mail->Password = password;                           // SMTP password
+			$mail->SMTPSecure = Encryption_method1;               // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = port1;                                  // TCP port to connect to
+	
+			$mail->setFrom(Username6);
+			 foreach($addAddress as $key => $value)
+			{
+				$mail->addAddress($value);
+			} 
+			//$mail->addAddress('amit.rastogi@techletsolutions.com');
+			// Add a recipient
+			//$mail->addAddress('ellen@example.com');               // Name is optional
+			//$mail->addReplyTo('test@global-beds.com');
+	
+			if(!empty($addCC))
+			{
+				foreach($addCC as $x => $y)
+				{	
+					$mail->addCC($y);
+				}
+			}
+			if(!empty($addBCC))
+			{
+				foreach($addBCC as $a => $b)
+				{
+					$mail->addBCC($b);
+				}
+			}
+			if(!empty($path)){
+			$mail->addAttachment($path); 
+			}        
+			// Add attachments
+			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');         // Optional name
+			$mail->isHTML(true);                                         // Set email format to HTML
+	        $key_array=get_all_key_array_common();        
+	        $key_array[CKEY_INVOICE_NUMBER]= $invoice_no;
+	        $gb_booking_no = get_data_by_pks('gb_orders',$id)->gb_booking_no;
+	        $key_array[CKEY_BOOKING_NUMBER]= $gb_booking_no;
+			$mail->Subject = get_message(MSG_ORDER_INVOICE_MAIL_SUBJECT_MSG,$key_array);
+			$mail->Body = MSG_ORDER_INVOICE_MAIL_BODY_MSG;
+			//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+	        $msg='';
+			if(!$mail->send()) {
+				$msg .='Message could not be sent.';
+                $msg .='Mailer Error: ' . $mail->ErrorInfo;
+                drupal_set_message($msg,'error');
+			} else {
+				$msg ='Message has been sent';
+				drupal_set_message($msg);
+			}
+		}else{ 
+			$msg ='Message could not be sent please add receipt ';
+			drupal_set_message($msg);
+		}
+		if(!empty($path)){
+			unlink($path);
+		}
+   return $msg;
+}
+		
+/***
+ * Function to send mail in case of payment successful.
+ * @param
+ */
+function send_mail_booking_payment($addAddress, $addCC=NULL,$addBCC=NULL)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{	
+	//require 'PHPMailerAutoload.php';
+	$mail = new PHPMailer;
+	//$mail->SMTPDebug = 2;                                // Enable verbose debug output
+
+	$mail->isSMTP();                                       // Set mailer to use SMTP
+	$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                                // Enable SMTP authentication
+	// Username1 changed to Username3
+	$mail->Username = Username1;                           // SMTP username
+	$mail->Password = password;                            // SMTP password
+	$mail->SMTPSecure = Encryption_method1;                // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = port1;                                   // TCP port to connect to
+
+	$mail->setFrom(Username1);
+foreach($addAddress as $key => $value)
+	{	
+	$mail->addAddress($value);
+	}
+	// Add a recipient
+	//$mail->addAddress('ellen@example.com');               // Name is optional
+	//$mail->addReplyTo('test@global-beds.com');
+	if(!empty($addCC))
+		{
+			 foreach($addCC as $x => $y)
+			 { 
+			
+				$mail->addCC($y);
+			 } 
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+
+	//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+	//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+	$mail->isHTML(true);                                  // Set email format to HTML
+
+	$mail->Subject = MSG_SEND_MAIL_BOOKING_PAYMENT_SUBJECT_MSG;
+	$mail->Body    = MSG_SEND_MAIL_BOOKING_PAYMENT_BODY_MSG;
+	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+	if(!$mail->send()) {
+		echo 'Message could not be sent.';
+		echo 'Mailer Error: ' . $mail->ErrorInfo;
+	} else {
+		echo 'Message has been sent';
+	}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/***
+ * 
+ */
+function send_mail_hotelbed_apiconnection($addAddress, $addCC=NULL,$addBCC=NULL)
+{
+
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		//require 'PHPMailerAutoload.php';
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+
+		$mail->isSMTP();                                     // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                             // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		//Username5 changed to Username3
+		$mail->Username = Username5;                          // SMTP username
+		$mail->Password = password;                           // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username5);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = 'voucher issue ';
+		$mail->Body    = 'voucher issue';
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/*
+function send_mail_bdm_booking_confirmed($addAddress,$path, $addCC=NULL,$addBCC=NULL)
+{	
+		
+
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		//require 'PHPMailerAutoload.php';
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+
+		$mail->isSMTP();                                     // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = Username1;                 // SMTP username
+		$mail->Password = password;                           // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username1);
+		
+		
+	foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+					
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = 'your booking is confirmed';
+		$mail->Body    = 'your booking is confirmed';
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt hii ';
+	}
+	return $mail;
+}
+
+function get_bdm_mailid(){
+	global $user;
+	$user_info = get_table_object_field('gb_user', 'uid', $user->uid);
+	$users = db_select('gb_user','u');
+	$users->fields('u', array('fContatmail'));
+	$users->condition('u.id',$user_info->bdm_attach_id,'=');
+	$result = $users->execute()->fetchAll();
+	$bdmmail = $result->fContatmail;
+	return $bdmmail;
+} */
+
+function get_facilities_image($content){
+	global $base_url;
+	$content = strtolower ( $content );
+	$specrm = str_replace ( ' ', '_', $content );
+	$image = $base_url.'/sites/all/themes/bootstrap/images/Filter_Images/amenities_GB_icon.png';// Default image
+	
+	if ($specrm == 'check-in_hour') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/clock.png';
+	}
+	if ($specrm == 'wi-fi') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/wifi.png';
+	}
+	if ($specrm == 'business_centre') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/business-center.png';
+	}
+	if ($specrm == 'disability-friendly_rooms') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/disable.png';
+	}
+	if ($specrm == 'centrally_regulated_air_conditioning') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/air-cond.png';
+	}
+	if ($specrm == 'bathroom') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/bathroom.png';
+	}
+	if ($specrm == 'connecting_rooms') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/connect-room.png';
+	}
+	if ($specrm == 'gym') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/gym.png';
+	}
+	if ($specrm == 'secure_parking') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/parking.png';
+	}
+	if ($specrm == 'restaurant') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/restuarant.png';
+	}
+	if ($specrm == 'shower') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/shower.png';
+	}
+	if ($specrm == 'spa_centre') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/spa.png';
+	}
+	if ($specrm == 'outdoor_swimming_pool') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/swimming.png';
+	}
+	if ($specrm == 'tv') {
+		$image = $base_url . '/sites/all/themes/bootstrap/images/Filter_Images/tv.png';
+	}
+	
+	return $image;
+	
+}
+
+function booking_list_by_conditions($column1=NULL,$column_value1=NULL,$time_interval=NULL,$column2=NULL,$keyword=NULL,$count_purpose=NULL,$recent_booking=NULL)
+{
+	global $user;
+	if($keyword == 'LAST' && !empty($keyword))
+	{
+		$condition1 = '>';
+		$condition2 = '<';
+		$time_interval = time()-$time_interval;
+	}
+	if($keyword == 'NEXT' && !empty($keyword))
+	{
+		$condition1 = '<';
+		$condition2 = '>';
+		$time_interval = time()+$time_interval;
+	}
+	if(empty($count_purpose))
+		$booking = db_select('gb_order_items','got')->extend('PagerDefault')->limit(PAGE_LIMIT);
+	else
+		$booking = db_select('gb_order_items','got');
+	if(empty($count_purpose))
+	{
+		if(!empty($recent_booking))
+			$booking->orderBy('got.id','DESC')->range(0,5);
+		$booking->fields('got', array('id','booking_no','data','created','user_currency','payment_status','agent_commission','itemname','destination','bprice','sprice','fprice','brief_item_detail','sdate','edate','agentid','created','client_nationality','orader_status','lead_passenger_fullname','payment_mode','gb_booking_no'));
+		$booking->leftJoin('gb_orders', 'go', 'go.id = got.order_id');
+		$booking->fields('go',array( 'id','pass_data'));
+	}
+	else
+		$booking->addExpression('COUNT(*)', 'count');
+	if(!empty($column1) && !empty($column_value1))
+		$booking->condition ( 'got.'.$column1, $column_value1, '=' );
+	if(!empty($keyword) && !empty($time_interval) && !empty($column2))
+	{
+		$booking->condition ( 'got.'.$column2, time(), $condition2 );
+		$booking->condition ( 'got.'.$column2, $time_interval, $condition1 );
+	}
+	if(!is_superadmin() && !is_administrator() && !is_account() && !is_finance())
+	{
+		$booking->condition('got.uid',get_all_users_to_show_bookinglist(),'IN');
+	}
+	$booking->condition ( 'got.type',BOOKING_TYPE_HOTEL,'=');
+	if(empty($count_purpose))
+		return $booking;
+	else
+	{
+		$result = $booking->execute()->fetchAll();
+		foreach ($result as $result)
+		{
+			$count = $result->count;
+		}
+		return $count;
+	}
+}
+
+
+function get_booking_status_dropdown(){
+	return array(ORDER_STATUS_PENDING=>ORDER_STATUS_PENDING_TEXT,
+				 ORDER_STATUS_CANCELLED=>ORDER_STATUS_CANCELLED_TEXT,
+				 ORDER_STATUS_BOOKED=>ORDER_STATUS_BOOKED_TEXT,
+				 ORDER_STATUS_CANCEL_REQUESTED=>ORDER_STATUS_CANCEL_REQUESTED_TEXT,
+				 ORDER_STATUS_MODIFIED=>ORDER_STATUS_MODIFIED_TEXT,
+			 	 ORDER_STATUS_COMPLETED=>ORDER_STATUS_COMPLETED_TEXT,
+				 ORDER_STATUS_MISSED=>ORDER_STATUS_MISSED_TEXT
+	);
+}
+
+function get_payment_status_dropdown(){
+	return array(PAYMENTS_STATUS_PENDING=>PAYMENTS_STATUS_PENDING_TXT,
+			PAYMENTS_STATUS_REFUND=>PAYMENTS_STATUS_REFUND_TXT,
+			PAYMENTS_STATUS_PARTIAL_PAYMENT=>PAYMENTS_STATUS_PARTIAL_PAYMENT_TXT,
+			PAYMENTS_STATUS_SUCCESS=>PAYMENTS_STATUS_SUCCESS_TXT
+	);
+}
+
+function get_payment_status_dropdown1(){
+	return array(PAYMENTS_STATUS_PENDING=>PAYMENTS_STATUS_PENDING_TXT,
+			PAYMENTS_STATUS_SUCCESS=>'Paid',
+			PAYMENTS_STATUS_REFUND=>PAYMENTS_STATUS_REFUND_TXT
+	);
+}
+
+
+function get_payment_mode_dropdown(){
+	return array(PAYMENT_TYPE_ONLINE=>PAYMENT_TYPE_ONLINE_TEXT,
+			PAYMENT_TYPE_POINT=>PAYMENT_TYPE_POINT_TEXT
+	);
+}
+
+
+/*Supplier DropDown */
+function get_supplier_dropdown(){
+	return array('Hotelbed'=>'Hotelbed',
+			'Hotel Pro'=>'Hotel Pro'
+	);
+}
+function get_time_long($unix_time){
+	if(empty($unix_time))
+		return '-';
+		else
+			return date('d M Y H:i:s',$unix_time);
+}
+
+function get_time_short($unix_time){
+	if(empty($unix_time))
+		return '-';
+		else
+			return date('d M Y',$unix_time);
+}
+
+function get_time_mid($unix_time){
+	if(empty($unix_time))
+		return '-';
+		else
+			return date('d M Y H:i',$unix_time);
+}
+
+function get_time_created($unix_time){
+	return get_time_mid($unix_time);
+}
+
+function get_time_long_format($unix_time){
+	if(empty($unix_time))
+		return '-';
+	else
+		return date('d/m/y g:i a',$unix_time);
+}
+
+
+/**
+ * Return booking type name from booking type code
+ * @param unknown $booking_type
+ */
+function get_booking_type_name_from_code($booking_type){
+	if($booking_type == BOOKING_TYPE_HOTEL)
+		return BOOKING_TYPE_HOTEL_NAME;
+	else if($booking_type == BOOKING_TYPE_ACTIVITY)
+		return BOOKING_TYPE_ACTIVITY_NAME;
+	else if($booking_type == BOOKING_TYPE_TRANSFER)
+		return BOOKING_TYPE_TRANSFER_NAME;
+	else if($booking_type == BOOKING_TYPE_PACKAGE)
+		return BOOKING_TYPE_PACKAGE_NAME;
+	else if($booking_type == BOOKING_TYPE_MIXED)
+		return BOOKING_TYPE_MIXED_NAME;
+	else 
+		return 'Contact Admin';
+}
+
+function get_all_users_to_show_bookinglist()
+{
+	global $user;
+	$user_list = array();
+	$user_info = get_table_object_field('gb_user', 'uid', $user->uid);
+	if(is_agent())
+	{
+		$users = db_select('gb_user','u');
+		$users->fields('u', array('uid'));
+		$users->condition('u.masterGid',$user_info->id,'=');
+		$result = $users->execute()->fetchAll();
+		foreach ($result as $result)
+		{
+			$user_list[] = $result->uid;
+		}
+		$user_list[] = $user->uid;
+	}
+	elseif(is_agentChild())
+	{
+		$parent_info = get_data_object_by_condition_value('gb_user', 'id', $user_info->masterGid, 'deleted', API_FALSE);
+		$users = db_select('gb_user','u');
+		$users->fields('u', array('uid'));
+		$users->condition('u.masterGid',$user_info->masterGid,'=');
+		$result = $users->execute()->fetchAll();
+		foreach ($result as $result)
+		{
+			$user_list[] = $result->uid;
+		}
+		$user_list[] = $parent_info->uid;
+	}
+	elseif(is_gsa())
+	{
+		$users = db_select('gb_user','u');
+		$users->fields('u', array('uid'));
+		$users->leftJoin('gb_user', 'gu', 'gu.masterGid = u.id');
+		$users->fields('gu',array('uid'));
+		$users->condition('u.masterGid',$user_info->id,'=');
+		$result = $users->execute()->fetchAll();
+		foreach ($result as $result)
+		{
+			if(!empty($result->uid))
+				$user_list[] = $result->uid;
+			if(!empty($result->gu_uid))
+				$user_list[] = $result->gu_uid;
+		}
+		$user_list[] = $user->uid;
+	}
+	elseif(is_bdm())
+	{
+		$users = db_select('gb_user','u');
+		$users->fields('u', array('uid'));
+		$users->condition('u.bdm_attach_id',$user_info->id,'=');
+		$result = $users->execute()->fetchAll();
+		foreach ($result as $result)
+		{
+			if(!empty($result->uid))
+			$user_list[] = $result->uid;
+		}
+		$user_list[] = $user->uid;
+	}
+	return $user_list;
+}
+
+
+
+/**
+ * 
+ * getUserEmailsArryByids
+ */
+
+/*function getUserEmailsArryByids($ids)
+{
+	global $user;
+	$user_emailslist = array();
+	//print_r($ids);exit;
+	$count = count($ids);
+	if($count >1){
+	foreach($ids as $userId){
+     $user_emailslist[] = getUserEmailByid($userId);
+     print_r($user_emailslist);exit;
+	}
+	}else{
+		$user_emailslist[] = getUserEmailByid($ids[0]);
+		print_r($user_emailslist);exit;
+	}
+	return $user_emailslist;
+}
+
+
+function getUserEmailByid($id)
+{
+	$users = db_select('users','u');
+	$users->fields('u', array('name'));
+	$users->condition('u.uid',$id,'=');
+	$result = $users->execute()->fetchAll();
+	return $result->name;
+}
+*/
+
+/**
+ * Function Name : Convert Price
+ * Inputs/Parameters : Price To Convert ,From Currency ,To Currency
+ * 
+ * */
+
+function convert_price($pricetoConvert,$fromCurrency,$toCurrency){	
+	if($fromCurrency = USER_DEFAULT_CURRENCY )
+	{
+	//$cndIdFrom= get_cnd_Id_byName($fromCurrency);
+	$cndIdTo = get_cnd_Id_byName($toCurrency);
+	$rates = get_data_by_pks('gb_cnd', $cndIdTo);
+	$rateAgainstUsd = $rates->generic_field;
+	$priceIntoCurrency = $pricetoConvert * $rateAgainstUsd;
+	}else{
+		$priceIntoCurrency = 100;
+	}
+	return round($priceIntoCurrency,2);
+}
+
+function utility_form_alter(&$form, &$form_state, $form_id) {
+	if ($form_id == 'user_pass') {
+		drupal_add_js ( 'misc/user_misc.js', array ('scope' => 'footer') );
+		$form['name']['#title'] = 'Enter E-mail address';
+		$form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Submit'));
+		$form['#submit'][0] = 'user_pass_submit_custom';
+		$form['#theme'][0] = 'user_pass';
+		return $form;
+	}
+	if ($form_id == 'user_profile_form') {
+		drupal_add_js ( 'misc/user-profile-form.js', array ('scope' => 'footer') );
+		$form['account']['mail']['#description'] = '';
+		$form['#submit'][0] = 'user_profile_form_submit_custom';
+	}
+	
+	if ($form_id == 'user_login_block' || $form_id == 'user_login') {
+		$form['#submit'][0] = 'user_login_alter_submit';
+	}
+
+}
+
+function user_pass_submit_custom($form, &$form_state) {
+	global $language;
+
+	$account = $form_state['values']['account'];
+	// Mail one time login URL and instructions using current language.
+	$mail = _user_mail_notify('password_reset', $account, $language);
+	if (!empty($mail)) {
+		watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
+		drupal_set_message(t(MSG_USER_PASS_SUBMIT_CUSTOM_PASSWORD_EMAIL_SENT.' '.$account->mail));
+		$_SESSION['message_home'] = MSG_USER_PASS_SUBMIT_CUSTOM_PASSWORD_EMAIL_SENT.' '.$account->mail;
+	}
+
+	$form_state['redirect'] = '';
+	return;
+}
+
+function user_profile_form_submit_custom($form, &$form_state) {
+	$account = $form_state['user'];
+	$category = $form['#user_category'];
+	//global $user;
+	// Remove unneeded values.
+	form_state_values_clean($form_state);
+
+	// Before updating the account entity, keep an unchanged copy for use with
+	// user_save() later. This is necessary for modules implementing the user
+	// hooks to be able to react on changes by comparing the values of $account
+	// and $edit.
+	$account_unchanged = clone $account;
+	
+
+
+	entity_form_submit_build_entity('user', $account, $form, $form_state);
+
+	// Populate $edit with the properties of $account, which have been edited on
+	// this form by taking over all values, which appear in the form values too.
+	$edit = array_intersect_key((array) $account, $form_state['values']);
+
+	user_save($account_unchanged, $edit, $category);
+	$form_state['values']['uid'] = $account->uid;
+	
+
+	if ($category == 'account' && !empty($edit['pass'])) {
+		// Remove the password reset tag since a new password was saved.
+		unset($_SESSION['pass_reset_'. $account->uid]);
+	}
+	// mail function
+	$user_uid = $account_unchanged->uid;
+	$user_mail_id = $account_unchanged->mail;
+	$mail_valid = valid_email_address($user_mail_id);
+	if($mail_valid == FALSE){
+		$user_mail_id = array($user_mail_id);
+		$username = $account_unchanged->name;
+	}
+	else{
+		$user_mail_id = array($user_mail_id);
+		$username = $account_unchanged->init;
+	}
+	reset_send_mail_user_password($user_mail_id, $username,$user_uid, $addCC=NULL, $addBCC=NULL);
+	drupal_set_message(t(MSG_USER_PROFILE_FORM_SUBMIT_CUSTOM));
+	$form_state['redirect'] = '';
+	
+	// Clear the page cache because pages can contain usernames and/or profile information:
+	cache_clear_all();
+
+
+	
+	//drupal_set_message(t(MSG_USER_PROFILE_FORM_SUBMIT_CUSTOM));
+	//$form_state['redirect'] = '';
+}
+
+
+
+/**
+ * Function Generate Global Bed Order No.
+ * Parameteres : OrderId
+ ** 
+ */
+function getGlobalbedOrderNo($orderId){
+	 $TempgbGeneratedOrderNo ='GB-HO12000000';
+	 $OrderIdpadded = sprintf("%03d", $orderId);
+	 $gbGeneratedOrderNo = substr($TempgbGeneratedOrderNo, 0, -3) . "$OrderIdpadded";
+	 return $gbGeneratedOrderNo;
+	
+}
+
+
+/**
+ * Function Generate Visa Application No.
+ * Parameteres : VisaId
+ **
+ */
+
+function generateVisaApplicationNobyVisaId($visaId){
+	$TempgbGeneratedAppNo ='EVISA0000';
+	$VisaIdpadded = sprintf("%03d", $visaId);
+	$GeneratedVisaAppNo = substr($TempgbGeneratedAppNo, 0, -3) . "$VisaIdpadded"."GBD";
+	return $GeneratedVisaAppNo;
+
+}
+
+
+/*function getLastGlobalBedOrderId(){
+	$query = db_select('gb_orders');
+	$query->addExpression('MAX(id)');
+	$max= $query->execute()->fetchField();
+	return $max;
+}
+*/
+
+
+/**
+ * Function Generate GlobalBedAgent by agentId(In database).
+ * Parameteres : agentId
+ **
+ */
+function getGlobalbedAgentId($agentId){
+	$agenInfo = get_data_by_pks('gb_user', $agentId);
+	$agentRegionCnd =$agenInfo->Region;
+	$agentCountryCnd =$agenInfo->fContactCountry;
+	if($agentRegionCnd=='' || $agentRegionCnd==NULL){
+		$agentRegion = 'DR';
+	}else{
+	$agentRegionResult  = get_cnd_name_byID($agentRegionCnd);
+	$agentRegionResult  = strtoupper($agentRegionResult);
+	$agentRegion = substr($agentRegionResult, 0, 2);
+	}
+	if($agentCountryCnd=='' || $agentCountryCnd==NULL){
+		$agentCountry = 'DC';
+	}else{
+		$agentCountryResult= get_cnd_name_byID($agentCountryCnd);
+		$agentCountryResult  = strtoupper($agentCountryResult);
+		$agentCountry = substr($agentCountryResult, 0, 2);
+		
+	}
+	
+	$TempgbAgentGeneratedIdWithoutCountry ='GB'.$agentRegion.'0000000';
+	$AgentIdpadded = sprintf("%03d", $agentId);
+	$AgentgbGeneratedId = substr($TempgbAgentGeneratedIdWithoutCountry, 0, -3) . "$AgentIdpadded";
+	$agentMainGenratedId = $AgentgbGeneratedId.''.$agentCountry;
+	return $agentMainGenratedId;
+
+}
+
+/**
+ * Function : getHoteLNameByOrderId
+ * Parameter: OrderId
+ * Returns  : Hotel Name/Item Name
+ * 
+ */ 
+function getHoteLNameByOrderId($orderId)
+{
+    $query = db_select('gb_order_items','got');
+	$query->fields('got',array('id','itemname'));
+	$query->condition('got.order_id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->itemname;
+}
+
+/**
+ * Function : getBookingNoByOrderId
+ * Parameter: OrderId
+ * Returns  : Booking No
+ */
+
+function getBookingNoByOrderId($orderId)
+{
+	$query = db_select('gb_orders','go');
+	$query->fields('go',array('id','booking_no'));
+	$query->condition('go.id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->booking_no;
+}
+
+
+/**
+ * Function : getGlobalBedBookingNoByOrderId
+ * Parameter: OrderId
+ * Returns  : Booking No
+ */
+
+function getGlobalBedBookingNoByOrderId($orderId)
+{
+	$query = db_select('gb_orders','go');
+	$query->fields('go',array('id','gb_booking_no'));
+	$query->condition('go.id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->gb_booking_no;
+}
+
+
+/**
+ * 
+ * updates generated GlobalBed Booking No.
+ * @param unknown $orderid
+ */
+function update_gb_booking_no_in_order($orderid)
+{
+	global $user;
+	$gb_bookingno = getGlobalbedOrderNo($orderid);
+	try{
+		$count_updated = db_update('gb_orders') // Table name no longer needs {}
+		->fields(array(
+				'gb_booking_no' => $gb_bookingno,
+				'modified' => time(),
+				'updatedby' => $user->uid,
+		))
+		->condition('id', $orderid, '=')
+		->execute();
+		//$order_log_entry = insert_order_log($OrderId,0,$OrderStatus);
+	}catch (Exception $e) {
+		error_log( $e->getMessage() );
+	}
+	
+}
+
+
+
+/**
+ * Function : canceldatewithbuffer
+ * parameter :CancelDate
+ * 
+ * 
+ **/
+function canceldatewithbuffer($canceldate)
+{
+	$cancelDatewithBuffer = date("Y-m-d H:i:s", strtotime($canceldate . "-".HOURS_BUFFER_CANCELDATE." hours"));
+	return $cancelDatewithBuffer;
+}
+
+/**
+ * Function:Update globalBed AgentId On approve
+ *
+ * @param unknown $id
+ */
+
+function update_gb_agentIdbyId($id)
+{
+	$gb_id = get_user_gb_id_by_uid($id);
+	$global_bed_agentId= getGlobalbedAgentId($gb_id);
+    $query = db_update('gb_user')
+    ->fields(array(
+		'gb_agent_id'=>$global_bed_agentId))
+		->condition('id', $gb_id, '=')
+		->execute();
+}
+
+
+
+function get_countofHotelInOrdersItembyItemCode($itemCode)
+{
+//echo $itemCode;exit;
+	$query = db_select('gb_order_items','got');
+	$query->fields('got',array('id','item_code','gb_booking_no'));
+	$query->condition('got.item_code',$itemCode,'=');
+	$result = $query->execute()->fetchAll();
+	//echo'<pre>';print_R($result);
+	 $countItem = count($result);
+	//exit;
+	
+	return $countItem;
+	
+}
+
+
+function get_bookingCountsofUserByUid($uid)
+{
+	//echo $itemCode;exit;
+	$query = db_select('gb_order_items','got');
+	$query->fields('got',array('id','item_code','gb_booking_no'));
+	$query->condition('got.uid',$uid,'=');
+	$result = $query->execute()->fetchAll();
+	$countItem = count($result);
+	//exit;
+
+	return $countItem;
+
+}
+
+/**
+ * Function : check speed and Process
+ * 
+ */
+function checkspeedAndProcess()
+{
+	$response='';
+	 $speed = internet_speed_test();
+	$fspeed = intval($speed);
+	$MediumSpeed = intval(MEDIUM_INTERNET_SPEED);
+	
+    if($fspeed < $MediumSpeed){
+		//drupal_set_message(MSG_INTERNETSPEED_ISSUE_FRIENDLY_ERROR,'error');
+		$response = 'Fail';
+	}else{
+		$response = 'Pass';
+	} 
+	return $response;
+}
+
+/**
+ * 
+ * Function : Checks Internet speed 
+ * @return number
+ */
+
+
+function microtime_diff($a, $b) {
+	list($a_dec, $a_sec) = explode(" ", $a);
+	list($b_dec, $b_sec) = explode(" ", $b);
+	return $b_sec - $a_sec + $b_dec - $a_dec;
+}
+
+function test_speed($test_size) {
+	flush();
+	$start_time = microtime();
+	/*$comment = "<!--O-->";
+	$len = strlen($comment);
+	 for($i = 0; $i < $test_size; $i += $len) {
+		echo $comment;
+	} */
+	flush();
+	$duration = microtime_diff($start_time, microtime());
+	if($duration != 0) {
+		return $test_size / $duration / 1024;
+	}
+	else {
+		return log(0);
+	}
+}
+function internet_speed_test(){
+$speed = test_speed(1024);
+if($speed > 50) { // a fast connection, send more byte for more accuracy
+	$speed = test_speed(10240);
+	if($speed > 500) { // a really fast connection, send even more byte for
+		$speed = test_speed(102400);
+	}
+}
+//echo $speed;
+return $speed;
+
+}
+
+/**
+ * 
+ * Function : get_priority_ticketby_priority_id
+ * @param priority_id
+ */
+function get_priority_ticketby_priority_id($priority_id)
+{
+	$query = db_select('support_priority','sp');
+	$query->fields('sp',array('priority'));
+	$query->condition('sp.pid',$priority_id,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->priority;
+}
+
+/**
+ *
+ * Function : get_state_ticketby_state_id
+ * @param $state_id
+ */
+function get_state_ticketby_state_id($state_id)
+{
+	$query = db_select(' support_states','ss');
+	$query->fields('ss',array('state'));
+	$query->condition('ss.sid',$state_id,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->state;
+
+}
+
+/**
+ * 
+ * get_email_ids
+ * @param unknown $uid
+ * @return email_address
+ */
+function get_email_ids($uid){
+	$mail_id = db_query("Select name from users where uid=:uid",array(':uid'=>$uid))->fetchField();
+	return $mail_id;
+}
+
+function booking_confirmed_msgsubject($order_Id)
+{
+	$query = db_select('gb_orders','go');
+	$query->fields('go', array('order_type', 'booking_no','gb_booking_no'));
+	$query->condition('go.id',$order_Id,'=');
+	$result = $query->execute()->fetchAll();
+	foreach ($result as $result)
+	{
+		$bookingNo = $result->gb_booking_no;		
+	}
+    // $msgsub = "Booking No:$bookingNo Confirmed";
+	$key_array=get_all_key_array();
+	$key_array[BKEY_BOOKING_NUMBER] = $bookingNo;
+	$msgsub = get_message(MSG_SEND_MAIL_BOOKING_CONFIRMED_SUBJECT_MSG, $key_array);
+	
+	return $msgsub;
+}
+
+function booking_confirmed_msgbody($order_Id)
+{
+	global $base_url;
+	require_once drupal_get_path('module', 'hotelbedapi').'/hotelbedapi.inc';
+		
+	$query = db_select('gb_orders','go');
+	$query->leftJoin('gb_order_items', 'got', 'got.order_id = go.id');
+	$query->fields('go', array('order_type', 'booking_no','uid','checkin_date','status','created','agentid','data','pass_data','gb_booking_no','orader_status','payment_status'));
+	$query->fields('got',array('itemname','destination','brief_item_detail','item_code','created','sdate','edate','user_currency','payment_mode'));
+	$query->condition('go.id',$order_Id,'=');
+	$result = $query->execute()->fetchAll();
+	
+	$adults = 0;
+	$childs = 0;
+	$room_type = '';
+	$rooms = 0;
+	foreach ($result as $result)
+	{
+//	$booking_status = $result->orader_status;
+	$lead_passenger = unserialize($result->pass_data);
+	if(!empty($lead_passenger))
+		$lead_passenger_name = $lead_passenger['lead_passenger_fname'].' '.$lead_passenger['lead_passenger_lname'];
+	    $lead_passenger_name_int = $lead_passenger['lead_passenger_fname'];
+		$bookingNo = $result->gb_booking_no;
+		if(!empty($result->item_code))
+			$hotel_detail = get_hotelinfo_frm_hotelcode(intval($result->item_code));
+			if(!empty($hotel_detail))
+			{
+				$hotel_name = $hotel_detail[$result->item_code]['title'];
+				$address = $hotel_detail[$result->item_code]['address'].','.$hotel_detail[$result->item_code]['city'];
+			}
+			$booking_date = date('d-m-Y',$result->got_created);
+			$checkin_date = date('d-m-Y',($result->sdate));
+			$checkout_date = date('d-m-Y',($result->edate));
+			$checkIn_date_format = date ( 'Y-m-d',  $result->sdate  );
+			$checkOut_date_format = date ( 'Y-m-d', $result->edate  );
+			$datediff =  (strtotime ( $checkOut_date_format ) - strtotime ( $checkIn_date_format ));
+			$days = floor ( $datediff / (60 * 60 * 24) );
+		
+			$res=unserialize($result->data);
+	 if($res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from']!='')
+		{
+			$cancleDate=$res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from'];
+		}else{
+			$cancleDate = 'NA';
+		}
+		$cancCleDate = date('d/m/Y H:i:s', strtotime($cancleDate));
+				
+	}
+	$currency_code = $result->user_currency;
+	$currency = get_cnd_name_byID($currency_code);
+	foreach($res->booking->hotel as $key=>$value)
+	{
+		if($key == 'rooms')
+		{
+			foreach ($value as $ke=>$val)
+			{
+				if($ke == 'name')
+				{
+					if(empty($room_type))
+						$room_type = $val['name'];
+						else
+							$room_type = $room_type.','.$val['name'];
+				}
+				if($ke == 'paxes')
+				{
+					foreach ($val['paxes'] as $v)
+					{
+						if($v['roomId']==1){
+							if($v['type'] == 'AD')
+								$adults++;
+								if($v['type'] == 'CH')
+									$childs++;
+						}
+					}
+				}
+				if($ke == 'rates')
+				{
+					foreach ($val['rates'] as $v)
+					{
+						$board = $v['boardName'];
+						$paymenttype = $v['paymentType'];
+					}
+	
+	
+	
+					foreach ($val['rates'] as $X=>$Y)
+					{
+						if($X == 'cancellationPolicies')
+						{
+							foreach($Y['cancellationPolicies'] as $A)
+							{
+								$cancelamount_usd = $A['amount'];
+								$cancelamount = convert_price($cancelamount_usd,USER_DEFAULT_CURRENCY,$currency);
+									
+									
+							}
+						}
+					}
+	
+				}
+				$rooms++;
+			}
+		}
+	}
+			
+	$guests = $adults + $childs;
+	if($result->payment_mode == PAYMENT_TYPE_NA){
+	$payment_mode = PAYMENT_TYPE_NA_TEXT;
+	}
+	if($result->payment_mode == PAYMENT_TYPE_POINT){
+		$payment_mode = PAYMENT_TYPE_POINT_TEXT;
+	}
+	if($result->payment_mode == PAYMENT_TYPE_ONLINE){
+		$payment_mode = PAYMENT_TYPE_ONLINE_TEXT;
+	}
+
+	if($result->orader_status == ORDER_STATUS_PENDING){
+		$booking_status = ORDER_STATUS_PENDING_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_CANCELLED){
+		$booking_status = ORDER_STATUS_CANCELLED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_CANCEL_REQUESTED){
+		$booking_status = ORDER_STATUS_CANCEL_REQUESTED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_MODIFIED){
+		$booking_status = ORDER_STATUS_MODIFIED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_COMPLETED){
+		$booking_status = PAYMENT_TYPE_POINT_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_MISSED){
+		$booking_status = ORDER_STATUS_MISSED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_BOOKED){
+		$booking_status = PAYMENT_TYPE_ONLINE_TEXT;
+	}
+	
+	$order_payment_status = get_booking_payment_status($result->payment_status);
+	
+	$order_booking_status = 'Confirmed';
+	    $key_array=get_all_key_array();
+	    $key_array[DKEY_BASE_URL]=$base_url;
+	    $key_array[DKEY_LEAD_PASSENGER_NAME]=$lead_passenger_name;
+	    $key_array[DKEY_BOOKING_NUMBER]=$bookingNo;
+	    $key_array[DKEY_HOTEL_NAME]=$hotel_name;
+	    $key_array[DKEY_HOTEL_ADDRESS]=$address;
+	    $key_array[DKEY_LEAD_PASSENGER_FIRST_NAME]=$lead_passenger_name_int;
+	    $key_array[DKEY_BOOKING_DATE]=$booking_date;
+	    $key_array[DKEY_CHECKIN_DATE]=$checkin_date;
+	    $key_array[DKEY_CHECKOUT_DATE]=$checkout_date;
+	    $key_array[DKEY_STAY]=$days;
+	    $key_array[DKEY_GUEST]=$guests;
+	    $key_array[DKEY_ROOM]=$rooms;
+	    $key_array[DKEY_ROOM_TYPE]=$room_type;
+	    $key_array[DKEY_BOARD_TYPE]=$board;
+	    $key_array[DKEY_PAYMENT_MODE]=$payment_mode;
+	    $key_array[DKEY_CANCLE_DATE]=$cancCleDate;
+	    $key_array[DKEY_CANCLE_AMOUNT]=$cancelamount;
+	    $key_array[DKEY_CURRENCY]=$currency;
+	    $key_array[DKEY_ORDER_STATUS]=$booking_status;
+	    $key_array[BKEY_BOOKING_MAIL_ID] = GB_GLOBAL_LINK;
+	    
+	    $cancel = get_hotel_cancellation_charges($order_Id);
+//	    $msgbody = get_message(MSG_SEND_MAIL_BOOKING_CONFIRMED_BODY_MSG, $key_array);
+		$msgbody .='<html>
+<head></head>
+<body style="margin:0;">
+<table style="background-color:#f5f5f5;padding:10px;margin:0 auto;">
+  <tr>
+    <td style="max-width:100%; display: block; clear: both;"><table style="width: 100%;">
+        <tr>
+          <td style="max-width:650px; display: block; clear: both;"><table style="width: 100%;">
+              <tr>
+                <td><img src="'.$base_url.'/sites/all/themes/bootstrap/images/mail_dorak_logo.png" style="max-height:60px;"></td>
+                <td style="text-align:right;"><p style="display:block;font-family:sans-serif;font-size:12px;margin-bottom:5px;"><a href="http://global-beds.com/" style="color:#ff6600; text-decoration:none">www.global-beds.com</a></p>
+                  <p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;margin-bottom:5px;">+90-2122316693</p>
+                  <p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;"><a href="#" style="color:#ff6600; text-decoration:none">'.GB_GLOBAL_LINK.'</a></p></td>
+              </tr>
+            </table></td>
+          <td></td>
+        </tr>
+      </table>
+      <table style="width: 100%; margin-top:10px;">
+        <tr>
+          <td style="max-width:600px; display: block; clear: both;background-color:#fff;padding:20px 10px;">
+          
+          <table style="width:100%;">
+                          <tr>
+                            <td colspan="2" height="10"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; width:40%; vertical-align:top;margin-top:5px;padding-bottom:5px" >Booking No. <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"><b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); width:60%;margin-top:5px;padding-bottom:5px"> $$DKEY_BOOKING_NUMBER$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; vertical-align:top;margin-top:5px;padding-bottom:5px">Hotel Detail <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px"></span> $$DKEY_HOTEL_NAME$$ ,$$DKEY_HOTEL_ADDRESS$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; vertical-align:top; margin-top:5px;padding-bottom:5px">Passenger Name <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_LEAD_PASSENGER_FIRST_NAME$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Booking Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_BOOKING_DATE$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Check In Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px;">$$DKEY_CHECKIN_DATE$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Check Out Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px;">$$DKEY_CHECKOUT_DATE$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Duration of Stay <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;"></span>$$DKEY_STAY$$ Nights</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Room Detail <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;"> $$DKEY_GUEST$$ Guests $$DKEY_ROOM$$ Room ($$DKEY_ROOM_TYPE$$,$$DKEY_BOARD_TYPE$$)</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Payment Status <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;">$$DKEY_PAYMENT_MODE$$</td>
+                          </tr>
+                          <tr>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Booking Status <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
+                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_ORDER_STATUS$$</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" height="10"></td>
+                          </tr>
+                          <tr>
+                            <td style="border-top:1px solid #ddd;" colspan="2"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" height="10"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" style="display:block;font-family:sans-serif;font-size:12px;color:#777;font-weight:bold;text-transform:uppercase;">Cancellation Charges</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" height="10"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" style="font-family:sans-serif;font-size:12px;color:#777;margin-bottom:0px; padding-bottom:0px"> $$DKEY_HOTEL_NAME$$ from <span style="font-weight:bold;">$$DKEY_CANCLE_DATE$$</span> the cancellation charges are $$DKEY_CANCLE_AMOUNT$$ $$DKEY_CURRENCY$$ </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" height="10"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="2"
+                              style="font-family:sans-serif;font-size:12px;color:#777; text-align:justify;margin-top:5px; margin-bottom:0px;">Cancellation will be carried out by our Customer Support Department. Time and date will be calculated according to the local of the country in which the destination is located.</td>
+                          </tr>
+                          <tr>
+                      <td colspan="2" height="20"></td>
+                    </tr>
+                     <tr>
+                      <td style="font-family:sans-serif;color:#777;font-size:12px;" colspan="2">Best Regards,<br/>
+                        <span style="margin-top:8px;display:block;font-weight:bold;";>Global Beds Team</span></td>
+                    </tr>
+                        </table>
+          
+          </td>
+          <td></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>';
+	return $msgbody;
+	
+}
+
+function booking_cancellation_msgbody($order_Id,$booking_stat)
+{
+	global $base_url;
+	require_once drupal_get_path('module', 'hotelbedapi').'/hotelbedapi.inc';
+		
+	$query = db_select('gb_orders','go');
+	$query->leftJoin('gb_order_items', 'got', 'got.order_id = go.id');
+	$query->fields('go', array('order_type', 'booking_no','uid','checkin_date','status','created','agentid','data','pass_data','gb_booking_no','orader_status'));
+	$query->fields('got',array('itemname','destination','brief_item_detail','item_code','created','sdate','edate','user_currency','payment_mode'));
+	$query->condition('go.id',$order_Id,'=');
+	$result = $query->execute()->fetchAll();
+	
+	$adults = 0;
+	$childs = 0;
+	$room_type = '';
+	$rooms = 0;
+	foreach ($result as $result)
+	{
+	
+	$lead_passenger = unserialize($result->pass_data);
+	if(!empty($lead_passenger))
+		$lead_passenger_name = $lead_passenger['lead_passenger_fname'].' '.$lead_passenger['lead_passenger_lname'];
+	    $lead_passenger_name_int = $lead_passenger['lead_passenger_fname'];
+		$bookingNo = $result->gb_booking_no;
+		if(!empty($result->item_code))
+			$hotel_detail = get_hotelinfo_frm_hotelcode(intval($result->item_code));
+			if(!empty($hotel_detail))
+			{
+				$hotel_name = $hotel_detail[$result->item_code]['title'];
+				$address = $hotel_detail[$result->item_code]['address'].','.$hotel_detail[$result->item_code]['city'];
+			}
+			$booking_date = date('d-m-Y',$result->got_created);
+			$checkin_date = date('d-m-Y',($result->sdate));
+			$checkout_date = date('d-m-Y',($result->edate));
+			 $checkIn_date_format = date ( 'Y-m-d',  $result->sdate  );
+			$checkOut_date_format = date ( 'Y-m-d', $result->edate  );
+			$datediff =  (strtotime ( $checkOut_date_format ) - strtotime ( $checkIn_date_format ));
+			$days = floor ( $datediff / (60 * 60 * 24) );
+		
+			$res=unserialize($result->data);
+	 if($res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from']!='')
+		{
+			$cancleDate=$res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from'];
+		}else{
+			$cancleDate = 'NA';
+		}
+		$cancCleDate = date('d/m/Y H:i:s', strtotime($cancleDate));
+				
+	}
+	$currency_code = $result->user_currency;
+	$currency = get_cnd_name_byID($currency_code);
+	foreach($res->booking->hotel as $key=>$value)
+	{
+		if($key == 'rooms')
+		{
+			foreach ($value as $ke=>$val)
+			{
+				if($ke == 'name')
+				{
+					if(empty($room_type))
+						$room_type = $val['name'];
+						else
+							$room_type = $room_type.','.$val['name'];
+				}
+				if($ke == 'paxes')
+				{
+					foreach ($val['paxes'] as $v)
+					{
+						if($v['roomId']==1){
+							if($v['type'] == 'AD')
+								$adults++;
+								if($v['type'] == 'CH')
+									$childs++;
+						}
+					}
+				}
+				if($ke == 'rates')
+				{
+					foreach ($val['rates'] as $v)
+					{
+						$board = $v['boardName'];
+						$paymenttype = $v['paymentType'];
+					}
+	
+	
+	
+					foreach ($val['rates'] as $X=>$Y)
+					{
+						if($X == 'cancellationPolicies')
+						{
+							foreach($Y['cancellationPolicies'] as $A)
+							{
+								$cancelamount_usd = $A['amount'];
+								$cancelamount = convert_price($cancelamount_usd,USER_DEFAULT_CURRENCY,$currency);
+									
+									
+							}
+						}
+					}
+	
+				}
+				$rooms++;
+			}
+		}
+	}
+	
+	$guests = $adults + $childs;
+	if($result->payment_mode == PAYMENT_TYPE_NA){
+	$payment_mode = PAYMENT_TYPE_NA_TEXT;
+	}
+	if($result->payment_mode == PAYMENT_TYPE_POINT){
+		$payment_mode = PAYMENT_TYPE_POINT_TEXT;
+	}
+	if($result->payment_mode == PAYMENT_TYPE_ONLINE){
+		$payment_mode = PAYMENT_TYPE_ONLINE_TEXT;
+	}
+	
+	if($result->orader_status == ORDER_STATUS_PENDING){
+		$booking_status = ORDER_STATUS_PENDING_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_CANCELLED){
+		$booking_status = ORDER_STATUS_CANCELLED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_CANCEL_REQUESTED){
+		$booking_status = ORDER_STATUS_CANCEL_REQUESTED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_MODIFIED){
+		$booking_status = ORDER_STATUS_MODIFIED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_COMPLETED){
+		$booking_status = PAYMENT_TYPE_POINT_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_MISSED){
+		$booking_status = ORDER_STATUS_MISSED_TEXT;
+	}
+	if($result->orader_status == ORDER_STATUS_BOOKED){
+		$booking_status = PAYMENT_TYPE_ONLINE_TEXT;
+	}
+	
+
+	$booking_status_lower = strtolower($booking_stat);
+	
+	    $key_array=get_all_key_array();
+	    $key_array[DKEY_BASE_URL]=$base_url;
+	    $key_array[DKEY_LEAD_PASSENGER_NAME]=$lead_passenger_name;
+	    $key_array[DKEY_BOOKING_NUMBER]=$bookingNo;
+	    $key_array[DKEY_HOTEL_NAME]=$hotel_name;
+	    $key_array[DKEY_HOTEL_ADDRESS]=$address;
+	    $key_array[DKEY_LEAD_PASSENGER_FIRST_NAME]=$lead_passenger_name_int;
+	    $key_array[DKEY_BOOKING_DATE]=$booking_date;
+	    $key_array[DKEY_CHECKIN_DATE]=$checkin_date;
+	    $key_array[DKEY_CHECKOUT_DATE]=$checkout_date;
+	    $key_array[DKEY_STAY]=$days;
+	    $key_array[DKEY_GUEST]=$guests;
+	    $key_array[DKEY_ROOM]=$rooms;
+	    $key_array[DKEY_ROOM_TYPE]=$room_type;
+	    $key_array[DKEY_BOARD_TYPE]=$board;
+	    $key_array[DKEY_PAYMENT_MODE]=$payment_mode;
+	    $key_array[DKEY_CANCLE_DATE]=$cancCleDate;
+	    $key_array[DKEY_CANCLE_AMOUNT]=$cancelamount;
+	    $key_array[DKEY_CURRENCY]=$currency;
+	    $key_array[DKEY_ORDER_STATUS]=$booking_status;
+	    $key_array[BKEY_BOOKING_STATUS]=$booking_status_lower;
+	    $key_array[VKEY_GB_MAIL_ID]=GB_GLOBALBEDS_LINK;
+	    $cancel=getCancellationChargeAndPricebufferedbyOrder_id($order_Id);
+	    if(($booking_stat == ORDER_STATUS_PENDING_TEXT)||($booking_stat == ORDER_STATUS_CANCELLED_TEXT)||($booking_stat == ORDER_STATUS_CANCEL_REQUESTED_TEXT)){
+	    	$msgbody .='<html>
+<head></head>
+<body style="margin:0;">
+<table style="background-color:#f5f5f5;padding:10px;margin:0 auto;" width="100%" align="center">
+<tr><td>
+<table width="650" align="center">
+<tr>
+<td>
+<table style="width: 100%;">
+<tr>
+<td><img src='.$base_url.'/sites/all/themes/bootstrap/images/hotel_image.png" style="max-height:60px;"></td>
+<td style="text-align:right;"><p style="display:block;font-family:sans-serif;font-size:12px;margin-bottom:5px;">www.global-beds.com</p>
+<p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;margin-bottom:5px;">+90-2122316693</p>
+<p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;">'.GB_GLOBALBEDS_LINK.'</p></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table style="width: 100%; margin-top:10px;">
+<tr>
+<td style="display: block;background-color:#fff;padding:20px 10px;">
+<table style="width: 100%;">
+<tr>
+<td style="display:block;font-family:sans-serif;font-weight:600;color:#333;font-size:14px; margin-bottom:0px;">Dear '.$lead_passenger_name.',</td>
+</tr>
+<tr>
+<td style="display: block;">
+<p style="display:block;font-family:sans-serif;font-size:12px;color:#777;margin-bottom:5px">The booking status of booking no. '.$bookingNo.' on behalf of $$DKEY_LEAD_PASSENGER_NAME$$ has been successfully changed to $$BKEY_BOOKING_STATUS$$.</p>
+<p style="display:block;font-family:sans-serif;font-size:12px;color:#777;font-weight:bold;margin-top:0px;">Below you will find your booking details:</p>
+<table style="width:100%;">
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Booking No. :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);margin-top:5px;padding-bottom:5px">'.$bookingNo.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Hotel Name :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$hotel_name.','.address.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">First Name  :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$lead_passenger_name_int.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Booking Date  :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px">'.$booking_date.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Check In Date  :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$checkin_date.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Check Out Date :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$checkout_date.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Duration of Stay  :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$days.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Room Detail  :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px ">$'.$guests.' Guests '.$rooms.' Room ('.$room_type.','.$board.')</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Payment :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$payment_mode.'</td>
+</tr>
+<tr>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Booking Status :</td>
+<td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">'.$booking_status_lower.'</td>
+</tr>
+<tr><td style="border-top:1px solid #ddd;" colspan="2"></td></tr>
+<tr><td  colspan="2"><p style="display:block;font-family:sans-serif;font-size:12px;color:#777;font-weight:bold;text-transform:uppercase;margin-bottom:0px; padding-bottom:0px">Cancellation Charges</p></td></tr>
+<tr><td  colspan="2">';
+	    	if(!empty($cancel)){
+	    		foreach($cancel as $row){
+	    		$msgbody .='<p style="display:block;font-family:sans-serif;font-size:12px;color:#777;margin-bottom:0px; padding-bottom:0px">'.$hotel_name.'from <span style="font-weight:bold;">'.get_time_created($row['CANCEL_AFTR_BUFFER_DATE']).'</span> the cancellation charges are '.$row['USD_CUSTOMER_CANCEL_PRICE'].' USD</p>';
+                 }
+	    	}
+$msgbody .='/td></tr>
+<tr>
+<td colspan="2">
+<p style="display:block;font-family:sans-serif;font-size:12px;color:#777; text-align:justify;margin-top:5px; margin-bottom:0px;">Cancellation will be carried out by our Customer Support Department. Time and date will be calculated according to the local of the country in which the destination is located.<br /></p>
+</td></tr>
+</table>
+</td>
+</tr>
+<tr>
+<td><table style="width: 100%;">
+<tr><td style="margin-top:10px;display:block;font-family:sans-serif;color:#777;font-size:12px;">Best Regards,<br/>
+		<span style="margin-top:8px;display:block;font-weight:bold;";>Global Beds Team</span></td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td></tr></table>
+</body>
+</html>';
+	    }
+	    else{
+	       $msgbody = get_message(MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG, $key_array);
+	    }
+	return $msgbody;
+}
+
+function registration_msgbody($name)
+{
+	global $base_url;
+	
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[DKEY_LEAD_PASSENGER_NAME]=$name;
+	$msgbody = get_message(MSG_SEND_MAIL_AGENT_REGISTER_BODY_MSG, $key_array);
+	
+	
+	/*'
+			<html>
+<head></head>
+<body style="margin:0;">
+<table style="background-color:#f5f5f5;padding:20px;margin:0 auto;">
+<tr><td  style="max-width:100%; display: block; clear: both;">
+<table style="width: 100%;">
+<tr>
+<td style="max-width:600px; display: block; clear: both;">
+<table style="width: 100%;">
+<tr>
+<td><img src="'.$base_url.'/sites/all/themes/bootstrap/images/hotel_image.png" style="height:60px;"></td>
+<td style="text-align:right;"><p style="display:block;font-family:sans-serif;font-size:12px;">global-beds.com</p>
+<p style="display:block;font-family:sans-serif;font-size:12px;">+902122316693</p></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table style="width: 100%; margin-top:10px;">
+<tr>
+<td style="max-width:600px; display: block; clear: both;background-color:#fff;padding:20px 10px;">
+<table style="width: 100%;">
+<tr>
+<td style="display:block;font-family:sans-serif;font-weight:600;color:#333;font-size:14px; margin-bottom:10px;">Dear Future Partner,</td>
+</tr>
+<tr>
+<td><p style="display:block;font-family:sans-serif;color:#777;font-size:12px;">Thank you very much for your interest in Global Beds which is a fully interactive online reservation system exclusively designed for travel agents and tour operators.
+
+Global Beds online booking system membership is totally FREE of charge for all licensed travel agencies throughout the world. All services are available at NO cost to our industry partners, and we guarantee a "win win" partnership for all parties.
+
+We have received your registration request and would like to inform you that we will contact you soon.<br><br></p></td>
+</tr>
+<tr>
+<td style="margin-top:20px;"><p style="display:block;font-family:sans-serif;color:#777;font-size:12px;">Thank You and Best Regards,</p>
+<p style="display:block;font-family:sans-serif;color:#333;font-size:12px;font-weight:bold;">Global Beds Team</p>
+</td>
+</tr>
+</table>
+</td>'; */
+	return $msgbody;
+}
+
+function visa_request_mail_body($name,$passport_no,$time,$id){
+		
+	global $base_url;
+    $key_array=get_all_key_array();
+    $key_array[VKEY_BASE_URL]=$base_url;
+	$key_array[VKEY_LEAD_PASSENGER_NAME ]=$name;
+	$key_array[VKEY_APPLICATION_ID]=$id;
+	$key_array[VKEY_PASSPORT_NUMBER]=$passport_no;
+	$key_array[VKEY_CURRENT_TIME]=$time;
+	$msgbody = get_message(MSG_SEND_GB_VISA_FORM_ADDED_SUCCESSFULLY_BODY_MSG, $key_array);
+       	
+	return $msgbody;
+	//return $msgbody;
+}
+
+function checkRemoteFile($url)
+{
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL,$url);
+	// don't download content
+	curl_setopt($ch, CURLOPT_NOBODY, 1);
+	curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	if(curl_exec($ch)!==FALSE)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+/***
+ * Function to display date in d/m/Y format.
+ */
+function get_time_short_format($unix_time){
+	if(empty($unix_time))
+		return '-';
+		else
+			return date('d/m/Y',$unix_time);
+}
+
+
+function get_GbIdbyCommissionId($commision_id)
+{
+	$query = db_select('gb_commission','gc');
+	$query->fields('gc',array('gb_id'));
+	$query->condition('gc.id',$commision_id,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->gb_id;
+
+}
+
+function get_GbIdByuserId($uid)
+{
+	$query = db_select('gb_user','gc');
+	$query->fields('gc',array('id'));
+	$query->condition('gc.uid',$uid,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->id;
+
+}
+
+
+/**
+ * 
+ * Get All Information Of Visa Application 
+ * By Visa Id
+ * @param  $visa_id
+ */
+function getVisaRecordByVisaId($visa_id)
+{
+	$query = db_select('gb_visa','gv');
+	$query->fields('gv');
+	$query->condition('gv.id',$visa_id,'=');
+	$result = $query->execute()->fetchAll();
+	return $result;
+}
+
+
+function get_informations_by_userId()
+{
+	global $user;
+	$uid = $user->uid;
+	$gb_id = get_GbIdByuserId($uid);
+	$query = db_select('gb_user','tn');
+	
+	$query->LeftJoin ( 'gb_user_billing_info', 'gbl', 'gbl.gb_id = tn.id' );
+	$query->LeftJoin ( 'gb_user_bank_info', 'gbn', 'gbn.gb_id = tn.id' );
+	$query->fields('tn',array('id','uid','fContactFName','fContactLName','fContatmail','fContactMobile','fContactLandline','fContactAddress','fContactPin','fContactCity','fContactState','fContactCountry','company_name','currency'))
+	->fields('gbn',array('id','bank_name','bank_account_number','bank_account_holder_name','payment_method','credit_line','bank_doc','bank_address','bank_country','bank_state','bank_city','iban','swift'))
+	->fields('gbl',array('id','bill_email','bill_address','bill_country','bill_city','bill_state'));
+	//$query->where('(gc.id IN (SELECT MAX(id) FROM gb_commission WHERE gb_id = gc.gb_id group by gb_id) OR gc.id IS NULL)');
+	$query->condition('tn.id',$gb_id,'=');
+	$query->condition('tn.deleted',0,'=');
+	///echo $query;exit;
+	$result = $query->execute()->fetchAll();
+	//print_r($result);exit;
+	return $result;
+}
+
+
+
+function paymentformGoCollects($transactionId,$payForType,$orderId,$Amount_Payble,$lead_passenger_fname,$lead_passenger_lname,$user_currency,$cardNo,$ccvNo,$expiryDate,$lead_passenger_sex,$userInfo){
+	//echo'<pre>';print_r($userInfo); exit;
+	require DRUPAL_SITE."/testpay.php";
+
+	// TODO ONLINE PAYMENT WORK
+	//echo'<pre>';echo $orderId;
+	/**
+	* instiate class and call method for online payment
+	*/
+	
+	$paymentClass=new Testpay();
+	//$info=$paymentClass->cardpayment($orderId,$Amount_Payble,$lead_passenger_fname,$lead_passenger_lname,$user_currency,$cardNo,$ccvNo,$expiryDate,$lead_passenger_sex,$userInfo);
+	//$info=$paymentClass->testCreateHostedCheckout();
+	$info=$paymentClass->testCreateHostedCheckout($transactionId,$payForType,$orderId,$Amount_Payble,$lead_passenger_fname,$lead_passenger_lname,$user_currency,$cardNo,$ccvNo,$expiryDate,$lead_passenger_sex,$userInfo);
+	return $info;
+
+
+}
+
+
+function getVisaFeesByNationalityAndCountry($visaCountry,$visaNationality)
+{
+	$query = db_select('gb_visa_fee','gbv');
+	$query->fields('gbv',array('total'));
+	$query->condition('gbv.aNationality',$visaNationality,'=');
+	$query->condition('gbv.aDestination',$visaCountry,'=');
+    $result = $query->execute()->fetchAll();
+	return $result[0]->total;
+	
+}
+
+function getFeesByVisaId($visaid)
+{
+	$query = db_select('gb_visa','gbv');
+	$query->fields('gbv',array('visa_usd_price'));
+	$query->condition('gbv.id',$visaid,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->visa_usd_price;
+
+}
+
+function getOrderNoOfVisaByVisaId($visaid)
+{
+	$query = db_select('gb_orders','gb');
+	$query->fields('gb',array('id'));
+	$query->condition('gb.visa_id',$visaid,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->id;
+
+}
+
+
+function getVisaApplicationNoByVisaId($visaid)
+{
+	$query = db_select('gb_visa','gbv');
+	$query->fields('gbv',array('visa_application_no'));
+	$query->condition('gbv.id',$visaid,'=');
+	$result = $query->execute()->fetchAll();
+	//print_r($result);exit;
+	return $result[0]->visa_application_no;
+
+}
+
+function get_visa_status_dropdown(){
+	return array(
+			ORDER_STATUS_PENDING=>ORDER_STATUS_PENDING_TEXT,
+			ORDER_STATUS_CANCELLED=>ORDER_STATUS_REJECTED_TEXT,
+			ORDER_STATUS_BOOKED=>ORDER_STATUS_BOOKED_TEXT,
+			
+	);
+}
+
+function getVisaIdAssocitedwithOrderbyOrderId($orderId)
+{
+	$query = db_select('gb_orders','gb');
+	$query->fields('gb',array('visa_id'));
+	$query->condition('gb.id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->visa_id;
+
+}
+
+function CheckPriceOfOrderbyOrderId($orderId,$ammount,$userCurrency)
+{
+	$query = db_select('gb_orders','gb');
+	$query->fields('gb',array('fprice','usd_fprice'));
+	$query->condition('gb.id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	$finalPrice = $result[0]->usd_fprice;
+	//echo '<br>';
+	//echo $ammount;exit;
+	if($finalPrice==$ammount)
+	{
+		return API_TRUE;
+	}else{
+		drupal_set_message(t(MSG_FRAUD_OR_TEMPERED_TRANSACTION), 'error');
+		drupal_goto('/hotelsearch');
+		return API_FALSE;
+	}
+}
+
+
+function insert_transaction_beforePayment($orderId,$Amount_Payble,$returnMac,$hostedCheckoutId){
+	$txn_point ='1';
+	$txn_reference=$returnMac.'@@'.$hostedCheckoutId;
+	$txn_mode =TRANSACTION_MODE_PG_ID;
+	$txn_status='0';
+	$comment ='Transaction Entry Before sending Third Party PG';
+	$comment_success ='Initiating Transcation on Payment Gateway';
+	$orderItemId = getOrderItemIdsByOrderId($orderId);
+	//updateOrderItemPaymentStatus($paymentStatus,$orderId,$orderItemId);
+	// update_transction_status($transactionId,$txn_status,$comment_success);
+	$trans = insert_transactions($orderId, $Amount_Payble, $txn_point, $txn_status, $txn_reference, $txn_mode,$orderItemId,$comment);
+}
+
+/**
+ * 
+ * Get Destination Name By desc_code
+ * @param unknown $orderId
+ */
+function getDestinationNameByDescCode($desc_code)
+{
+	$query = db_select('gb_hotel_search_code','ghsc');
+	$query->fields('ghsc',array('des_name'));
+	$query->condition('ghsc.des_code',$desc_code,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->des_name;
+}
+/*
+ * @return MongoClient
+ */
+function mongo_connect(){
+	try {
+		$connection_res = new MongoClient( MONGODB_CLIENT );
+		return $connection_res;
+	}catch (Exception $e) {
+		error_log( $e->getMessage() );
+		drupal_set_message(MONGO_SERVER_ERROR,'error');
+		drupal_goto('hotelsearch');
+	}
+}
+
+/**
+ * this function in used to retrive facilities
+ * group name
+ */
+	
+function get_facilities_group_name_frm_code($code){
+	$con=mongo_connect();
+	$group = $con->globalbed->facilitygroups;
+	$find_key=array('code'=>(int) $code);
+	$cursor = $group->find($find_key);
+	$total= $cursor->count();
+	if($total >0){
+		foreach ( $cursor as $key => $value ){
+			return $value['description']['content'];
+		}
+	}
+}
+
+function get_facilities_name_frm_code($code){
+	$conn=mongo_connect();
+	$groupn = $conn->globalbed->facilities;
+	$find_key=array('code'=>(int) $code);
+	$cursorn = $groupn->find($find_key);
+	$total= $cursorn->count();
+	if($total >0){
+		foreach ( $cursorn as $key => $value ){
+			return $value;
+		}
+	}
+}
+
+
+function msort($array, $key, $sort_flags = SORT_REGULAR) {
+	if (is_array($array) && count($array) > 0) {
+		if (!empty($key)) {
+			$mapping = array();
+			foreach ($array as $k => $v) {
+				$sort_key = '';
+				if (!is_array($key)) {
+					$sort_key = $v[$key];
+				} else {
+					// @TODO This should be fixed, now it will be sorted as string
+					foreach ($key as $key_key) {
+						$sort_key .= $v[$key_key];
+					}
+					$sort_flags = SORT_NUMERIC ;
+				}
+				$mapping[$k] = $sort_key;
+			}
+			asort($mapping, $sort_flags);//arsort
+			$sorted = array();
+			foreach ($mapping as $k => $v) {
+				$sorted[$k] = $array[$k];
+			}
+			return $sorted;
+		}
+	}
+	return $array;
+}
+
+function get_room_info($p){
+	if($p['room'] > 0){
+		$array=array();
+		for($i=1;$i<=$p['room'];$i++){
+			$adult='adult';
+			$children='children';
+				if($i>1){
+					$adult='adult_'.($i-1);
+					$children='children_'.($i-1);
+				}
+				$tadult=$p[$adult];
+				$tchildren=$p[$children];
+				$tchild_age_array=array();
+				$child_age_q='';
+				for($j=1;$j<=$tchildren;$j++){
+					$child_age_q = 'child_age_'.$j.'_'.($i-1);
+					$tchild_age_array[]=$p[$child_age_q];
+				}
+				$array[]=$i.'~'.$tadult.'~'.$tchildren.':cha:'.implode('~',$tchild_age_array);
+		}
+	}
+	$res=implode('||',$array);
+	return $res;	
+}
+
+
+/***
+ * Function to sent mail whenever a visa payment has been made.
+ * @param $name,$passport_no,$id
+ ***/
+function send_mail_visa_payment($addAddress,$addCC=NULL,$addBCC=NULL,$user_name,$visa_application_no,$Amount,$payment_mode,$payment_status)
+{ 
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		//Username4 changed to Username3
+		$mail->Username = Username4;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username4);
+
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$gb_mail_id = GB_LINK;
+		$gb_visa_mail_id = MSG_GB_VISA_EMAIL_ID;
+		$body = visa_payment_mail_body($user_name,$visa_application_no,$Amount,$payment_mode,$payment_status,$gb_mail_id,$gb_visa_mail_id);
+		$mail->isHTML(true);                                                                                         // Set email format to HTML
+
+		$key_array=get_all_key_array();
+		$key_array[VKEY_APPLICATION_ID]=$visa_application_no;
+		$mail->Subject = get_message(MSG_SEND_GB_VISA_PAYMENT_MAIL_SUBJECT, $key_array);
+		$mail->MsgHTML($body);
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+function visa_payment_mail_body($user_name,$visa_application_no,$Amount,$payment_mode,$payment_status,$gb_mail_id,$gb_visa_mail_id){
+	global $base_url;
+	$time = get_time_long(time());
+	$key_array=get_all_key_array();
+	$key_array[VKEY_BASE_URL]=$base_url;
+	$key_array[VKEY_LEAD_PASSENGER_NAME]=$user_name;
+	$key_array[VKEY_APPLICATION_ID]=$visa_application_no;
+	$key_array[VKEY_VISA_PAYMENT]=$Amount;
+	$key_array[VKEY_VISA_PAYMENT_MODE]=$payment_mode;
+	$key_array[VKEY_VISA_PAYMENT_STATUS]=$payment_status;
+	$key_array[VKEY_CURRENT_TIME]=$time;
+	$key_array[VKEY_GB_MAIL_ID]=$gb_visa_mail_id;
+	$msgbody = get_message(MSG_SEND_GB_VISA_PAYMENT_BODY_MSG, $key_array);
+
+	return $msgbody;
+}
+
+/**
+ * Function for user verfication message body.
+ */
+function verification_msgbody($username){
+	global $base_url;
+	
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[AKEY_USERNAME]=$username;
+	$key_array[VKEY_GB_MAIL_ID]=GB_GLOBALBEDS_LINK;	
+	$msgbody =  $msgbody = get_message(MSG_SEND_MAIL_VERIFICATION_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+
+function getVisaPreviousDocbyVisa_id($visa_id)
+{
+	$query = db_select('gb_visa','gv');
+	$query->fields('gv',array('visa_doc'));
+	$query->condition('gv.id',$visa_id,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->visa_doc;
+}
+
+function Agent_approve_msgbody($name){
+	global $base_url;
+	
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[DKEY_LEAD_PASSENGER_NAME]=$name;
+	$msgbody =  $msgbody = get_message(MSG_SEND_MAIL_AGENT_APPROVE_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+
+function Agent_deactivate_msgbody($name){
+	global $base_url;
+	
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[DKEY_LEAD_PASSENGER_NAME]=$name;
+	$msgbody =  $msgbody = get_message(MSG_SEND_MAIL_AGENT_DEACTIVATED_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+function get_parent_regions_values_id()
+{
+	$parent_regions = array();
+	$query = db_query("select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0 and deleted=0")->fetchAll();
+	foreach ($query as $query)
+	{
+		$parent_regions[] = array('value' => $query->pr_id);
+	}
+	return $parent_regions;
+}
+
+function get_parent_regions_id()
+{
+	$parent_regions = array();
+	$query = db_query("select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0  and deleted=0")->fetchAll();
+	foreach ($query as $query)
+	{
+		$parent_regions[] = $query->pr_id;
+	}
+	return $parent_regions;
+}
+
+function get_parent_sub_region($reg)
+{
+	$p_region = '';
+	$s_region = '';
+	$query = get_data_by_pks('gb_region', $reg);
+	$p_region = $query->pr_id;
+	$region = $p_region;
+	if(empty($p_region))
+	{
+		$p_region = $reg;
+		$region = $reg;
+	}
+	else
+		$s_region = $reg;
+	return array($region,$p_region,$s_region);
+}
+
+
+/*TODO 
+ * Extract array From Database
+ */
+/*Function :Rejected Card Payment Countries
+ *
+ */
+function rejectedCardPaymentCountries(){
+	return array(
+			"Nigeria"=>"Nigeria",
+			"Ghana"=>"Ghana",
+			"Cameroon"=>"Cameroon",
+			"Angola"=>"Angola",
+			"Benin"=>"Benin",
+			"Burkina"=>"Burkina",
+			"Faso"=>"Faso",
+			"Burundi"=>"Burundi",
+			"Central African Republic"=>"Central African Republic",
+			"Chad"=>"Chad",
+			"Congo"=>"Congo",
+			"Cote D’Ivoire"=>"Cote D’Ivoire",
+			"Djibouti" =>"Djibouti",
+			"Eriteria" =>"Eriteria",
+			"Ethiopia" =>"Ethiopia",
+	);
+}
+
+/**
+ * Function : checkCountry validate for Card Pay
+ * @param unknown $country
+ * @return boolean
+ */
+function checkRejectedCountryForCardPay($country){
+	$rejectedcountryArray =rejectedCardPaymentCountries();
+	if (in_array($country, $rejectedcountryArray)) {
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
+/**
+ * Function to send mail on visa approval
+ * @param
+ */
+function send_mail_visa_approval($addAddress, $addCC=NULL,$addBCC=NULL,$user_name,$visa_application_no,$payment_status,$visa_status_txt)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		// Username4 changed to Username3
+		$mail->Username = Username4;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username4);
+
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+
+		$visa_mail_time = get_time_long(time());
+		$body = visa_approval_mail_body($user_name,$visa_application_no,$payment_status,$visa_status_txt);
+		$mail->isHTML(true);                                  // Set email format to HTML
+         if(($visa_status_txt =='Approved')||($visa_status_txt =='approved')){
+         	  $key_array = get_all_key_array();
+         	  $key_array[VKEY_APPLICATION_ID] = $visa_application_no;
+		      $mail->Subject = get_message(MSG_SEND_MAIL_VISA_APPROVAL_SUBJECT_MSG,$key_array);
+         }else{
+              $mail->Subject = MSG_SEND_MAIL_VISA_REJECTION_SUBJECT_MSG;
+         }
+		$mail->MsgHTML($body);
+
+		if(!$mail->send()) {
+			$msg ="Message could not be sent";
+			drupal_set_message($msg,'error');
+		} else {
+		
+		}
+	}else{ 
+	}
+
+	return $mail;
+}
+
+/**
+ * Function :Visa Approval Mail
+ * @param unknown $user_name
+ * @param unknown $visa_application_no
+ * @param unknown $Amount
+ * @param unknown $payment_mode
+ * @param unknown $payment_status
+ * @return Ambigous <unknown, mixed>
+ */
+function visa_approval_mail_body($user_name,$visa_application_no,$payment_status,$visa_status_txt){
+
+	global $base_url;
+	$time = time();
+	$key_array=get_all_key_array();
+	$key_array[VKEY_BASE_URL]=$base_url;
+	$key_array[VKEY_LEAD_PASSENGER_NAME ]=$user_name;
+	$key_array[VKEY_APPLICATION_ID]=$visa_application_no;
+	$key_array[VKEY_VISA_PAYMENT_STATUS]=$payment_status;
+	$key_array[VKEY_VISA_ORDER_STATUS]=strtolower($visa_status_txt);
+	$key_array[VKEY_CURRENT_TIME]=$time;
+	$key_array[VKEY_GB_MAIL_ID]=MSG_GB_VISA_EMAIL_ID ;
+	
+	$msgbody = get_message(MSG_SEND_GB_VISA_APPROVAL_BODY_MSG, $key_array);
+		
+	return $msgbody;
+}
+
+/**
+ * function is used to get topology code which will paid
+ */
+function get_facilities_fee_code(){
+	$con=mongo_connect();
+	$collection_top = $con->globalbed->facilitytypologies;
+	$topology_code=array();
+	$find_key=array('feeFlag'=>true);
+	$cursor = $collection_top->find($find_key);
+	//$con->close();
+	$total= $cursor->count();
+	if($total >0){
+		foreach ( $cursor as $key => $value ) {
+			$topology_code[]=$value['code'];
+		}
+	}
+	return $topology_code;
+
+}
+
+/**
+ * Function to send mail with hotel pdf.
+ * @param 
+ */
+function send_mail_with_pdf($addAddress,$path,$subject,$comment,$addCC=NULL,$addBCC=NULL){
+	
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                // Enable verbose debug output
+		$mail->isSMTP();                                       // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                // Enable SMTP authentication
+		// changed Username1 to Username3
+		$mail->Username = Username1;                           // SMTP username
+		$mail->Password = password;                            // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username1);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}  
+		
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		if(!empty($path)){
+			$mail->addAttachment($path);
+		}
+
+		$mail->isHTML(true);                                             // Set email format to HTML
+		$mail->Subject = $subject;
+		$mail->Body    = $comment;
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		$msg='';
+		if(!$mail->send()) {
+			 $msg .='Message could not be sent.';
+			 $msg .='Mailer Error: ' . $mail->ErrorInfo;
+			 drupal_set_message($msg,'error');
+		} else {
+			 $msg ='Message has been sent';
+			drupal_set_message($msg);
+		}
+	}else{
+		$msg ='Message could not be sent please add receipt ';
+		drupal_set_message($msg);
+	}
+	if(!empty($path)){
+		unlink($path);
+	}
+	return $msg;
+}
+
+
+
+/**
+ * Function :Insert Client Deatils Along with OrderId
+ * parameters :OrderId and Client Details
+ */
+function insert_client_details($orderId,$client_name,$client_phoneno,$client_email){
+	global $user;
+	try {
+		$id = db_insert ( 'gb_clients_cards_payments' )
+		->fields ( array (
+				'order_id'=>$orderId,
+				'client_name' =>$client_name,
+				'client_phoneno' =>$client_phoneno,
+				'client_email' =>$client_email,
+				'updated' => time(),
+				'updatedBy' => $user->uid,
+		) )->execute ();
+	}
+	catch( Exception $e ) {
+		error_log ( $e->getMessage() );
+	}
+}
+
+
+/**
+ * Function to send mail to user when is account is rejected.
+ * @param $addAddress
+ */
+function send_mail_user_reject($addAddress, $addCC=NULL,$addBCC=NULL)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		//changed Username1 to Username3
+		$mail->Username = Username2;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username2);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{				
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$body = reject_msgbody();
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = MSG_SEND_MAIL_ACCOUNT_REJECT_SUBJECT_MSG;
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/**
+ * Function for user account reject message body.
+ */
+function reject_msgbody(){
+	global $base_url;
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[VKEY_GB_MAIL_ID]=GB_GLOBALBEDS_LINK ;
+	$msgbody =  $msgbody = get_message(MSG_SEND_MAIL_ACCOUNT_REJECT_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+/**
+ * Function to send mail on reset of password.
+ */
+function reset_send_mail_user_password($addAddress, $username,$user_uid, $addCC=NULL, $addBCC=NULL)
+{   
+	$info = get_table_data_by_conditons('gb_user',"uid=$user_uid");
+	if(!empty($info->fContactFName)){
+		$full_name = $info->fContactFName." ".$info->fContactLName;
+	}
+	else{
+		$full_name = $username;
+	}
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+		$mail->Username = Username2;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username2);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$body = reset_password_msgbody($full_name);
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = MSG_SEND_MAIL_RESET_PASSWORD_SUBJECT_MSG;
+		$mail->MsgHTML($body);
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/**
+ * Function for user account reject message body.
+ */
+function reset_password_msgbody($username){
+	global $base_url;
+	$key_array=get_key_array_base_url();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[AKEY_USERNAME]=$username;
+	$key_array[VKEY_GB_MAIL_ID] = GB_GLOBALBEDS_LINK ;
+	$msgbody = get_message(MSG_SEND_MAIL_RESET_PASSWORD_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+/***
+ * Function to get_booking_order_status_text
+ */
+function get_booking_order_status_text($order_status){
+	//ORDER_STATUS_REJECTED_TEXT
+	$options = array(
+		ORDER_STATUS_PENDING => ORDER_STATUS_PENDING_TEXT,
+		ORDER_STATUS_CANCELLED => ORDER_STATUS_CANCELLED_TEXT,
+	    ORDER_STATUS_BOOKED => ORDER_STATUS_BOOKED_TEXT,
+		ORDER_STATUS_CANCEL_REQUESTED => ORDER_STATUS_CANCEL_REQUESTED_TEXT,
+		ORDER_STATUS_MODIFIED => ORDER_STATUS_MODIFIED_TEXT,
+		ORDER_STATUS_COMPLETED => ORDER_STATUS_COMPLETED_TEXT,
+		ORDER_STATUS_MISSED => ORDER_STATUS_MISSED_TEXT,
+	);
+	if(!empty($order_status)){
+		return $options[$order_status];
+	}
+	else{
+		return '';
+	}
+}
+/***
+ * Function to get mail subject and body based on booking status.
+ */
+function get_booking_status_based_mail_subject_body($status){
+	$mail = array();
+	if($status == ORDER_STATUS_PENDING_TEXT){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_PENDING_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_CANCELLED_TEXT){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_CANCELLATION_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_CANCELLATION_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_BOOKED_TEXT){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_BOOKED_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_CANCEL_REQUESTED_TEXT){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_REQUESTED_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_MODIFIED_TEXT){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_MODIFIED_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_COMPLETED){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_COMPLETED_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else if($status == ORDER_STATUS_MISSED){
+		$mail['subject']= MSG_SEND_MAIL_BOOKING_MISSED_SUBJECT_MSG;
+	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
+	}
+	else{
+		$mail['subject']= '';
+	//	$mail['body'] = '';
+	}
+	return $mail;
+}
+
+
+/**
+ * BDM/FINANCE/ACCOUNTS mail function.
+ * @param $addAddress, $name
+ */
+function send_mail_on_register($addAddress, $addCC=NULL,$addBCC=NULL,$name,$flag_role)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                   // Enable verbose debug output
+
+		$mail->isSMTP();                                              // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                                 // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                   // Enable SMTP authentication
+		$mail->Username = Username2;                              // SMTP username
+		$mail->Password = password;                               // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                   // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                      // TCP port to connect to
+
+		$mail->setFrom(Username2);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		
+		$body = register_msgbody($name,$flag_role);
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = get_mail_subject_based_on_role($flag_role);
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/**
+ * Registration mail body.
+ */
+function register_msgbody($name, $flag_role){
+	global $base_url;
+	
+	$key_array = get_key_array_base_url();
+	$key_array[DKEY_BASE_URL] = $base_url;
+	$key_array[DKEY_LEAD_PASSENGER_NAME] = $name;
+	$key_array[AKEY_ROLE_NAME] = $flag_role;
+	$key_array[VKEY_GB_MAIL_ID] = GB_GLOBALBEDS_LINK;
+	$msgbody = get_message(MSG_SEND_MAIL_REGISTRATION_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+
+/**
+ * *
+ * Function to get mail ids of all the super admins.
+ */
+function get_all_superadmin_mails() {
+	$mail = array ();
+	$results = db_query ( "Select uid from users_roles where rid=:rid", array (
+			':rid' => SUPERADMIN_ROLE_VALUE
+	) )->fetchAll ();
+	if (! empty ( $results )) {
+		foreach ( $results as $row ) {
+			$mail [] = get_mail_by_uid ( 'users', 'uid', $row->uid )->name;
+		}
+	}
+	return $mail;
+}
+
+function get_mail_subject_based_on_role($flag_role){
+	$options = array(
+			BDM => MSG_SEND_MAIL_BDM_REGISTRATION_SUBJECT_MSG,
+			FINANCE => MSG_SEND_MAIL_FINANCE_REGISTRATION_SUBJECT_MSG,
+			ACCOUNT => MSG_SEND_MAIL_ACCOUNTS_REGISTRATION_SUBJECT_MSG,		
+	);
+	if(!empty($flag_role))
+		return $options[$flag_role];
+	else
+		return '';
+	
+}
+
+
+/**
+ * Function :getCancellationChargeAndPricebufferedbyOrder_id
+ * @parameter : order_id
+ * 
+ */
+	
+function getCancellationChargeAndPricebufferedbyOrder_id($order_id){
+	$query = db_select('gb_orders','go');
+	$query->fields('go',array('prices'));
+	$query->condition('go.id',$order_id,'=');
+	$result = $query->execute()->fetchAll();
+	
+	$pricesdata = unserialize($result[0]->prices);
+	//echo'<pre>';print_r($pricesdata['CANCELLATION_CHARGES']);exit;
+	
+	return $pricesdata['CANCELLATION_CHARGES'];
+	
+}
+
+/**
+ * DropDown Support Ticket Issue
+ * 
+ * @return multitype:string
+ */
+//TODO :After Cnd Creation and Relation with Need Help these values comes from CND
+
+function get_ticket_type_dropdown(){
+	return array(1=>BOOKING_TYPE_HOTEL_NAME,
+			2=>BOOKING_TYPE_ACTIVITY_NAME,
+			3=>BOOKING_TYPE_PACKAGE_NAME,
+			4=>BOOKING_TYPE_TRANSFER_NAME,
+			5=>BOOKING_TYPE_MIXED_NAME,
+			6=>BOOKING_TYPE_VISA_NAME
+	);
+}
+
+
+
+
+/**
+ * DropDown Support Need Help
+ *
+ * @return multitype:string
+ */
+//TODO :After Cnd Creation and Relation with Ticket Issue these values comes from CND
+
+function get_ticket_need_help_dropdown(){
+	return array('1'=>'Visa Support',
+			'2'=>'Commissions/ Refunds',
+			'3'=>'Transfer',
+			'4'=>'Tours and Activities',
+			'5'=>'Complaint',
+			'6'=>'Amendment Request',
+			'7'=>'Cancellation Request',
+			'8' =>'Reconfirm Booking',
+			'9'=>'Hotel Facilities and Booking Preferences',
+	);
+}
+
+
+
+
+
+/**
+ * *
+ * Function to get mail ids of all the Support Ticket Agents
+ */
+//TODO :here emails and Id will come of Support Ticket Users
+function get_all_supportAgents_mails() {
+	$mail = array ();
+	$results = db_query ( "Select uid from users_roles where rid=:rid", array (
+			':rid' => ROLE_SUPPORT_AGENT
+	) )->fetchAll ();
+	if (! empty ( $results )) {
+		foreach ( $results as $row ) {
+			$mail [$row->uid] = get_mail_by_uid ( 'users', 'uid', $row->uid )->name;
+		}
+	}
+	return $mail;
+}
+
+/*Get All Items Ids From OrderId*/
+function getOrderItemIdsByOrderId($orderId){
+	$query = db_select('gb_order_items','gbi');
+	$query->fields('gbi',array('id'));
+	$query->condition('gbi.order_id',$orderId,'=');
+	$result = $query->execute()->fetchAll();
+	return $result[0]->id;
+}
+
+
+function get_bookingInfoByGbBookingNo($GBbooking_no){
+
+	$query = db_select('gb_orders','go')
+	->fields('go')
+	->condition('go.gb_booking_no',$GBbooking_no,'=');
+	$result = $query->execute()->fetchObject();
+	return $result;
+
+}
+function user_login_alter_submit($form, &$form_state) {
+	global $user;
+	$user = user_load($form_state['uid']);
+	//$form_state['redirect'] = 'user/' . $user->uid;
+	if(!CODE_SHOW){
+		if(is_agent() || is_gsa())
+		{
+			$_SESSION['message_home'] = 'you are not authorized to access system';
+			drupal_goto('/');
+		}
+	}
+	
+	if(is_superadmin() || is_administrator())
+		$form_state['redirect'] = 'hotelsearch';
+	else
+		$form_state['redirect'] = 'hotelsearch';
+
+	user_login_finalize($form_state);
+}
+
+
+/*Get Cnd Id by Name and Group*/
+ function get_cnd_Id_byNameAndGroup($name,$group){
+$query = db_select('gb_cnd','cn');
+$query->fields('cn',array('id','cnd_name'));
+$query->condition('cn.cnd_name',$name,'=');
+$query->condition('cn.cnd_group',$group,'=');
+$result = $query->execute()->fetchAll();
+return $result[0]->id;
+}
+
+
+/**
+ * Function defined to send mail on ticket query confirmation.
+ */
+function send_mail_ticket_query_confirmation($addAddress, $addCC=NULL,$addBCC=NULL,$query_no,$problem_cat,$booking_no)
+{
+	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		$mail = new PHPMailer;
+		$mail->isSMTP();                                        // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
+        
+		//Username1
+		$mail->Username =Username1;                            // SMTP username
+		$mail->Password = password;                             // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username1);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{				
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		$body = ticket_query_confirmation_body();
+		$mail->isHTML(true);                                  // Set email format to HTML
+
+		$mail->Subject = ticket_query_confirmation_subject($query_no,$problem_cat,$booking_no) ;
+		$mail->MsgHTML($body);
+
+		if(!$mail->send()) {
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $mail->ErrorInfo;
+		} else {
+			echo 'Message has been sent';
+		}
+	}else{ echo 'Message could not be sent please add receipt ';
+	}
+	return $mail;
+}
+
+/***
+ * Ticketquery Confirmation Mail Body
+ */
+function ticket_query_confirmation_body(){
+	global $base_url;	
+	$key_array = get_key_array_base_url();
+	$key_array[VKEY_GB_MAIL_ID] = MSG_GB_TICKET_EMAIL_ID;	
+	$msgbody = get_message(MSG_SEND_MAIL_TICKET_QUERY_CONFIRMATION_BODY_MSG, $key_array);
+	return $msgbody;
+}
+
+/***
+ * Ticket Query Confirmation Mail Subject.
+ */
+function ticket_query_confirmation_subject($query_no, $problem_cat, $booking_no){
+	$key_array = array();
+	$key_array[TKEY_TICKET_QUERY_NUMBER] = $query_no;
+	$key_array[TKEY_TICKET_PROBLEM_CATEGORY] = $problem_cat;
+	$key_array[BKEY_BOOKING_NUMBER] = $booking_no;
+	$msgbody = get_message(MSG_SEND_MAIL_TICKET_QUERY_CONFIRMATION_SUBJECT_MSG, $key_array);
+	return $msgbody;
+}
+
+function send_mail_account_summery($addAddress,$path,$user_name,$month,$year, $addCC=NULL,$addBCC=NULL)
+{
+	require_once(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
+	require_once(DRUPAL_SITE."/php_mailer/class.smtp.php");
+	if(!empty($addAddress))
+	{
+		//require 'PHPMailerAutoload.php';
+		$mail = new PHPMailer;
+		//$mail->SMTPDebug = 2;                                // Enable verbose debug output
+		$mail->isSMTP();                                       // Set mailer to use SMTP
+		$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                                // Enable SMTP authentication
+		// changed Username1 to Username3
+		$mail->Username = Username1;                           // SMTP username
+		$mail->Password = password;                            // SMTP password
+		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = port1;                                    // TCP port to connect to
+
+		$mail->setFrom(Username1);
+		foreach($addAddress as $key => $value)
+		{
+			$mail->addAddress($value);
+		}
+		// Add a recipient
+		//$mail->addAddress('ellen@example.com');               // Name is optional
+		//$mail->addReplyTo('test@global-beds.com');
+
+		if(!empty($addCC))
+		{
+			foreach($addCC as $x => $y)
+			{
+				$mail->addCC($y);
+			}
+		}
+		if(!empty($addBCC))
+		{
+			foreach($addBCC as $a => $b)
+			{
+				$mail->addBCC($b);
+			}
+		}
+		if(!empty($path)){
+			$mail->addAttachment($path);
+		}
+		$subject = account_summary_msgsubject($month,$year);
+		$body = account_summary_msg_body($user_name,$month,$year);
+		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		$mail->isHTML(true);                                  // Set email format to HTML
+		$mail->Subject = "$subject";
+		$mail->MsgHTML($body);
+		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		$msg='';
+		if(!$mail->send()) {
+			$msg .='Message could not be sent.';
+			$msg .='Mailer Error: ' . $mail->ErrorInfo;
+			drupal_set_message($msg,'error');
+		} else {
+			$msg ='Message has been sent';
+			drupal_set_message($msg);
+		}
+	}else{
+		$msg ='Message could not be sent please add receipt ';
+		drupal_set_message($msg);
+	}
+	if(!empty($path)){
+		unlink($path);
+	}
+	return $msg;
+}
+
+function account_summary_msg_body($user_name,$month,$year){
+	$key_array=get_key_array_account_summary();
+	$key_array[DKEY_BASE_URL]=$base_url;
+	$key_array[DKEY_LEAD_PASSENGER_NAME]=$user_name;
+	$key_array[AKEY_MONTH] = $month;
+	$key_array[AKEY_YEAR] = $year;
+	$msgbody = get_message(MSG_SEND_MAIL_ACCOUNT_SUMMARY_BODY_MSG, $key_array);
+	return $msgbody;
+}
+function account_summary_msgsubject($month,$year)
+{
+	$key_array=get_key_array_account_summary();
+	$key_array[AKEY_MONTH] = $month;
+	$key_array[AKEY_YEAR] = $year;
+	$msgsub = get_message(MSG_SEND_MAIL_ACCOUNT_SUMMARY_SUBJECT_MSG, $key_array);
+	
+	return $msgsub;
+}
+
+/**
+ * Payment status to be display in booking mail.
+ */
+function get_booking_payment_status($val){
+	$options = array(
+			PAYMENTS_STATUS_PENDING =>PAYMENTS_STATUS_PENDING_TXT,
+			PAYMENTS_STATUS_REFUND => PAYMENTS_STATUS_REFUND_TXT,
+			PAYMENTS_STATUS_PARTIAL_PAYMENT => PAYMENTS_STATUS_PARTIAL_PAYMENT_TXT,
+			PAYMENTS_STATUS_SUCCESS =>PAYMENTS_STATUS_SUCCESS_TXT,
+	);
+  if(empty($val))
+      	return '';
+  else
+  		return $options[$val];
+  	
+}

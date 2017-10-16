@@ -36,7 +36,7 @@ function dynamo_menu() {
  */
 function dynamo(){
 	
-	$table_name = 'st_material_type'; //TODO later on make this dynamic
+	$table_name = 'st_price'; //TODO later on make this dynamic
 	
 	//Call dynamo core for a table
 	dynamo_core_table($table_name);

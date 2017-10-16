@@ -1,0 +1,4 @@
+name=st_order
+description=Techlet st_order tags in this module
+core=7.x
+package="Techlet"
