@@ -232,18 +232,15 @@ function st_inventery_view($form, &$form_state) {
 	$rows_articles = array ();
 //	$rem_qty = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'] ,'mid');
 	foreach ( $result as $records ) {
-		 $created=util_date_format_short($records->created);
 		
+		$created=util_date_format_short($records->created);
 		$unit = get_ut_material_qty ( $records->unit );
-		//$rem_qty = get_data_by_pks ( 'st_order', $records->mid ,'mid');
+		//$rem_qty = get_rem_qty ( 'st_order', $records->mid ,'mid');
+		$mat = get_ut_material_mat ( $records->mid );
+		$rem_qty=get_rem_qty($records->mid);
 		
-		//$remaing_qty = db_query ( "select SUM(qty) from st_order  WHERE  $records->mid ;" )->fetchAll ();
 		
-	
-				$mat = get_ut_material_mat ( $records->mid );
-		
-				$rem_qty=get_rem_qty($records->mid);
-		$rows_articles [] = array (
+				$rows_articles [] = array (
 				$records->int_id,
 				$mat,
 				$records->qty,
@@ -252,8 +249,8 @@ function st_inventery_view($form, &$form_state) {
 				$records->total_price,
 				$records->base_price,
 				$records->sale_price,
-				$created
-				//$rem_qty->qty
+				$created,
+				$rem_qty
 		);
 	}
 	
@@ -321,10 +318,8 @@ function st_inventery_detail($form, &$form_state, $id = NULL) {
 function ut_material_inventery() {
 	$par1 = array ();
 	$parent_cat1 = db_query ( "SELECT mid from st_material" )->fetchAll ();
-	// echo "<pre>";
-	// print_r($parent_cat[0]->material_category);
+	
 	foreach ( $parent_cat1 as $res ) {
-		// print_r($res);
 		$par1 ['0'] = 'select';
 		$par1 [] = get_ut_material_mat ( $res->mid );
 	}
@@ -353,11 +348,17 @@ function get_ut_material_mat($mat) {
 function get_rem_qty($mat) {
 	$rem_qty=array();
 	$mat_name = db_query ( "select qty from st_order where mid=$mat" )->fetchAll ();
+	$x=0;
+	
+	
 	foreach ($mat_name as $res){
-		echo "<pre>";
-		$rem_qty=$res->qty;
+		
+		
+		$x=$res->qty+$x;
+		
 		
 	}
-	print_r($rem_qty);
-	exit;
+	return $x;
+	//print_r($rem_qty);
+
 }
