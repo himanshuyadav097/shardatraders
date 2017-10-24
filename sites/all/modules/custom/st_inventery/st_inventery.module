@@ -211,7 +211,7 @@ function st_inventery_view($form, &$form_state) {
 	
 	
 	 $form ['html_markup'] = array (
-			'#markup' => t ( '<a href="http://shardatraders.com/admins/st_inventery/add">Add Inventery</a>' ) 
+			'#markup' => t ( '<a href="/admins/st_inventery/add">Add Inventery</a>' ) 
 	); 
 	
 	$query = db_select ( 'st_inventery', 'tn' );
