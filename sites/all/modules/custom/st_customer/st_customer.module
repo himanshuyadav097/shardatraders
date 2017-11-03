@@ -1,300 +1,312 @@
-<?php 
-function st_customer_permission(){
-return array (
-  'st_customer_per_add' => 
-  array (
-    'title' => 'Create form st_customer According To choice',
-    'description' => 'Form st_customer Creation',
-  ),
-  'st_customer_per_view' => 
-  array (
-    'title' => 'View The List Of st_customer',
-    'description' => 'View st_customer according to his powers',
-  ),
-);
+<?php
+function st_customer_permission() {
+	return array (
+			'st_customer_per_add' => array (
+					'title' => 'Create form st_customer According To choice',
+					'description' => 'Form st_customer Creation' 
+			),
+			'st_customer_per_view' => array (
+					'title' => 'View The List Of st_customer',
+					'description' => 'View st_customer according to his powers' 
+			) 
+	);
 }
 function st_customer_menu() {
-$items['admins/st_customer/add']=array (
-  'title' => 'Add New St Customer Form',
-  'page callback' => 'drupal_get_form',
-  'page arguments' => 
-  array (
-    0 => 'st_customer_add',
-  ),
-  'access arguments' => 
-  array (
-    0 => 'st_customer_per_add',
-  ),
-  'description' => 'General',
-  'type' => 0,
-  'weight' => 1,
-);
-$items['admins/st_customer/view']=array (
-  'title' => 'St Customer List',
-  'page callback' => 'drupal_get_form',
-  'page arguments' => 
-  array (
-    0 => 'st_customer_view',
-  ),
-  'access arguments' => 
-  array (
-    0 => 'st_customer_per_view',
-  ),
-  'description' => 'General',
-  'type' => 0,
-  'weight' => 1,
-);
-$items['admins/st_customer/edit/%']=array (
-  'title' => 'St Customer Edit',
-  'page callback' => 'drupal_get_form',
-  'page arguments' => 
-  array (
-    0 => 'st_customer_add',
-    1 => 3,
-  ),
-  'access arguments' => 
-  array (
-    0 => 'st_customer_per_add',
-  ),
-  'description' => 'General',
-  'type' => 0,
-  'weight' => 1,
-);
-$items['admins/st_customer/detail/%']=array (
-  'title' => 'St Customer detail',
-  'page callback' => 'drupal_get_form',
-  'page arguments' => 
-  array (
-    0 => 'st_customer_detail',
-    1 => 3,
-  ),
-  'access arguments' => 
-  array (
-    0 => 'st_customer_per_view',
-  ),
-  'description' => 'General',
-  'type' => 0,
-  'weight' => 1,
-);
-return $items;
+	$items ['admins/st_customer/add'] = array (
+			'title' => 'Add New St Customer Form',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array (
+					0 => 'st_customer_add' 
+			),
+			'access arguments' => array (
+					0 => 'st_customer_per_add' 
+			),
+			'description' => 'General',
+			'type' => 0,
+			'weight' => 1 
+	);
+	$items ['admins/st_customer/view'] = array (
+			'title' => 'St Customer List',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array (
+					0 => 'st_customer_view' 
+			),
+			'access arguments' => array (
+					0 => 'st_customer_per_view' 
+			),
+			'description' => 'General',
+			'type' => 0,
+			'weight' => 1 
+	);
+	$items ['admins/st_customer/edit/%'] = array (
+			'title' => 'St Customer Edit',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array (
+					0 => 'st_customer_add',
+					1 => 3 
+			),
+			'access arguments' => array (
+					0 => 'st_customer_per_add' 
+			),
+			'description' => 'General',
+			'type' => 0,
+			'weight' => 1 
+	);
+	$items ['admins/st_customer/detail/%'] = array (
+			'title' => 'St Customer detail',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array (
+					0 => 'st_customer_detail',
+					1 => 3 
+			),
+			'access arguments' => array (
+					0 => 'st_customer_per_view' 
+			),
+			'description' => 'General',
+			'type' => 0,
+			'weight' => 1 
+	);
+	return $items;
 }
-function st_customer_add($form,&$form_state,$id=NULL){
-if(!empty($id)){
-		$data = get_data_by_pks('st_customer', $id);
+function st_customer_add($form, &$form_state, $id = NULL) {
+	if (! empty ( $id )) {
+		$data = get_data_by_pks ( 'st_customer', $id );
 		
-		$form['#submit'][] = "st_customer_edit_submit";
-		$form['id']=array(
-				'#type'=>'value',
-				'#value'=>$id,
+		$form ['#submit'] [] = "st_customer_edit_submit";
+		$form ['id'] = array (
+				'#type' => 'value',
+				'#value' => $id 
 		);
-	}	
-$form['oid']=array (
-  '#type' => 'select',
-  '#title' => 'Oid',
-  '#options' => 
-  array (
-  ),
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-  ),
-  '#default_value' => isset($data->oid)?$data->oid:"",
-);
-$form['f_name']=array (
-  '#type' => 'textfield',
-  '#title' => 'F_name',
-  '#size' => '255',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '255',
-  ),
-  '#default_value' => isset($data->f_name)?$data->f_name:"",
-);
-$form['l_name']=array (
-  '#type' => 'textfield',
-  '#title' => 'L_name',
-  '#size' => '255',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '255',
-  ),
-  '#default_value' => isset($data->l_name)?$data->l_name:"",
-);
-$form['address']=array (
-  '#type' => 'textfield',
-  '#title' => 'Address',
-  '#size' => '255',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '255',
-  ),
-  '#default_value' => isset($data->address)?$data->address:"",
-);
-$form['phone']=array (
-  '#type' => 'textfield',
-  '#title' => 'Phone',
-  '#size' => '20',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '20',
-  ),
-  '#default_value' => isset($data->phone)?$data->phone:"",
-);
-$form['reference']=array (
-  '#type' => 'textfield',
-  '#title' => 'Reference',
-  '#size' => '255',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '255',
-  ),
-  '#default_value' => isset($data->reference)?$data->reference:"",
-);
-/* $form['created']=array (
-  '#type' => 'textfield',
-  '#title' => 'Created',
-  '#size' => '10',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '10',
-  ),
-  '#default_value' => isset($data->created)?date("Y-m-d",$data->created):"",
-);
-$form['updated']=array (
-  '#type' => 'textfield',
-  '#title' => 'Updated',
-  '#size' => '10',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '10',
-  ),
-  '#default_value' => isset($data->updated)?date("Y-m-d",$data->updated):"",
-);
-$form['updatedby']=array (
-  '#type' => 'textfield',
-  '#title' => 'Updatedby',
-  '#size' => '10',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '10',
-  ),
-  '#default_value' => isset($data->updatedby)?$data->updatedby:"",
-);
-$form['createdby']=array (
-  '#type' => 'textfield',
-  '#title' => 'Createdby',
-  '#size' => '10',
-  '#attributes' => 
-  array (
-    'placeholder' => '',
-    'maxlength' => '10',
-  ),
-  '#default_value' => isset($data->createdby)?$data->createdby:"",
-);
-$form['deleted']=NULL;
- */
-$form['submit']=array('#type'=>'submit','#value'=>'Save');
-return $form;
+	}
+	$form ['oid'] = array (
+			'#type' => 'select',
+			'#title' => 'Oid',
+			'#options' => array (),
+			'#attributes' => array (
+					'placeholder' => '' 
+			),
+			'#default_value' => isset ( $data->oid ) ? $data->oid : "" 
+	);
+	$form ['f_name'] = array (
+			'#type' => 'textfield',
+			'#title' => 'F_name',
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '255' 
+			),
+			'#default_value' => isset ( $data->f_name ) ? $data->f_name : "" 
+	);
+	$form ['l_name'] = array (
+			'#type' => 'textfield',
+			'#title' => 'L_name',
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '255' 
+			),
+			'#default_value' => isset ( $data->l_name ) ? $data->l_name : "" 
+	);
+	$form ['address'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Address',
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '255' 
+			),
+			'#default_value' => isset ( $data->address ) ? $data->address : "" 
+	);
+	$form ['phone'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Phone',
+			'#size' => '20',
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '20' 
+			),
+			'#default_value' => isset ( $data->phone ) ? $data->phone : "" 
+	);
+	$form ['reference'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Reference',
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '255' 
+			),
+			'#default_value' => isset ( $data->reference ) ? $data->reference : "" 
+	);
+	/*
+	 * $form['created']=array (
+	 * '#type' => 'textfield',
+	 * '#title' => 'Created',
+	 * '#size' => '10',
+	 * '#attributes' =>
+	 * array (
+	 * 'placeholder' => '',
+	 * 'maxlength' => '10',
+	 * ),
+	 * '#default_value' => isset($data->created)?date("Y-m-d",$data->created):"",
+	 * );
+	 * $form['updated']=array (
+	 * '#type' => 'textfield',
+	 * '#title' => 'Updated',
+	 * '#size' => '10',
+	 * '#attributes' =>
+	 * array (
+	 * 'placeholder' => '',
+	 * 'maxlength' => '10',
+	 * ),
+	 * '#default_value' => isset($data->updated)?date("Y-m-d",$data->updated):"",
+	 * );
+	 * $form['updatedby']=array (
+	 * '#type' => 'textfield',
+	 * '#title' => 'Updatedby',
+	 * '#size' => '10',
+	 * '#attributes' =>
+	 * array (
+	 * 'placeholder' => '',
+	 * 'maxlength' => '10',
+	 * ),
+	 * '#default_value' => isset($data->updatedby)?$data->updatedby:"",
+	 * );
+	 * $form['createdby']=array (
+	 * '#type' => 'textfield',
+	 * '#title' => 'Createdby',
+	 * '#size' => '10',
+	 * '#attributes' =>
+	 * array (
+	 * 'placeholder' => '',
+	 * 'maxlength' => '10',
+	 * ),
+	 * '#default_value' => isset($data->createdby)?$data->createdby:"",
+	 * );
+	 * $form['deleted']=NULL;
+	 */
+	$form ['submit'] = array (
+			'#type' => 'submit',
+			'#value' => 'Save' 
+	);
+	return $form;
 }
-function st_customer_validate($form,&$form_state){
-
+function st_customer_validate($form, &$form_state) {
 }
-function st_customer_add_submit($form,&$form_state){
-global $user;
-$query = db_insert('st_customer')
-	 ->fields(array('oid'=>$form_state['values']['oid'],
-	 		'f_name'=>$form_state['values']['f_name'],
-	 		'l_name'=>$form_state['values']['l_name'],
-	 		'address'=>$form_state['values']['address'],
-	 		'phone'=>$form_state['values']['phone'],
-	 		'reference'=>$form_state['values']['reference'],
-	 		'created'=>time(),
+function st_customer_add_submit($form, &$form_state) {
+	global $user;
+	$query = db_insert ( 'st_customer' )->fields ( array (
+			'oid' => $form_state ['values'] ['oid'],
+			'f_name' => $form_state ['values'] ['f_name'],
+			'l_name' => $form_state ['values'] ['l_name'],
+			'address' => $form_state ['values'] ['address'],
+			'phone' => $form_state ['values'] ['phone'],
+			'reference' => $form_state ['values'] ['reference'],
+			'created' => time (),
 	 	/* 	'updated'=>strtotime($form_state['values']['updated']),
 	 		'updatedby'=>$form_state['values']['updatedby'],
 	 		'createdby'=>$form_state['values']['createdby'],
 	 		'deleted'=>$form_state['values']['deleted'],
 	 		 */
-	 )
-	 		)->execute();
-if($query>0){
-    	drupal_set_message('st_customer added successfully');
-		drupal_goto('admins/st_customer/view');	
-    }
+	 ) )->execute ();
+	if ($query > 0) {
+		drupal_set_message ( 'st_customer added successfully' );
+		drupal_goto ( 'admins/st_customer/view' );
+	}
 }
-function st_customer_edit_submit($form,&$form_state){
-global $user;
-$query = db_update('st_customer')
-	 ->fields(array('oid'=>$form_state['values']['oid'],'f_name'=>$form_state['values']['f_name'],'l_name'=>$form_state['values']['l_name'],'address'=>$form_state['values']['address'],'phone'=>$form_state['values']['phone'],'reference'=>$form_state['values']['reference'],'created'=>strtotime($form_state['values']['created']),'updated'=>strtotime($form_state['values']['updated']),'updatedby'=>$form_state['values']['updatedby'],'createdby'=>$form_state['values']['createdby'],'deleted'=>$form_state['values']['deleted'],))
-	 ->condition('id', $form_state['values']['id'], '=')
-	 ->execute();
-if($form_state['values']['id']>0){
-    	drupal_set_message('st_customer update successfully');
-		drupal_goto('admins/st_customer/view');
-    }
+function st_customer_edit_submit($form, &$form_state) {
+	global $user;
+	$query = db_update ( 'st_customer' )->fields ( array (
+			'oid' => $form_state ['values'] ['oid'],
+			'f_name' => $form_state ['values'] ['f_name'],
+			'l_name' => $form_state ['values'] ['l_name'],
+			'address' => $form_state ['values'] ['address'],
+			'phone' => $form_state ['values'] ['phone'],
+			'reference' => $form_state ['values'] ['reference'],
+			'created' => strtotime ( $form_state ['values'] ['created'] ),
+			'updated' => strtotime ( $form_state ['values'] ['updated'] ),
+			'updatedby' => $form_state ['values'] ['updatedby'],
+			'createdby' => $form_state ['values'] ['createdby'],
+			'deleted' => $form_state ['values'] ['deleted'] 
+	) )->condition ( 'id', $form_state ['values'] ['id'], '=' )->execute ();
+	if ($form_state ['values'] ['id'] > 0) {
+		drupal_set_message ( 'st_customer update successfully' );
+		drupal_goto ( 'admins/st_customer/view' );
+	}
 }
-function st_customer_view($form,&$form_state){
-$form['html_markup'] = array(
-		'#markup' => t(
-				'<a href="http://shardatraders.com/admins/st_customer/add">Add Customer Details</a>'
-				)
-);
+function st_customer_view($form, &$form_state) {
+	$form ['html_markup'] = array (
+			'#markup' => t ( '<a href="http://shardatraders.com/admins/st_customer/add">Add Customer Details</a>' ) 
+	);
 	
-global $user;
-	$query = db_select('st_customer','tn')
-	->extend('PagerDefault')
-	->fields('tn')
-	->orderBy('tn.cus_id','desc')
-	->limit(20);
-	$result = $query->execute();
-$rows_articles=array();
-foreach ($result as $records){
-
-$rows_articles[] = array($records->cus_id,
-		$records->oid,
-		$records->f_name,
-		$records->l_name,
-		$records->address,
-		$records->phone,
-		$records->reference,
+	global $user;
+	$query = db_select ( 'st_customer', 'tn' )->extend ( 'PagerDefault' )->fields ( 'tn' )->orderBy ( 'tn.cus_id', 'desc' )->limit ( 20 );
+	$result = $query->execute ();
+	$rows_articles = array ();
+	foreach ( $result as $records ) {
+		
+		$rows_articles [] = array (
+				$records->cus_id,
+				$records->oid,
+				$records->f_name,
+				$records->l_name,
+				$records->address,
+				$records->phone,
+				$records->reference 
 		);
-}
-$headers=array('Customer Id','Oid','First name','Last name','Address','Phone','Reference');
-$all_articles=theme('table', array('header' => $headers, 'rows' => $rows_articles,'empty'=>'No Record Found','attributes'=>array('class'=>array('list-table'),'style'=>'width:100%;')));
-$all_articles .=theme('pager');
-$form['all_articles']=array(
-			'#markup'=>$all_articles,
+	}
+	$headers = array (
+			'Customer Id',
+			'Oid',
+			'First name',
+			'Last name',
+			'Address',
+			'Phone',
+			'Reference' 
 	);
-return $form;
-}
-function st_customer_detail($form,&$form_state,$id=NULL){
-global $user;
-	$query = db_select('st_customer','tn')
-	->extend('PagerDefault')
-	->fields('tn')
-	->condition('tn.id',$id,'=')
-	->orderBy('tn.id','desc');
-	$result = $query->execute()->fetchObject();
-$rows_articles=array();
-if(!empty($result))
-foreach ($result as $key => $value){
-
-
-
-$rows_articles[] = array($key.' :: '.$value);
-}
-
-$all_articles=theme('table', array('header' => array(), 'rows' => $rows_articles,'empty'=>'No Record Found','attributes'=>array('class'=>array('list-table'),'style'=>'width:100%;')));
-$all_articles .=theme('pager');
-$form['all_articles']=array(
-			'#markup'=>$all_articles,
+	$all_articles = theme ( 'table', array (
+			'header' => $headers,
+			'rows' => $rows_articles,
+			'empty' => 'No Record Found',
+			'attributes' => array (
+					'class' => array (
+							'list-table' 
+					),
+					'style' => 'width:100%;' 
+			) 
+	) );
+	$all_articles .= theme ( 'pager' );
+	$form ['all_articles'] = array (
+			'#markup' => $all_articles 
 	);
-return $form;
+	return $form;
+}
+function st_customer_detail($form, &$form_state, $id = NULL) {
+	global $user;
+	$query = db_select ( 'st_customer', 'tn' )->extend ( 'PagerDefault' )->fields ( 'tn' )->condition ( 'tn.id', $id, '=' )->orderBy ( 'tn.id', 'desc' );
+	$result = $query->execute ()->fetchObject ();
+	$rows_articles = array ();
+	if (! empty ( $result ))
+		foreach ( $result as $key => $value ) {
+			
+			$rows_articles [] = array (
+					$key . ' :: ' . $value 
+			);
+		}
+	
+	$all_articles = theme ( 'table', array (
+			'header' => array (),
+			'rows' => $rows_articles,
+			'empty' => 'No Record Found',
+			'attributes' => array (
+					'class' => array (
+							'list-table' 
+					),
+					'style' => 'width:100%;' 
+			) 
+	) );
+	$all_articles .= theme ( 'pager' );
+	$form ['all_articles'] = array (
+			'#markup' => $all_articles 
+	);
+	return $form;
 }

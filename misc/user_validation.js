@@ -93,7 +93,7 @@ jQuery(document).ready(function(){
 	
 	jQuery("#edit-base-price, #edit-qty").blur(function(){  
 		var material_value = jQuery("#edit-qty").val();
-		var material_price = jQuery("#edit-base-price").val();
+		var material_price = jQuery("#edit-qty-baseprice").val();
 		var material_total = '';
 	//	var material_cost_price = '';
 	//	var Netprofit = '';
@@ -168,3 +168,29 @@ jQuery(document).ready(function () {
 	    }
 	   });
 	});
+jQuery(document).ready(function(){
+	
+	jQuery(" #edit-qty,#edit-qty-totall").blur(function(){  
+		
+		var qty_value = jQuery("#edit-qty").val();
+		var qtybase_price = jQuery("#edit-qty-totall").val();
+		if(parseInt(qty_value)> parseInt(qtybase_price)){
+		
+
+			 jQuery("#edit-qty").val('');
+			
+		}
+		//jQuery("#edit-qty").val(material_total);
+
+		
+		//var edit-qty = jQuery("#edit-qty").val();
+		//var edit-qty-baseprice = jQuery("#edit-qty-baseprice").val();
+	//	var material_total = '';
+		//var material_unit = jQuery("#edit-unit").val();
+		
+		/*if(edit-qty != '' && edit-qty-baseprice != '' && edit-qty > edit-qty-baseprice )
+			{
+				alert("wrong");
+			}*/
+	});  
+});  

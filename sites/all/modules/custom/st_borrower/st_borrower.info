@@ -1,0 +1,4 @@
+name=st_borrower
+description=Techlet st_borrower tags in this module
+core=7.x
+package="Techlet"

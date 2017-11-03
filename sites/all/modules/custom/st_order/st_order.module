@@ -90,7 +90,8 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			'#default_value' => isset ( $data->mid ) ? $data->mid : "",
 			'#ajax' => array (
 					'callback' => 'ajax_total_selling_price_callback',
-					'wrapper' => 'reg_child_state',
+					//'wrapper' => 'reg_child_state',
+					'wrapper' =>array('reg_child_state', 'reg_qty_state'),
 					// 'method' => 'replace',
 					'effect' => 'fade' 
 			) ,
@@ -98,24 +99,30 @@ function st_order_add($form, &$form_state, $id = NULL) {
 				
 	);
 	
-	$form ['qty'] = array (
+	  $form ['qty'] = array (
 			'#type' => 'textfield',
 			'#title' => 'Qty',
 			'#size' => '255',
 			'#attributes' => array (
 					'placeholder' => '' 
 			),
-			'#ajax' => array (
-					'callback' => 'ajax_check_qty_callback',
-					'wrapper' => 'reg_qty_state',
-					//'method' => 'replace',
-					//'keypress' => TRUE,
-					//'event' => 'change',
-					'effect' => 'fade'
+			
+			/* '#prefix' => '<div id="reg_qty_state">',
+			'#suffix' => '</div>', */
+			'#default_value' => isset ( $data->qty ) ? $data->qty : "" 
+	);  
+	$form ['qty_baseprice'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Qty_base',
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => ''
 			),
 			'#prefix' => '<div id="reg_qty_state">',
 			'#suffix' => '</div>',
-			'#default_value' => isset ( $data->qty ) ? $data->qty : "" 
+			
+			
+			'#default_value' => isset ( $data->qty ) ? $data->qty : ""
 	);
 
 	$form ['base_price'] = array (
@@ -151,6 +158,19 @@ function st_order_add($form, &$form_state, $id = NULL) {
 					'maxlength' => '255' 
 			),
 			'#default_value' => isset ( $data->total_price ) ? $data->total_price : "" 
+	);
+	$form ['pay_status'] = array (
+			'#type' => 'select',
+			'#title' => 'pay status',
+			/* '#size' => '255', */
+		    '#options' => array('Select','Done','Pending'),
+			'#attributes' => array (
+					'placeholder' => '' 
+			),
+			
+					
+			
+			'#default_value' => isset ( $data->pay_status ) ? $data->pay_status : ""
 	);
 	$form ['f_name'] = array (
 			'#type' => 'textfield',
@@ -219,10 +239,11 @@ function ajax_total_selling_price_callback($form, $form_state) {
 	
 	// return form ajax
 	
-	$base_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
 	
+	$base_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
+	$qty = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
 	$commands = array ();
-	$commands [] = ajax_command_replace ( "#reg_child_state", render ( $form ['base_price'] = array (
+	/* $commands [] = ajax_command_replace ( "#reg_child_state", render ( $form ['base_price'] = array (
 			'#type' => 'textfield',
 			'#title' => 'Base Price',
 			'#name' => 'base_price',
@@ -232,9 +253,9 @@ function ajax_total_selling_price_callback($form, $form_state) {
 			'#value' => $base_price->base_price 
 	)
 	 ), 
-	$form ['base_price454'] = array (
+	$form ['qty_baseprice'] = array (
 			'#type' => 'textfield',
-			'#title' => 'Base t7u',
+			'#title' => 'qty_baseprice',
 			'#name' => 'base_price4',
 			'#size' => '255',
 	 		'#prefix' => '<div id="reg_qty_state">',
@@ -242,12 +263,43 @@ function ajax_total_selling_price_callback($form, $form_state) {
 			'#value' => '1'
 	)
 	 
-			);
+			); */
 	
-	return array (
+	$commands [] = ajax_command_replace ( "#reg_child_state", render( $form ['base_price'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Base Price',
+			'#name' => 'base_price',
+			'#id' => 'edit-qty-baseprice',
+			'#size' => '255',
+			'#prefix' => '<div id="reg_child_state">',
+			'#suffix' => '</div>',
+			'#value' => $base_price->base_price 
+	)
+	 ));
+	$commands [] = ajax_command_replace ( "#reg_qty_state", render( $form ['qty_baseprice'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Qty Base',
+			'#name' => 'qty_baseprice',
+			'#id' => 'edit-qty-totall',
+				
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => ''
+			),
+			
+			'#prefix' => '<div id="reg_qty_state">',
+			'#suffix' => '</div>',
+			'#value' => $qty->qty
+	)
+		 ));
+	
+	
+	
+	 return array (
 			'#type' => 'ajax',
 			'#commands' => $commands 
-	);
+	); 
+	
 	// return $form['base_price'];
 	// return $form_state['values']['mid'];
 	// return '<div id="reg_child_state">'.$form_state['values']['mid'].'</div>';
@@ -323,6 +375,7 @@ function ajax_check_qty_callback($form, $form_state){
 function st_order_validate($form, &$form_state) {
 }
 function st_order_add_submit($form, &$form_state) {
+	
 	global $user;
 	$output = array ();
 	$inv_result = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
@@ -337,14 +390,21 @@ function st_order_add_submit($form, &$form_state) {
 				'base_price' => $form_state ['values'] ['base_price'],
 				'total_price' => $form_state ['values'] ['total_price'],
 				'cost_price' => $cost_price,
-				'net_profit' => $net_profit 
+				'net_profit' => $net_profit,
+				'pay_status' => $form_state ['values'] ['pay_status'],
+				'created' => time(),
+				'updated'=>time()
 		) )->execute ();
 		$remaing_inv_result = $inv_result->qty - $form_state ['values'] ['qty'];
 		$unit_price = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
+		
+		
 		$rem_total_bal = $unit_price->total_price - $form_state ['values'] ['total_price'];
+		
 		try {
+			
 			$update_qty = db_query ( "update  st_inventery set qty='" . $remaing_inv_result . "' where mid='" . $form_state ['values'] ['mid'] . "'" )->execute ();
-			$update_total_price = db_query ( "update  st_price set total_price='" . $rem_total_bal . "' where mid='" . $form_state ['values'] ['mid'] . "'" )->execute ();
+			//$update_total_price = db_query ( "update  st_price set total_price='" . $rem_total_bal . "' where mid='" . $form_state ['values'] ['mid'] . "'" )->execute ();
 		} catch ( Exception $e ) {
 			print_r ( $e );
 		}
@@ -355,7 +415,7 @@ function st_order_add_submit($form, &$form_state) {
 				'address' => $form_state ['values'] ['address'],
 				'phone' => $form_state ['values'] ['phone'],
 				'reference' => $form_state ['values'] ['reference'] 
-		) )->execute ();
+		) )->execute (); 
 		
 		if ($query > 0) {
 			drupal_set_message ( 'st_order added successfully' );

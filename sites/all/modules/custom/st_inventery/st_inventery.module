@@ -74,12 +74,12 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 	drupal_add_js ( 'misc/user_validation.js', 'file' );
 	
 	if (! empty ( $id )) {
-		$data = get_data_by_pks ( 'st_inventery', $id );
+		$data = get_data_by_pks ( 'st_inventery', $id ,'int_id');
 		
 		$form ['#submit'] [] = "st_inventery_edit_submit";
-		$form ['id'] = array (
+		$form ['int_id'] = array (
 				'#type' => 'value',
-				'#value' => $id 
+				'#value' => $int_id
 		);
 	}
 	$form ['mid'] = array (
@@ -241,7 +241,9 @@ function st_inventery_view($form, &$form_state) {
 		
 		
 				$rows_articles [] = array (
-				$records->int_id,
+						l ( $records->int_id, 'admins/st_inventery/edit/' . $records->int_id ),
+						
+				//$records->int_id,
 				$mat,
 				$records->qty,
 				$unit,

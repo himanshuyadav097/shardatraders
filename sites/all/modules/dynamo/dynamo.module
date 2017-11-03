@@ -1,7 +1,7 @@
 <?php 
 define("NEXT_LINE","\n");
 define("SEMICOLON",";");
-define("TABLEPREFIX","gb_");
+define("TABLEPREFIX","gtw_");
 /**
  * function to create permission hook
  */
@@ -36,7 +36,7 @@ function dynamo_menu() {
  */
 function dynamo(){
 	
-	$table_name = 'st_price'; //TODO later on make this dynamic
+	$table_name = 'st_borrower'; //TODO later on make this dynamic
 	
 	//Call dynamo core for a table
 	dynamo_core_table($table_name);
@@ -453,7 +453,7 @@ function dynamo_get_html($dataType,$length,$name,$ref_arr){
 	if($length==1 &&($type=="bigint" || $type=="int") ){
 		$type="select";
 	}
-	if($length==11 &&($type=="bigint" || $type=="int") ){
+	if($length==-1 &&($type=="bigint" || $type=="int") ){
 		$type="date";
 	}else{
 		if($type=="bigint" || $type=="int"){
@@ -499,6 +499,14 @@ function dynamo_get_html($dataType,$length,$name,$ref_arr){
 			$type='textfield';
 			return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
 			break;
+		case "double":
+				$type='textfield';
+				return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+				break;
+		case "smallint":
+					$type='textfield';
+					return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
+					break;
 		case "varchar":
 			$type='textfield';
 			return array('#type' => $type,'#title' => t($name),'#size' => $length,'#attributes'=>array('placeholder' =>$hint,'maxlength'=>$length),'#default_value'=>$val);
