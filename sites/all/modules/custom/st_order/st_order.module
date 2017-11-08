@@ -172,7 +172,7 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			
 			'#default_value' => isset ( $data->pay_status ) ? $data->pay_status : ""
 	);
-	$form ['f_name'] = array (
+	/* $form ['f_name'] = array (
 			'#type' => 'textfield',
 			'#title' => 'First name',
 			'#size' => '255',
@@ -221,7 +221,7 @@ function st_order_add($form, &$form_state, $id = NULL) {
 					'maxlength' => '255' 
 			),
 			'#default_value' => isset ( $data->reference ) ? $data->reference : "" 
-	);
+	); */
 	
 	$form ['submit'] = array (
 			'#type' => 'submit',
@@ -339,8 +339,6 @@ function ajax_check_qty_callback($form, $form_state){
 		$valueQty = $form_state ['values'] ['qty'];
 		//echo "OK ".$base_price->qty;
 	}
-	
-		
 		$commands1 = array ();
 		$commands1 [] = ajax_command_replace ( "#reg_qty_state", render ( $form ['qty'] = array (
 			'#type' => 'textfield',
@@ -378,10 +376,12 @@ function st_order_add_submit($form, &$form_state) {
 	
 	global $user;
 	$output = array ();
+	
 	$inv_result = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
-	$unit_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
-	$cost_price = $form_state ['values'] ['qty'] * $unit_price->unit_price;
-	$net_profit = $form_state ['values'] ['total_price'] - $cost_price;
+	
+	//$unit_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
+	//$cost_price = $form_state ['values'] ['qty'] * $unit_price->unit_price;
+	//$net_profit = $form_state ['values'] ['total_price'] - $cost_price;
 	
 	try {
 		$query = db_insert ( 'st_order' )->fields ( array (
@@ -395,27 +395,42 @@ function st_order_add_submit($form, &$form_state) {
 				'created' => time(),
 				'updated'=>time()
 		) )->execute ();
+	
+		
+		
 		$remaing_inv_result = $inv_result->qty - $form_state ['values'] ['qty'];
-		$unit_price = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
+		$st_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
+		$unitprice=$st_price->unit_price;
+		;
+		
+		$total_price=$remaing_inv_result * $unitprice;
 		
 		
-		$rem_total_bal = $unit_price->total_price - $form_state ['values'] ['total_price'];
+		
+		//$unit_price = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
+		
+		//$rem_price=($unit_price->qty * $st_price->unit_price);
+	
+		//$rem_total_bal = $unit_price->total_price - $form_state ['values'] ['total_price'];
 		
 		try {
 			
 			$update_qty = db_query ( "update  st_inventery set qty='" . $remaing_inv_result . "' where mid='" . $form_state ['values'] ['mid'] . "'" )->execute ();
-			//$update_total_price = db_query ( "update  st_price set total_price='" . $rem_total_bal . "' where mid='" . $form_state ['values'] ['mid'] . "'" )->execute ();
+				
+			
 		} catch ( Exception $e ) {
 			print_r ( $e );
 		}
-		$query = db_insert ( 'st_customer' )->fields ( array (
+		$update_total_cost = db_query ( "update  st_price set total_price='" . $total_price . "' where mid='" . $st_price->mid . "'" )->execute ();
+		
+		/* $query = db_insert ( 'st_customer' )->fields ( array (
 				'oid' => $query,
 				'f_name' => $form_state ['values'] ['f_name'],
 				'l_name' => $form_state ['values'] ['l_name'],
 				'address' => $form_state ['values'] ['address'],
 				'phone' => $form_state ['values'] ['phone'],
 				'reference' => $form_state ['values'] ['reference'] 
-		) )->execute (); 
+		) )->execute ();  */
 		
 		if ($query > 0) {
 			drupal_set_message ( 'st_order added successfully' );

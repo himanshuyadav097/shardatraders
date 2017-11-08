@@ -69,8 +69,7 @@ function st_inventery_menu() {
 	return $items;
 }
 function st_inventery_add($form, &$form_state, $id = NULL) {
-	// ut_material_qty();
-	// exit;
+
 	drupal_add_js ( 'misc/user_validation.js', 'file' );
 	
 	if (! empty ( $id )) {
@@ -86,10 +85,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 			'#type' => 'select',
 			'#title' => 'Mid',
 			'#options' => ut_material_inventery (),
-  /* '#attributes' => 
-  array (
-    'placeholder' => '',
-  ), */
+  
   '#default_value' => isset ( $data->mid ) ? $data->mid : "" 
 	);
 	$form ['qty'] = array (
@@ -173,8 +169,6 @@ function st_inventery_add_submit($form, &$form_state) {
 			'created' => time () 
 	)
 	 )->execute ();
-	// $group_id=db_query("SELECT g_id from gb_group where g_name='$arg1[g_name]'")->fetchAll();
-	
 	$query = db_insert ( 'st_price' )->fields ( array (
 			'mid' => $form_state ['values'] ['mid'],
 			'unit_price' => $form_state ['values'] ['unit_prices'],
