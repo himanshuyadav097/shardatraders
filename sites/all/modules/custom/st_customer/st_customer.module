@@ -13,7 +13,7 @@ function st_customer_permission() {
 }
 function st_customer_menu() {
 	$items ['admins/st_customer/add'] = array (
-			'title' => 'Add New St Customer Form',
+			'title' => 'Add Customer',
 			'page callback' => 'drupal_get_form',
 			'page arguments' => array (
 					0 => 'st_customer_add' 
@@ -69,6 +69,8 @@ function st_customer_menu() {
 	return $items;
 }
 function st_customer_add($form, &$form_state, $id = NULL) {
+	drupal_add_js ( 'misc/user_validation.js', 'file' );
+	
 	if (! empty ( $id )) {
 		$data = get_data_by_pks ( 'st_customer', $id );
 		
@@ -78,18 +80,10 @@ function st_customer_add($form, &$form_state, $id = NULL) {
 				'#value' => $id 
 		);
 	}
-	$form ['oid'] = array (
-			'#type' => 'select',
-			'#title' => 'Oid',
-			'#options' => array (),
-			'#attributes' => array (
-					'placeholder' => '' 
-			),
-			'#default_value' => isset ( $data->oid ) ? $data->oid : "" 
-	);
+	
 	$form ['f_name'] = array (
 			'#type' => 'textfield',
-			'#title' => 'F_name',
+			'#title' => 'First name',
 			'#size' => '255',
 			'#attributes' => array (
 					'placeholder' => '',
@@ -99,7 +93,7 @@ function st_customer_add($form, &$form_state, $id = NULL) {
 	);
 	$form ['l_name'] = array (
 			'#type' => 'textfield',
-			'#title' => 'L_name',
+			'#title' => 'Last name',
 			'#size' => '255',
 			'#attributes' => array (
 					'placeholder' => '',
@@ -108,7 +102,7 @@ function st_customer_add($form, &$form_state, $id = NULL) {
 			'#default_value' => isset ( $data->l_name ) ? $data->l_name : "" 
 	);
 	$form ['address'] = array (
-			'#type' => 'textfield',
+			'#type' => 'textarea',
 			'#title' => 'Address',
 			'#size' => '255',
 			'#attributes' => array (
@@ -123,7 +117,8 @@ function st_customer_add($form, &$form_state, $id = NULL) {
 			'#size' => '20',
 			'#attributes' => array (
 					'placeholder' => '',
-					'maxlength' => '20' 
+					'maxlength' => '20' ,
+					'class' => array('mobileval')
 			),
 			'#default_value' => isset ( $data->phone ) ? $data->phone : "" 
 	);
@@ -195,7 +190,7 @@ function st_customer_validate($form, &$form_state) {
 function st_customer_add_submit($form, &$form_state) {
 	global $user;
 	$query = db_insert ( 'st_customer' )->fields ( array (
-			'oid' => $form_state ['values'] ['oid'],
+			
 			'f_name' => $form_state ['values'] ['f_name'],
 			'l_name' => $form_state ['values'] ['l_name'],
 			'address' => $form_state ['values'] ['address'],
@@ -216,7 +211,7 @@ function st_customer_add_submit($form, &$form_state) {
 function st_customer_edit_submit($form, &$form_state) {
 	global $user;
 	$query = db_update ( 'st_customer' )->fields ( array (
-			'oid' => $form_state ['values'] ['oid'],
+			
 			'f_name' => $form_state ['values'] ['f_name'],
 			'l_name' => $form_state ['values'] ['l_name'],
 			'address' => $form_state ['values'] ['address'],
@@ -246,7 +241,7 @@ function st_customer_view($form, &$form_state) {
 		
 		$rows_articles [] = array (
 				$records->cus_id,
-				$records->oid,
+				
 				$records->f_name,
 				$records->l_name,
 				$records->address,
@@ -256,7 +251,7 @@ function st_customer_view($form, &$form_state) {
 	}
 	$headers = array (
 			'Customer Id',
-			'Oid',
+			
 			'First name',
 			'Last name',
 			'Address',

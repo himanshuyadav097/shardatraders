@@ -132,6 +132,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 	$form ['base_price'] = array (
 			'#type' => 'textfield',
 			'#title' => 'Base price',
+			'#id' => 'edit-qty-baseprice1',
 			'#size' => '255',
 			'#attributes' => array (
 					'placeholder' => '',

@@ -87,10 +87,17 @@ jQuery(document).ready(function(){
 		{
 			jQuery("#edit-unit").css("border", "1px solid #ccc");
 		}
-    });  
-});  
-jQuery(document).ready(function(){
+    });
 	
+	jQuery(".mobileval").keyup(function() {
+
+		if (this.value.match(/[^0-9-+]/g)) {
+
+			this.value = this.value.replace(/[^0-9-+]/g, '');
+		}
+		
+		
+	});
 	jQuery("#edit-base-price, #edit-qty").blur(function(){  
 		var material_value = jQuery("#edit-qty").val();
 		var material_price = jQuery("#edit-qty-baseprice").val();
@@ -121,44 +128,17 @@ jQuery(document).ready(function(){
 		{
 			jQuery("#edit-base-price").css("border", "1px solid #ccc");
 		}
-    });  
-	
-	
-});
+    }); 
 
-//Not enter numeric Number
-
-jQuery(document).ready(function(){
-
-	jQuery("#edit-f-name ,#edit-l-name").keypress(function(event){
-	        var inputValue = event.which;
-	        // allow letters and whitespaces only.
-	        if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) { 
-	            event.preventDefault(); 
-	        }
-	    });  
-	});
-
-//Validate phone number function
-
-function ValidatePhone(ids) {
-	
-    var phoneRegExp = /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/;
-    var phoneVal = jQuery(ids).val();
-    var numbers = phoneVal.split("").length;
-    if (10 <= numbers && numbers <= 16 && phoneRegExp.test(phoneVal)) {
-        return 'S';
-    }
-    else{
-    	return 'F';
-    }
-    }
-
-
-//Validate enter only integer value
-
-jQuery(document).ready(function () {
-	  //called when key is pressed in textbox
+	jQuery("#edit-f-name ,#edit-l-name").keypress(function(e) {
+		//alert("hii");
+		//exit;
+        var key = e.keyCode;
+        if (key >= 48 && key <= 57) {
+            e.preventDefault();
+            console.log("hello");
+        }
+    });
 	jQuery("#edit-qty,#edit-unit-prices,#edit-total-price,#edit-base-price,#edit-sale-price").keypress(function (event) {
 	     //if the letter is not digit then display error and don't type anything
 	     if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
@@ -167,9 +147,6 @@ jQuery(document).ready(function () {
 	               return false;
 	    }
 	   });
-	});
-jQuery(document).ready(function(){
-	
 	jQuery(" #edit-qty,#edit-qty-totall").blur(function(){  
 		
 		var qty_value = jQuery("#edit-qty").val();
@@ -192,5 +169,24 @@ jQuery(document).ready(function(){
 			{
 				alert("wrong");
 			}*/
-	});  
+	}); 
 });  
+
+
+
+//Validate phone number function
+
+function ValidatePhone(ids) {
+	
+    var phoneRegExp = /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/;
+    var phoneVal = jQuery(ids).val();
+    var numbers = phoneVal.split("").length;
+    if (10 <= numbers && numbers <= 16 && phoneRegExp.test(phoneVal)) {
+        return 'S';
+    }
+    else{
+    	return 'F';
+    }
+    }
+
+ 
