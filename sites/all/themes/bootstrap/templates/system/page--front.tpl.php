@@ -75,6 +75,26 @@
  * @ingroup templates
  */
 ?>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 5px;
+	text-align: left;
+}
+
+.gateway-table {
+	width: 100%;
+}
+
+table.gateway-table td {
+	width: 50%;
+}
+</style>
+
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
   <div class="<?php print $container_class; ?>">
     <div class="navbar-header">
@@ -180,7 +200,52 @@
       <?php endif; ?>
       <?php print render($page['content']); ?>
     </section>
-  
+    
+    
+    <h2>Product Status</h2>
+
+		<table class="gateway-table">
+			<tr>
+				<th>FIELDS</th>
+				<th colspan="2">VALUES</th>
+			</tr>
+   <?php  if(user_is_logged_in()){?>
+   <?php $result=db_query(
+   		"select 
+   		o.mid,
+   		sum(o.net_profit) SUM ,
+   		i.qty,
+   		p.total_price,
+   		name
+   		from st_order 
+   		as o left join st_inventery as i 
+   		on o.mid=i.mid left join st_price 
+   		as p on i.mid=p.mid left join st_material 
+   		as m on p.mid=m.mid")->fetchAll();?>
+   <?php
+   foreach ( $result as $value ) {?>
+ 
+   <tr>
+   <td><?php
+				echo "TOTAL PROFIT";
+				
+				?></td>
+   <td colspan="2"><?php echo $value->SUM;?></td>
+   </tr>
+   
+   
+   
+   
+   <?php }?>
+   
+   
+   
+   <?php }?> 
+    
+    
+    
+    
+    
     <?php if (!empty($page['sidebar_second'])): ?>
 
       <aside class="col-sm-3" role="complementary">
