@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * @file
  * Default theme implementation to display a single Drupal page.
@@ -201,51 +200,78 @@ table.gateway-table td {
       <?php print render($page['content']); ?>
     </section>
     
+       <?php  if(user_is_logged_in()){?>
     
     <h2>Product Status</h2>
 
-		<table class="gateway-table">
+		<table >
 			<tr>
-				<th>FIELDS</th>
-				<th colspan="2">VALUES</th>
+			<th>ProductName</th>
+			<th>Qty Remaing</th>
+			<th>Total Remaning amount product INR</th>
+			<th>Total Selling Price INR</th>
+			<th colspan="2">Net Profit INR</th>
 			</tr>
+			   <?php }?>
+			
    <?php  if(user_is_logged_in()){?>
    <?php $result=db_query(
    		"select 
    		o.mid,
-   		sum(o.net_profit) SUM ,
+   		sum(o.net_profit) SUM ,sum(o.total_price) as total_sell_price ,
    		i.qty,
    		p.total_price,
-   		name
+   		m.name
    		from st_order 
    		as o left join st_inventery as i 
    		on o.mid=i.mid left join st_price 
    		as p on i.mid=p.mid left join st_material 
-   		as m on p.mid=m.mid")->fetchAll();?>
+   		as m on p.mid=m.mid group by o.mid")->fetchAll();?>
    <?php
    foreach ( $result as $value ) {?>
  
-   <tr>
-   <td><?php
-				echo "TOTAL PROFIT";
-				
-				?></td>
+   <tr><td><?php echo $value->name;?></td>
+   <td><?php echo $value->qty; ?></td>
+   <td><?php echo $value->total_price;?></td>
+   <td ><?php echo $value->total_sell_price; ?></td>
    <td colspan="2"><?php echo $value->SUM;?></td>
    </tr>
+    <?php }?>
    
-   
-   
-   
-   <?php }?>
-   
-   
+   </table>
    
    <?php }?> 
-    
-    
-    
-    
-    
+      <?php  if(user_is_logged_in()){?>
+   
+    <h2>Borrower</h2>
+
+		<table >
+			<tr>
+			<th>Order ID</th>
+			<!-- <th>User ID</th> -->
+			<th>User name</th>
+			<th>Pay</th>
+			<th>payPending</th>
+			<th>Phone number</th>
+			
+			</tr>
+    <?php $result=$result = db_query ( "SELECT * from st_borrower" )->fetchAll ();
+   
+    foreach ($result as $res){
+    	$user_id=$res->user_id;
+    	$res1=get_data_by_pks('st_customer',$user_id,'cus_id');
+    	
+    	
+    	?>
+    		 <tr><td><?php echo $res->oid;?></td>
+    		   <td><?php echo $res1->f_name.''.$res1->l_name;?></td>
+    		    <td><?php echo $res->pay;?></td>
+   			 <td><?php echo $res->payment_remaining;?></td>
+   			   <td><?php echo $res1->phone;?></td>
+   			 
+       </tr>
+    <?php }?>
+    <?php }?>
     <?php if (!empty($page['sidebar_second'])): ?>
 
       <aside class="col-sm-3" role="complementary">

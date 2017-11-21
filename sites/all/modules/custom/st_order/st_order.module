@@ -157,7 +157,7 @@ function st_order_add($form, &$form_state, $id = NULL) {
 	
 	$form ['pay_status'] = array (
 			'#type' => 'select',
-			'#title' => 'pay status',
+			'#title' => 'Pay status',
 			/* '#size' => '255', */
 			'#options' => array (
 					'Select',
@@ -167,8 +167,42 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			'#attributes' => array (
 					'placeholder' => '' 
 			),
+			'#ajax' => array (
+					'callback' => 'ajax_total_pay_status_callback',
+					'wrapper' => array (
+							
+							'reg_pay_status_state',
+							'reg_payment_remaining_state'
+					),
+					'effect' => 'fade'
+			),
 			
 			'#default_value' => isset ( $data->pay_status ) ? $data->pay_status : "" 
+	);
+	$form ['pay'] = array (
+			'#type' => 'hidden',
+			'#title' => 'pay ',
+			 '#size' => '255', 
+			
+			'#attributes' => array (
+					'placeholder' => ''
+			),
+			'#prefix' => '<div id="reg_pay_status_state">',
+			'#suffix' => '</div>',
+				
+			'#default_value' => ''
+	);
+	$form ['payment_remaining'] = array (
+			'#type' => 'hidden',
+			'#title' => 'pay Reamaing',
+			'#size' => '255',
+			
+			'#attributes' => array (
+					'placeholder' => ''
+			),
+			'#prefix' => '<div id="reg_payment_remaining_state">',
+			'#suffix' => '</div>',
+			'#default_value' => ''
 	);
 	$form ['customer_start'] = array (
 			'#markup' => '<h4><u>Customer Information:</u></h4>' 
@@ -273,6 +307,89 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			) 
 	);
 	return $form;
+}
+
+function ajax_total_pay_status_callback($form, $form_state){
+	$commands = array ();
+	
+	if($form_state ['values'] ['pay_status']==2){
+	$commands [] = ajax_command_replace ( "#reg_pay_status_state", render ( $form ['pay'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Pays',
+			'#name' => 'pay',
+			'#id' => 'edit-pay-totall',
+				
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => ''
+			),
+				
+			'#prefix' => '<div id="reg_pay_status_state">',
+			'#suffix' => '</div>',
+			//'#value' => $qty->pay
+	) ) );
+	$commands [] = ajax_command_replace ( "#reg_payment_remaining_state", render ( $form ['payment_remaining'] = array (
+			'#type' => 'textfield',
+			'#title' => 'Payment Remaining',
+			'#name' => 'payment_remaining',
+			'#id' => 'edit-payment_remaining-totall',
+	
+			'#size' => '255',
+			'#attributes' => array (
+					'placeholder' => ''
+			),
+	
+			'#prefix' => '<div id="reg_payment_remaining_state">',
+			'#suffix' => '</div>',
+			//'#value' => $qty->pay
+	) ) );
+	
+	}
+	else{
+
+		$commands [] = ajax_command_replace ( "#reg_pay_status_state", render ( $form ['pay'] = array (
+				'#type' => 'hidden',
+				'#title' => 'Payy',
+				'#name' => 'pay',
+				'#id' => 'edit-pay-totall',
+		
+				'#size' => '255',
+				'#attributes' => array (
+						'placeholder' => ''
+				),
+		
+				'#prefix' => '<div id="reg_pay_status_state">',
+				'#suffix' => '</div>',
+				//'#value' => $qty->pay
+		) ) );
+		
+		$commands [] = ajax_command_replace ( "#reg_payment_remaining_state", render ( $form ['payment_remaining'] = array (
+				'#type' => 'hidden',
+				'#title' => 'payment_remaining',
+				'#name' => 'payment_remaining',
+				'#id' => 'edit-payment_remaining-totall',
+		
+				'#size' => '255',
+				'#attributes' => array (
+						'placeholder' => ''
+				),
+		
+				'#prefix' => '<div id="reg_payment_remaining_state">',
+				'#suffix' => '</div>',
+				//'#value' => $qty->pay
+		) ) );
+		
+	
+		
+	}
+	
+	
+	return array (
+			'#type' => 'ajax',
+			'#commands' => $commands
+	);
+	
+	
 }
 function ajax_total_selling_price_callback($form, $form_state) {
 	
@@ -417,7 +534,8 @@ function st_order_add_submit($form, &$form_state) {
 			}
 		}
 		
-
+		
+		
 	
 		 $query = db_insert ( 'st_order' )->fields ( array (
 				'mid' => $mid,
@@ -431,7 +549,26 @@ function st_order_add_submit($form, &$form_state) {
 				'created' => time (),
 				'updated' => time () 
 		) )->execute ();
+		 
 		
+	 	
+       try{
+		$query_a = db_insert ( 'st_borrower' )->fields ( array (
+				
+				'oid' => $query,
+				'user_id' => $cus_id,
+				'pay' => $form_state ['values'] ['pay'],
+				'payment_remaining' => $form_state ['values'] ['payment_remaining'],
+				'created' => time (),
+		
+		) )->execute ();
+       }catch(Exception $e){
+       	echo $e->getMessage();
+       	exit;
+       }
+
+		
+		 
 		$remaing_inv_result = $inv_result->qty - $form_state ['values'] ['qty'];
 		$st_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
 		$unitprice = $st_price->unit_price;
@@ -478,7 +615,57 @@ function st_order_view($form, &$form_state) {
 	);
 	
 	global $user;
+	$default_status='';
+	
+	if (! empty ( $_GET ['status'] )) {
+		$default_status = $_GET ['status'];
+	}
+	
+	$form['#attributes']['autocomplete'] = 'off';
+	
+	$form ['search_form'] = array (
+			'#title' => t ( 'Search' ),
+			'#type' => 'fieldset',
+			'#collapsible' => TRUE,
+			'#collapsed' => TRUE,
+			/* '#attached' => array (
+			 'library' => array (
+			 		array (
+			 				'system',
+			 				'drupal.collapse'
+			 		)
+			 )
+			) */
+	);
+	$form ['search_form'] ['status'] = array (
+			'#type' => 'textfield',
+			'#title' => t ( 'Pending status 1-done,2-due' ),
+			'#prefix' => ' <div  class="col-sm-6 form-group">',
+			'#suffix' => '</div> ',
+			'#size' => 100,
+			'#attributes' => array (
+					'placeholder' => '',
+					'maxlength' => '100' ,
+					
+						
+			),
+			'#default_value' => $default_status
+	);
+	
+
+	$form ['search_form'] ['submit'] = array (
+			'#type' => 'submit',
+			'#prefix' => ' <div  class="col-sm-3 form-group">',
+	
+			'#value' => 'Submit'
+	);
+	
 	$query = db_select ( 'st_order', 'tn' )->extend ( 'PagerDefault' )->fields ( 'tn' )->orderBy ( 'tn.oid', 'desc' )->limit ( 10 );
+	if (! empty ( $default_status )) {
+	
+		$query->condition ( 'tn.pay_status', $default_status, '=' );
+	
+	}
 	$result = $query->execute ();
 	$rows_articles = array ();
 	foreach ( $result as $records ) {
@@ -490,7 +677,8 @@ function st_order_view($form, &$form_state) {
 				$records->base_price,
 				$records->total_price,
 				$records->cost_price,
-				$records->net_profit 
+				$records->net_profit,
+				$records->pay_status
 		);
 	}
 	$headers = array (
@@ -500,7 +688,8 @@ function st_order_view($form, &$form_state) {
 			'Base Selling Price / Unit',
 			'Total Price',
 			'Cost Price',
-			'Net Profit' 
+			'Net Profit',
+			'Status'
 	);
 	$all_articles = theme ( 'table', array (
 			'header' => $headers,
@@ -518,6 +707,21 @@ function st_order_view($form, &$form_state) {
 			'#markup' => $all_articles 
 	);
 	return $form;
+}
+function st_order_view_submit($form, &$form_state){
+
+	$status = $form_state ['values'] ['status'];
+	
+	
+	if (! empty ( $status )) {
+		$param ["status"] = $status;
+	}
+
+	
+	drupal_goto ( 'admins/st_order/view', array (
+			'query' => $param
+	) );
+	
 }
 function st_order_detail($form, &$form_state, $id = NULL) {
 	global $user;

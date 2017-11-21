@@ -73,21 +73,42 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 	drupal_add_js ( 'misc/user_validation.js', 'file' );
 	
 	if (! empty ( $id )) {
-		$data = get_data_by_pks ( 'st_inventery', $id ,'int_id');
+    $data = get_data_by_pks ( 'st_inventery', $id ,'int_id');
+	
+	
+		$data_st_price = get_data_by_pks ( 'st_price', $data->mid ,'mid');
+		
 		
 		$form ['#submit'] [] = "st_inventery_edit_submit";
 		$form ['int_id'] = array (
 				'#type' => 'value',
-				'#value' => $int_id
+				'#value' => $id
 		);
 	}
+	if($id == null){
 	$form ['mid'] = array (
 			'#type' => 'select',
 			'#title' => 'Mid',
 			'#options' => ut_material_inventery (),
   
-  '#default_value' => isset ( $data->mid ) ? $data->mid : "" 
+  		'#default_value' => isset ( $data->mid ) ? $data->mid : "" 
 	);
+	}else{
+		$form ['mid'] = array (
+				'#type' => 'select',
+				'#title' => 'Mid',
+				'#options' => ut_material_inventery (),
+				'#disabled' => TRUE,
+				'#attributes' => array (
+						'placeholder' => '',
+						'maxlength' => '255',
+						
+				),
+		
+				'#default_value' => isset ( $data->mid ) ? $data->mid : ""
+		);
+		
+	}
 	$form ['qty'] = array (
 			'#type' => 'textfield',
 			'#title' => 'Qty',
@@ -98,7 +119,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 			),
 			'#default_value' => isset ( $data->qty ) ? $data->qty : "" 
 	);
-	
+	if($id == null){
 	$form ['unit'] = array (
 			'#type' => 'select',
 			'#title' => 'Unit',
@@ -109,6 +130,20 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 		 ), */
 		'#default_value' => isset ( $data->unit ) ? $data->unit : "" 
 	);
+	}else{
+		
+		$form ['unit'] = array (
+				'#type' => 'select',
+				'#title' => 'Unit',
+				'#disabled' => TRUE,
+				'#options' => ut_material_qty (),
+				/* '#attributes' =>
+				 array (
+				 		'placeholder' => '',
+				 ), */
+				'#default_value' => isset ( $data->unit ) ? $data->unit : ""
+		);
+	}
 	$form ['unit_prices'] = array (
 			'#type' => 'textfield',
 			'#title' => 'Unit Prices',
@@ -117,7 +152,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 					'placeholder' => '',
 					'maxlength' => '255' 
 			),
-			'#default_value' => isset ( $data->unit_price ) ? $data->unit_price : "" 
+			'#default_value' => isset ( $data_st_price->unit_price ) ? $data_st_price->unit_price : "" 
 	);
 	$form ['total_price'] = array (
 			'#type' => 'textfield',
@@ -127,7 +162,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 					'placeholder' => '',
 					'maxlength' => '255' 
 			),
-			'#default_value' => isset ( $data->total_price ) ? $data->total_price : "" 
+			'#default_value' => isset ( $data_st_price->total_price ) ? $data_st_price->total_price : "" 
 	);
 	$form ['base_price'] = array (
 			'#type' => 'textfield',
@@ -138,7 +173,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 					'placeholder' => '',
 					'maxlength' => '255' 
 			),
-			'#default_value' => isset ( $data->base_price ) ? $data->base_price : "" 
+			'#default_value' => isset ( $data_st_price->base_price ) ? $data_st_price->base_price : "" 
 	);
 	$form ['sale_price'] = array (
 			'#type' => 'textfield',
@@ -148,7 +183,7 @@ function st_inventery_add($form, &$form_state, $id = NULL) {
 					'placeholder' => '',
 					'maxlength' => '255' 
 			),
-			'#default_value' => isset ( $data->sale_price ) ? $data->sale_price : "" 
+			'#default_value' => isset ( $data_st_price->sale_price ) ? $data_st_price->sale_price : "" 
 	);
 	
 	$form ['submit'] = array (
@@ -185,18 +220,30 @@ function st_inventery_add_submit($form, &$form_state) {
 	}
 }
 function st_inventery_edit_submit($form, &$form_state) {
+	
 	global $user;
+	
 	$query = db_update ( 'st_inventery' )->fields ( array (
 			'mid' => $form_state ['values'] ['mid'],
 			'qty' => $form_state ['values'] ['qty'],
 			'unit' => $form_state ['values'] ['unit'],
-			'created' => strtotime ( $form_state ['values'] ['created'] ),
-			'updated' => strtotime ( $form_state ['values'] ['updated'] ),
+			'updated' => time() ,
 			'updatedby' => $form_state ['values'] ['updatedby'],
-			'createdby' => $form_state ['values'] ['createdby'],
-			'deleted' => $form_state ['values'] ['deleted'] 
-	) )->condition ( 'id', $form_state ['values'] ['id'], '=' )->execute ();
-	if ($form_state ['values'] ['id'] > 0) {
+	)
+			)->condition ( 'int_id', $form_state ['values'] ['int_id'], '=' )
+	->execute ();
+	$query = db_update ( 'st_price' )->fields ( array (
+			'unit_price' => $form_state ['values'] ['unit_prices'],
+			'total_price' => $form_state ['values'] ['total_price'],
+			'base_price' => $form_state ['values'] ['base_price'],
+			'sale_price' => $form_state ['values'] ['sale_price'],
+			'updated' => time(),
+			'updatedby' => $form_state ['values'] ['updatedby'],
+	)
+			)->condition ( 'mid', $form_state ['values'] ['mid'], '=' )
+			->execute ();
+	
+	if ($form_state ['values'] ['int_id'] > 0 ) {
 		drupal_set_message ( 'st_inventery update successfully' );
 		drupal_goto ( 'admins/st_inventery/view' );
 	}

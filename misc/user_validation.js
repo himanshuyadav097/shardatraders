@@ -5,6 +5,7 @@ var specialChars_withOut_at = "<>!#$%^&*()[]{}?:;|'\"\\,/~`=";
 
 
 
+
 function register_user_validation()
 {
 	
@@ -65,19 +66,26 @@ function register_user_validation()
 
 });*/
 
+
 jQuery(document).ready(function(){
-	
-	jQuery("#edit-unit-prices, #edit-qty, #edit-unit").blur(function(){  
+
+	jQuery("#st-inventery-add #edit-unit-prices, #st-inventery-add #edit-qty, #st-inventery-add #edit-unit").blur(function(){  
+		
+
 		var material_value = jQuery("#edit-qty").val();
 		var material_price = jQuery("#edit-unit-prices").val();
 		var material_total = '';
 		var material_unit = jQuery("#edit-unit").val();
-		
+	
 		if(material_value != '' && material_price != '' && material_unit != '0')
 			{
-				material_total = material_value * material_price;
+			
+			
+				material_total = parseInt(material_value) * parseInt(material_price);
 			}
+		
 		jQuery("#edit-total-price").val(material_total);
+	
 		if(material_unit == 0)
 		{
 			jQuery("#edit-unit").css("border", "1px solid red");
@@ -89,6 +97,8 @@ jQuery(document).ready(function(){
 		}
     });
 	
+	
+	
 	jQuery(".mobileval").keyup(function() {
 
 		if (this.value.match(/[^0-9-+]/g)) {
@@ -98,7 +108,7 @@ jQuery(document).ready(function(){
 		
 		
 	});
-	jQuery("#edit-base-price, #edit-qty").blur(function(){  
+	jQuery("#st-order-add #edit-base-price, #st-order-add #edit-qty").blur(function(){  
 		var material_value = jQuery("#edit-qty").val();
 		var material_price = jQuery("#edit-qty-baseprice").val();
 		var material_total = '';

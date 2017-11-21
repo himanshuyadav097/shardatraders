@@ -86,6 +86,8 @@ function st_borrower_add($form, &$form_state, $id = NULL) {
 				'#attributes' => array (
 					'placeholder' => '' 
 			),
+			'#disabled' => TRUE,
+				
 			'#ajax' => array (
 					'callback' => 'ajax_order_callback',
 					//'wrapper' => 'reg_child_state',
@@ -104,6 +106,8 @@ function st_borrower_add($form, &$form_state, $id = NULL) {
 			'#attributes' => array (
 					'placeholder' => ''
 			),
+			'#disabled' => TRUE,
+				
 			'#prefix' => '<div id="reg_order_state">',
 			'#suffix' => '</div>',
 				
@@ -211,6 +215,7 @@ function st_borrower_add_submit($form, &$form_state) {
 	}
 }
 function st_borrower_edit_submit($form, &$form_state) {
+	
 	global $user;
 	$query = db_update ( 'st_borrower' )->fields ( array (
 			'oid' => $form_state ['values'] ['oid'],
@@ -230,6 +235,7 @@ function st_borrower_edit_submit($form, &$form_state) {
 }
 function st_borrower_view($form, &$form_state) {
 	global $user;
+	
 	$query = db_select ( 'st_borrower', 'tn' )
 	->extend ( 'PagerDefault' )
 	->fields ( 'tn' )
@@ -241,6 +247,8 @@ function st_borrower_view($form, &$form_state) {
 	foreach ( $result as $records ) {
 		$created = util_date_format_short ( $records->created );
 		$updated = util_date_format_short ( $records->updated );
+		$user_id=$records->user_id;
+		$res1=get_data_by_pks('st_customer',$user_id,'cus_id');
 		
 		
 		if ($records->deleted) {
@@ -252,8 +260,9 @@ function st_borrower_view($form, &$form_state) {
 		}
 		$rows_articles [] = array (
 				l ( $records->id, 'admins/st_borrower/edit/' . $records->id ),
-				$records->oid,
-				$records->user_id,
+			//	$records->oid,
+			//	$records->user_id,
+				$res1->f_name.' '.$res1->l_name,
 				$records->pay,
 				$records->payment_remaining,
 				$created,
@@ -263,10 +272,11 @@ function st_borrower_view($form, &$form_state) {
 	}
 	$headers = array (
 			'ID',
-			'Order ID',
-			'User_id',
+			//'Order ID',
+			//'User_id',
+			'Name',
 			'Pay',
-			'Payment Remaining',
+			'Pay Remaining',
 			'Created'
 			
 	);
