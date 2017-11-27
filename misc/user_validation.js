@@ -18,6 +18,24 @@ function register_user_validation()
 		jQuery("#edit-f-name").parent().removeClass('has-error');
 	}
 	
+	if(jQuery( "#edit-qty" ).val() == "")
+	{
+		alert("qty is required");
+		jQuery("#edit-qty").parent().addClass('has-error');
+		return false;
+	}else{
+		jQuery("#edit-qty").parent().removeClass('has-error');
+	}
+	
+	if(jQuery( "#edit-pay-status" ).val() == "" || jQuery("#edit-pay-status" ).val() == '0')
+	{
+		alert("PAY STATUS is required");
+		jQuery("#edit-pay-status").parent().addClass('has-error');
+		return false;
+	}else{
+		jQuery("#edit-pay-status").parent().removeClass('has-error');
+	}
+	
 	if(jQuery( "#edit-l-name" ).val() == "")
 	{
 		alert("Last name is required");
@@ -97,8 +115,11 @@ jQuery(document).ready(function(){
 		}
     });
 	
-	
-	
+	/**
+	 * 
+	 * borrower pay and pay remiang validation
+	 * 
+	 */
 	jQuery(".mobileval").keyup(function() {
 
 		if (this.value.match(/[^0-9-+]/g)) {
@@ -108,6 +129,9 @@ jQuery(document).ready(function(){
 		
 		
 	});
+	
+
+	
 	jQuery("#st-order-add #edit-base-price, #st-order-add #edit-qty").blur(function(){  
 		var material_value = jQuery("#edit-qty").val();
 		var material_price = jQuery("#edit-qty-baseprice").val();
@@ -199,4 +223,31 @@ function ValidatePhone(ids) {
     }
     }
 
- 
+ /**
+  * Pay and pay remaing validation 
+  * 
+  * 
+  */
+
+function paycal_rem_pay(){
+	
+	
+	var material_total_price= jQuery("#edit-total-price").val();
+	var material_pay_total = jQuery("#edit-pay-totall").val();
+	var material_remaing_pay = '';
+
+
+
+
+	if(material_total_price != '' && material_pay_total != '' )
+		{
+		material_remaing_pay = parseInt(material_total_price) - parseInt(material_pay_total);
+		
+		
+
+			
+	}
+	jQuery("#edit-payment_remaining-totall").val(material_remaing_pay);
+	jQuery( "#edit-payment_remaining-totall" ).prop( "readonly", true );
+
+}

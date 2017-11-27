@@ -69,6 +69,7 @@ function st_borrower_menu() {
 	return $items;
 }
 function st_borrower_add($form, &$form_state, $id = NULL) {
+	drupal_add_js ( 'misc/user_validation.js', 'file' );
 	
 	if (! empty ( $id )) {
 		$data = get_data_by_pks ( 'st_borrower', $id,'id' );
@@ -134,6 +135,8 @@ function st_borrower_add($form, &$form_state, $id = NULL) {
 			'#type' => 'textfield',
 			'#title' => 'Payment_remaining',
 			'#size' => '255',
+			'#disabled' => TRUE,
+				
 			'#attributes' => array (
 					'placeholder' => '',
 					'maxlength' => '255' 
@@ -217,11 +220,14 @@ function st_borrower_add_submit($form, &$form_state) {
 function st_borrower_edit_submit($form, &$form_state) {
 	
 	global $user;
+	echo $pay=$form_state ['values'] ['pay'];
+	echo $payment_remaining=$form_state ['values'] ['payment_remaining'];
+	
 	$query = db_update ( 'st_borrower' )->fields ( array (
 			'oid' => $form_state ['values'] ['oid'],
 			'user_id' => $form_state ['values'] ['user_id'],
-			'pay' => $form_state ['values'] ['pay'],
-			'payment_remaining' => $form_state ['values'] ['payment_remaining'],
+			'pay' => $pay,
+			'payment_remaining' => $payment_remaining,
 			'created' => time(),
 			'updated' => time(),
 			/* 'updatedby' => $form_state ['values'] ['updatedby'],
@@ -229,18 +235,77 @@ function st_borrower_edit_submit($form, &$form_state) {
 			'deleted' => $form_state ['values'] ['deleted']  */
 	) )->condition ( 'id', $form_state ['values'] ['id'], '=' )->execute ();
 	if ($form_state ['values'] ['id'] > 0) {
+		if($pay==$payment_remaining){
+		
+			$result = db_query("UPDATE {st_order} SET pay_status = 1 WHERE created >= %d");
+				
+		
+		}
+		
 		drupal_set_message ( 'st_borrower update successfully' );
 		drupal_goto ( 'admins/st_borrower/view' );
 	}
+
+	
 }
 function st_borrower_view($form, &$form_state) {
 	global $user;
+	$default_user_id='';
+	if (! empty ( $_GET ['user_id'] )) {
+		$default_user_id = $_GET ['user_id'];
+	}
 	
+	$form['#attributes']['autocomplete'] = 'off';
+	
+	$form ['search_form'] = array (
+			'#title' => t ( 'Search' ),
+			'#type' => 'fieldset',
+			'#collapsible' => TRUE,
+			'#collapsed' => TRUE,
+			/* '#attached' => array (
+			 'library' => array (
+			 		array (
+			 				'system',
+			 				'drupal.collapse'
+			 		)
+			 )
+			) */
+	);
+	$form ['search_form'] ['user_id'] = array (
+			'#type' => 'select',
+			'#title' => t ( 'User Id' ),
+			'#options' => get_all_list ( 'st_customer', 'cus_id,f_name,l_name' ),
+				
+			'#prefix' => ' <div  class="col-sm-6 form-group">',
+			'#suffix' => '</div> ',
+			//'#size' => 100,
+			'#attributes' => array (
+					'placeholder' => '',
+					//'maxlength' => '100' ,
+						
+	
+			),
+			'#default_value' => $default_user_id
+	);
+	
+	
+	$form ['search_form'] ['submit'] = array (
+			'#type' => 'submit',
+			'#prefix' => ' <div  class="col-sm-3 form-group">',
+	
+			'#value' => 'Submit'
+	);
 	$query = db_select ( 'st_borrower', 'tn' )
 	->extend ( 'PagerDefault' )
 	->fields ( 'tn' )
 	->orderBy ( 'tn.id', 'desc' )
 	->limit ( 20 );
+
+	if (! empty ( $default_user_id )) {
+	
+		$query->condition ( 'tn.user_id', intval($default_user_id), '=' );
+	
+	}
 	$result = $query->execute ();
 	$rows_articles = array ();
 	
@@ -259,10 +324,12 @@ function st_borrower_view($form, &$form_state) {
 			) );
 		}
 		$rows_articles [] = array (
-				l ( $records->id, 'admins/st_borrower/edit/' . $records->id ),
+				l ($records->id,'admins/st_borrower/edit/' . $records->id ),
+				
 			//	$records->oid,
-			//	$records->user_id,
-				$res1->f_name.' '.$res1->l_name,
+				$records->user_id,
+				$res1->f_name,
+				$res1->l_name,
 				$records->pay,
 				$records->payment_remaining,
 				$created,
@@ -273,8 +340,9 @@ function st_borrower_view($form, &$form_state) {
 	$headers = array (
 			'ID',
 			//'Order ID',
-			//'User_id',
-			'Name',
+			'User ID',
+			'First Name',
+			'Last Name',
 			'Pay',
 			'Pay Remaining',
 			'Created'
@@ -296,6 +364,23 @@ function st_borrower_view($form, &$form_state) {
 			'#markup' => $all_articles 
 	);
 	return $form;
+}
+
+function st_borrower_view_submit($form, &$form_state) {
+	
+	$user_id = $form_state ['values'] ['user_id'];
+	
+	
+	if (! empty ( $user_id )) {
+		$param ["user_id"] = $user_id;
+	}
+	
+	
+	drupal_goto ( 'admins/st_borrower/view', array (
+			'query' => $param
+	) );
+	
+	
 }
 function st_borrower_detail($form, &$form_state, $id = NULL) {
 	global $user;

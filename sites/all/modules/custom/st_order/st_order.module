@@ -159,11 +159,12 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			'#type' => 'select',
 			'#title' => 'Pay status',
 			/* '#size' => '255', */
-			'#options' => array (
+		/* 	'#options' => array (
 					'Select',
 					'Done',
 					'Pending' 
-			),
+			), */
+			'#options'=>product_status(),
 			'#attributes' => array (
 					'placeholder' => '' 
 			),
@@ -216,7 +217,7 @@ function st_order_add($form, &$form_state, $id = NULL) {
 			'#attributes' => array (
 					'placeholder' => '' 
 			),
-			'#default_value' => isset ( $data->cid ) ? $data->cid : "",
+			'#default_value' => isset ( $data->cus_id ) ? $data->cus_id : "",
 			'#ajax' => array (
 					'callback' => 'ajax_customer_list_callback',
 					'wrapper' => array (
@@ -320,10 +321,7 @@ function ajax_total_pay_status_callback($form, $form_state){
 			'#id' => 'edit-pay-totall',
 				
 			'#size' => '255',
-			'#attributes' => array (
-					'placeholder' => ''
-			),
-				
+			'#attributes' =>array("onChange" => "paycal_rem_pay()"),
 			'#prefix' => '<div id="reg_pay_status_state">',
 			'#suffix' => '</div>',
 			//'#value' => $qty->pay
@@ -336,7 +334,8 @@ function ajax_total_pay_status_callback($form, $form_state){
 	
 			'#size' => '255',
 			'#attributes' => array (
-					'placeholder' => ''
+					'placeholder' => '',
+					'readonly' => 'readonly'
 			),
 	
 			'#prefix' => '<div id="reg_payment_remaining_state">',
@@ -352,7 +351,8 @@ function ajax_total_pay_status_callback($form, $form_state){
 				'#title' => 'Payy',
 				'#name' => 'pay',
 				'#id' => 'edit-pay-totall',
-		
+				
+				
 				'#size' => '255',
 				'#attributes' => array (
 						'placeholder' => ''
@@ -368,7 +368,7 @@ function ajax_total_pay_status_callback($form, $form_state){
 				'#title' => 'payment_remaining',
 				'#name' => 'payment_remaining',
 				'#id' => 'edit-payment_remaining-totall',
-		
+				
 				'#size' => '255',
 				'#attributes' => array (
 						'placeholder' => ''
@@ -536,7 +536,7 @@ function st_order_add_submit($form, &$form_state) {
 		
 		
 		
-	
+
 		 $query = db_insert ( 'st_order' )->fields ( array (
 				'mid' => $mid,
 				'qty' => $qty,
@@ -551,8 +551,9 @@ function st_order_add_submit($form, &$form_state) {
 		) )->execute ();
 		 
 		
-	 	
+	 	if($pay_status==2){
        try{
+       	
 		$query_a = db_insert ( 'st_borrower' )->fields ( array (
 				
 				'oid' => $query,
@@ -566,7 +567,7 @@ function st_order_add_submit($form, &$form_state) {
        	echo $e->getMessage();
        	exit;
        }
-
+	 	}
 		
 		 
 		$remaing_inv_result = $inv_result->qty - $form_state ['values'] ['qty'];
@@ -667,8 +668,15 @@ function st_order_view($form, &$form_state) {
 	
 	}
 	$result = $query->execute ();
-	$rows_articles = array ();
+	$rows_articles = array ();	
+	
+	
 	foreach ( $result as $records ) {
+		//print_r($records->pay_status);
+	
+		//exit;
+		
+	
 		$mat = get_ut_material_mat ( $records->mid );
 		$rows_articles [] = array (
 				$records->oid,
@@ -678,7 +686,8 @@ function st_order_view($form, &$form_state) {
 				$records->total_price,
 				$records->cost_price,
 				$records->net_profit,
-				$records->pay_status
+				$records->pay_status,
+				
 		);
 	}
 	$headers = array (
@@ -862,4 +871,18 @@ function ajax_customer_list_callback($form, $form_state) {
 			'#type' => 'ajax',
 			'#commands' => $commands 
 	);
+}
+
+function product_status(){
+	
+	$prd_status=array (
+			'0'=>'Select',
+			'1'=>'Done',
+			'2'=>'Pending'
+	);
+
+	return $prd_status;
+	
+	
+	//return prd_status;
 }
