@@ -243,30 +243,33 @@ table.gateway-table td {
    <?php }?> 
       <?php  if(user_is_logged_in()){?>
    
-    <h2>Borrower</h2>
+    <h2>Borrower orderwise</h2>
 
 		<table >
 			<tr>
 			<th>Order ID</th>
 			<!-- <th>User ID</th> -->
-			<th>User name</th>
+			<th>User Name</th>
 			<th>Pay</th>
-			<th>payPending</th>
+			<th>Pay Pending</th>
+			<th>Pay Status</th>
+			
 			<th>Phone number</th>
 			
 			</tr>
-    <?php $result=$result = db_query ( "SELECT * from st_borrower" )->fetchAll ();
+    <?php $result=$result = db_query ( "select * from st_order as o inner join st_borrower as b on o.oid=b.oid where pay_status=2" )->fetchAll ();
    
     foreach ($result as $res){
+  
     	$user_id=$res->user_id;
     	$res1=get_data_by_pks('st_customer',$user_id,'cus_id');
-    	
-    	
     	?>
     		 <tr><td><?php echo $res->oid;?></td>
     		   <td><?php echo $res1->f_name.''.$res1->l_name;?></td>
     		    <td><?php echo $res->pay;?></td>
    			 <td><?php echo $res->payment_remaining;?></td>
+   			   <td><?php echo product_status($res->pay_status);?></td>
+   	
    			   <td><?php echo $res1->phone;?></td>
    			 
        </tr>

@@ -1,232 +1,224 @@
 <?php
+define ( 'SUPPILER', 'Suppiler' );
+define ( 'SUPPILER_REF_NO_DORAK', '01' );
+define ( 'BDM', 'BDM' );
+define ( 'AGENT', 'Agent' );
+define ( 'AGENT_CHILD', 'AgentChild' );
+define ( 'ACCOUNT', 'Account' );
+define ( 'GSA', 'GSA' );
+define ( 'API_SUPPILER', 'ApiSuppiler' );
+define ( 'NONE', 'None' );
+define ( 'FINANCE', 'Finance' );
+define ( 'SUPERADMIN', 'Super Admin' );
 
-define('SUPPILER', 'Suppiler');
-define('SUPPILER_REF_NO_DORAK', '01');
-define('BDM', 'BDM');
-define('AGENT', 'Agent');
-define('AGENT_CHILD', 'AgentChild');
-define('ACCOUNT', 'Account');
-define('GSA', 'GSA');
-define('API_SUPPILER', 'ApiSuppiler');
-define('NONE', 'None');
-define('FINANCE', 'Finance');
-define('SUPERADMIN', 'Super Admin');
+define ( 'SUPPILER_KEY', 'S' );
+define ( 'BDM_KEY', 'B' );
+define ( 'AGENT_KEY', 'A' );
+define ( 'AGENTCHILD_KEY', 'AC' );
+define ( 'ACCOUNT_KEY', 'ACC' );
+define ( 'GSA_KEY', 'G' );
+define ( 'API_SUPPILER_KEY', 'AS' );
+define ( 'NONE_KEY', 'X' );
+define ( 'FINANCE_KEY', 'F' );
+define ( 'SUPERADMIN_KEY', 'SA' );
 
-define('SUPPILER_KEY', 'S');
-define('BDM_KEY', 'B');
-define('AGENT_KEY', 'A');
-define('AGENTCHILD_KEY', 'AC');
-define('ACCOUNT_KEY', 'ACC');
-define('GSA_KEY', 'G');
-define('API_SUPPILER_KEY', 'AS');
-define('NONE_KEY', 'X');
-define('FINANCE_KEY', 'F');
-define('SUPERADMIN_KEY', 'SA');
+define ( 'ROLE_SUPPILER', '5' );
+define ( 'ROLE_AGENT', '4' ); //
+define ( 'ROLE_AGENT_CHILD', '7' ); //
+define ( 'ROLE_ACCOUNT', '6' ); //
+define ( 'ROLE_GSA', '10' ); //
+define ( 'ROLE_BDM', '11' );
+define ( 'ROLE_FINANCE', '12' );
+define ( 'ROLE_API_SUPPILER', '9' ); //
+define ( 'ROLE_SUPPORT_AGENT', '13' ); //
+define ( 'RESTAURANT_IMAGE_CODE', 'RES' ); //
+define ( 'IMAGE_BASE_URL_HD', 'http://photos.hotelbeds.com/giata/bigger/' );
 
+define ( 'IMAGE_BASE_URL_SMALL', 'http://photos.hotelbeds.com/giata/small/' );
 
-define('ROLE_SUPPILER','5');
-define('ROLE_AGENT','4'); // 
-define('ROLE_AGENT_CHILD','7');  // 
-define('ROLE_ACCOUNT','6');  // 
-define('ROLE_GSA','10');  // 
-define('ROLE_BDM','11');
-define('ROLE_FINANCE','12');
-define('ROLE_API_SUPPILER','9'); // 
-define('ROLE_SUPPORT_AGENT','13'); //
-define('RESTAURANT_IMAGE_CODE','RES'); //
-define('IMAGE_BASE_URL_HD','http://photos.hotelbeds.com/giata/bigger/');
+define ( 'IMAGE_BASE_URL_MEDIUM', 'http://photos.hotelbeds.com/giata/medium/' );
 
-define('IMAGE_BASE_URL_SMALL','http://photos.hotelbeds.com/giata/small/');
+define ( 'IMAGE_BASE_URL', 'http://photos.hotelbeds.com/giata/' );
 
-define('IMAGE_BASE_URL_MEDIUM','http://photos.hotelbeds.com/giata/medium/');
+define ( 'ACTIVITY_API_URL', 'https://api.test.hotelbeds.com/activity-api/3.0/activities' );
+define ( 'ACTIVITY_API_KEY', 'ptq9qgten8u3c8kn5ebj6s97' );
+define ( 'ACTIVITY_API_SECRET', 'PhRZ34k34f' );
+define ( 'ACTIVITY_ITEM_PER_PAGE', 5 );
+define ( 'ACTIVITY_PAGE', 1 );
+define ( 'ACTIVITY_ITEM_ORDER', 'PRICE' );
 
-define('IMAGE_BASE_URL','http://photos.hotelbeds.com/giata/');
+define ( 'PAX_TYPE_ADULT', 'ADULT' );
+define ( 'PAX_TYPE_CHILD', 'CHILD' );
 
-define('ACTIVITY_API_URL','https://api.test.hotelbeds.com/activity-api/3.0/activities');
-define('ACTIVITY_API_KEY','ptq9qgten8u3c8kn5ebj6s97');
-define('ACTIVITY_API_SECRET','PhRZ34k34f');
-define('ACTIVITY_ITEM_PER_PAGE',5);
-define('ACTIVITY_PAGE',1);
-define('ACTIVITY_ITEM_ORDER','PRICE');
+define ( 'ACTIVITY_DETAIL_API_URL', 'https://api.test.hotelbeds.com/activity-api/3.0/activities/details/full' );
 
-define('PAX_TYPE_ADULT','ADULT');
-define('PAX_TYPE_CHILD','CHILD');
+define ( 'ORDER_TYPE', 1 ); // for online
+                        
+// define('MONGODB_CLIENT',"mongodb://192.168.1.60");
 
-define('ACTIVITY_DETAIL_API_URL','https://api.test.hotelbeds.com/activity-api/3.0/activities/details/full');
+define ( 'PAGE_LIMIT', 10 );
 
-define('ORDER_TYPE',1); // for online
+// define('DORAK_BASE_PRICE','base_price');
+define ( 'USER_COMMISSION_CURRENCY', 'user_currency' );
+define ( 'USER_COMMISSION_CURRENCY_NAME', 'user_currency_name' );
+define ( 'USER_DEFAULT_CURRENCY', 'USD' );
+define ( 'USER_DEFAULT_CURRENCY_ID', 75011 );
+define ( 'PRICE_ENGINE_STATUS', 'status' );
+define ( 'PRICE_ENGINE_MESSAGE', 'message' );
+define ( 'RATE_AGAINST_USD', 'rate' );
+define ( 'API_TRUE', 1 );
+define ( 'API_FALSE', 0 );
+define ( 'UPPER_COMMISSION_THRESHOLD', 400 );
+define ( 'LOWER_COMMISSION_THRESHOLD', 800 );
+define ( 'SYSTEM_LOW', 'SYSTEM_LOW' );
+define ( 'SYSTEM_MID', 'SYSTEM_MID' );
+define ( 'SYSTEM_HIGH', 'SYSTEM_HIGH' );
+define ( 'GSA_LOW', 'GSA_LOW' );
+define ( 'GSA_MID', 'GSA_MID' );
+define ( 'GSA_HIGH', 'GSA_HIGH' );
+define ( 'CUSTOMER_LOW', 'CUSTOMER_LOW' );
+define ( 'CUSTOMER_MID', 'CUSTOMER_MID' );
+define ( 'CUSTOMER_HIGH', 'CUSTOMER_HIGH' );
+define ( 'DEFAULT_COMMISSION', 2 );
+define ( 'USERID', 'uid' );
+define ( 'COMMISSION', 'COMMISSION' );
+define ( 'GLOBAL_BED_ID', 'gb_id' );
+define ( 'GSA_PRICE', 'GSA_PRICE' );
+define ( 'AGENT_PRICE', 'AGENT_PRICE' );
+define ( 'CUSTOMER_PRICE', 'CUSTOMER_PRICE' );
+define ( 'GSA_COMMISSION', 'GSA_COMMISSION' );
+define ( 'AGENT_COMMISSION', 'AGENT_COMMISSION' );
+define ( 'CUSTOMER_COMMISSION', 'CUSTOMER_COMMISSION' );
+define ( 'CURRENT_PRICE', 'CURRENT_PRICE' );
+define ( 'SEARCH_KEY', 'am_' );
 
-#define('MONGODB_CLIENT',"mongodb://192.168.1.60");
+/* Order States */
+define ( 'ORDER_STATUS_PENDING', 100 );
+define ( 'ORDER_STATUS_CANCELLED', - 200 );
+define ( 'ORDER_STATUS_BOOKED', 500 );
+define ( 'ORDER_STATUS_CANCEL_REQUESTED', - 100 );
+define ( 'ORDER_STATUS_MODIFIED', 1000 );
+define ( 'ORDER_STATUS_COMPLETED', 1500 );
+define ( 'ORDER_STATUS_MISSED', 1200 );
+define ( 'ORDER_STATUS_MODIFIED_REQUESTED', 2000 );
 
-define('PAGE_LIMIT',10);
+/* Order States Text */
+define ( 'ORDER_STATUS_PENDING_TEXT', 'In Process' );
+define ( 'ORDER_STATUS_CANCELLED_TEXT', 'Cancelled' );
+define ( 'ORDER_STATUS_REJECTED_TEXT', 'Rejected' );
+define ( 'ORDER_STATUS_BOOKED_TEXT', 'Confirmed' );
+define ( 'ORDER_STATUS_CANCEL_REQUESTED_TEXT', 'Cancel Requested' );
+define ( 'ORDER_STATUS_MODIFIED_TEXT', 'Modified' );
+define ( 'ORDER_STATUS_COMPLETED_TEXT', 'Completed' );
+define ( 'ORDER_STATUS_MISSED_TEXT', 'Missed' );
+define ( 'ORDER_STATUS_MODIFIED_REQUESTED_TEXT', 'Modification Requested' );
 
-//define('DORAK_BASE_PRICE','base_price');
-define('USER_COMMISSION_CURRENCY','user_currency');
-define('USER_COMMISSION_CURRENCY_NAME','user_currency_name');
-define('USER_DEFAULT_CURRENCY','USD');
-define('USER_DEFAULT_CURRENCY_ID',75011);
-define('PRICE_ENGINE_STATUS','status');
-define('PRICE_ENGINE_MESSAGE','message');
-define('RATE_AGAINST_USD','rate');
-define('API_TRUE',1);
-define('API_FALSE',0);
-define('UPPER_COMMISSION_THRESHOLD',400);
-define('LOWER_COMMISSION_THRESHOLD',800);
-define('SYSTEM_LOW','SYSTEM_LOW');
-define('SYSTEM_MID','SYSTEM_MID');
-define('SYSTEM_HIGH','SYSTEM_HIGH');
-define('GSA_LOW','GSA_LOW');
-define('GSA_MID','GSA_MID');
-define('GSA_HIGH','GSA_HIGH');
-define('CUSTOMER_LOW','CUSTOMER_LOW');
-define('CUSTOMER_MID','CUSTOMER_MID');
-define('CUSTOMER_HIGH','CUSTOMER_HIGH');
-define('DEFAULT_COMMISSION',2);
-define('USERID','uid');
-define('COMMISSION','COMMISSION');
-define('GLOBAL_BED_ID','gb_id');
-define('GSA_PRICE','GSA_PRICE');
-define('AGENT_PRICE','AGENT_PRICE');
-define('CUSTOMER_PRICE','CUSTOMER_PRICE');
-define('GSA_COMMISSION','GSA_COMMISSION');
-define('AGENT_COMMISSION','AGENT_COMMISSION');
-define('CUSTOMER_COMMISSION','CUSTOMER_COMMISSION');
-define('CURRENT_PRICE','CURRENT_PRICE');
-define('SEARCH_KEY','am_');
+/* Payments States */
+define ( 'PAYMENTS_STATUS_PENDING', 100 );
+define ( 'PAYMENTS_STATUS_REFUND', - 200 );
+define ( 'PAYMENTS_STATUS_PARTIAL_PAYMENT', 500 );
+define ( 'PAYMENTS_STATUS_SUCCESS', 1000 );
 
-/*Order States*/
-define('ORDER_STATUS_PENDING',100);
-define('ORDER_STATUS_CANCELLED',-200);
-define('ORDER_STATUS_BOOKED',500);
-define('ORDER_STATUS_CANCEL_REQUESTED',-100);
-define('ORDER_STATUS_MODIFIED',1000);
-define('ORDER_STATUS_COMPLETED',1500);
-define('ORDER_STATUS_MISSED',1200);
-define('ORDER_STATUS_MODIFIED_REQUESTED',2000);
+define ( 'PAYMENTS_STATUS_PENDING_TXT', 'Pending' );
+define ( 'PAYMENTS_STATUS_REFUND_TXT', 'Refund' );
+define ( 'PAYMENTS_STATUS_PARTIAL_PAYMENT_TXT', 'Partial Payment' );
+define ( 'PAYMENTS_STATUS_SUCCESS_TXT', 'Payment Success' );
 
-/*Order States Text*/
-define('ORDER_STATUS_PENDING_TEXT','In Process');
-define('ORDER_STATUS_CANCELLED_TEXT','Cancelled');
-define('ORDER_STATUS_REJECTED_TEXT','Rejected');
-define('ORDER_STATUS_BOOKED_TEXT','Confirmed');
-define('ORDER_STATUS_CANCEL_REQUESTED_TEXT','Cancel Requested');
-define('ORDER_STATUS_MODIFIED_TEXT','Modified');
-define('ORDER_STATUS_COMPLETED_TEXT','Completed');
-define('ORDER_STATUS_MISSED_TEXT','Missed');
-define('ORDER_STATUS_MODIFIED_REQUESTED_TEXT','Modification Requested');
+define ( 'PAYMENT_TYPE_ONLINE', 1 );
+define ( 'PAYMENT_TYPE_POINT', 2 );
+define ( 'PAYMENT_TYPE_NA', 0 );
+define ( 'PAYMENT_TYPE_OTHERCARD', 3 );
 
+define ( 'PAYMENT_TYPE_ONLINE_TEXT', 'Credit or Debit Card Payment' );
+define ( 'PAYMENT_TYPE_POINT_TEXT', 'Bank credit Payment' );
+define ( 'PAYMENT_TYPE_NA_TEXT', 'Payment Pending' );
+define ( 'PAYMENT_TYPE_OTHERCARD_TXT', 'Client Credit Card' );
 
-/*Payments States*/
-define('PAYMENTS_STATUS_PENDING',100);
-define('PAYMENTS_STATUS_REFUND',-200);
-define('PAYMENTS_STATUS_PARTIAL_PAYMENT',500);
-define('PAYMENTS_STATUS_SUCCESS',1000);
+define ( 'BOOKING_TYPE_HOTEL', 'H' );
+define ( 'BOOKING_TYPE_ACTIVITY', 'A' );
+define ( 'BOOKING_TYPE_PACKAGE', 'P' );
+define ( 'BOOKING_TYPE_TRANSFER', 'T' );
+define ( 'BOOKING_TYPE_MIXED', 'M' );
+define ( 'BOOKING_TYPE_VISA', 'V' );
 
+define ( 'THIRTY_DAYS', 30 * 86400 );
+define ( 'SEVEN_DAYS', 7 * 86400 );
 
-define('PAYMENTS_STATUS_PENDING_TXT','Pending');
-define('PAYMENTS_STATUS_REFUND_TXT','Refund');
-define('PAYMENTS_STATUS_PARTIAL_PAYMENT_TXT','Partial Payment');
-define('PAYMENTS_STATUS_SUCCESS_TXT','Payment Success');
+define ( 'IMAGE_TYPE_RESTAURANT', 'RES' );
+define ( 'IMAGE_TYPE_ROOM', 'HAB' );
+define ( 'IMAGE_TYPE_GENERAL', 'GEN' );
+define ( 'IMAGE_TYPE_SPORTS', 'DEP' ); // Sports and entertainment
+define ( 'IMAGE_TYPE_LOBBY', 'COM' ); // Lobby
+define ( 'IMAGE_TYPE_CONFERENCE', 'CON' );
+define ( 'IMAGE_TYPE_BAR', 'BAR' );
+define ( 'IMAGE_TYPE_POOL', 'PIS' );
+define ( 'IMAGE_TYPE_BEACH', 'PLA' );
+define ( 'IMAGE_TYPE_TERRACE', 'TER' );
 
-define('PAYMENT_TYPE_ONLINE',1);
-define('PAYMENT_TYPE_POINT',2);
-define('PAYMENT_TYPE_NA',0);
-define('PAYMENT_TYPE_OTHERCARD',3);
+define ( 'BOOKING_TYPE_HOTEL_NAME', 'Hotel' );
+define ( 'BOOKING_TYPE_ACTIVITY_NAME', 'Activity' );
+define ( 'BOOKING_TYPE_PACKAGE_NAME', 'Package' );
+define ( 'BOOKING_TYPE_TRANSFER_NAME', 'Transfer' );
+define ( 'BOOKING_TYPE_MIXED_NAME', 'Mixed' );
+define ( 'BOOKING_TYPE_VISA_NAME', 'Visa' );
 
-define('PAYMENT_TYPE_ONLINE_TEXT','Credit or Debit Card Payment');
-define('PAYMENT_TYPE_POINT_TEXT','Bank credit Payment');
-define('PAYMENT_TYPE_NA_TEXT','Payment Pending');
-define('PAYMENT_TYPE_OTHERCARD_TXT','Client Credit Card');
+define ( 'TRANSACTION_MODE_PG_ID', 1 );
+define ( 'TRANSACTION_MODE_PG_VALUE', 'Payment Gateway' );
+define ( 'TRANSACTION_MODE_CREDIT_ID', 2 );
+define ( 'TRANSACTION_MODE_CREDIT_VALUE', 'Credit Line' );
 
+define ( 'TXN_STATUS_SUCCESS', 1 );
+define ( 'HOURS_BUFFER_CANCELDATE', 12 );
+define ( 'HB_BASE_PRICE', 'Hotal bed base price' );
+define ( 'HB_TO_GB_MARKUP', 4 );
+define ( 'AUTO_COMPLETE_SHOW_LIMIT', 10 );
+define ( 'KILOMETER', ' km' );
+define ( 'METER', ' m' );
+define ( 'MEDIUM_INTERNET_SPEED', 64 );
+define ( 'HOTEL_TYPE', 'HOSTEL' );
+define ( 'SUPPLIER_NAME', 'http//www.global-beds.com' );
+define ( 'VAT_NO', '816 003 7959' );
+define ( 'REFERENCE', 'XXXX' );
+define ( 'MONGO_SERVER_ERROR', 'Server not connected. Please try again!' );
+define ( 'VERIFICATION_REQUEST_SENT', 'V' );
+define ( 'VERIFICATION_REQUEST_REJECTED', 'B' );
+define ( 'VERIFICATION_REQUEST_RESENT', 'R' );
+define ( 'INVERVAL1', 604800 );
+define ( 'INVERVAL2', 2592000 );
 
+define ( 'SUPERADMIN_ROLE_VALUE', '8' );
+define ( 'PAID_FACILITIES', '$' );
+define ( 'PAID_FACILITIES_DESCRIPTION', '* $ = Paid Facilities are paid at hotel.' );
+define ( 'PERCENTAGE_KEY', 'P' );
+define ( 'AMOUNT_KEY', 'A' );
+define ( 'PERCENTAGE', 'Perecentage' );
+define ( 'AMOUNT', 'Amount' );
+define ( 'GB_CANCEL_MARKUP', 'GB_CANCEL_MARKUP' );
+define ( 'GB_MARKUP', 'GB_MARKUP' );
+define ( 'MARKUP_KEY', 'M' );
+define ( 'DISCOUNT_KEY', 'D' );
+define ( 'MARKUP', 'Markup' );
+define ( 'DISCOUNT', 'Discount' );
+define ( 'DEFAULT_CANCELLATION_MARKUP', 5 );
 
-define('BOOKING_TYPE_HOTEL', 'H');
-define('BOOKING_TYPE_ACTIVITY', 'A');
-define('BOOKING_TYPE_PACKAGE', 'P');
-define('BOOKING_TYPE_TRANSFER', 'T');
-define('BOOKING_TYPE_MIXED', 'M');
-define('BOOKING_TYPE_VISA', 'V');
+define ( 'CANCELLATION_CHARGES', 'CANCELLATION_CHARGES' );
+define ( 'CANCEL_BASE_CHARGES', 'CANCELLATION_BASE_CHARGES' );
+define ( 'CUSTOMER_CANCEL_PRICE', 'CUSTOMER_CANCEL_PRICE' );
+define ( 'CANCEL_BFR_BUFFER_DATE', 'CANCEL_BFR_BUFFER_DATE' );
+define ( 'CANCEL_AFTR_BUFFER_DATE', 'CANCEL_AFTR_BUFFER_DATE' );
+define ( 'DEFAULT_BUFFER_TIME', 24 * 60 * 60 );
+define ( 'ONE_DAY_BUFFER_TIME', 24 * 60 * 60 );
+define ( 'GB_CANCEL_DATE_MARKUP', 'GB_CANCEL_DATE_MARKUP' );
+define ( 'STATUS_KEY', 'status' );
+define ( 'ONLY_ONE_BDM_FOUND', 1 );
+define ( 'MORE_THAN_ONE_BDM_FOUND', 2 );
+define ( 'NO_BDM_FOUND', 3 );
+// define('BDM_ID', bdm_id);
 
-define('THIRTY_DAYS', 30*86400);
-define('SEVEN_DAYS', 7*86400);
-
-define('IMAGE_TYPE_RESTAURANT','RES');
-define('IMAGE_TYPE_ROOM','HAB');
-define('IMAGE_TYPE_GENERAL','GEN');
-define('IMAGE_TYPE_SPORTS','DEP'); //Sports and entertainment
-define('IMAGE_TYPE_LOBBY','COM'); //Lobby
-define('IMAGE_TYPE_CONFERENCE','CON');
-define('IMAGE_TYPE_BAR','BAR');
-define('IMAGE_TYPE_POOL','PIS');
-define('IMAGE_TYPE_BEACH','PLA');
-define('IMAGE_TYPE_TERRACE','TER');
-
-define('BOOKING_TYPE_HOTEL_NAME', 'Hotel');
-define('BOOKING_TYPE_ACTIVITY_NAME', 'Activity');
-define('BOOKING_TYPE_PACKAGE_NAME', 'Package');
-define('BOOKING_TYPE_TRANSFER_NAME', 'Transfer');
-define('BOOKING_TYPE_MIXED_NAME', 'Mixed');
-define('BOOKING_TYPE_VISA_NAME', 'Visa');
-
-define('TRANSACTION_MODE_PG_ID',1);
-define('TRANSACTION_MODE_PG_VALUE','Payment Gateway');
-define('TRANSACTION_MODE_CREDIT_ID',2);
-define('TRANSACTION_MODE_CREDIT_VALUE','Credit Line');
-
-define('TXN_STATUS_SUCCESS',1); 
-define('HOURS_BUFFER_CANCELDATE',12);
-define('HB_BASE_PRICE','Hotal bed base price');
-define('HB_TO_GB_MARKUP',4);
-define('AUTO_COMPLETE_SHOW_LIMIT',10);
-define('KILOMETER',' km');
-define('METER',' m');
-define('MEDIUM_INTERNET_SPEED',64);
-define('HOTEL_TYPE','HOSTEL');
-define('SUPPLIER_NAME','http//www.global-beds.com');
-define('VAT_NO','816 003 7959');
-define('REFERENCE','XXXX');
-define('MONGO_SERVER_ERROR','Server not connected. Please try again!');
-define('VERIFICATION_REQUEST_SENT','V');
-define('VERIFICATION_REQUEST_REJECTED','B');
-define('VERIFICATION_REQUEST_RESENT','R');
-define('INVERVAL1',604800);
-define('INVERVAL2',2592000);
-
-
-
-define('SUPERADMIN_ROLE_VALUE','8');    
-define('PAID_FACILITIES','$');  
-define('PAID_FACILITIES_DESCRIPTION','* $ = Paid Facilities are paid at hotel.');        
-define('PERCENTAGE_KEY', 'P');
-define('AMOUNT_KEY', 'A');
-define('PERCENTAGE', 'Perecentage');
-define('AMOUNT', 'Amount');
-define('GB_CANCEL_MARKUP', 'GB_CANCEL_MARKUP');
-define('GB_MARKUP', 'GB_MARKUP');
-define('MARKUP_KEY', 'M');
-define('DISCOUNT_KEY', 'D');
-define('MARKUP', 'Markup');
-define('DISCOUNT', 'Discount');
-define('DEFAULT_CANCELLATION_MARKUP',5);
-
-define('CANCELLATION_CHARGES','CANCELLATION_CHARGES');
-define('CANCEL_BASE_CHARGES','CANCELLATION_BASE_CHARGES');
-define('CUSTOMER_CANCEL_PRICE','CUSTOMER_CANCEL_PRICE');
-define('CANCEL_BFR_BUFFER_DATE','CANCEL_BFR_BUFFER_DATE');
-define('CANCEL_AFTR_BUFFER_DATE','CANCEL_AFTR_BUFFER_DATE');
-define('DEFAULT_BUFFER_TIME', 24*60*60 );
-define('ONE_DAY_BUFFER_TIME', 24*60*60 );
-define('GB_CANCEL_DATE_MARKUP','GB_CANCEL_DATE_MARKUP');
-define('STATUS_KEY', 'status');
-define('ONLY_ONE_BDM_FOUND', 1);
-define('MORE_THAN_ONE_BDM_FOUND', 2);
-define('NO_BDM_FOUND', 3);
-//define('BDM_ID', bdm_id);
-
- // superadmin role id.
+// superadmin role id.
 /**
  * user role is mygate Super Admin
-*/
+ */
 function is_superadmin() {
 	global $user;
 	if (in_array ( 'superadmin', array_values ( $user->roles ) ))
@@ -235,7 +227,7 @@ function is_superadmin() {
 		return false;
 }
 /**
- * 
+ *
  * @return boolean
  */
 function is_administrator() {
@@ -316,7 +308,6 @@ function is_account() {
 	else
 		return false;
 }
-
 function is_bdm() {
 	global $user;
 	if (in_array ( 'bdm', array_values ( $user->roles ) ))
@@ -324,7 +315,6 @@ function is_bdm() {
 	else
 		return false;
 }
-
 function is_finance() {
 	global $user;
 	if (in_array ( 'finance', array_values ( $user->roles ) ))
@@ -332,7 +322,6 @@ function is_finance() {
 	else
 		return false;
 }
-
 function is_supportAgent() {
 	global $user;
 	if (in_array ( 'support agent', array_values ( $user->roles ) ))
@@ -341,201 +330,16 @@ function is_supportAgent() {
 		return false;
 }
 
-
-/**
- * Fetch Depedded Dropdown
- *
- * @param string $include_0
- * @param unknown $CND_GROUP
- * @param string $selecttype
- * @return multitype:string NULL
- */
-function get_cnd_child_group_array($include_0 = FALSE, $CND_GROUP, $selecttype = '') {
-	$loan_purpose_array = array ();
-	
-//	$options [0]='Select';
-	if (! empty ( $CND_GROUP )) {
-		$query = db_select ( 'gb_cnd', 'c' );
-		$query->fields ( 'c' );
-		$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_parent_id', $CND_GROUP, '=' )->orderBy ( 'cnd_name', "ASC" );
-		$results_db = $query->execute ();
-		 if ($include_0) {
-			$loan_purpose_array [0] = 'Select ' . $selecttype;
-		}
-		foreach ( $results_db as $res ) {
-				
-			$loan_purpose_array [$res->id] = $res->cnd_name;
-		}
-		return $loan_purpose_array;
-	} else {
-		return $loan_purpose_array;
-	}
-}
-
-
-
-/**
- * Get Nationality Dropdown For Visa
- * 
- */
-function get_visa_nationality_array() {
-	$loan_purpose_array = array ();
-
-	 $query = db_select('gb_visa_fee','gbv');
-	 $query->LeftJoin ('gb_cnd', 'gc', 'gc.id = gbv.aNationality' );
-	$query->fields('gbv',array('aNationality'))
-	->fields('gc',array('id','cnd_name'));
-	$query->condition('gc.cnd_group','COUNTRY','=')->condition('gbv.deleted','0','=')->orderBy ( 'gc.cnd_name', "ASC" );
-		$results_db = $query->execute ();
-		foreach ( $results_db as $res ) {
-
-			$loan_purpose_array [$res->id] = $res->cnd_name;
-		}     
-		return $loan_purpose_array;
-	
-}
-
-
-
-/**
- * Get Visa For Country Dropdown
- *
- */
-function get_visa_forCountry_array() {
-	$loan_purpose_array = array ();
-
-	$query = db_select('gb_visa_fee','gbv');
-	$query->LeftJoin ('gb_cnd', 'gc', 'gc.id = gbv.aDestination' );
-	$query->fields('gbv',array('aDestination'))
-	->fields('gc',array('id','cnd_name'));
-	$query->condition('gc.cnd_group','COUNTRY','=')->condition('gbv.deleted','0','=')->orderBy ( 'gc.cnd_name', "ASC" );
-	$results_db = $query->execute ();
-	foreach ( $results_db as $res ) {
-
-		$loan_purpose_array [$res->id] = $res->cnd_name;
-	}
-	return $loan_purpose_array;
-
-}
-/**
- * Cnd Data By Function
- *
- * @param
- *        	string
- * @param
- *        	unknown
- * @param
- *        	unknown
- * @param
- *        	unknown
- * @param
- *        	string
- * @return multitype:string NULL
- *         returning cnd_names based on the matching of parent id
- */
-function get_cnd_name_group_array_by_parent_id($is_parent_id, $parent_id, $order) {
-	$cnd_name_array = array ();
-	$query = db_select ( 'gb_cnd', 'c' );
-	$query->fields ( 'c' );
-	if ($is_parent_id) {
-		if ($order)
-			$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_parent_id', $parent_id, '=' )->orderBy ( 'priority', "ASC" );
-
-		else
-			$query->condition ( 'deleted', 'N', '=' )->condition ( 'cnd_group', $CND_GROUP, '=' )->orderBy ( 'cnd_name', "ASC" );
-	}
-
-	$results_db = $query->execute ();
-	/*
-	 * if($include_0){
-	* $cnd_name_array[0] = 'Select '.$select_statement;
-	* }
-	*/
-	foreach ( $results_db as $res ) {
-		$cnd_name_array [$res->id] = $res->cnd_name;
-	}
-	return $cnd_name_array;
-}
-/**
- * Create New User Uid
- *
- * @param unknown $name
- * @param unknown $mail
- * @param unknown $mobileno
- * @return string
- */
-function createNewUser($name, $mail, $pass,$status) {
-	global $user;
-	$account = user_load_by_mail ( $mail );
-	if (! $account) {
-
-		$userinfo = array (
-				'name' => $mail,
-				'mail' => $mail,
-				'pass' => $pass,
-				'init' => $name,
-				// 'data' => $name,
-				'created' => time (),
-				'status' => $status,
-				'access' => REQUEST_TIME
-		);
-		$account = user_save ( drupal_anonymous_user (), $userinfo );
-		if (! empty ( $account->uid ))
-			return $account->uid;
-		else {
-			if(!empty($user->uid))
-			{
-				drupal_set_message ( t ( MSG_CREATENEWUSER_NOT_EMPTY_UID_ERROR ), 'error' );
-				return '';
-			}
-			else
-			{
-				$_SESSION['message_home'] = MSG_CREATENEWUSER_SESSION;
-				drupal_goto();
-			}
-		}
-	} else
-		return '';
-}
-
-/**
- * Create New User Uid
- *
- * @param unknown $name
- * @param unknown $mail
- * @param unknown $mobileno
- * @return string
- */
-function createNewUser_app($name, $mail, $mobileno) {
-	$userinfo = array (
-			'name' => $mail,
-			'mail' => $mail,
-			'pass' => $mobileno,
-			'init' => $name,
-			// 'data' => $name,
-			'created' => time (),
-			'status' => 1,
-			'access' => REQUEST_TIME
-	);
-	$account = user_save ( drupal_anonymous_user (), $userinfo );
-	if (! empty ( $account->uid ))
-		return $account->uid;
-	else {
-		drupal_set_message ( t ( MSG_CREATENEWUSER_APP_ERROR ), 'error' );
-		return '';
-	}
-
-}
 /**
  * function to return active/inactive status
  *
- * @param unknown $type
+ * @param unknown $type        	
  * @return string
  */
 function get_status_type($request = NULL) {
 	$option = array (
 			'1' => 'Inactive',
-			'0' => 'Active'
+			'0' => 'Active' 
 	);
 	if ($request == '0')
 		return $option [$request];
@@ -544,17 +348,16 @@ function get_status_type($request = NULL) {
 }
 
 /**
- * @param string $request
+ *
+ * @param string $request        	
  * @return multitype:string
  */
 function delete_record($request = NULL) {
-
 	return array (
 			'0' => 'No',
-			'1' => 'Yes'
+			'1' => 'Yes' 
 	);
 }
-
 function util_date_format_short($date) {
 	if ($date == 0 || $date == NULL) {
 		return 0;
@@ -562,798 +365,499 @@ function util_date_format_short($date) {
 		return format_date ( $date, 'custom', ' j M Y' );
 	}
 }
-
-
-
-
-
-function gb_user_insert($userId,$fname,$lname,$type_company,$region,$country,$state,$city,$company_name,$email,$phone,$currency,$mastergid=API_FALSE,$gbType=NONE_KEY,$bdm_id=NULL){
-	try{
-		$ac=db_insert('gb_user')
-		->fields(array(
-				'uid'=>$userId,
-				'masterGid'=>$mastergid,
-				'currency'=>$currency,
-				'fContactFName'=>$fname,
-				'fContactLName'=>$lname,
-				'fContatmail'=>$email,
-				'fContactMobile'=>$phone,
-				'fContactCountry'=>$country,
-				'fContactState'=>$state,
-				'fContactCity'=>$city,
-				'gbType'=>$gbType,
-				'company_type'=>$type_company,
-				'company_name'=>$company_name,
-				'bdm_attach_id'=>$bdm_id,
-				'Region'=>$region,
-				'updated'=>time(),
-				'created'=>time(),
-				'updatedBy'=>1,
-		))->execute();
-	}
-	catch(Exception $e){
-		$ac=0;
-		drupal_set_message($e);
+function gb_user_insert($userId, $fname, $lname, $type_company, $region, $country, $state, $city, $company_name, $email, $phone, $currency, $mastergid = API_FALSE, $gbType = NONE_KEY, $bdm_id = NULL) {
+	try {
+		$ac = db_insert ( 'gb_user' )->fields ( array (
+				'uid' => $userId,
+				'masterGid' => $mastergid,
+				'currency' => $currency,
+				'fContactFName' => $fname,
+				'fContactLName' => $lname,
+				'fContatmail' => $email,
+				'fContactMobile' => $phone,
+				'fContactCountry' => $country,
+				'fContactState' => $state,
+				'fContactCity' => $city,
+				'gbType' => $gbType,
+				'company_type' => $type_company,
+				'company_name' => $company_name,
+				'bdm_attach_id' => $bdm_id,
+				'Region' => $region,
+				'updated' => time (),
+				'created' => time (),
+				'updatedBy' => 1 
+		) )->execute ();
+	} catch ( Exception $e ) {
+		$ac = 0;
+		drupal_set_message ( $e );
 	}
 	return $ac;
-	
 }
-
-
-
-
-
-
-
- 
-
-
-
-function get_time_long($unix_time){
-	if(empty($unix_time))
-		return '-';
-		else
-			return date('d M Y H:i:s',$unix_time);
-}
-
-function get_time_short($unix_time){
-	if(empty($unix_time))
-		return '-';
-		else
-			return date('d M Y',$unix_time);
-}
-
-function get_time_mid($unix_time){
-	if(empty($unix_time))
-		return '-';
-		else
-			return date('d M Y H:i',$unix_time);
-}
-
-function get_time_created($unix_time){
-	return get_time_mid($unix_time);
-}
-
-function get_time_long_format($unix_time){
-	if(empty($unix_time))
+function get_time_long($unix_time) {
+	if (empty ( $unix_time ))
 		return '-';
 	else
-		return date('d/m/y g:i a',$unix_time);
+		return date ( 'd M Y H:i:s', $unix_time );
 }
-
-
-
-
-
-
-function getBookingNoByOrderId($orderId)
-{
-	$query = db_select('gb_orders','go');
-	$query->fields('go',array('id','booking_no'));
-	$query->condition('go.id',$orderId,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->booking_no;
+function get_time_short($unix_time) {
+	if (empty ( $unix_time ))
+		return '-';
+	else
+		return date ( 'd M Y', $unix_time );
 }
-
+function get_time_mid($unix_time) {
+	if (empty ( $unix_time ))
+		return '-';
+	else
+		return date ( 'd M Y H:i', $unix_time );
+}
+function get_time_created($unix_time) {
+	return get_time_mid ( $unix_time );
+}
+function get_time_long_format($unix_time) {
+	if (empty ( $unix_time ))
+		return '-';
+	else
+		return date ( 'd/m/y g:i a', $unix_time );
+}
+function getBookingNoByOrderId($orderId) {
+	$query = db_select ( 'gb_orders', 'go' );
+	$query->fields ( 'go', array (
+			'id',
+			'booking_no' 
+	) );
+	$query->condition ( 'go.id', $orderId, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->booking_no;
+}
 
 /**
  * Function : getGlobalBedBookingNoByOrderId
  * Parameter: OrderId
- * Returns  : Booking No
+ * Returns : Booking No
  */
-
-function getGlobalBedBookingNoByOrderId($orderId)
-{
-	$query = db_select('gb_orders','go');
-	$query->fields('go',array('id','gb_booking_no'));
-	$query->condition('go.id',$orderId,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->gb_booking_no;
+function getGlobalBedBookingNoByOrderId($orderId) {
+	$query = db_select ( 'gb_orders', 'go' );
+	$query->fields ( 'go', array (
+			'id',
+			'gb_booking_no' 
+	) );
+	$query->condition ( 'go.id', $orderId, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->gb_booking_no;
 }
-
 
 /**
- * 
+ *
  * updates generated GlobalBed Booking No.
- * @param unknown $orderid
+ * 
+ * @param unknown $orderid        	
  */
-function update_gb_booking_no_in_order($orderid)
-{
+function update_gb_booking_no_in_order($orderid) {
 	global $user;
-	$gb_bookingno = getGlobalbedOrderNo($orderid);
-	try{
-		$count_updated = db_update('gb_orders') // Table name no longer needs {}
-		->fields(array(
+	$gb_bookingno = getGlobalbedOrderNo ( $orderid );
+	try {
+		$count_updated = db_update ( 'gb_orders' )-> // Table name no longer needs {}
+fields ( array (
 				'gb_booking_no' => $gb_bookingno,
-				'modified' => time(),
-				'updatedby' => $user->uid,
-		))
-		->condition('id', $orderid, '=')
-		->execute();
-		//$order_log_entry = insert_order_log($OrderId,0,$OrderStatus);
-	}catch (Exception $e) {
-		error_log( $e->getMessage() );
+				'modified' => time (),
+				'updatedby' => $user->uid 
+		) )->condition ( 'id', $orderid, '=' )->execute ();
+		// $order_log_entry = insert_order_log($OrderId,0,$OrderStatus);
+	} catch ( Exception $e ) {
+		error_log ( $e->getMessage () );
 	}
-	
 }
-
-
 
 /**
  * Function : canceldatewithbuffer
  * parameter :CancelDate
- * 
- * 
- **/
-function canceldatewithbuffer($canceldate)
-{
-	$cancelDatewithBuffer = date("Y-m-d H:i:s", strtotime($canceldate . "-".HOURS_BUFFER_CANCELDATE." hours"));
+ */
+function canceldatewithbuffer($canceldate) {
+	$cancelDatewithBuffer = date ( "Y-m-d H:i:s", strtotime ( $canceldate . "-" . HOURS_BUFFER_CANCELDATE . " hours" ) );
 	return $cancelDatewithBuffer;
 }
 
 /**
  * Function:Update globalBed AgentId On approve
  *
- * @param unknown $id
+ * @param unknown $id        	
  */
-
-function update_gb_agentIdbyId($id)
-{
-	$gb_id = get_user_gb_id_by_uid($id);
-	$global_bed_agentId= getGlobalbedAgentId($gb_id);
-    $query = db_update('gb_user')
-    ->fields(array(
-		'gb_agent_id'=>$global_bed_agentId))
-		->condition('id', $gb_id, '=')
-		->execute();
+function update_gb_agentIdbyId($id) {
+	$gb_id = get_user_gb_id_by_uid ( $id );
+	$global_bed_agentId = getGlobalbedAgentId ( $gb_id );
+	$query = db_update ( 'gb_user' )->fields ( array (
+			'gb_agent_id' => $global_bed_agentId 
+	) )->condition ( 'id', $gb_id, '=' )->execute ();
 }
-
-
-
-function get_countofHotelInOrdersItembyItemCode($itemCode)
-{
-//echo $itemCode;exit;
-	$query = db_select('gb_order_items','got');
-	$query->fields('got',array('id','item_code','gb_booking_no'));
-	$query->condition('got.item_code',$itemCode,'=');
-	$result = $query->execute()->fetchAll();
-	//echo'<pre>';print_R($result);
-	 $countItem = count($result);
-	//exit;
+function get_countofHotelInOrdersItembyItemCode($itemCode) {
+	// echo $itemCode;exit;
+	$query = db_select ( 'gb_order_items', 'got' );
+	$query->fields ( 'got', array (
+			'id',
+			'item_code',
+			'gb_booking_no' 
+	) );
+	$query->condition ( 'got.item_code', $itemCode, '=' );
+	$result = $query->execute ()->fetchAll ();
+	// echo'<pre>';print_R($result);
+	$countItem = count ( $result );
+	// exit;
 	
 	return $countItem;
-	
 }
-
-
-function get_bookingCountsofUserByUid($uid)
-{
-	//echo $itemCode;exit;
-	$query = db_select('gb_order_items','got');
-	$query->fields('got',array('id','item_code','gb_booking_no'));
-	$query->condition('got.uid',$uid,'=');
-	$result = $query->execute()->fetchAll();
-	$countItem = count($result);
-	//exit;
-
+function get_bookingCountsofUserByUid($uid) {
+	// echo $itemCode;exit;
+	$query = db_select ( 'gb_order_items', 'got' );
+	$query->fields ( 'got', array (
+			'id',
+			'item_code',
+			'gb_booking_no' 
+	) );
+	$query->condition ( 'got.uid', $uid, '=' );
+	$result = $query->execute ()->fetchAll ();
+	$countItem = count ( $result );
+	// exit;
+	
 	return $countItem;
-
 }
 
 /**
  * Function : check speed and Process
- * 
  */
-function checkspeedAndProcess()
-{
-	$response='';
-	 $speed = internet_speed_test();
-	$fspeed = intval($speed);
-	$MediumSpeed = intval(MEDIUM_INTERNET_SPEED);
+function checkspeedAndProcess() {
+	$response = '';
+	$speed = internet_speed_test ();
+	$fspeed = intval ( $speed );
+	$MediumSpeed = intval ( MEDIUM_INTERNET_SPEED );
 	
-    if($fspeed < $MediumSpeed){
-		//drupal_set_message(MSG_INTERNETSPEED_ISSUE_FRIENDLY_ERROR,'error');
+	if ($fspeed < $MediumSpeed) {
+		// drupal_set_message(MSG_INTERNETSPEED_ISSUE_FRIENDLY_ERROR,'error');
 		$response = 'Fail';
-	}else{
+	} else {
 		$response = 'Pass';
-	} 
+	}
 	return $response;
 }
 
 /**
+ *
+ * Function : Checks Internet speed
  * 
- * Function : Checks Internet speed 
  * @return number
  */
-
-
 function microtime_diff($a, $b) {
-	list($a_dec, $a_sec) = explode(" ", $a);
-	list($b_dec, $b_sec) = explode(" ", $b);
+	list ( $a_dec, $a_sec ) = explode ( " ", $a );
+	list ( $b_dec, $b_sec ) = explode ( " ", $b );
 	return $b_sec - $a_sec + $b_dec - $a_dec;
 }
-
 function test_speed($test_size) {
-	flush();
-	$start_time = microtime();
-	/*$comment = "<!--O-->";
-	$len = strlen($comment);
-	 for($i = 0; $i < $test_size; $i += $len) {
-		echo $comment;
-	} */
-	flush();
-	$duration = microtime_diff($start_time, microtime());
-	if($duration != 0) {
+	flush ();
+	$start_time = microtime ();
+	/*
+	 * $comment = "<!--O-->";
+	 * $len = strlen($comment);
+	 * for($i = 0; $i < $test_size; $i += $len) {
+	 * echo $comment;
+	 * }
+	 */
+	flush ();
+	$duration = microtime_diff ( $start_time, microtime () );
+	if ($duration != 0) {
 		return $test_size / $duration / 1024;
-	}
-	else {
-		return log(0);
-	}
-}
-function internet_speed_test(){
-$speed = test_speed(1024);
-if($speed > 50) { // a fast connection, send more byte for more accuracy
-	$speed = test_speed(10240);
-	if($speed > 500) { // a really fast connection, send even more byte for
-		$speed = test_speed(102400);
+	} else {
+		return log ( 0 );
 	}
 }
-//echo $speed;
-return $speed;
-
+function internet_speed_test() {
+	$speed = test_speed ( 1024 );
+	if ($speed > 50) { // a fast connection, send more byte for more accuracy
+		$speed = test_speed ( 10240 );
+		if ($speed > 500) { // a really fast connection, send even more byte for
+			$speed = test_speed ( 102400 );
+		}
+	}
+	// echo $speed;
+	return $speed;
 }
 
 /**
- * 
+ *
  * Function : get_priority_ticketby_priority_id
- * @param priority_id
+ * 
+ * @param
+ *        	priority_id
  */
-function get_priority_ticketby_priority_id($priority_id)
-{
-	$query = db_select('support_priority','sp');
-	$query->fields('sp',array('priority'));
-	$query->condition('sp.pid',$priority_id,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->priority;
+function get_priority_ticketby_priority_id($priority_id) {
+	$query = db_select ( 'support_priority', 'sp' );
+	$query->fields ( 'sp', array (
+			'priority' 
+	) );
+	$query->condition ( 'sp.pid', $priority_id, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->priority;
 }
 
 /**
  *
  * Function : get_state_ticketby_state_id
- * @param $state_id
+ * 
+ * @param
+ *        	$state_id
  */
-function get_state_ticketby_state_id($state_id)
-{
-	$query = db_select(' support_states','ss');
-	$query->fields('ss',array('state'));
-	$query->condition('ss.sid',$state_id,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->state;
-
+function get_state_ticketby_state_id($state_id) {
+	$query = db_select ( ' support_states', 'ss' );
+	$query->fields ( 'ss', array (
+			'state' 
+	) );
+	$query->condition ( 'ss.sid', $state_id, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->state;
 }
 
 /**
- * 
+ *
  * get_email_ids
- * @param unknown $uid
+ * 
+ * @param unknown $uid        	
  * @return email_address
  */
-function get_email_ids($uid){
-	$mail_id = db_query("Select name from users where uid=:uid",array(':uid'=>$uid))->fetchField();
+function get_email_ids($uid) {
+	$mail_id = db_query ( "Select name from users where uid=:uid", array (
+			':uid' => $uid 
+	) )->fetchField ();
 	return $mail_id;
 }
-
-function booking_confirmed_msgsubject($order_Id)
-{
-	$query = db_select('gb_orders','go');
-	$query->fields('go', array('order_type', 'booking_no','gb_booking_no'));
-	$query->condition('go.id',$order_Id,'=');
-	$result = $query->execute()->fetchAll();
-	foreach ($result as $result)
-	{
-		$bookingNo = $result->gb_booking_no;		
+function booking_confirmed_msgsubject($order_Id) {
+	$query = db_select ( 'gb_orders', 'go' );
+	$query->fields ( 'go', array (
+			'order_type',
+			'booking_no',
+			'gb_booking_no' 
+	) );
+	$query->condition ( 'go.id', $order_Id, '=' );
+	$result = $query->execute ()->fetchAll ();
+	foreach ( $result as $result ) {
+		$bookingNo = $result->gb_booking_no;
 	}
-    // $msgsub = "Booking No:$bookingNo Confirmed";
-	$key_array=get_all_key_array();
-	$key_array[BKEY_BOOKING_NUMBER] = $bookingNo;
-	$msgsub = get_message(MSG_SEND_MAIL_BOOKING_CONFIRMED_SUBJECT_MSG, $key_array);
+	// $msgsub = "Booking No:$bookingNo Confirmed";
+	$key_array = get_all_key_array ();
+	$key_array [BKEY_BOOKING_NUMBER] = $bookingNo;
+	$msgsub = get_message ( MSG_SEND_MAIL_BOOKING_CONFIRMED_SUBJECT_MSG, $key_array );
 	
 	return $msgsub;
 }
 
-function booking_confirmed_msgbody($order_Id)
-{
-	global $base_url;
-	require_once drupal_get_path('module', 'hotelbedapi').'/hotelbedapi.inc';
-		
-	$query = db_select('gb_orders','go');
-	$query->leftJoin('gb_order_items', 'got', 'got.order_id = go.id');
-	$query->fields('go', array('order_type', 'booking_no','uid','checkin_date','status','created','agentid','data','pass_data','gb_booking_no','orader_status','payment_status'));
-	$query->fields('got',array('itemname','destination','brief_item_detail','item_code','created','sdate','edate','user_currency','payment_mode'));
-	$query->condition('go.id',$order_Id,'=');
-	$result = $query->execute()->fetchAll();
-	
-	$adults = 0;
-	$childs = 0;
-	$room_type = '';
-	$rooms = 0;
-	foreach ($result as $result)
-	{
-//	$booking_status = $result->orader_status;
-	$lead_passenger = unserialize($result->pass_data);
-	if(!empty($lead_passenger))
-		$lead_passenger_name = $lead_passenger['lead_passenger_fname'].' '.$lead_passenger['lead_passenger_lname'];
-	    $lead_passenger_name_int = $lead_passenger['lead_passenger_fname'];
-		$bookingNo = $result->gb_booking_no;
-		if(!empty($result->item_code))
-			$hotel_detail = get_hotelinfo_frm_hotelcode(intval($result->item_code));
-			if(!empty($hotel_detail))
-			{
-				$hotel_name = $hotel_detail[$result->item_code]['title'];
-				$address = $hotel_detail[$result->item_code]['address'].','.$hotel_detail[$result->item_code]['city'];
-			}
-			$booking_date = date('d-m-Y',$result->got_created);
-			$checkin_date = date('d-m-Y',($result->sdate));
-			$checkout_date = date('d-m-Y',($result->edate));
-			$checkIn_date_format = date ( 'Y-m-d',  $result->sdate  );
-			$checkOut_date_format = date ( 'Y-m-d', $result->edate  );
-			$datediff =  (strtotime ( $checkOut_date_format ) - strtotime ( $checkIn_date_format ));
-			$days = floor ( $datediff / (60 * 60 * 24) );
-		
-			$res=unserialize($result->data);
-	 if($res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from']!='')
-		{
-			$cancleDate=$res->booking->hotel['rooms']['0']['rates'][0]['cancellationPolicies'][0]['from'];
-		}else{
-			$cancleDate = 'NA';
-		}
-		$cancCleDate = date('d/m/Y H:i:s', strtotime($cancleDate));
-				
-	}
-	$currency_code = $result->user_currency;
-	$currency = get_cnd_name_byID($currency_code);
-	foreach($res->booking->hotel as $key=>$value)
-	{
-		if($key == 'rooms')
-		{
-			foreach ($value as $ke=>$val)
-			{
-				if($ke == 'name')
-				{
-					if(empty($room_type))
-						$room_type = $val['name'];
-						else
-							$room_type = $room_type.','.$val['name'];
-				}
-				if($ke == 'paxes')
-				{
-					foreach ($val['paxes'] as $v)
-					{
-						if($v['roomId']==1){
-							if($v['type'] == 'AD')
-								$adults++;
-								if($v['type'] == 'CH')
-									$childs++;
-						}
-					}
-				}
-				if($ke == 'rates')
-				{
-					foreach ($val['rates'] as $v)
-					{
-						$board = $v['boardName'];
-						$paymenttype = $v['paymentType'];
-					}
-	
-	
-	
-					foreach ($val['rates'] as $X=>$Y)
-					{
-						if($X == 'cancellationPolicies')
-						{
-							foreach($Y['cancellationPolicies'] as $A)
-							{
-								$cancelamount_usd = $A['amount'];
-								$cancelamount = convert_price($cancelamount_usd,USER_DEFAULT_CURRENCY,$currency);
-									
-									
-							}
-						}
-					}
-	
-				}
-				$rooms++;
-			}
-		}
-	}
-			
-	$guests = $adults + $childs;
-	if($result->payment_mode == PAYMENT_TYPE_NA){
-	$payment_mode = PAYMENT_TYPE_NA_TEXT;
-	}
-	if($result->payment_mode == PAYMENT_TYPE_POINT){
-		$payment_mode = PAYMENT_TYPE_POINT_TEXT;
-	}
-	if($result->payment_mode == PAYMENT_TYPE_ONLINE){
-		$payment_mode = PAYMENT_TYPE_ONLINE_TEXT;
-	}
-
-	if($result->orader_status == ORDER_STATUS_PENDING){
-		$booking_status = ORDER_STATUS_PENDING_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_CANCELLED){
-		$booking_status = ORDER_STATUS_CANCELLED_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_CANCEL_REQUESTED){
-		$booking_status = ORDER_STATUS_CANCEL_REQUESTED_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_MODIFIED){
-		$booking_status = ORDER_STATUS_MODIFIED_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_COMPLETED){
-		$booking_status = PAYMENT_TYPE_POINT_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_MISSED){
-		$booking_status = ORDER_STATUS_MISSED_TEXT;
-	}
-	if($result->orader_status == ORDER_STATUS_BOOKED){
-		$booking_status = PAYMENT_TYPE_ONLINE_TEXT;
-	}
-	
-	$order_payment_status = get_booking_payment_status($result->payment_status);
-	
-	$order_booking_status = 'Confirmed';
-	    $key_array=get_all_key_array();
-	    $key_array[DKEY_BASE_URL]=$base_url;
-	    $key_array[DKEY_LEAD_PASSENGER_NAME]=$lead_passenger_name;
-	    $key_array[DKEY_BOOKING_NUMBER]=$bookingNo;
-	    $key_array[DKEY_HOTEL_NAME]=$hotel_name;
-	    $key_array[DKEY_HOTEL_ADDRESS]=$address;
-	    $key_array[DKEY_LEAD_PASSENGER_FIRST_NAME]=$lead_passenger_name_int;
-	    $key_array[DKEY_BOOKING_DATE]=$booking_date;
-	    $key_array[DKEY_CHECKIN_DATE]=$checkin_date;
-	    $key_array[DKEY_CHECKOUT_DATE]=$checkout_date;
-	    $key_array[DKEY_STAY]=$days;
-	    $key_array[DKEY_GUEST]=$guests;
-	    $key_array[DKEY_ROOM]=$rooms;
-	    $key_array[DKEY_ROOM_TYPE]=$room_type;
-	    $key_array[DKEY_BOARD_TYPE]=$board;
-	    $key_array[DKEY_PAYMENT_MODE]=$payment_mode;
-	    $key_array[DKEY_CANCLE_DATE]=$cancCleDate;
-	    $key_array[DKEY_CANCLE_AMOUNT]=$cancelamount;
-	    $key_array[DKEY_CURRENCY]=$currency;
-	    $key_array[DKEY_ORDER_STATUS]=$booking_status;
-	    $key_array[BKEY_BOOKING_MAIL_ID] = GB_GLOBAL_LINK;
-	    
-	    $cancel = get_hotel_cancellation_charges($order_Id);
-//	    $msgbody = get_message(MSG_SEND_MAIL_BOOKING_CONFIRMED_BODY_MSG, $key_array);
-		$msgbody .='<html>
-<head></head>
-<body style="margin:0;">
-<table style="background-color:#f5f5f5;padding:10px;margin:0 auto;">
-  <tr>
-    <td style="max-width:100%; display: block; clear: both;"><table style="width: 100%;">
-        <tr>
-          <td style="max-width:650px; display: block; clear: both;"><table style="width: 100%;">
-              <tr>
-                <td><img src="'.$base_url.'/sites/all/themes/bootstrap/images/mail_dorak_logo.png" style="max-height:60px;"></td>
-                <td style="text-align:right;"><p style="display:block;font-family:sans-serif;font-size:12px;margin-bottom:5px;"><a href="http://global-beds.com/" style="color:#ff6600; text-decoration:none">www.global-beds.com</a></p>
-                  <p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;margin-bottom:5px;">+90-2122316693</p>
-                  <p style="display:block;font-family:sans-serif;font-size:12px;margin-top:5px;"><a href="#" style="color:#ff6600; text-decoration:none">'.GB_GLOBAL_LINK.'</a></p></td>
-              </tr>
-            </table></td>
-          <td></td>
-        </tr>
-      </table>
-      <table style="width: 100%; margin-top:10px;">
-        <tr>
-          <td style="max-width:600px; display: block; clear: both;background-color:#fff;padding:20px 10px;">
-          
-          <table style="width:100%;">
-                          <tr>
-                            <td colspan="2" height="10"></td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; width:40%; vertical-align:top;margin-top:5px;padding-bottom:5px" >Booking No. <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"><b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119); width:60%;margin-top:5px;padding-bottom:5px"> $$DKEY_BOOKING_NUMBER$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; vertical-align:top;margin-top:5px;padding-bottom:5px">Hotel Detail <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px"></span> $$DKEY_HOTEL_NAME$$ ,$$DKEY_HOTEL_ADDRESS$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600; vertical-align:top; margin-top:5px;padding-bottom:5px">Passenger Name <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_LEAD_PASSENGER_FIRST_NAME$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Booking Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_BOOKING_DATE$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Check In Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px;">$$DKEY_CHECKIN_DATE$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Check Out Date <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span> </td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119); margin-top:5px;padding-bottom:5px;">$$DKEY_CHECKOUT_DATE$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Duration of Stay <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;"></span>$$DKEY_STAY$$ Nights</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Room Detail <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;"> $$DKEY_GUEST$$ Guests $$DKEY_ROOM$$ Room ($$DKEY_ROOM_TYPE$$,$$DKEY_BOARD_TYPE$$)</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px;">Payment Status <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px;">$$DKEY_PAYMENT_MODE$$</td>
-                          </tr>
-                          <tr>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119, 119);font-weight: 600;vertical-align:top;margin-top:5px;padding-bottom:5px">Booking Status <span style="text-align:right; display:inline-block; float:right; padding-right:10px;"> <b>:</b></span></td>
-                            <td style="font-family: sans-serif; font-size: 12px; color: rgb(119, 119,119);margin-top:5px;padding-bottom:5px">$$DKEY_ORDER_STATUS$$</td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" height="10"></td>
-                          </tr>
-                          <tr>
-                            <td style="border-top:1px solid #ddd;" colspan="2"></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" height="10"></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" style="display:block;font-family:sans-serif;font-size:12px;color:#777;font-weight:bold;text-transform:uppercase;">Cancellation Charges</td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" height="10"></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" style="font-family:sans-serif;font-size:12px;color:#777;margin-bottom:0px; padding-bottom:0px"> $$DKEY_HOTEL_NAME$$ from <span style="font-weight:bold;">$$DKEY_CANCLE_DATE$$</span> the cancellation charges are $$DKEY_CANCLE_AMOUNT$$ $$DKEY_CURRENCY$$ </td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" height="10"></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2"
-                              style="font-family:sans-serif;font-size:12px;color:#777; text-align:justify;margin-top:5px; margin-bottom:0px;">Cancellation will be carried out by our Customer Support Department. Time and date will be calculated according to the local of the country in which the destination is located.</td>
-                          </tr>
-                          <tr>
-                      <td colspan="2" height="20"></td>
-                    </tr>
-                     <tr>
-                      <td style="font-family:sans-serif;color:#777;font-size:12px;" colspan="2">Best Regards,<br/>
-                        <span style="margin-top:8px;display:block;font-weight:bold;";>Global Beds Team</span></td>
-                    </tr>
-                        </table>
-          
-          </td>
-          <td></td>
-        </tr>
-      </table></td>
-  </tr>
-</table>
-</body>
-</html>';
-	return $msgbody;
-	
-}
-
-
-
-/***
+/**
+ * *
  * Function to display date in d/m/Y format.
  */
-function get_time_short_format($unix_time){
-	if(empty($unix_time))
+function get_time_short_format($unix_time) {
+	if (empty ( $unix_time ))
 		return '-';
-		else
-			return date('d/m/Y',$unix_time);
+	else
+		return date ( 'd/m/Y', $unix_time );
 }
-
-
-function get_GbIdbyCommissionId($commision_id)
-{
-	$query = db_select('gb_commission','gc');
-	$query->fields('gc',array('gb_id'));
-	$query->condition('gc.id',$commision_id,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->gb_id;
-
+function get_GbIdbyCommissionId($commision_id) {
+	$query = db_select ( 'gb_commission', 'gc' );
+	$query->fields ( 'gc', array (
+			'gb_id' 
+	) );
+	$query->condition ( 'gc.id', $commision_id, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->gb_id;
 }
-
-function get_GbIdByuserId($uid)
-{
-	$query = db_select('gb_user','gc');
-	$query->fields('gc',array('id'));
-	$query->condition('gc.uid',$uid,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->id;
-
+function get_GbIdByuserId($uid) {
+	$query = db_select ( 'gb_user', 'gc' );
+	$query->fields ( 'gc', array (
+			'id' 
+	) );
+	$query->condition ( 'gc.uid', $uid, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->id;
 }
-
 
 /**
- * 
- * Get All Information Of Visa Application 
+ *
+ * Get All Information Of Visa Application
  * By Visa Id
- * @param  $visa_id
+ * 
+ * @param
+ *        	$visa_id
  */
-function getVisaRecordByVisaId($visa_id)
-{
-	$query = db_select('gb_visa','gv');
-	$query->fields('gv');
-	$query->condition('gv.id',$visa_id,'=');
-	$result = $query->execute()->fetchAll();
+function getVisaRecordByVisaId($visa_id) {
+	$query = db_select ( 'gb_visa', 'gv' );
+	$query->fields ( 'gv' );
+	$query->condition ( 'gv.id', $visa_id, '=' );
+	$result = $query->execute ()->fetchAll ();
 	return $result;
 }
-
-
-function get_informations_by_userId()
-{
+function get_informations_by_userId() {
 	global $user;
 	$uid = $user->uid;
-	$gb_id = get_GbIdByuserId($uid);
-	$query = db_select('gb_user','tn');
+	$gb_id = get_GbIdByuserId ( $uid );
+	$query = db_select ( 'gb_user', 'tn' );
 	
 	$query->LeftJoin ( 'gb_user_billing_info', 'gbl', 'gbl.gb_id = tn.id' );
 	$query->LeftJoin ( 'gb_user_bank_info', 'gbn', 'gbn.gb_id = tn.id' );
-	$query->fields('tn',array('id','uid','fContactFName','fContactLName','fContatmail','fContactMobile','fContactLandline','fContactAddress','fContactPin','fContactCity','fContactState','fContactCountry','company_name','currency'))
-	->fields('gbn',array('id','bank_name','bank_account_number','bank_account_holder_name','payment_method','credit_line','bank_doc','bank_address','bank_country','bank_state','bank_city','iban','swift'))
-	->fields('gbl',array('id','bill_email','bill_address','bill_country','bill_city','bill_state'));
-	//$query->where('(gc.id IN (SELECT MAX(id) FROM gb_commission WHERE gb_id = gc.gb_id group by gb_id) OR gc.id IS NULL)');
-	$query->condition('tn.id',$gb_id,'=');
-	$query->condition('tn.deleted',0,'=');
-	///echo $query;exit;
-	$result = $query->execute()->fetchAll();
-	//print_r($result);exit;
+	$query->fields ( 'tn', array (
+			'id',
+			'uid',
+			'fContactFName',
+			'fContactLName',
+			'fContatmail',
+			'fContactMobile',
+			'fContactLandline',
+			'fContactAddress',
+			'fContactPin',
+			'fContactCity',
+			'fContactState',
+			'fContactCountry',
+			'company_name',
+			'currency' 
+	) )->fields ( 'gbn', array (
+			'id',
+			'bank_name',
+			'bank_account_number',
+			'bank_account_holder_name',
+			'payment_method',
+			'credit_line',
+			'bank_doc',
+			'bank_address',
+			'bank_country',
+			'bank_state',
+			'bank_city',
+			'iban',
+			'swift' 
+	) )->fields ( 'gbl', array (
+			'id',
+			'bill_email',
+			'bill_address',
+			'bill_country',
+			'bill_city',
+			'bill_state' 
+	) );
+	// $query->where('(gc.id IN (SELECT MAX(id) FROM gb_commission WHERE gb_id = gc.gb_id group by gb_id) OR gc.id IS NULL)');
+	$query->condition ( 'tn.id', $gb_id, '=' );
+	$query->condition ( 'tn.deleted', 0, '=' );
+	// /echo $query;exit;
+	$result = $query->execute ()->fetchAll ();
+	// print_r($result);exit;
 	return $result;
 }
-
-
-
-
-
-
-function getVisaFeesByNationalityAndCountry($visaCountry,$visaNationality)
-{
-	$query = db_select('gb_visa_fee','gbv');
-	$query->fields('gbv',array('total'));
-	$query->condition('gbv.aNationality',$visaNationality,'=');
-	$query->condition('gbv.aDestination',$visaCountry,'=');
-    $result = $query->execute()->fetchAll();
-	return $result[0]->total;
-	
+function getVisaFeesByNationalityAndCountry($visaCountry, $visaNationality) {
+	$query = db_select ( 'gb_visa_fee', 'gbv' );
+	$query->fields ( 'gbv', array (
+			'total' 
+	) );
+	$query->condition ( 'gbv.aNationality', $visaNationality, '=' );
+	$query->condition ( 'gbv.aDestination', $visaCountry, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->total;
 }
-
-function getFeesByVisaId($visaid)
-{
-	$query = db_select('gb_visa','gbv');
-	$query->fields('gbv',array('visa_usd_price'));
-	$query->condition('gbv.id',$visaid,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->visa_usd_price;
-
+function getFeesByVisaId($visaid) {
+	$query = db_select ( 'gb_visa', 'gbv' );
+	$query->fields ( 'gbv', array (
+			'visa_usd_price' 
+	) );
+	$query->condition ( 'gbv.id', $visaid, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->visa_usd_price;
 }
-
-function getOrderNoOfVisaByVisaId($visaid)
-{
-	$query = db_select('gb_orders','gb');
-	$query->fields('gb',array('id'));
-	$query->condition('gb.visa_id',$visaid,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->id;
-
+function getOrderNoOfVisaByVisaId($visaid) {
+	$query = db_select ( 'gb_orders', 'gb' );
+	$query->fields ( 'gb', array (
+			'id' 
+	) );
+	$query->condition ( 'gb.visa_id', $visaid, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->id;
 }
-
-
-function getVisaApplicationNoByVisaId($visaid)
-{
-	$query = db_select('gb_visa','gbv');
-	$query->fields('gbv',array('visa_application_no'));
-	$query->condition('gbv.id',$visaid,'=');
-	$result = $query->execute()->fetchAll();
-	//print_r($result);exit;
-	return $result[0]->visa_application_no;
-
+function getVisaApplicationNoByVisaId($visaid) {
+	$query = db_select ( 'gb_visa', 'gbv' );
+	$query->fields ( 'gbv', array (
+			'visa_application_no' 
+	) );
+	$query->condition ( 'gbv.id', $visaid, '=' );
+	$result = $query->execute ()->fetchAll ();
+	// print_r($result);exit;
+	return $result [0]->visa_application_no;
 }
-
-function get_visa_status_dropdown(){
-	return array(
-			ORDER_STATUS_PENDING=>ORDER_STATUS_PENDING_TEXT,
-			ORDER_STATUS_CANCELLED=>ORDER_STATUS_REJECTED_TEXT,
-			ORDER_STATUS_BOOKED=>ORDER_STATUS_BOOKED_TEXT,
-			
-	);
+function get_visa_status_dropdown() {
+	return array (
+			ORDER_STATUS_PENDING => ORDER_STATUS_PENDING_TEXT,
+			ORDER_STATUS_CANCELLED => ORDER_STATUS_REJECTED_TEXT,
+			ORDER_STATUS_BOOKED => ORDER_STATUS_BOOKED_TEXT 
+	)
+	;
 }
-
-function getVisaIdAssocitedwithOrderbyOrderId($orderId)
-{
-	$query = db_select('gb_orders','gb');
-	$query->fields('gb',array('visa_id'));
-	$query->condition('gb.id',$orderId,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->visa_id;
-
+function getVisaIdAssocitedwithOrderbyOrderId($orderId) {
+	$query = db_select ( 'gb_orders', 'gb' );
+	$query->fields ( 'gb', array (
+			'visa_id' 
+	) );
+	$query->condition ( 'gb.id', $orderId, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->visa_id;
 }
-
-function CheckPriceOfOrderbyOrderId($orderId,$ammount,$userCurrency)
-{
-	$query = db_select('gb_orders','gb');
-	$query->fields('gb',array('fprice','usd_fprice'));
-	$query->condition('gb.id',$orderId,'=');
-	$result = $query->execute()->fetchAll();
-	$finalPrice = $result[0]->usd_fprice;
-	//echo '<br>';
-	//echo $ammount;exit;
-	if($finalPrice==$ammount)
-	{
+function CheckPriceOfOrderbyOrderId($orderId, $ammount, $userCurrency) {
+	$query = db_select ( 'gb_orders', 'gb' );
+	$query->fields ( 'gb', array (
+			'fprice',
+			'usd_fprice' 
+	) );
+	$query->condition ( 'gb.id', $orderId, '=' );
+	$result = $query->execute ()->fetchAll ();
+	$finalPrice = $result [0]->usd_fprice;
+	// echo '<br>';
+	// echo $ammount;exit;
+	if ($finalPrice == $ammount) {
 		return API_TRUE;
-	}else{
-		drupal_set_message(t(MSG_FRAUD_OR_TEMPERED_TRANSACTION), 'error');
-		drupal_goto('/hotelsearch');
+	} else {
+		drupal_set_message ( t ( MSG_FRAUD_OR_TEMPERED_TRANSACTION ), 'error' );
+		drupal_goto ( '/hotelsearch' );
 		return API_FALSE;
 	}
 }
-
-
-function insert_transaction_beforePayment($orderId,$Amount_Payble,$returnMac,$hostedCheckoutId){
-	$txn_point ='1';
-	$txn_reference=$returnMac.'@@'.$hostedCheckoutId;
-	$txn_mode =TRANSACTION_MODE_PG_ID;
-	$txn_status='0';
-	$comment ='Transaction Entry Before sending Third Party PG';
-	$comment_success ='Initiating Transcation on Payment Gateway';
-	$orderItemId = getOrderItemIdsByOrderId($orderId);
-	//updateOrderItemPaymentStatus($paymentStatus,$orderId,$orderItemId);
+function insert_transaction_beforePayment($orderId, $Amount_Payble, $returnMac, $hostedCheckoutId) {
+	$txn_point = '1';
+	$txn_reference = $returnMac . '@@' . $hostedCheckoutId;
+	$txn_mode = TRANSACTION_MODE_PG_ID;
+	$txn_status = '0';
+	$comment = 'Transaction Entry Before sending Third Party PG';
+	$comment_success = 'Initiating Transcation on Payment Gateway';
+	$orderItemId = getOrderItemIdsByOrderId ( $orderId );
+	// updateOrderItemPaymentStatus($paymentStatus,$orderId,$orderItemId);
 	// update_transction_status($transactionId,$txn_status,$comment_success);
-	$trans = insert_transactions($orderId, $Amount_Payble, $txn_point, $txn_status, $txn_reference, $txn_mode,$orderItemId,$comment);
+	$trans = insert_transactions ( $orderId, $Amount_Payble, $txn_point, $txn_status, $txn_reference, $txn_mode, $orderItemId, $comment );
 }
 
 /**
- * 
+ *
  * Get Destination Name By desc_code
- * @param unknown $orderId
+ * 
+ * @param unknown $orderId        	
  */
-function getDestinationNameByDescCode($desc_code)
-{
-	$query = db_select('gb_hotel_search_code','ghsc');
-	$query->fields('ghsc',array('des_name'));
-	$query->condition('ghsc.des_code',$desc_code,'=');
-	$result = $query->execute()->fetchAll();
-	return $result[0]->des_name;
+function getDestinationNameByDescCode($desc_code) {
+	$query = db_select ( 'gb_hotel_search_code', 'ghsc' );
+	$query->fields ( 'ghsc', array (
+			'des_name' 
+	) );
+	$query->condition ( 'ghsc.des_code', $desc_code, '=' );
+	$result = $query->execute ()->fetchAll ();
+	return $result [0]->des_name;
 }
 /*
  * @return MongoClient
  */
-function mongo_connect(){
+function mongo_connect() {
 	try {
-		$connection_res = new MongoClient( MONGODB_CLIENT );
+		$connection_res = new MongoClient ( MONGODB_CLIENT );
 		return $connection_res;
-	}catch (Exception $e) {
-		error_log( $e->getMessage() );
-		drupal_set_message(MONGO_SERVER_ERROR,'error');
-		drupal_goto('hotelsearch');
+	} catch ( Exception $e ) {
+		error_log ( $e->getMessage () );
+		drupal_set_message ( MONGO_SERVER_ERROR, 'error' );
+		drupal_goto ( 'hotelsearch' );
 	}
 }
 
@@ -1361,485 +865,281 @@ function mongo_connect(){
  * this function in used to retrive facilities
  * group name
  */
-	
-function get_facilities_group_name_frm_code($code){
-	$con=mongo_connect();
+function get_facilities_group_name_frm_code($code) {
+	$con = mongo_connect ();
 	$group = $con->globalbed->facilitygroups;
-	$find_key=array('code'=>(int) $code);
-	$cursor = $group->find($find_key);
-	$total= $cursor->count();
-	if($total >0){
-		foreach ( $cursor as $key => $value ){
-			return $value['description']['content'];
+	$find_key = array (
+			'code' => ( int ) $code 
+	);
+	$cursor = $group->find ( $find_key );
+	$total = $cursor->count ();
+	if ($total > 0) {
+		foreach ( $cursor as $key => $value ) {
+			return $value ['description'] ['content'];
 		}
 	}
 }
-
-function get_facilities_name_frm_code($code){
-	$conn=mongo_connect();
+function get_facilities_name_frm_code($code) {
+	$conn = mongo_connect ();
 	$groupn = $conn->globalbed->facilities;
-	$find_key=array('code'=>(int) $code);
-	$cursorn = $groupn->find($find_key);
-	$total= $cursorn->count();
-	if($total >0){
-		foreach ( $cursorn as $key => $value ){
+	$find_key = array (
+			'code' => ( int ) $code 
+	);
+	$cursorn = $groupn->find ( $find_key );
+	$total = $cursorn->count ();
+	if ($total > 0) {
+		foreach ( $cursorn as $key => $value ) {
 			return $value;
 		}
 	}
 }
-
-
-
-function get_parent_regions_values_id()
-{
-	$parent_regions = array();
-	$query = db_query("select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0 and deleted=0")->fetchAll();
-	foreach ($query as $query)
-	{
-		$parent_regions[] = array('value' => $query->pr_id);
+function get_parent_regions_values_id() {
+	$parent_regions = array ();
+	$query = db_query ( "select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0 and deleted=0" )->fetchAll ();
+	foreach ( $query as $query ) {
+		$parent_regions [] = array (
+				'value' => $query->pr_id 
+		);
 	}
 	return $parent_regions;
 }
-
-function get_parent_regions_id()
-{
-	$parent_regions = array();
-	$query = db_query("select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0  and deleted=0")->fetchAll();
-	foreach ($query as $query)
-	{
-		$parent_regions[] = $query->pr_id;
+function get_parent_regions_id() {
+	$parent_regions = array ();
+	$query = db_query ( "select distinct(pr_id) from gb_region where pr_id is not null and pr_id != 0  and deleted=0" )->fetchAll ();
+	foreach ( $query as $query ) {
+		$parent_regions [] = $query->pr_id;
 	}
 	return $parent_regions;
 }
-
-function get_parent_sub_region($reg)
-{
+function get_parent_sub_region($reg) {
 	$p_region = '';
 	$s_region = '';
-	$query = get_data_by_pks('gb_region', $reg);
+	$query = get_data_by_pks ( 'gb_region', $reg );
 	$p_region = $query->pr_id;
 	$region = $p_region;
-	if(empty($p_region))
-	{
+	if (empty ( $p_region )) {
 		$p_region = $reg;
 		$region = $reg;
-	}
-	else
+	} else
 		$s_region = $reg;
-	return array($region,$p_region,$s_region);
+	return array (
+			$region,
+			$p_region,
+			$s_region 
+	);
 }
 
-
-/*TODO 
+/*
+ * TODO
  * Extract array From Database
  */
-/*Function :Rejected Card Payment Countries
+/*
+ * Function :Rejected Card Payment Countries
  *
  */
-function rejectedCardPaymentCountries(){
-	return array(
-			"Nigeria"=>"Nigeria",
-			"Ghana"=>"Ghana",
-			"Cameroon"=>"Cameroon",
-			"Angola"=>"Angola",
-			"Benin"=>"Benin",
-			"Burkina"=>"Burkina",
-			"Faso"=>"Faso",
-			"Burundi"=>"Burundi",
-			"Central African Republic"=>"Central African Republic",
-			"Chad"=>"Chad",
-			"Congo"=>"Congo",
-			"Cote D’Ivoire"=>"Cote D’Ivoire",
-			"Djibouti" =>"Djibouti",
-			"Eriteria" =>"Eriteria",
-			"Ethiopia" =>"Ethiopia",
+function rejectedCardPaymentCountries() {
+	return array (
+			"Nigeria" => "Nigeria",
+			"Ghana" => "Ghana",
+			"Cameroon" => "Cameroon",
+			"Angola" => "Angola",
+			"Benin" => "Benin",
+			"Burkina" => "Burkina",
+			"Faso" => "Faso",
+			"Burundi" => "Burundi",
+			"Central African Republic" => "Central African Republic",
+			"Chad" => "Chad",
+			"Congo" => "Congo",
+			"Cote D’Ivoire" => "Cote D’Ivoire",
+			"Djibouti" => "Djibouti",
+			"Eriteria" => "Eriteria",
+			"Ethiopia" => "Ethiopia" 
 	);
 }
 
 /**
  * Function : checkCountry validate for Card Pay
- * @param unknown $country
+ * 
+ * @param unknown $country        	
  * @return boolean
  */
-function checkRejectedCountryForCardPay($country){
-	$rejectedcountryArray =rejectedCardPaymentCountries();
-	if (in_array($country, $rejectedcountryArray)) {
+function checkRejectedCountryForCardPay($country) {
+	$rejectedcountryArray = rejectedCardPaymentCountries ();
+	if (in_array ( $country, $rejectedcountryArray )) {
 		return TRUE;
-	}else{
+	} else {
 		return FALSE;
 	}
 }
 
 /**
- * Function to send mail with hotel pdf.
- * @param 
- */
-function send_mail_with_pdf($addAddress,$path,$subject,$comment,$addCC=NULL,$addBCC=NULL){
-	
-	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
-	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
-	
-	if(!empty($addAddress))
-	{
-		$mail = new PHPMailer;
-		//$mail->SMTPDebug = 2;                                // Enable verbose debug output
-		$mail->isSMTP();                                       // Set mailer to use SMTP
-		$mail->Host = SMTP_HOST1;                              // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                                // Enable SMTP authentication
-		// changed Username1 to Username3
-		$mail->Username = Username1;                           // SMTP username
-		$mail->Password = password;                            // SMTP password
-		$mail->SMTPSecure = Encryption_method1;                            // Enable TLS encryption, `ssl` also accepted
-		$mail->Port = port1;                                    // TCP port to connect to
-
-		$mail->setFrom(Username1);
-		foreach($addAddress as $key => $value)
-		{
-			$mail->addAddress($value);
-		}  
-		
-		if(!empty($addCC))
-		{
-			foreach($addCC as $x => $y)
-			{
-				$mail->addCC($y);
-			}
-		}
-		if(!empty($addBCC))
-		{
-			foreach($addBCC as $a => $b)
-			{
-				$mail->addBCC($b);
-			}
-		}
-		if(!empty($path)){
-			$mail->addAttachment($path);
-		}
-
-		$mail->isHTML(true);                                             // Set email format to HTML
-		$mail->Subject = $subject;
-		$mail->Body    = $comment;
-		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-		$msg='';
-		if(!$mail->send()) {
-			 $msg .='Message could not be sent.';
-			 $msg .='Mailer Error: ' . $mail->ErrorInfo;
-			 drupal_set_message($msg,'error');
-		} else {
-			 $msg ='Message has been sent';
-			drupal_set_message($msg);
-		}
-	}else{
-		$msg ='Message could not be sent please add receipt ';
-		drupal_set_message($msg);
-	}
-	if(!empty($path)){
-		unlink($path);
-	}
-	return $msg;
-}
-
-
-
-/**
  * Function :Insert Client Deatils Along with OrderId
  * parameters :OrderId and Client Details
  */
-function insert_client_details($orderId,$client_name,$client_phoneno,$client_email){
+function insert_client_details($orderId, $client_name, $client_phoneno, $client_email) {
 	global $user;
 	try {
-		$id = db_insert ( 'gb_clients_cards_payments' )
-		->fields ( array (
-				'order_id'=>$orderId,
-				'client_name' =>$client_name,
-				'client_phoneno' =>$client_phoneno,
-				'client_email' =>$client_email,
-				'updated' => time(),
-				'updatedBy' => $user->uid,
+		$id = db_insert ( 'gb_clients_cards_payments' )->fields ( array (
+				'order_id' => $orderId,
+				'client_name' => $client_name,
+				'client_phoneno' => $client_phoneno,
+				'client_email' => $client_email,
+				'updated' => time (),
+				'updatedBy' => $user->uid 
 		) )->execute ();
+	} catch ( Exception $e ) {
+		error_log ( $e->getMessage () );
 	}
-	catch( Exception $e ) {
-		error_log ( $e->getMessage() );
-	}
-}
-
-
-/**
- * Function to send mail to user when is account is rejected.
- * @param $addAddress
- */
-function send_mail_user_reject($addAddress, $addCC=NULL,$addBCC=NULL)
-{
-	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
-	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
-	if(!empty($addAddress))
-	{
-		
-		$mail = new PHPMailer;
-		//$mail->SMTPDebug = 2;                                 // Enable verbose debug output
-
-		$mail->isSMTP();                                        // Set mailer to use SMTP
-		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
-		//changed Username1 to Username3
-		$mail->Username = Username2;                            // SMTP username
-		$mail->Password = password;                             // SMTP password
-		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
-		$mail->Port = port1;                                    // TCP port to connect to
-
-		$mail->setFrom(Username2);
-		foreach($addAddress as $key => $value)
-		{
-			$mail->addAddress($value);
-		}
-
-		if(!empty($addCC))
-		{
-			foreach($addCC as $x => $y)
-			{				
-				$mail->addCC($y);
-			}
-		}
-		if(!empty($addBCC))
-		{
-			foreach($addBCC as $a => $b)
-			{
-				$mail->addBCC($b);
-			}
-		}
-		$body = reject_msgbody();
-		//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-		$mail->isHTML(true);                                  // Set email format to HTML
-
-		$mail->Subject = MSG_SEND_MAIL_ACCOUNT_REJECT_SUBJECT_MSG;
-		$mail->MsgHTML($body);
-		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-		if(!$mail->send()) {
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-		} else {
-			echo 'Message has been sent';
-		}
-	}else{ echo 'Message could not be sent please add receipt ';
-	}
-	return $mail;
 }
 
 /**
  * Function for user account reject message body.
  */
-function reject_msgbody(){
+function reject_msgbody() {
 	global $base_url;
-	$key_array=get_key_array_base_url();
-	$key_array[DKEY_BASE_URL]=$base_url;
-	$key_array[VKEY_GB_MAIL_ID]=GB_GLOBALBEDS_LINK ;
-	$msgbody =  $msgbody = get_message(MSG_SEND_MAIL_ACCOUNT_REJECT_BODY_MSG, $key_array);
+	$key_array = get_key_array_base_url ();
+	$key_array [DKEY_BASE_URL] = $base_url;
+	$key_array [VKEY_GB_MAIL_ID] = GB_GLOBALBEDS_LINK;
+	$msgbody = $msgbody = get_message ( MSG_SEND_MAIL_ACCOUNT_REJECT_BODY_MSG, $key_array );
 	return $msgbody;
 }
 
+// -------------------------------------------------------------------------------------------------
 /**
- * Function to send mail on reset of password.
+ * shardatraders funcdtions
+ *
+ *
+ *
+ *
+ * Functions
+ *
+ *
+ *
+ *
+ * Params
  */
-function reset_send_mail_user_password($addAddress, $username,$user_uid, $addCC=NULL, $addBCC=NULL)
-{   
-	$info = get_table_data_by_conditons('gb_user',"uid=$user_uid");
-	if(!empty($info->fContactFName)){
-		$full_name = $info->fContactFName." ".$info->fContactLName;
-	}
-	else{
-		$full_name = $username;
-	}
-	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
-	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
-	if(!empty($addAddress))
-	{
-		$mail = new PHPMailer;
-
-		$mail->isSMTP();                                        // Set mailer to use SMTP
-		$mail->Host = SMTP_HOST1;                               // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                                 // Enable SMTP authentication
-		$mail->Username = Username2;                            // SMTP username
-		$mail->Password = password;                             // SMTP password
-		$mail->SMTPSecure = Encryption_method1;                 // Enable TLS encryption, `ssl` also accepted
-		$mail->Port = port1;                                    // TCP port to connect to
-
-		$mail->setFrom(Username2);
-		foreach($addAddress as $key => $value)
-		{
-			$mail->addAddress($value);
-		}
-
-		if(!empty($addCC))
-		{
-			foreach($addCC as $x => $y)
-			{
-				$mail->addCC($y);
-			}
-		}
-		if(!empty($addBCC))
-		{
-			foreach($addBCC as $a => $b)
-			{
-				$mail->addBCC($b);
-			}
-		}
-		$body = reset_password_msgbody($full_name);
-		$mail->isHTML(true);                                  // Set email format to HTML
-
-		$mail->Subject = MSG_SEND_MAIL_RESET_PASSWORD_SUBJECT_MSG;
-		$mail->MsgHTML($body);
-
-		if(!$mail->send()) {
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-		} else {
-			echo 'Message has been sent';
-		}
-	}else{ echo 'Message could not be sent please add receipt ';
-	}
-	return $mail;
+function get_data_by_pks($table, $mid, $field) {
+	$Object = db_query ( "select * from $table where $field = :id", array (
+			':id' => $mid 
+	) )->fetchObject ();
+	return $Object;
 }
-
-/**
- * Function for user account reject message body.
- */
-function reset_password_msgbody($username){
-	global $base_url;
-	$key_array=get_key_array_base_url();
-	$key_array[DKEY_BASE_URL]=$base_url;
-	$key_array[AKEY_USERNAME]=$username;
-	$key_array[VKEY_GB_MAIL_ID] = GB_GLOBALBEDS_LINK ;
-	$msgbody = get_message(MSG_SEND_MAIL_RESET_PASSWORD_BODY_MSG, $key_array);
-	return $msgbody;
-}
-
-/***
- * Function to get_booking_order_status_text
- */
-function get_booking_order_status_text($order_status){
-	//ORDER_STATUS_REJECTED_TEXT
-	$options = array(
-		ORDER_STATUS_PENDING => ORDER_STATUS_PENDING_TEXT,
-		ORDER_STATUS_CANCELLED => ORDER_STATUS_CANCELLED_TEXT,
-	    ORDER_STATUS_BOOKED => ORDER_STATUS_BOOKED_TEXT,
-		ORDER_STATUS_CANCEL_REQUESTED => ORDER_STATUS_CANCEL_REQUESTED_TEXT,
-		ORDER_STATUS_MODIFIED => ORDER_STATUS_MODIFIED_TEXT,
-		ORDER_STATUS_COMPLETED => ORDER_STATUS_COMPLETED_TEXT,
-		ORDER_STATUS_MISSED => ORDER_STATUS_MISSED_TEXT,
+function get_all_list($table, $field) {
+	$list = array (
+			'0' => 'Select' 
 	);
-	if(!empty($order_status)){
-		return $options[$order_status];
+	$result = db_query ( "SELECT $field from $table" )->fetchAll ();
+	foreach ( $result as $value ) {
+		$list [$value->cus_id] = ucfirst ( $value->f_name . ' ' . $value->l_name );
 	}
-	else{
-		return '';
-	}
+	
+	return $list;
 }
-/***
- * Function to get mail subject and body based on booking status.
- */
-function get_booking_status_based_mail_subject_body($status){
-	$mail = array();
-	if($status == ORDER_STATUS_PENDING_TEXT){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_PENDING_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_CANCELLED_TEXT){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_CANCELLATION_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_CANCELLATION_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_BOOKED_TEXT){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_BOOKED_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_CANCEL_REQUESTED_TEXT){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_REQUESTED_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_MODIFIED_TEXT){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_MODIFIED_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_COMPLETED){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_COMPLETED_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else if($status == ORDER_STATUS_MISSED){
-		$mail['subject']= MSG_SEND_MAIL_BOOKING_MISSED_SUBJECT_MSG;
-	//	$mail['body'] = MSG_SEND_MAIL_BOOKING_PENDING_BODY_MSG;
-	}
-	else{
-		$mail['subject']= '';
-	//	$mail['body'] = '';
-	}
-	return $mail;
+function get_customers() {
+	$Object = db_query ( "select * from $table where $field = :id", array (
+			':id' => $mid 
+	) )->fetchObject ();
+	return $Object;
 }
-
- 
-/**
- * BDM/FINANCE/ACCOUNTS mail function.
- * @param $addAddress, $name
- */
-function send_mail_on_register($addAddress, $addCC=NULL,$addBCC=NULL,$name,$flag_role)
-{
-	require(DRUPAL_SITE."/php_mailer/class.phpmailer.php");
-	require(DRUPAL_SITE."/php_mailer/class.smtp.php");
-	if(!empty($addAddress))
-	{
-		$mail = new PHPMailer;
-		//$mail->SMTPDebug = 2;                                   // Enable verbose debug output
-
-		$mail->isSMTP();                                              // Set mailer to use SMTP
-		$mail->Host = SMTP_HOST1;                                 // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                                   // Enable SMTP authentication
-		$mail->Username = Username2;                              // SMTP username
-		$mail->Password = password;                               // SMTP password
-		$mail->SMTPSecure = Encryption_method1;                   // Enable TLS encryption, `ssl` also accepted
-		$mail->Port = port1;                                      // TCP port to connect to
-
-		$mail->setFrom(Username2);
-		foreach($addAddress as $key => $value)
-		{
-			$mail->addAddress($value);
-		}
-
-		if(!empty($addCC))
-		{
-			foreach($addCC as $x => $y)
-			{
-				$mail->addCC($y);
-			}
-		}
-		if(!empty($addBCC))
-		{
-			foreach($addBCC as $a => $b)
-			{
-				$mail->addBCC($b);
-			}
-		}
-		
-		$body = register_msgbody($name,$flag_role);
-		$mail->isHTML(true);                                  // Set email format to HTML
-
-		$mail->Subject = get_mail_subject_based_on_role($flag_role);
-		$mail->MsgHTML($body);
-		//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-		if(!$mail->send()) {
-			echo 'Message could not be sent.';
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
-		} else {
-			echo 'Message has been sent';
-		}
-	}else{ echo 'Message could not be sent please add receipt ';
+function product_status($status = NULL) {
+	$prd_status = array (
+			'0' => 'Select',
+			'1' => 'Done',
+			'2' => 'Pending' 
+	);
+	
+	if ($status != NULL && array_key_exists ( $status, $prd_status )) {
+		return $prd_status [$status];
+	} else {
+		return $prd_status;
 	}
-	return $mail;
+	
+	// return prd_status;
 }
-
-
-
-
-
+function ut_material_qty() {
+	$numbers = array (
+			'Select',
+			'Kg',
+			'Quental',
+			'50KG/Bag',
+			'sqft' 
+	);
+	return $numbers;
+}
+function ut_order_id() {
+	$par1 = array ();
+	$parent_ord = db_query ( "SELECT oid from st_order where pay_status=2" )->fetchAll ();
+	
+	foreach ( $parent_ord as $res ) {
+		$par1 ['0'] = 'select';
+		$par1 [$res->oid] = $res->oid;
+	}
+	return $par1;
+}
+function ut_user_id() {
+	$par1 = array ();
+	$parent_ord = db_query ( "SELECT f_name from st_customer" )->fetchAll ();
+	
+	foreach ( $parent_ord as $res ) {
+		$par1 ['0'] = 'select';
+		$par1 [$res->cus_id] = $res->f_name;
+	}
+	return $par1;
+}
+function ut_material_inventery() {
+	$par1 = array ();
+	$parent_cat1 = db_query ( "SELECT mid from st_material" )->fetchAll ();
+	
+	foreach ( $parent_cat1 as $res ) {
+		$par1 ['0'] = 'select';
+		$par1 [] = get_ut_material_mat ( $res->mid );
+	}
+	return $par1;
+}
+function get_ut_material_qty($unit) {
+	$qrt = ut_material_qty ();
+	
+	return $qrt [$unit];
+}
+function get_ut_material_mat($mat) {
+	$mat_name = db_query ( "SELECT name from st_material where mid=$mat" )->fetchAll ();
+	return $mat_name [0]->name;
+}
+function get_rem_qty($mat) {
+	$rem_qty = array ();
+	$mat_name = db_query ( "select qty from st_order where mid=$mat" )->fetchAll ();
+	$x = 0;
+	
+	foreach ( $mat_name as $res ) {
+		$x = $res->qty + $x;
+	}
+	return $x;
+}
+function ut_material() {
+	$par = array ();
+	$parent_cat = db_query ( "SELECT material_category from st_material_category" )->fetchAll ();
+	// echo "<pre>";
+	// print_r($parent_cat[0]->material_category);
+	foreach ( $parent_cat as $res ) {
+		// print_r($res);
+		$par ['0'] = 'select';
+		$par [] = $res->material_category;
+	}
+	
+	return $par;
+}
+function parents_cat() {
+	$par = array ();
+	$parent_cat = db_query ( "SELECT material_category from st_material_category" )->fetchAll ();
+	// echo "<pre>";
+	// print_r($parent_cat[0]->material_category);
+	foreach ( $parent_cat as $res ) {
+		// print_r($res);
+		$par ['0'] = 'select';
+		$par [] = $res->material_category;
+	}
+	
+	return $par;
+}
 
 

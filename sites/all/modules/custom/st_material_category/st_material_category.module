@@ -252,17 +252,3 @@ $form['all_articles']=array(
 	);
 return $form;
 }
-function parents_cat(){
-	   $par=array();
-		$parent_cat=db_query("SELECT material_category from st_material_category")->fetchAll();
-		//echo "<pre>";
-	//print_r($parent_cat[0]->material_category);
-	foreach($parent_cat as $res){
-		//print_r($res);
-		$par['0']='select';
-		$par[]=$res->material_category;
-		
-	}	
-	
-	return $par;
-}

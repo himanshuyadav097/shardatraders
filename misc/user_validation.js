@@ -164,6 +164,52 @@ jQuery(document).ready(function(){
 		}
     }); 
 
+	/**
+	 * borrower edit remaing payment 
+	 * 
+	 */
+	jQuery("#st-borrower-add #edit-pay").blur(function(){  
+	
+		var total_price = jQuery("#edit-total-price").val();
+		var pay = jQuery("#edit-pay").val();
+
+
+		var pay_rem = '';
+		
+	//	var material_cost_price = '';
+	//	var Netprofit = '';
+
+	//	var material_unit = jQuery("#edit-unit").val();
+		
+		if(pay != ''  )
+			{
+			pay_rem = parseInt(total_price) - parseInt(pay);
+				//material_cost_price = material_value * 272;
+				//Netprofit = material_total - material_cost_price;
+		}else
+		if(pay != ''  &&  parseInt(total_price) < parseInt(pay))
+		{
+		pay_rem = 0;
+			//material_cost_price = material_value * 272;
+			//Netprofit = material_total - material_cost_price;
+	}
+		jQuery("#edit-payment-remaining").val(pay_rem);
+		
+		//jQuery("#edit-cost-price").val(material_cost_price);
+		
+		//jQuery("#edit-net-profit").val(Netprofit);
+
+		if(pay == 0)
+		{
+			//jQuery("#edit-base-price").css("border", "1px solid red");
+			return false;
+		}
+	else
+		{
+			jQuery("#edit-pay").css("border", "1px solid #ccc");
+		}
+    }); 
+	
 	jQuery("#edit-f-name ,#edit-l-name").keypress(function(e) {
 		//alert("hii");
 		//exit;
