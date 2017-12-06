@@ -1,6 +1,6 @@
 <?php 
 function st_material_permission(){
-array (
+return array (
   'st_material_per_add' => 
   array (
     'title' => 'Create form st_material According To choice',

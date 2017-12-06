@@ -84,6 +84,14 @@ if ($user->uid) { // this user is already logged in
 }
 
 ?>
+<?php 
+if ($user->uid) {
+  print 'Welcome '.$user->name.'!';
+}
+else {
+  print 'Welcome, Guest!';
+}
+?>
 <style>
 table, th, td {
 	border: 1px solid black;
