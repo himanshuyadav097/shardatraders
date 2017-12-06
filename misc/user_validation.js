@@ -172,31 +172,17 @@ jQuery(document).ready(function(){
 	
 		var total_price = jQuery("#edit-total-price").val();
 		var pay = jQuery("#edit-pay").val();
-
-
-		var pay_rem = '';
-		
-	//	var material_cost_price = '';
-	//	var Netprofit = '';
-
-	//	var material_unit = jQuery("#edit-unit").val();
-		
-		if(pay != ''  )
+        var pay_rem = 0;
+	
+        if(pay != '' &&  parseInt(total_price) > parseInt(pay) )
 			{
 			pay_rem = parseInt(total_price) - parseInt(pay);
 				//material_cost_price = material_value * 272;
 				//Netprofit = material_total - material_cost_price;
-		}else
-		if(pay != ''  &&  parseInt(total_price) < parseInt(pay))
-		{
-		pay_rem = 0;
-			//material_cost_price = material_value * 272;
-			//Netprofit = material_total - material_cost_price;
-	}
+		}
+		
 		jQuery("#edit-payment-remaining").val(pay_rem);
-		
 		//jQuery("#edit-cost-price").val(material_cost_price);
-		
 		//jQuery("#edit-net-profit").val(Netprofit);
 
 		if(pay == 0)
@@ -282,16 +268,10 @@ function paycal_rem_pay(){
 	var material_pay_total = jQuery("#edit-pay-totall").val();
 	var material_remaing_pay = '';
 
-
-
-
 	if(material_total_price != '' && material_pay_total != '' )
 		{
 		material_remaing_pay = parseInt(material_total_price) - parseInt(material_pay_total);
-		
-		
-
-			
+	
 	}
 	jQuery("#edit-payment_remaining-totall").val(material_remaing_pay);
 	jQuery( "#edit-payment_remaining-totall" ).prop( "readonly", true );

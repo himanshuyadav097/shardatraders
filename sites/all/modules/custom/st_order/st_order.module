@@ -712,7 +712,7 @@ function st_order_view($form, &$form_state) {
 			'Oid',
 			'Product name',
 			'Qty',
-			'Base Selling Price / Unit',
+			'Selling Price/Unit',
 			'Total Price',
 			'Cost Price',
 			'Net Profit',

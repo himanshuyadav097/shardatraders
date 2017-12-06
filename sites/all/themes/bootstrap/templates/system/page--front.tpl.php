@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation to display a single Drupal page.
@@ -73,6 +72,17 @@
  *
  * @ingroup templates
  */
+
+global $user;
+if ($user->uid) { // this user is already logged in
+	//print "Access Denied: You do not have access to this page.";
+} else {
+	drupal_set_message("Access Denied: Please Login");
+	$dest = drupal_get_destination();
+	print_r($dest);
+	drupal_goto('user', array('query' => $dest)); // this remembers where the user is coming from
+}
+
 ?>
 <style>
 table, th, td {
@@ -94,32 +104,35 @@ table.gateway-table td {
 }
 </style>
 
-<header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
-  <div class="<?php print $container_class; ?>">
-    <div class="navbar-header">
+<header id="navbar" role="banner"
+	class="<?php print $navbar_classes; ?>">
+	<div class="<?php print $container_class; ?>">
+		<div class="navbar-header">
       <?php if ($logo): ?>
-        <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
+        <a class="logo navbar-btn pull-left"
+				href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+				<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+			</a>
       <?php endif; ?>
 
       <?php if (!empty($site_name)): ?>
-        <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
+        <a class="name navbar-brand" href="<?php print $front_page; ?>"
+				title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
       <?php endif; ?>
 
       <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only"><?php print t('Toggle navigation'); ?></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+        <button type="button" class="navbar-toggle"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only"><?php print t('Toggle navigation'); ?></span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
       <?php endif; ?>
     </div>
 
     <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
       <div class="navbar-collapse collapse">
-        <nav role="navigation">
+			<nav role="navigation">
           <?php if (!empty($primary_nav)): ?>
             <?php print render($primary_nav); ?>
           <?php endif; ?>
@@ -130,52 +143,53 @@ table.gateway-table td {
             <?php print render($page['navigation']); ?>
           <?php endif; ?>
         </nav>
-      </div>
+		</div>
     <?php endif; ?>
   </div>
 </header>
 
 <div class="main-container <?php print $container_class; ?>">
 
-  <header role="banner" id="page-header">
+	<header role="banner" id="page-header">
     <?php if (!empty($site_slogan)): ?>
       <p class="lead"><?php print $site_slogan; ?></p>
     <?php endif; ?>
 
     <?php print render($page['header']); ?>
-  </header> <!-- /#page-header -->
+  </header>
+	<!-- /#page-header -->
 
-  <div class="row">
-  
+	<div class="row">
   
     <?php if (!empty($page['block_first'])): ?>
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['block_first']); ?>
-      </aside>  <!-- /#sidebar-first -->
+      </aside>
+		<!-- /#sidebar-first -->
     <?php endif; ?>
        
     <?php if (!empty($page['block_second'])): ?>
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['block_second']); ?>
-      </aside>  <!-- /#sidebar-first -->
+      </aside>
+		<!-- /#sidebar-first -->
     <?php endif; ?>
     
     <?php if (!empty($page['block_third'])): ?>
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['block_third']); ?>
-      </aside>  <!-- /#sidebar-first -->
+      </aside>
+		<!-- /#sidebar-first -->
     <?php endif; ?>
-    
     
    <?php if (!empty($page['block_fourth'])): ?>
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['block_fourth']); ?>
-      </aside>  <!-- /#sidebar-first -->
+      </aside>
+		<!-- /#sidebar-first -->
     <?php endif; ?>
     
-    
-    
-    <section<?php print $content_column_class; ?>>
+    <section <?php print $content_column_class; ?>>
  
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
@@ -197,26 +211,30 @@ table.gateway-table td {
       <?php if (!empty($action_links)): ?>
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
-      <?php print render($page['content']); ?>
+      <?php  // print render($page['content']); ?>
     </section>
     
-       <?php  if(user_is_logged_in()){?>
-    
+       <?php 
+     
+       if(user_is_logged_in()){
+  if( !in_array('traders-help', $user->roles)){
+        ?>
     <h2>Product Status</h2>
 
-		<table >
+		<table  width="100%">
 			<tr>
-			<th>ProductName</th>
-			<th>Qty Remaing</th>
-			<th>Total Remaning amount product INR</th>
-			<th>Total Selling Price INR</th>
-			<th colspan="2">Net Profit INR</th>
+				<th>ProductName</th>
+				<th>Qty Remain</th>
+				<th>Remaing Product INR</th>
+				<th>Total Selling INR</th>
+				<th colspan="2">Net Profit INR</th>
+
 			</tr>
-			   <?php }?>
-			
-   <?php  if(user_is_logged_in()){?>
-   <?php $result=db_query(
-   		"select 
+		
+
+   <?php
+				
+$result = db_query ( "select 
    		o.mid,
    		sum(o.net_profit) SUM ,sum(o.total_price) as total_sell_price ,
    		i.qty,
@@ -226,75 +244,122 @@ table.gateway-table td {
    		as o left join st_inventery as i 
    		on o.mid=i.mid left join st_price 
    		as p on i.mid=p.mid left join st_material 
-   		as m on p.mid=m.mid group by o.mid")->fetchAll();?>
+   		as m on p.mid=m.mid group by o.mid" )->fetchAll ();
+				?>
    <?php
-   foreach ( $result as $value ) {?>
- 
-   <tr><td><?php echo $value->name;?></td>
-   <td><?php echo $value->qty; ?></td>
-   <td><?php echo $value->total_price;?></td>
-   <td ><?php echo $value->total_sell_price; ?></td>
-   <td colspan="2"><?php echo $value->SUM;?></td>
-   </tr>
-    <?php }?>
-   
-   </table>
-   
-   <?php }?> 
-      <?php  if(user_is_logged_in()){?>
-   
-    <h2>Borrower orderwise</h2>
+				
+$total = 0;
+				foreach ( $result as $value ) {
+					
+					$total = $value->SUM + $total;
+					?>
+   <tr>
+				<td><?php echo $value->name;?></td>
+				<td><?php echo $value->qty; ?></td>
+				<td><?php echo $value->total_price;?></td>
+				<td><?php echo $value->total_sell_price; ?></td>
+				<td colspan="2"><?php echo $value->SUM;?></td>
 
-		<table >
-			<tr>
-			<th>Order ID</th>
-			<!-- <th>User ID</th> -->
-			<th>User Name</th>
-			<th>Pay</th>
-			<th>Pay Pending</th>
-			<th>Pay Status</th>
-			
-			<th>Phone number</th>
-			
 			</tr>
-    <?php $result=$result = db_query ( "select * from st_order as o inner join st_borrower as b on o.oid=b.oid where pay_status=2" )->fetchAll ();
-   
-    foreach ($result as $res){
+    <?php }?>
+    
+      <tr>
+				<td colspan="4">Total Net profit</td>
+				<td colspan="2"><?php echo $total;?></td>
+
+			</tr>
+
+		</table>
+   <?php } ?>
   
-    	$user_id=$res->user_id;
-    	$res1=get_data_by_pks('st_customer',$user_id,'cus_id');
-    	?>
-    		 <tr><td><?php echo $res->oid;?></td>
-    		   <td><?php echo $res1->f_name.''.$res1->l_name;?></td>
-    		    <td><?php echo $res->pay;?></td>
-   			 <td><?php echo $res->payment_remaining;?></td>
-   			   <td><?php echo product_status($res->pay_status);?></td>
-   	
-   			   <td><?php echo $res1->phone;?></td>
-   			 
-       </tr>
+   
+    <h2>Borrower Orderwise</h2>
+
+		<table width="100%">
+			<tr>
+				<th>OID</th>
+				<!-- <th>User ID</th> -->
+				<th>User Name</th>
+				<th>Pay</th>
+				<th>Pay Pending</th>
+				<th>Pay Status</th>
+				<th>Phone</th>
+			</tr>
+    <?php
+							
+$result = $result = db_query ( "select * from st_order as o inner join st_borrower as b on o.oid=b.oid where pay_status=2" )->fetchAll ();
+							
+							foreach ( $result as $res ) {
+								
+								$user_id = $res->user_id;
+								$res1 = get_data_by_pks ( 'st_customer', $user_id, 'cus_id' );
+								?>
+    		 <tr>
+				<td><?php echo $res->oid;?></td>
+				<td><?php echo ucfirst($res1->f_name.''.$res1->l_name);?></td>
+				<td><?php echo $res->pay;?></td>
+				<td><?php echo $res->payment_remaining;?></td>
+				<td><?php echo product_status($res->pay_status);?></td>
+
+				<td><?php echo $res1->phone;?></td>
+
+			</tr>
+    <?php }?>	<table>
+    
+   
+    <h2>Borrower</h2>
+
+			<table  width="100%">
+				<tr>
+					<th>Username</th>
+					<!-- <th>User ID</th> -->
+
+					<th>Pay</th>
+
+
+				</tr>
+    <?php
+				
+$resultb = db_query ( "select user_id,sum(payment_remaining) SUM from st_borrower as b where b.user_id in (select o.cus_id from st_order as o where o.pay_status=2 group by o.cus_id) group by b.user_id " )->fetchAll ();
+				
+				foreach ( $resultb as $res ) {
+					
+					$user_id = $res->user_id;
+					$res1 = get_data_by_pks ( 'st_customer', $user_id, 'cus_id' );
+					
+					?>
+    		 <tr>
+					<td><?php echo ucfirst($res1->f_name);?></td>
+					<td><?php echo $res->SUM ?></td>
+
+
+				</tr>
+    <?php }?>	<table>
     <?php }?>
-    <?php }?>
+    
+    
     <?php if (!empty($page['sidebar_second'])): ?>
 
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['sidebar_second']); ?>
-      </aside>  <!-- /#sidebar-second -->
+      </aside>
+				<!-- /#sidebar-second -->
     <?php endif; ?>
 
   </div>
-  <div class="row">
+				<div class="row">
   
   
    <?php if (!empty($page['middle'])): ?>
 
       <aside class="col-sm-12" role="complementary">
         <?php print render($page['middle']); ?>
-      </aside>  <!-- /#sidebar-second -->
+      </aside>
+					<!-- /#sidebar-second -->
     <?php endif; ?>
 
   </div>
-</div>
+				</div>
  
 <?php if (!empty($page['footer'])): ?>
   <footer class="footer <?php print $container_class; ?>">

@@ -242,11 +242,11 @@ function st_customer_view($form, &$form_state) {
 		$rows_articles [] = array (
 				$records->cus_id,
 				
-				$records->f_name,
-				$records->l_name,
-				$records->address,
+				ucfirst($records->f_name),
+				ucfirst($records->l_name),
+				ucfirst($records->address),
 				$records->phone,
-				$records->reference 
+				ucfirst($records->reference) 
 		);
 	}
 	$headers = array (

@@ -226,8 +226,7 @@ function st_borrower_edit_submit($form, &$form_state) {
 	global $user;
 	$oid=$form_state ['values'] ['oid'];
 	$real_pay=db_query("select * from st_order where oid=$oid")->fetchAll ();
-	$real_pay1=$real_pay->total_price;
-	print_r($real_pay1);
+	
 	$pay=$form_state ['values'] ['pay'];
 	$payment_remaining=$form_state ['values'] ['payment_remaining'];
 
@@ -348,8 +347,6 @@ function st_borrower_view($form, &$form_state) {
 		}else{
 			
 			$link=l ($records->id,'admins/st_borrower/edit/' . $records->id );
-				
-			
 		}
 		$rows_articles [] = array (
 				
@@ -357,8 +354,8 @@ function st_borrower_view($form, &$form_state) {
 				$link,
 				$records->oid,
 				$records->user_id,
-				$res1->f_name,
-				$res1->l_name,
+				ucfirst($res1->f_name),
+				ucfirst($res1->l_name),
 				$records->pay,
 				$records->payment_remaining,
 				//$pay_status->pay_status,
@@ -405,7 +402,6 @@ function st_borrower_view_submit($form, &$form_state) {
 	drupal_goto ( 'admins/st_borrower/view', array (
 			'query' => $param
 	) );
-	
 	
 }
 function st_borrower_detail($form, &$form_state, $id = NULL) {
