@@ -295,7 +295,7 @@ $total = 0;
 			</tr>
     <?php
 							
-$result = $result = db_query ( "select * from st_order as o inner join st_borrower as b on o.oid=b.oid where pay_status=2" )->fetchAll ();
+$result = $result = db_query ( "select * from st_order as o inner join st_borrower as b on o.oid=b.oid where pay_status=2 order by b.payment_remaining asc " )->fetchAll ();
 							
 							foreach ( $result as $res ) {
 								
@@ -322,7 +322,7 @@ $result = $result = db_query ( "select * from st_order as o inner join st_borrow
 					<th>Username</th>
 					<!-- <th>User ID</th> -->
 
-					<th>Pay</th>
+					<th>Payment Remaing</th>
 
 
 				</tr>
@@ -345,6 +345,41 @@ $resultb = db_query ( "select user_id,sum(payment_remaining) SUM from st_borrowe
     <?php }?>	<table>
     <?php }?>
     
+    
+    <?php if( !in_array('traders-help', $user->roles)){ ?>  
+    
+     <h2>Top 10 Customers</h2>
+
+		<table width="100%">
+			<tr>
+			
+				<!-- <th>User ID</th> -->
+				<th>Cusomer name</th>
+				<th>Net Profit</th>
+				
+			</tr>
+    <?php
+							
+$result = $result = db_query ( "select sum(net_profit) SUM,o.cus_id  from st_order as o group by cus_id order by SUM DESC limit 10;
+
+
+		" )->fetchAll ();
+							
+							foreach ( $result as $res ) {
+								
+								//$user_id = $res->user_id;
+							$res1 = get_data_by_pks ( 'st_customer', $res->cus_id, 'cus_id' );
+								?>
+    		 <tr>
+				<td><?php echo ucwords($res1->f_name.' '.$res1->l_name)?></td>
+				<td><?php echo $res->SUM?></td>
+				
+
+
+			</tr>
+    <?php }?>	<table>
+    
+   <?php }?>
     
     <?php if (!empty($page['sidebar_second'])): ?>
 

@@ -158,12 +158,6 @@ function st_order_add($form, &$form_state, $id = NULL) {
 	$form ['pay_status'] = array (
 			'#type' => 'select',
 			'#title' => 'Pay status',
-			/* '#size' => '255', */
-		/* 	'#options' => array (
-					'Select',
-					'Done',
-					'Pending' 
-			), */
 			'#options'=>product_status(),
 			'#attributes' => array (
 					'placeholder' => '' 
@@ -177,7 +171,6 @@ function st_order_add($form, &$form_state, $id = NULL) {
 					),
 					'effect' => 'fade'
 			),
-			
 			'#default_value' => isset ( $data->pay_status ) ? $data->pay_status : "" 
 	);
 	$form ['pay'] = array (
@@ -212,7 +205,6 @@ function st_order_add($form, &$form_state, $id = NULL) {
 	$form ['cus_id'] = array (
 			'#type' => 'select',
 			'#title' => 'Select Customer',
-			/* '#size' => '255', */
 			'#options' => get_all_list ( 'st_customer', 'cus_id,f_name,l_name' ),
 			'#attributes' => array (
 					'placeholder' => '' 
@@ -309,7 +301,13 @@ function st_order_add($form, &$form_state, $id = NULL) {
 	);
 	return $form;
 }
-
+/**
+ * Choose payment status field chose payment status
+ * pay status done and pending render pay and pay remaing fields
+ * 
+ * @param unknown $form
+ * @param unknown $form_state
+ */
 function ajax_total_pay_status_callback($form, $form_state){
 	$commands = array ();
 	
@@ -378,12 +376,7 @@ function ajax_total_pay_status_callback($form, $form_state){
 				'#suffix' => '</div>',
 				//'#value' => $qty->pay
 		) ) );
-		
-	
-		
 	}
-	
-	
 	return array (
 			'#type' => 'ajax',
 			'#commands' => $commands
@@ -391,6 +384,17 @@ function ajax_total_pay_status_callback($form, $form_state){
 	
 	
 }
+/**
+ * Select Mid , render remaing Quentry of Product qtyBase
+ * Render Mid product base price means selling price
+ * 
+ * 
+ * @param unknown $form
+ * @param unknown $form_state
+ * @return string[]|An[][]
+ */
+
+
 function ajax_total_selling_price_callback($form, $form_state) {
 	
 	// TODO 1.Get Value from form state and query for base price 2.Replace in base price column
@@ -431,9 +435,19 @@ function ajax_total_selling_price_callback($form, $form_state) {
 			'#commands' => $commands 
 	);
 }
+/**
+ * 
+ * Check product qty available our stock OR Not
+ * field: Qty
+ * field: Qty Base 
+ * Qty compare Qty base field
+ *  
+ * @param unknown $form
+ * @param unknown $form_state
+ * @return string[]|An[][]
+ */
 function ajax_check_qty_callback($form, $form_state) {
 	
-	// echo $form_state;
 	$base_price = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
 	
 	if ($base_price->qty < $form_state ['values'] ['qty']) {
@@ -468,19 +482,15 @@ function st_order_validate($form, &$form_state) {
 }
 function st_order_add_submit($form, &$form_state) {
 	
-	
 	global $user;
 	$uid = $user->uid;
 	$output = array ();
-	
-	//$cost_price = NULL;
 	$net_profit = NULL;
 	// assign variables
 	$unit_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
 	$unit_price=$unit_price->unit_price;
 	$cost_price=$unit_price*$form_state ['values'] ['qty'];
 	$form_state ['values'] ['base_price']*
-	
 	$cus_id = $form_state ['values'] ['cus_id'];
 	$f_name = $form_state ['values'] ['f_name'];
 	$l_name = $form_state ['values'] ['l_name'];
@@ -500,11 +510,7 @@ function st_order_add_submit($form, &$form_state) {
 	$net_profit=$total_price-$cost_price;
 	$inv_result = get_data_by_pks ( 'st_inventery', $form_state ['values'] ['mid'], 'mid' );
 	try {
-		/*
-		 * echo "<pre>";
-		 * print_r($form_state['values']);
-		 * exit;
-		 */
+		
 		// update customer information if customer id provided
 		if ($cus_id) {
 			
@@ -533,10 +539,6 @@ function st_order_add_submit($form, &$form_state) {
 				) )->execute ();
 			}
 		}
-		
-		
-		
-
 		 $query = db_insert ( 'st_order' )->fields ( array (
 				'mid' => $mid,
 				'qty' => $qty,
@@ -549,8 +551,6 @@ function st_order_add_submit($form, &$form_state) {
 				'created' => time (),
 				'updated' => time () 
 		) )->execute ();
-		 
-		
 	 	if($pay_status==2){
        try{
        	
@@ -568,8 +568,6 @@ function st_order_add_submit($form, &$form_state) {
        	exit;
        }
 	 	}
-		
-		 
 		$remaing_inv_result = $inv_result->qty - $form_state ['values'] ['qty'];
 		$st_price = get_data_by_pks ( 'st_price', $form_state ['values'] ['mid'], 'mid' );
 		$unitprice = $st_price->unit_price;
@@ -616,8 +614,16 @@ function st_order_view($form, &$form_state) {
 	);
 	
 	global $user;
+	$default_mid='';
+	$res_cus_name='';
 	$default_status='';
-	
+	$default_cus_id='';
+	if (! empty ( $_GET ['mid'] )) {
+		$default_mid = $_GET ['mid'];
+	}
+	if (! empty ( $_GET ['cus_id'] )) {
+		$default_cus_id = $_GET ['cus_id'];
+	}
 	if (! empty ( $_GET ['status'] )) {
 		$default_status = $_GET ['status'];
 	}
@@ -656,8 +662,8 @@ function st_order_view($form, &$form_state) {
 			'#type' => 'select',
 			'#options' => product_status (),
 				
-			'#title' => t ( 'Pending status 1-done,2-due' ),
-			'#prefix' => ' <div  class="col-sm-6 form-group">',
+			'#title' => t ( 'Payment Status' ),
+			'#prefix' => ' <div  class="col-sm-4 form-group">',
 			'#suffix' => '</div> ',
 			//'#size' => 100,
 			'#attributes' => array (
@@ -668,31 +674,62 @@ function st_order_view($form, &$form_state) {
 			),
 			'#default_value' => $default_status
 	);
+	$form ['search_form'] ['mid'] = array (
+			'#type' => 'select',
+			'#title' => 'Product Name',
+			'#prefix' => ' <div  class="col-sm-4 form-group">',
+			'#suffix' => '</div> ',
+			'#options' => ut_material_inventery (),
 	
-
+			'#default_value' => $default_mid
+	);
+	$form ['search_form'] ['cus_id'] = array (
+			'#type' => 'select',
+			'#title' => t ( 'Customer Name' ),
+			'#options' => get_all_list ( 'st_customer', 'cus_id,f_name,l_name' ),
+	
+			'#prefix' => ' <div  class="col-sm-4 form-group">',
+			'#suffix' => '</div> ',
+			'#attributes' => array (
+					'placeholder' => '',
+					//'maxlength' => '100' ,
+			),
+			'#default_value' => $default_cus_id
+	);
 	$form ['search_form'] ['submit'] = array (
 			'#type' => 'submit',
 			'#prefix' => ' <div  class="col-sm-3 form-group">',
 	
 			'#value' => 'Submit'
 	);
-	
-	$query = db_select ( 'st_order', 'tn' )->extend ( 'PagerDefault' )->fields ( 'tn' )->orderBy ( 'tn.oid', 'desc' )->limit ( 10 );
+	$query = db_select ( 'st_order', 'tn' )->extend ( 'PagerDefault' )->fields ( 'tn' )->orderBy ( 'tn.oid', 'desc' )->limit ( 15 );
+	if (! empty ( $default_cus_id )) {
+		$query->condition ( 'tn.cus_id', intval($default_cus_id), '=' );
+	}
 	if (! empty ( $default_status )) {
 	
 		$query->condition ( 'tn.pay_status', $default_status, '=' );
 	
 	}
+	if (! empty ( $default_mid )) {
+	
+		$query->condition ( 'tn.mid', $default_mid, '=' );
+	
+	}
 	$result = $query->execute ();
 	$rows_articles = array ();	
 	
-	
 	foreach ( $result as $records ) {
-		//print_r($records->pay_status);
-	
-		//exit;
+		$res_cus_name=get_data_by_pks('st_customer',$records->cus_id,'cus_id');
 		
-	
+	if(isset($res_cus_name->f_name) ||  isset($res_cus_name->l_name)){
+		
+		$fullname=$res_cus_name->f_name .' '.$res_cus_name->l_name;
+	}else{
+		$fullname='Unknown';
+		
+		
+	}
 		$mat = get_ut_material_mat ( $records->mid );
 		$rows_articles [] = array (
 				$records->oid,
@@ -700,23 +737,27 @@ function st_order_view($form, &$form_state) {
 				$records->qty,
 				$records->base_price,
 				$records->total_price,
+				product_status($records->pay_status),
+				ucwords($fullname),
+				
 				$records->cost_price,
 				$records->net_profit,
 			//	$records->pay_status,
-				product_status($records->pay_status),
+				//$records->cus_id,
 				
 				
 		);
 	}
 	$headers = array (
 			'Oid',
-			'Product name',
+			'Product Name',
 			'Qty',
 			'Selling Price/Unit',
 			'Total Price',
+			'Status',
+			'Customer Name',
 			'Cost Price',
 			'Net Profit',
-			'Status'
 	);
 	$all_articles = theme ( 'table', array (
 			'header' => $headers,
@@ -738,10 +779,22 @@ function st_order_view($form, &$form_state) {
 function st_order_view_submit($form, &$form_state){
 
 	$status = $form_state ['values'] ['status'];
+	$cus_id = $form_state ['values'] ['cus_id'];
+	$mid = $form_state ['values'] ['mid'];
+	
+	
 	
 	
 	if (! empty ( $status )) {
 		$param ["status"] = $status;
+	}
+	
+	if (! empty ( $cus_id )) {
+		$param ["cus_id"] = $cus_id;
+	}
+	
+	if (! empty ( $mid )) {
+		$param ["mid"] = $mid;
 	}
 
 	
@@ -780,7 +833,15 @@ function st_order_detail($form, &$form_state, $id = NULL) {
 	);
 	return $form;
 }
-
+/**
+ * Customer LIst return list
+ * Field: Select Customer
+ * Field: OR add new Customer
+ * 
+ * @param unknown $form
+ * @param unknown $form_state
+ * @return string[]|An[][]
+ */
 function ajax_customer_list_callback($form, $form_state) {
 	// return form ajax
 	$info = get_data_by_pks ( 'st_customer', $form_state ['values'] ['cus_id'], 'cus_id' );

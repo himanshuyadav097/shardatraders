@@ -132,53 +132,7 @@ function st_customer_add($form, &$form_state, $id = NULL) {
 			),
 			'#default_value' => isset ( $data->reference ) ? $data->reference : "" 
 	);
-	/*
-	 * $form['created']=array (
-	 * '#type' => 'textfield',
-	 * '#title' => 'Created',
-	 * '#size' => '10',
-	 * '#attributes' =>
-	 * array (
-	 * 'placeholder' => '',
-	 * 'maxlength' => '10',
-	 * ),
-	 * '#default_value' => isset($data->created)?date("Y-m-d",$data->created):"",
-	 * );
-	 * $form['updated']=array (
-	 * '#type' => 'textfield',
-	 * '#title' => 'Updated',
-	 * '#size' => '10',
-	 * '#attributes' =>
-	 * array (
-	 * 'placeholder' => '',
-	 * 'maxlength' => '10',
-	 * ),
-	 * '#default_value' => isset($data->updated)?date("Y-m-d",$data->updated):"",
-	 * );
-	 * $form['updatedby']=array (
-	 * '#type' => 'textfield',
-	 * '#title' => 'Updatedby',
-	 * '#size' => '10',
-	 * '#attributes' =>
-	 * array (
-	 * 'placeholder' => '',
-	 * 'maxlength' => '10',
-	 * ),
-	 * '#default_value' => isset($data->updatedby)?$data->updatedby:"",
-	 * );
-	 * $form['createdby']=array (
-	 * '#type' => 'textfield',
-	 * '#title' => 'Createdby',
-	 * '#size' => '10',
-	 * '#attributes' =>
-	 * array (
-	 * 'placeholder' => '',
-	 * 'maxlength' => '10',
-	 * ),
-	 * '#default_value' => isset($data->createdby)?$data->createdby:"",
-	 * );
-	 * $form['deleted']=NULL;
-	 */
+	
 	$form ['submit'] = array (
 			'#type' => 'submit',
 			'#value' => 'Save' 
@@ -242,18 +196,16 @@ function st_customer_view($form, &$form_state) {
 		$rows_articles [] = array (
 				$records->cus_id,
 				
-				ucfirst($records->f_name),
-				ucfirst($records->l_name),
+				ucwords($records->f_name.' '.$records->l_name),
+				//ucfirst($records->l_name),
 				ucfirst($records->address),
 				$records->phone,
 				ucfirst($records->reference) 
 		);
 	}
 	$headers = array (
-			'Customer Id',
-			
-			'First name',
-			'Last name',
+			'CID',
+			'Name',
 			'Address',
 			'Phone',
 			'Reference' 

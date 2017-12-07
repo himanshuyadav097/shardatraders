@@ -299,8 +299,8 @@ function st_inventery_view($form, &$form_state) {
 	}
 	
 	$headers = array (
-			'Int_id',
-			'Product name',
+			'Int Id',
+			'Product Name',
 			'Qty',
 			'Units(kg/quental..)' ,
 			'Unit Per Price INR',

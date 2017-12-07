@@ -1035,12 +1035,25 @@ function get_all_list($table, $field) {
 	
 	return $list;
 }
+/**
+ * Get Customer details
+ * 
+ * 
+ */
 function get_customers() {
 	$Object = db_query ( "select * from $table where $field = :id", array (
 			':id' => $mid 
 	) )->fetchObject ();
 	return $Object;
 }
+/**
+ * Status of Product
+ * admins/st_order/add
+ * pay_status
+ * 
+ * @param unknown $status
+ * @return string|string[]
+ */
 function product_status($status = NULL) {
 	$prd_status = array (
 			'0' => 'Select',
@@ -1056,6 +1069,12 @@ function product_status($status = NULL) {
 	
 	// return prd_status;
 }
+/**
+ * Units of products
+ * admins/st_inventery/add
+ * 
+ * @return string[]
+ */
 function ut_material_qty() {
 	$numbers = array (
 			'Select',
@@ -1115,6 +1134,11 @@ function get_rem_qty($mat) {
 	}
 	return $x;
 }
+/**
+ * Get material_category 
+ * 
+ * @return string[]|NULL[]
+ */
 function ut_material() {
 	$par = array ();
 	$parent_cat = db_query ( "SELECT material_category from st_material_category" )->fetchAll ();
